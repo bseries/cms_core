@@ -12,16 +12,17 @@ Session::config(array(
 	'default' => array('adapter' => 'Php', 'session.name' => $name)
 ));
 
-Auth::config(array(
-	'http' => array(
-		'adapter' => 'Http',
-		'realm' => 'Application Administration',
-		'method' => 'digest',
-		'users' => Environment::get('users')
-	)
-));
-
 Dispatcher::applyFilter('_call', function($self, $params, $chain) {
+	// late...
+	Auth::config(array(
+		'http' => array(
+			'adapter' => 'Http',
+			'realm' => 'Application Administration',
+			'method' => 'digest',
+			'users' => Environment::get('users')
+		)
+	));
+
 	$url = $params['request']->url;
 
 	$granted = strpos($url, 'admin') !== 0;

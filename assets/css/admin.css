@@ -1,0 +1,163 @@
+@charset "UTF-8";
+/*!
+ * Admin Stylesheet
+ */
+
+/* Main layout elements
+-------------------------------------------------------------- */
+html {
+  overflow-y: scroll;
+}
+body {
+  font-size: 75%;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica, Arial, sans-serif;
+  word-spacing: -.02em;
+
+  color: #111;
+  background: #fff;
+}
+body * {
+  outline: 0;
+}
+#container {
+  margin: 0 auto;
+  width: 910px;
+  text-align: left;
+}
+#content {
+  float: left;
+  margin: 0 10px 0 0;
+  width: 910px;
+}
+
+
+/* Forms
+-------------------------------------------------------------- */
+form                     { width: 670px; text-align: left; }
+
+label                    { float: left; width: 160px; margin-right: 10px; }
+.required label          { font-weight: bold; }
+
+input { margin-bottom: .25em; }
+
+input.text, input.title  { margin: inherit; }
+.input, .inputs          { float: left; clear: left; margin-bottom: .5em; }
+.inputs div              { float: left; }
+
+select                   { margin: 0; padding: 0; min-width: 135px; }
+textarea                 { margin: inherit; width: 470px; height: 20em; padding: .5em; }
+
+div.checkbox + *         { clear: left; }
+div.checkbox             { padding-left: 140px; }
+.checkbox input          { float: left; margin: 0 5px 0 0; }
+.checkbox label          { float: left; width: auto; line-height: 1.3; }
+form .checkbox           { margin-bottom: 1em; }
+.radio legend            { float: left; width: 130px; margin-right: 10px; }
+.radio label             { width: auto; line-height: 1.2; }
+.radio input             { float: left; margin: 0 4px 0 0; }
+.radio.required label    { font-weight: normal; }
+.radio.required legend   { font-weight: bold; }
+
+.error label             { color: #590026; }
+.error-message           { color: #590026; margin-left: 140px; margin-top: .25em; clear: both; }
+.checkbox .error-message { clear: both; margin: 0; }
+
+form h4 { /* Also see section nav. */
+	float: left;
+	clear: both;
+	margin-left: -20px;
+	padding-left: 20px;
+	border-bottom: 1px solid #e6e6e6;
+	width: 400px;
+}
+
+form input[type="submit"] {
+	clear: both; margin-top: 1em; margin-left: 170px;;
+}
+input[type="submit"] {
+	padding: 6px 10px;
+
+	color: #333;
+	background: #eee;
+	background: -moz-linear-gradient(#fff, #ddd);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ddd));
+
+	font-size: 1.2em;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
+
+	border-radius: 2px;
+	border: solid 1px #999;
+}
+input[type="submit"]:hover {
+	border-color: #888 #888 #777;
+}
+input[type="submit"]:active {
+	background: -moz-linear-gradient(#ddd, #fff);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd), to(#ddd));
+}
+input[type="submit"] + input[type="submit"] {
+	margin-left: 10px;
+}
+input[type="submit"] + a.abort {
+	margin-left: 10px;
+}
+
+input[id*="Title"] {
+	font-weight: bold;
+	width: 360px;
+}
+input[id*="Name"],
+input[id*="Email"],
+input[id*="Authors"] {
+	width: 240px;
+}
+input[id*="Location"],
+input[id*="Materials"],
+input[id*="Medium"] {
+	width: 320px;
+}
+input[id*="Password"] {
+	width: 160px;
+}
+input[id*="Runtime"],
+input[id*="Start"],
+input[id*="End"],
+input[id*="Date"] {
+	width: 80px;
+}
+input[id*="Year"] {
+	width: 40px;
+}
+
+textarea[id*="Teaser"],
+textarea[id*="Description"] {
+	height: 4em; /* 145 chars */
+}
+
+/* Tables
+-------------------------------------------------------------- */
+table       { margin-bottom: 1.4em; width:100%; }
+th          { font-weight: bold; }
+th,td       { padding: 4px 0; border-bottom: 1px solid #e0e0e0; }
+tfoot       { font-style: italic; }
+thead       { text-transform: uppercase; border-top: 1px solid #e0e0e0; }
+
+thead th { font-weight: normal; }
+
+tr:hover td   { border-color: #a8a8a8; }
+tr.loading td { border-color: #a6a6a6; }
+
+td, th {
+	vertical-align: middle;
+	height: 18px;
+}
+
+table .actions {
+  width: 100px;
+  text-align: right;
+}
+table td + td {
+  padding-left: 20px;
+}

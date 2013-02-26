@@ -27,7 +27,10 @@ $modules = Environment::get('modules');
 	<body>
 	<div id="container">
 		<header>
-			<h1><?= $site['title'] ?> – Administration</h1>
+			<h1>
+				<?= $site['title'] ?> –
+				<?= $this->html->link('Administration', array('controller' => 'pages', 'action' => 'home', 'library' => 'cms_core')) ?>
+			</h1>
 			<nav>
 				<?php foreach ($modules as $module): ?>
 					<?= $this->html->link($module['title'], array(

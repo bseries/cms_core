@@ -11,7 +11,7 @@ $modules = Environment::get('modules');
 	<head>
 		<?php echo $this->html->charset() ?>
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?>Admin – <?= $site['title'] ?></title>
-		<link rel="icon" href="<?= $this->url('assets/ico/site.png') ?>">
+		<link rel="icon" href="<?= $this->url('assets/site/ico/png.png') ?>">
 
 		<?php echo $this->html->style(array(
 			'/assets/core/css/reset',

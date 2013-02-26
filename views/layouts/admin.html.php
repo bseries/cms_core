@@ -35,6 +35,7 @@ $modules = Environment::get('modules');
 					)) ?>
 				<?php endforeach ?>
 				<?= $this->html->link('View Site', '/', array('target' => 'new')) ?>
+				<?= $this->html->link('Dashboard', array('controller' => 'pages', 'action' => 'home', 'library' => 'cms_core')) ?>
 			</nav>
 		</header>
 		<div id="content">

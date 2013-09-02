@@ -28,23 +28,9 @@ if (PHP_SAPI == 'cli') {
 	Environment::set(new ActionRequest());
 }
 
-$config = array(
-	'users' => array(
-		'john' => 'foobar'
-	),
-	'site' => array(
-		'title' => 'Application',
-		'email' => 'mail@example.com',
-		'phone' => '+49 123 4567'
-	),
-	'service' => array(
-		'googleAnalytics' => array(
-			// 'account' => ''
-		)
-	)
-);
-Environment::set('production', $config);
-Environment::set('development', $config);
+// $config = array();
+// Environment::set('production', $config);
+// Environment::set('development', $config);
 
 Libraries::add('temporary', array(
 	'path' => dirname(__DIR__) . '/libraries/temporary/src'

@@ -4,17 +4,18 @@ use lithium\storage\Cache;
 use lithium\core\Libraries;
 use lithium\core\Environment;
 use lithium\action\Dispatcher;
-use lithium\storage\cache\adapter\Apc;
+use lithium\storage\cache\adapter\Memcache;
 
-$cachePath = Libraries::get(true, 'resources') . '/tmp/cache';
-
-if (!(($apcEnabled = Apc::enabled()) || PHP_SAPI === 'cli') && !is_writable($cachePath)) {
-	return;
+if (!Memcache::enabled()) {
+	throw Exception('Memcache not enabled.');
 }
 
-Cache::config(array('default' => $apcEnabled ? array('adapter' => 'Apc') : array(
-	'adapter' => 'File', 'strategies' => array('Serializer')
-)));
+Cache::config(array(
+	'default' => array(
+		'adapter' => 'Memcache',
+		'host' => '127.0.0.1:11211'
+	)
+));
 
 Dispatcher::applyFilter('run', function($self, $params, $chain) {
 	if (!Environment::is('production')) {

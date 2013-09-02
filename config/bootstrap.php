@@ -41,7 +41,10 @@ Libraries::add('li3_lldr', array(
 
 require __DIR__ . '/bootstrap/errors.php';
 require __DIR__ . '/bootstrap/action.php';
-require __DIR__ . '/bootstrap/cache.php';
+
+if (PHP_SAPI !== 'cli') {
+	require __DIR__ . '/bootstrap/cache.php';
+}
 require __DIR__ . '/bootstrap/session.php';
 require __DIR__ . '/bootstrap/g11n.php';
 require __DIR__ . '/bootstrap/media.php';

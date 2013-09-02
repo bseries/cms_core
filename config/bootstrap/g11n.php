@@ -101,10 +101,10 @@ Catalog::config(array(
 	'runtime' => array(
 		'adapter' => 'Memory'
 	),
-	// 'app' => array(
-	// 	'adapter' => 'Gettext',
-	// 	'path' => Libraries::get(true, 'resources') . '/g11n'
-	// ),
+	'app' => array(
+	 	'adapter' => 'Gettext',
+	 	'path' => Libraries::get(true, 'resources') . '/g11n/po'
+	 ),
 	'lithium' => array(
 		'adapter' => 'Php',
 		'path' => LITHIUM_LIBRARY_PATH . '/lithium/g11n/resources/php'
@@ -139,7 +139,7 @@ Multibyte::config(array(
  * @see lithiumm\g11n\Catalog
  * @see lithium\util\Inflector::slug()
  */
-// Inflector::rules('transliteration', Catalog::read(true, 'inflection.transliteration', 'en'));
+Inflector::rules('transliteration', Catalog::read(true, 'inflection.transliteration', 'en'));
 // Inflector::rules('transliteration', array('/É|Ê/' => 'E'));
 
 /**

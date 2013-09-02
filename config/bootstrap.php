@@ -49,6 +49,9 @@ Environment::set('development', $config);
 Libraries::add('temporary', array(
 	'path' => dirname(__DIR__) . '/libraries/temporary/src'
 ));
+Libraries::add('li3_lldr', array(
+	'path' => dirname(__DIR__) . '/libraries/li3_lldr'
+));
 
 require __DIR__ . '/bootstrap/errors.php';
 require __DIR__ . '/bootstrap/action.php';

@@ -10,7 +10,7 @@ Environment::is(function($request) {
 	$isConsole = PHP_SAPI == 'cli';
 
 	switch (true) {
-		case ($isConsole && preg_match('#Code/clepto/main/#', $request->env('PWD'))):
+		case ($isConsole && preg_match('#Code/app/#', $request->env('PWD'))):
 		case ($isLocal || gethostname() == 'coffee.local'):
 			return 'development';
 		case (isset($request->env)):
@@ -54,7 +54,7 @@ require __DIR__ . '/bootstrap/errors.php';
 require __DIR__ . '/bootstrap/action.php';
 require __DIR__ . '/bootstrap/cache.php';
 require __DIR__ . '/bootstrap/session.php';
-// require __DIR__ . '/bootstrap/g11n.php';
+require __DIR__ . '/bootstrap/g11n.php';
 require __DIR__ . '/bootstrap/media.php';
 
 if (PHP_SAPI === 'cli') {

@@ -11,7 +11,7 @@ $site = Environment::get('site');
 	<head>
 		<?php echo $this->html->charset() ?>
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?><?= $site['title'] ?></title>
-		<link rel="icon" href="<?= $this->url('/assets/site/ico/site.png') ?>">
+		<link rel="icon" href="<?= $this->url('assets/ico/site.ico') ?>">
 
 		<?php echo $this->html->style(array(
 			'/assets/core/css/reset'

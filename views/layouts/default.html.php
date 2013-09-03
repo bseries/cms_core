@@ -14,7 +14,8 @@ $site = Environment::get('site');
 		<link rel="icon" href="<?= $this->url('assets/ico/site.ico') ?>">
 
 		<?php echo $this->html->style(array(
-			'/assets/core/css/reset'
+			'/assets/core/css/reset',
+			'/assets/site/css/base'
 		)) ?>
 		<?php echo $this->html->script(array(
 			'/assets/core/js/underscore',

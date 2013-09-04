@@ -38,6 +38,9 @@ Libraries::add('temporary', array(
 Libraries::add('li3_lldr', array(
 	'path' => dirname(__DIR__) . '/libraries/li3_lldr'
 ));
+Libraries::add('li3_flash_message', array(
+	'path' => dirname(__DIR__) . '/libraries/li3_flash_message'
+));
 
 require __DIR__ . '/bootstrap/errors.php';
 require __DIR__ . '/bootstrap/action.php';

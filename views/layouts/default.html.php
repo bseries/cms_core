@@ -1,9 +1,13 @@
 <?php
 
 use lithium\core\Environment;
+use li3_flash_message\extensions\storage\FlashMessage;
 
 $service = Environment::get('service');
 $site = Environment::get('site');
+
+$flash = FlashMessage::read();
+FlashMessage::clear();
 
 ?>
 <!doctype html>
@@ -20,7 +24,8 @@ $site = Environment::get('site');
 		<?php echo $this->html->script(array(
 			'/assets/core/js/underscore',
 			'/assets/core/js/jquery',
-			'/assets/core/js/require'
+			'/assets/core/js/require',
+			'/assets/core/js/base'
 		)) ?>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<!--[if IE 8 ]>
@@ -44,21 +49,29 @@ $site = Environment::get('site');
 		)) ?>
 	</head>
 	<body class="<?=$this->_config['template']?>">
-	<div id="fb-root"></div>
-	<div id="container">
-		<header>
-			<?=$this->view()->render(array('element' => 'header'), compact('site', 'service', 'feature', 'episodes'), array(
+		<div id="fb-root"></div>
+		<div
+			id="messages"
+			<?php if ($flash): ?>
+				data-flash-message="<?= $flash['message'] ?>"
+				data-flash-level="<?= isset($flash['attr']['level']) ? $flash['attr']['level'] : 'neutral' ?>"
+			<?php endif ?>
+		>
+		</div>
+		<div id="container">
+			<header>
+				<?=$this->view()->render(array('element' => 'header'), compact('site', 'service', 'feature', 'episodes'), array(
+					'library' => 'app'
+				)) ?>
+			</header>
+			<div id="content">
+				<?php echo $this->content() ?>
+			</div>
+		</div>
+		<footer>
+			<?=$this->view()->render(array('element' => 'footer'), compact('site', 'service', 'feature'), array(
 				'library' => 'app'
 			)) ?>
-		</header>
-		<div id="content">
-			<?php echo $this->content() ?>
-		</div>
-	</div>
-	<footer>
-		<?=$this->view()->render(array('element' => 'footer'), compact('site', 'service', 'feature'), array(
-			'library' => 'app'
-		)) ?>
-	</footer>
+		</footer>
 	</body>
 </html>

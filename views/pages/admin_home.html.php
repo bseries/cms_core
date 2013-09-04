@@ -6,7 +6,7 @@ $services = Environment::get('service');
 $site = Environment::get('site');
 
 ?>
-<article>
+<article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
 	<h1><?= $this->title('Dashboard') ?></h1>
 
 	<h2>Site</h2>
@@ -21,5 +21,4 @@ $site = Environment::get('site');
 <?php echo json_encode($service) ?>
 </pre>
 	<?php endforeach ?>
-
 </article>

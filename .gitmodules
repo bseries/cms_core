@@ -4,3 +4,6 @@
 [submodule "libraries/li3_lldr"]
 	path = libraries/li3_lldr
 	url = https://github.com/UnionOfRAD/li3_lldr.git
+[submodule "libraries/li3_flash_message"]
+	path = libraries/li3_flash_message
+	url = https://github.com/uor/li3_flash_message.git

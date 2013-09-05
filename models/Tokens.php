@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace cms_core\models;
 
 use lithium\util\String;
 

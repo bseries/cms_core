@@ -1,0 +1,22 @@
+
+Bureau Core
+-- Core CMS Functionality
+
+Synopsis
+--------
+This library contains core CMS functionality.
+
+Authors
+-------
+David Persson for Atelier Disko (david@atelierdisko.de).
+
+Copyright & License
+-------------------
+Bureau is Copyright (c) 2013 and beyond Atelier Disko.
+
+- Redistributions not permitted. -
+
+Copyright and license information for contained 3rd party libraries can
+be found in (a) the `vendors/licenses` directory, (b) the header of the files
+contained in the library or (c) the directory of the library.
+

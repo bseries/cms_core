@@ -60,7 +60,5 @@ if (PHP_SAPI === 'cli') {
 }
 
 require __DIR__ . '/bootstrap/auth.php';
-require __DIR__ . '/bootstrap/access.php';
-
 
 ?>

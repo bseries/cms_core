@@ -41,6 +41,9 @@ Libraries::add('li3_lldr', array(
 Libraries::add('li3_flash_message', array(
 	'path' => dirname(__DIR__) . '/libraries/li3_flash_message'
 ));
+Libraries::add('li3_access', array(
+	'path' => dirname(__DIR__) . '/libraries/li3_access'
+));
 
 require __DIR__ . '/bootstrap/errors.php';
 require __DIR__ . '/bootstrap/action.php';
@@ -55,6 +58,9 @@ require __DIR__ . '/bootstrap/media.php';
 if (PHP_SAPI === 'cli') {
 	require __DIR__ . '/bootstrap/console.php';
 }
+
+require __DIR__ . '/bootstrap/auth.php';
+require __DIR__ . '/bootstrap/access.php';
 
 
 ?>

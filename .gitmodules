@@ -7,3 +7,6 @@
 [submodule "libraries/li3_flash_message"]
 	path = libraries/li3_flash_message
 	url = https://github.com/uor/li3_flash_message.git
+[submodule "libraries/li3_access"]
+	path = libraries/li3_access
+	url = https://github.com/tmaiaroto/li3_access.git

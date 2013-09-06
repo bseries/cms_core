@@ -60,7 +60,7 @@ FlashMessage::clear();
 		</div>
 		<div id="container">
 			<header>
-				<?=$this->view()->render(array('element' => 'header'), compact('site', 'service', 'feature', 'episodes'), array(
+				<?=$this->view()->render(array('element' => 'header'), compact('site', 'service'), array(
 					'library' => 'app'
 				)) ?>
 			</header>
@@ -69,7 +69,7 @@ FlashMessage::clear();
 			</div>
 		</div>
 		<footer>
-			<?=$this->view()->render(array('element' => 'footer'), compact('site', 'service', 'feature'), array(
+			<?=$this->view()->render(array('element' => 'footer'), compact('site', 'service'), array(
 				'library' => 'app'
 			)) ?>
 		</footer>

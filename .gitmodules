@@ -10,3 +10,6 @@
 [submodule "libraries/li3_access"]
 	path = libraries/li3_access
 	url = https://github.com/atelierdisko/li3_access.git
+[submodule "libraries/li3_mailer"]
+	path = libraries/li3_mailer
+	url = git@github.com:atelierdisko/li3_mailer.git

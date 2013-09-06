@@ -44,6 +44,9 @@ Libraries::add('li3_flash_message', array(
 Libraries::add('li3_access', array(
 	'path' => dirname(__DIR__) . '/libraries/li3_access'
 ));
+Libraries::add('li3_mailer', array(
+	'path' => dirname(__DIR__) . '/libraries/li3_mailer'
+));
 
 require __DIR__ . '/bootstrap/errors.php';
 require __DIR__ . '/bootstrap/action.php';

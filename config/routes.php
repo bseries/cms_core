@@ -17,9 +17,11 @@ Router::connect('/dashboard', array(
 	'controller' => 'pages', 'action' => 'home', 'library' => 'cms_core'
 ));
 
-Router::connect('/tokens/{:action}/{:token:[0-9a-f]{8,16}}', array(
-	'controller' => 'tokens', 'library' => 'cms_core'
-));
+if (Environment::get('features.registerWithTokenOnly')) {
+	Router::connect('/tokens/{:action}/{:token:[0-9a-f]{8,16}}', array(
+		'controller' => 'tokens', 'library' => 'cms_core'
+	));
+}
 Router::connect('/tokens/{:action}/{:args}', array(
 	'controller' => 'tokens', 'library' => 'cms_core'
 ));

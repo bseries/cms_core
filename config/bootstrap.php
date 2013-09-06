@@ -64,4 +64,12 @@ if (PHP_SAPI === 'cli') {
 
 require __DIR__ . '/bootstrap/auth.php';
 
+Environment::set(true, array(
+	'modules' => array(
+		'tokens' => array(
+			'library' => 'cms_core', 'title' => 'Tokens', 'name' => 'tokens', 'slug' => 'tokens'
+		)
+	)
+));
+
 ?>

@@ -10,10 +10,10 @@ class Tokens extends \lithium\data\Model {
 	// returns it. Default expiration is one year.
 	public static function generate($short = false) {
 		$token = substr(md5(String::random(32)), 0, $short ? 8 : 16);
-		$expires = date('Y-m-d H:i:s', time() + YEAR);
+		$expires = date('Y-m-d H:i:s', strtotime('+1 year'));
 
-		static::create(compact('token', 'expires'));
-		return static::save() ? $token : false;
+		$item = static::create(compact('token', 'expires'));
+		return $item->save() ? $token : false;
 	}
 
 	// Checks if a given token is valid and not yet expired.

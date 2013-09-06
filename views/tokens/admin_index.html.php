@@ -1,5 +1,5 @@
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
-	<h1>Tokens</h1>
+	<h1><?= $t('Tokens') ?></h1>
 
 	<nav class="actions">
 		<?= $this->html->link($t('generate new token'), array('action' => 'generate', 'library' => 'cms_core')) ?>

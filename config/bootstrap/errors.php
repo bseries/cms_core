@@ -121,15 +121,13 @@ Logger::applyFilter('write', function ($self, $params, $chain) {
 	return $chain->next($self, $params, $chain);
 });
 
-/*
-Connections::get('app')->applyFilter('_execute', function($self, $params, $chain) {
+Connections::get('default')->applyFilter('_execute', function($self, $params, $chain) {
 	if (!Environment::is('production')) {
 		// Disable query logging for performance reasons.
 		Logger::debug($params['sql']);
 	}
 	return $chain->next($self, $params, $chain);
 });
- */
 
 
 $errorResponse = function($request, $type = 404) {

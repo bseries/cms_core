@@ -52,7 +52,7 @@ requirejs.config({
 require(['jquery', 'notify', 'domready!'], function($) {
   // Bridge between PHP flash messaging and JS notify.
   var flashMessage = $('#messages').data('flash-message');
-  var flashLevel = $('#messages').data('flash-class');
+  var flashLevel = $('#messages').data('flash-level');
   if (flashMessage) {
     $.notify(flashMessage, 'notify-level-' + flashLevel);
   }

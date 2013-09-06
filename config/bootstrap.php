@@ -39,6 +39,9 @@ Environment::set(true, array(
 	'modules' => array(
 		'tokens' => array(
 			'library' => 'cms_core', 'title' => 'Tokens', 'name' => 'tokens', 'slug' => 'tokens'
+		),
+		'users' => array(
+			'library' => 'app', 'title' => 'Users', 'name' => 'users', 'slug' => 'users'
 		)
 	)
 ));

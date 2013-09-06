@@ -7,6 +7,7 @@
 				<td><?= $t('Active?') ?>
 				<td><?= $t('Name') ?>
 				<td><?= $t('Email') ?>
+				<td><?= $t('Role') ?>
 				<td><?= $t('Created') ?>
 				<td><?= $t('Modified') ?>
 				<td>
@@ -17,6 +18,7 @@
 				<td><?= $item->is_active ? '✓ ' : '╳' ?>
 				<td><?= $item->name ?>
 				<td><?= $item->email ?>
+				<td><?= $item->role ?>
 				<td><?= $item->created ?>
 				<td><?= $item->modified ?>
 				<td>

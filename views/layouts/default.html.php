@@ -48,7 +48,7 @@ FlashMessage::clear();
 			'library' => 'app'
 		)) ?>
 	</head>
-	<body class="<?=$this->_config['template']?>">
+	<body class="layout-default">
 		<div id="fb-root"></div>
 		<div
 			id="messages"

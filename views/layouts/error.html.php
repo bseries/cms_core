@@ -31,7 +31,7 @@ $site = Environment::get('site');
 		<![endif]-->
 		<?php echo $this->scripts() ?>
 	</head>
-	<body class="error <?=$this->_config['template']?>">
+	<body class="layout-error">
 	<div id="container">
 		<div id="content">
 			<?php echo $this->content() ?>

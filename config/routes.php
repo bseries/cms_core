@@ -24,4 +24,11 @@ Router::connect('/tokens/{:action}/{:args}', array(
 	'controller' => 'tokens', 'library' => 'cms_core'
 ));
 
+Router::connect('/users/{:action}/{:id:[0-9]+}', array(
+	'controller' => 'users', 'library' => 'cms_core'
+));
+Router::connect('/users/{:action}/{:args}', array(
+	'controller' => 'users', 'library' => 'cms_core'
+));
+
 ?>

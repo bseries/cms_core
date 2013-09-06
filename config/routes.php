@@ -12,7 +12,7 @@ Router::connect(
 	)
 );
 
-Router::connect('/dashboard', array(
+Router::connect('/', array(
 	'controller' => 'pages', 'action' => 'home', 'library' => 'cms_core'
 ));
 

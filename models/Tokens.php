@@ -21,7 +21,7 @@ class Tokens extends \lithium\data\Model {
 		return (boolean) static::find('count', array(
 			'conditions' => array(
 				'token' => $token,
-				'expires' => '>=' . date('Y-m-d H:i:s')
+				'expires' => array('>=' => date('Y-m-d H:i:s'))
 			)
 		));
 	}

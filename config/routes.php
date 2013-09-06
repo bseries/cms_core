@@ -12,7 +12,8 @@ Router::connect(
 	)
 );
 
-Router::connect('/', array(
+// @fixme Making this / interferes with the non-admin /.
+Router::connect('/dashboard', array(
 	'controller' => 'pages', 'action' => 'home', 'library' => 'cms_core'
 ));
 

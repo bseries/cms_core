@@ -15,7 +15,7 @@ FlashMessage::clear();
 	<head>
 		<?php echo $this->html->charset() ?>
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?>Admin – <?= $site['title'] ?></title>
-		<link rel="icon" href="<?= $this->assets->url('/ico/site.png') ?>">
+		<link rel="icon" href="<?= $this->assets->url('/site/ico/site.png') ?>">
 
 		<?php echo $this->assets->style([
 			'/core/css/reset',

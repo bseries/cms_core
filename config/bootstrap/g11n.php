@@ -48,11 +48,11 @@ date_default_timezone_set('UTC');
  * @see lithiumm\core\Environment
  */
 $locale = 'en';
-$locales = array('en' => 'English');
+$locales = ['en' => 'English'];
 
 Environment::set('production', compact('locale', 'locales'));
 Environment::set('development', compact('locale', 'locales'));
-Environment::set('test', array('locale' => 'en', 'locales' => array('en' => 'English')));
+Environment::set('test', ['locale' => 'en', 'locales' => ['en' => 'English']]);
 
 /**
  * Effective/Request Locale
@@ -68,7 +68,7 @@ $setLocale = function($self, $params, $chain) {
 	if (!$params['request']->locale()) {
 		$params['request']->locale(Locale::preferred($params['request']));
 	}
-	Environment::set(true, array('locale' => $params['request']->locale()));
+	Environment::set(true, ['locale' => $params['request']->locale()]);
 
 	return $chain->next($self, $params, $chain);
 };
@@ -97,19 +97,19 @@ ConsoleDispatcher::applyFilter('_callable', $setLocale);
  * @link https://github.com/UnionOfRAD/li3_lldr
  * @link https://github.com/UnionOfRAD/li3_cldr
  */
-Catalog::config(array(
-	'runtime' => array(
+Catalog::config([
+	'runtime' => [
 		'adapter' => 'Memory'
-	),
-	'app' => array(
+	],
+	'app' => [
 	 	'adapter' => 'Gettext',
 	 	'path' => Libraries::get(true, 'resources') . '/g11n/po'
-	 ),
-	'lithium' => array(
+	 ],
+	'lithium' => [
 		'adapter' => 'Php',
 		'path' => LITHIUM_LIBRARY_PATH . '/lithium/g11n/resources/php'
-	)
-) + Catalog::config());
+	]
+] + Catalog::config());
 
 /**
  * Multibyte Strings
@@ -123,11 +123,11 @@ Catalog::config(array(
  *
  * @see lithiumm\g11n\Multibyte
  */
-Multibyte::config(array(
+Multibyte::config([
 //	'default' => array('adapter' => 'Intl'),
-	'default' => array('adapter' => 'Mbstring'),
+	'default' => ['adapter' => 'Mbstring'],
 //	'default' => array('adapter' => 'Iconv')
-));
+]);
 
 /**
  * Transliteration
@@ -172,12 +172,12 @@ Inflector::rules('transliteration', Catalog::read(true, 'inflection.transliterat
  * @see lithiumm\g11n\Multibyte
  * @see lithium\util\Validator
  */
-foreach (array('phone', 'postalCode', 'ssn') as $name) {
+foreach (['phone', 'postalCode', 'ssn'] as $name) {
 	Validator::add($name, Catalog::read(true, "validation.{$name}", 'en_US'));
 }
 Validator::add('lengthBetween', function($value, $format, $options) {
 	$length = Multibyte::strlen($value);
-	$options += array('min' => 1, 'max' => 255);
+	$options += ['min' => 1, 'max' => 255];
 	return ($length >= $options['min'] && $length <= $options['max']);
 });
 
@@ -192,7 +192,7 @@ Validator::add('lengthBetween', function($value, $format, $options) {
  * @see lithiumm\net\http\Media
  */
 Media::applyFilter('_handle', function($self, $params, $chain) {
-	$params['handler'] += array('outputFilters' => array());
+	$params['handler'] += ['outputFilters' => []];
 	$params['handler']['outputFilters'] += Message::aliases();
 	return $chain->next($self, $params, $chain);
 });

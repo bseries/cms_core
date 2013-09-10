@@ -24,12 +24,12 @@
  * @link       https://gist.github.com/1323139
  */
 
-extract(array(
+extract([
 	'holder' => null, // i.e. `'James Brown'`; required.
 	'object' => null, // Additional copyright property to prepend; optional.
 	'begin' => null,  // The beginning year i.e. 2009; optional.
 	'end' => null     // The ending year i.e. 2011; optional.
-), EXTR_SKIP);
+], EXTR_SKIP);
 
 $end = date('Y');
 

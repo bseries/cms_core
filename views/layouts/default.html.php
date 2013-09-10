@@ -17,16 +17,16 @@ FlashMessage::clear();
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?><?= $site['title'] ?></title>
 		<link rel="icon" href="<?= $this->url('assets/ico/site.ico') ?>">
 
-		<?php echo $this->html->style(array(
+		<?php echo $this->html->style([
 			'/assets/core/css/reset',
 			'/assets/site/css/base'
-		)) ?>
-		<?php echo $this->html->script(array(
+		]) ?>
+		<?php echo $this->html->script([
 			'/assets/core/js/underscore',
 			'/assets/core/js/jquery',
 			'/assets/core/js/require',
 			'/assets/core/js/base'
-		)) ?>
+		]) ?>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<!--[if IE 8 ]>
 		<script>
@@ -41,12 +41,12 @@ FlashMessage::clear();
 		</script>
 		<![endif]-->
 		<?php echo $this->scripts() ?>
-		<?=$this->view()->render(array('element' => 'ga'), $service['googleAnalytics'], array(
+		<?=$this->view()->render(['element' => 'ga'], $service['googleAnalytics'], [
 			'library' => 'cms_core'
-		)) ?>
-		<?=$this->view()->render(array('element' => 'head'), compact('site', 'service', 'feature'), array(
+		]) ?>
+		<?=$this->view()->render(['element' => 'head'], compact('site', 'service', 'feature'), [
 			'library' => 'app'
-		)) ?>
+		]) ?>
 	</head>
 	<body class="layout-default">
 		<div id="fb-root"></div>
@@ -60,18 +60,18 @@ FlashMessage::clear();
 		</div>
 		<div id="container">
 			<header>
-				<?=$this->view()->render(array('element' => 'header'), compact('site', 'service'), array(
+				<?=$this->view()->render(['element' => 'header'], compact('site', 'service'), [
 					'library' => 'app'
-				)) ?>
+				]) ?>
 			</header>
 			<div id="content">
 				<?php echo $this->content() ?>
 			</div>
 		</div>
 		<footer>
-			<?=$this->view()->render(array('element' => 'footer'), compact('site', 'service'), array(
+			<?=$this->view()->render(['element' => 'footer'], compact('site', 'service'), [
 				'library' => 'app'
-			)) ?>
+			]) ?>
 		</footer>
 	</body>
 </html>

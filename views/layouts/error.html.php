@@ -12,10 +12,10 @@ $site = Environment::get('site');
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?><?= $site['title'] ?></title>
 		<link rel="icon" href="<?= $this->url('assets/ico/site.ico') ?>">
 
-		<?php echo $this->html->style(array(
+		<?php echo $this->html->style([
 			'/assets/core/css/reset',
 			'/assets/site/css/error'
-		)) ?>
+		]) ?>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<!--[if IE 8 ]>
 		<script>

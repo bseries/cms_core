@@ -18,20 +18,20 @@ class Tokens extends \lithium\data\Model {
 
 	// Checks if a given token is valid and not yet expired.
 	public static function check($token) {
-		return (boolean) static::find('count', array(
-			'conditions' => array(
+		return (boolean) static::find('count', [
+			'conditions' => [
 				'token' => $token,
-				'expires' => array('>=' => date('Y-m-d H:i:s'))
-			)
-		));
+				'expires' => ['>=' => date('Y-m-d H:i:s')]
+			]
+		]);
 	}
 
 	// Deletes a given token if it exists.
 	public static function void($token) {
-		$item = static::find('first', array(
+		$item = static::find('first', [
 			'conditions' => compact('token'),
-			'fields' => array('id')
-		));
+			'fields' => ['id']
+		]);
 		if (!$item) {
 			return false;
 		}
@@ -40,9 +40,9 @@ class Tokens extends \lithium\data\Model {
 
 	// Runs garbage collection on the collection, deleting any expired items.
 	public static function gc() {
-		return static::remove(array(
+		return static::remove([
 			'expires <' => date('Y-m-d H:i:s')
-		));
+		]);
 	}
 }
 

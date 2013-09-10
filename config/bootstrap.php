@@ -3,21 +3,21 @@
 use lithium\core\Libraries;
 use lithium\core\Environment;
 
-Libraries::add('temporary', array(
+Libraries::add('temporary', [
 	'path' => dirname(__DIR__) . '/libraries/temporary/src'
-));
-Libraries::add('li3_lldr', array(
+]);
+Libraries::add('li3_lldr', [
 	'path' => dirname(__DIR__) . '/libraries/li3_lldr'
-));
-Libraries::add('li3_flash_message', array(
+]);
+Libraries::add('li3_flash_message', [
 	'path' => dirname(__DIR__) . '/libraries/li3_flash_message'
-));
-Libraries::add('li3_access', array(
+]);
+Libraries::add('li3_access', [
 	'path' => dirname(__DIR__) . '/libraries/li3_access'
-));
-Libraries::add('li3_mailer', array(
+]);
+Libraries::add('li3_mailer', [
 	'path' => dirname(__DIR__) . '/libraries/li3_mailer'
-));
+]);
 
 require __DIR__ . '/bootstrap/errors.php';
 require __DIR__ . '/bootstrap/action.php';
@@ -35,18 +35,18 @@ if (PHP_SAPI === 'cli') {
 
 require __DIR__ . '/bootstrap/auth.php';
 
-Environment::set(true, array(
-	'features' => array(
+Environment::set(true, [
+	'features' => [
 		'registerWithTokenOnly' => true
-	),
-	'modules' => array(
-		'tokens' => array(
+	],
+	'modules' => [
+		'tokens' => [
 			'library' => 'cms_core', 'title' => 'Tokens', 'name' => 'tokens', 'slug' => 'tokens'
-		),
-		'users' => array(
+		],
+		'users' => [
 			'library' => 'app', 'title' => 'Users', 'name' => 'users', 'slug' => 'users'
-		)
-	)
-));
+		]
+	]
+]);
 
 ?>

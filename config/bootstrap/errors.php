@@ -61,7 +61,7 @@ $handler = function($info) use ($mapErrorType, $path) {
 	$formatTrace = function($data) use ($path) {
 		$result = '';
 		foreach ($data as $line) {
-			$line += array('class' => '-', 'type' => '?', 'line' => '?', 'file' => '?');
+			$line += ['class' => '-', 'type' => '?', 'line' => '?', 'file' => '?'];
 			$result .= sprintf("%-40s%-30s on %4d in %s\n",
 				$line['class'],
 				$line['function'] . '()',
@@ -92,11 +92,11 @@ $exceptionHandler = function($exception, $return = false) use ($handler) {
 	if (ob_get_length()) {
 		ob_end_clean();
 	}
-	$info = compact('exception') + array(
+	$info = compact('exception') + [
 		'type' => get_class($exception),
 		'stack' => ErrorHandler::trace($exception->getTrace())
-	);
-	foreach (array('message', 'file', 'line', 'trace') as $key) {
+	];
+	foreach (['message', 'file', 'line', 'trace'] as $key) {
 		$method = 'get' . ucfirst($key);
 		$info[$key] = $exception->{$method}();
 	}
@@ -109,31 +109,31 @@ $exceptionHandler = function($exception, $return = false) use ($handler) {
 // set_error_handler($errorHandler);
 // set_exception_handler($exceptionHandler);
 
-Logger::config(array(
-	'default' => array(
+Logger::config([
+	'default' => [
 		'adapter' => 'File',
 		'path' => $path . '/log',
-		'priority' => array('debug', 'error')
-	),
-));
+		'priority' => ['debug', 'error']
+	],
+]);
 Logger::applyFilter('write', function ($self, $params, $chain) {
 	$params['message'] = date('[Y-m-d H:i:s]') . ' '. $params['message'];
 	return $chain->next($self, $params, $chain);
 });
 
 $errorResponse = function($request, $type = 404) {
-	$response = new Response(array(
+	$response = new Response([
 		'request' => $request,
 		'status' => $type
-	));
+	]);
 
-	Media::render($response, array(), array(
+	Media::render($response, [], [
 		'library' => true,
 		'controller' => 'errors',
 		'template' => (string) $type,
 		'layout' => 'error',
 		'request' => $request
-	));
+	]);
 	return $response;
 };
 

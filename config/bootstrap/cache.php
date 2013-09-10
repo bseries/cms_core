@@ -10,12 +10,12 @@ if (!Memcache::enabled()) {
 	throw Exception('Memcache not enabled.');
 }
 
-Cache::config(array(
-	'default' => array(
+Cache::config([
+	'default' => [
 		'adapter' => 'Memcache',
 		'host' => '127.0.0.1:11211'
-	)
-));
+	]
+]);
 
 Dispatcher::applyFilter('run', function($self, $params, $chain) {
 	if (!Environment::is('production')) {
@@ -44,7 +44,7 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 
 	if ($condition === $hash) {
 		$response->status(304);
-		$response->body = array();
+		$response->body = [];
 	}
 
 	$response->headers['ETag'] = "\"{$hash}\"";;

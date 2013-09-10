@@ -10,18 +10,18 @@ class Users extends \lithium\data\Model {
 
 	public function activate($entity) {
 		$entity->is_active = true;
-		return $entity->save(null, array('validate' => false, 'whitelist' => array('is_active')));
+		return $entity->save(null, ['validate' => false, 'whitelist' => ['is_active']]);
 	}
 
 	public function deactivate($entity) {
 		$entity->is_active = false;
-		return $entity->save(null, array('validate' => false, 'whitelist' => array('is_active')));
+		return $entity->save(null, ['validate' => false, 'whitelist' => ['is_active']]);
 	}
 
 	// Generates a random (pronounceable) plaintext password.
 	public static function generatePassword($length = 8, $alphabet = 0) {
 		// Alphabets in descending order of complexity.
-		$alphabets = array(
+		$alphabets = [
 			// The most simple set without any special characters.
 			'abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ02345679',
 
@@ -39,7 +39,7 @@ class Users extends \lithium\data\Model {
 			//
 			// Source: https://www.grc.com/ppp.htm
 			'!"#$%&\'()*+,-./23456789:;<=>?@ABCDEFGHJKLMNOPRSTUVWXYZ[\]^_abcdefghijkmnopqrstuvwxyz{|}~'
-		);
+		];
 
 		$chars = $alphabets[$alphabet];
 		$password = '';

@@ -2,26 +2,26 @@
 
 use lithium\core\Environment;
 
-$config = array(
-	'site' => array(
+$config = [
+	'site' => [
 		'email' => 'mail@atelierdisko.de',
 		'phone' => '+49 123 4567'
-	),
-	'service' => array(
-		'googleAnalytics' => array(
+	],
+	'service' => [
+		'googleAnalytics' => [
 			'account' => ''
-		),
-		'facebook' => array(
+		],
+		'facebook' => [
 			'pageUrl' => 'https://www.facebook.com/AtelierDisko'
-		),
-		'twitter' => array(
+		],
+		'twitter' => [
 			'username' => 'atelierdisko'
-		),
-		'tumblr' => array(
+		],
+		'tumblr' => [
 			'username' => 'atelierdisko'
-		)
-	)
-);
+		]
+	]
+];
 Environment::set('production', $config);
 Environment::set('development', $config);
 

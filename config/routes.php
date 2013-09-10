@@ -5,32 +5,32 @@ use lithium\core\Environment;
 
 Router::connect(
 	'/admin/{:args}',
-	array('admin' => true),
-	array(
+	['admin' => true],
+	[
 		'continue' => true,
-		'persist' => array('admin', 'controller')
-	)
+		'persist' => ['admin', 'controller']
+	]
 );
 
 // @fixme Making this / interferes with the non-admin /.
-Router::connect('/dashboard', array(
+Router::connect('/dashboard', [
 	'controller' => 'pages', 'action' => 'home', 'library' => 'cms_core'
-));
+]);
 
 if (Environment::get('features.registerWithTokenOnly')) {
-	Router::connect('/tokens/{:action}/{:token:[0-9a-f]{8,16}}', array(
+	Router::connect('/tokens/{:action}/{:token:[0-9a-f]{8,16}}', [
 		'controller' => 'tokens', 'library' => 'cms_core'
-	));
+	]);
 }
-Router::connect('/tokens/{:action}/{:args}', array(
+Router::connect('/tokens/{:action}/{:args}', [
 	'controller' => 'tokens', 'library' => 'cms_core'
-));
+]);
 
-Router::connect('/users/{:action}/{:id:[0-9]+}', array(
+Router::connect('/users/{:action}/{:id:[0-9]+}', [
 	'controller' => 'users', 'library' => 'cms_core'
-));
-Router::connect('/users/{:action}/{:args}', array(
+]);
+Router::connect('/users/{:action}/{:args}', [
 	'controller' => 'users', 'library' => 'cms_core'
-));
+]);
 
 ?>

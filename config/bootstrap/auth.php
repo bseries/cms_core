@@ -2,13 +2,13 @@
 
 use lithium\security\Auth;
 
-Auth::config(array(
-	'default' => array(
+Auth::config([
+	'default' => [
 		'adapter' => 'Form',
 		'model' => 'Users',
-		'fields' => array('email', 'password'),
-		'scope' => array('is_active' => true)
-	)
-));
+		'fields' => ['email', 'password'],
+		'scope' => ['is_active' => true]
+	]
+]);
 
 ?>

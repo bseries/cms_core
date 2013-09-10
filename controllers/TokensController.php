@@ -16,14 +16,14 @@ class TokensController extends \lithium\action\Controller {
 		Tokens::generate();
 
 		FlashMessage::write('Token generated.');
-		return $this->redirect(array('action' => 'index', 'library' => 'cms_core'));
+		return $this->redirect(['action' => 'index', 'library' => 'cms_core']);
 	}
 
 	public function admin_void() {
 		Tokens::void($token = $this->request->token);
 
 		FlashMessage::write("Voided token `{$token}`.");
-		return $this->redirect(array('action' => 'index', 'library' => 'cms_core'));
+		return $this->redirect(['action' => 'index', 'library' => 'cms_core']);
 	}
 }
 

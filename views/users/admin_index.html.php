@@ -23,11 +23,11 @@
 				<td><?= $item->modified ?>
 				<td>
 					<nav class="actions">
-						<?= $this->html->link($t('delete'), array('id' => $item->id, 'action' => 'delete', 'library' => 'cms_core')) ?>
+						<?= $this->html->link($t('delete'), ['id' => $item->id, 'action' => 'delete', 'library' => 'cms_core']) ?>
 						<?php if ($item->is_active): ?>
-							<?= $this->html->link($t('deactivate'), array('id' => $item->id, 'action' => 'deactivate', 'library' => 'cms_core')) ?>
+							<?= $this->html->link($t('deactivate'), ['id' => $item->id, 'action' => 'deactivate', 'library' => 'cms_core']) ?>
 						<?php else: ?>
-							<?= $this->html->link($t('activate'), array('id' => $item->id, 'action' => 'activate', 'library' => 'cms_core')) ?>
+							<?= $this->html->link($t('activate'), ['id' => $item->id, 'action' => 'activate', 'library' => 'cms_core']) ?>
 						<?php endif ?>
 					</nav>
 			<?php endforeach ?>

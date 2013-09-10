@@ -24,9 +24,9 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 });
 
 // Admin routing
-Dispatcher::config(array(
-	'rules' => array('admin' => array('action' => 'admin_{:action}'))
-));
+Dispatcher::config([
+	'rules' => ['admin' => ['action' => 'admin_{:action}']]
+]);
 
 // Admin layout.
 Dispatcher::applyFilter('run', function($self, $params, $chain) {

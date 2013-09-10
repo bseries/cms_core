@@ -40,7 +40,8 @@ class Assets extends \lithium\template\Helper {
 
 	public function url($path) {
 		$version = Environment::get('project.version');
-		return 'http://assets.zerowaste/v' . $version . $path;
+		$base = Environment::get('assets.url');
+		return $base . '/v' . $version . $path;
 	}
 }
 

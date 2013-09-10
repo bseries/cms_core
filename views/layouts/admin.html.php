@@ -15,17 +15,17 @@ FlashMessage::clear();
 	<head>
 		<?php echo $this->html->charset() ?>
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?>Admin – <?= $site['title'] ?></title>
-		<link rel="icon" href="<?= $this->url('assets/ico/site.png') ?>">
+		<link rel="icon" href="<?= $this->assets->url('/ico/site.png') ?>">
 
-		<?php echo $this->html->style([
-			'/assets/core/css/reset',
-			'/assets/core/css/admin'
+		<?php echo $this->assets->style([
+			'/core/css/reset',
+			'/core/css/admin'
 		]) ?>
-		<?php echo $this->html->script([
-			'/assets/core/js/underscore',
-			'/assets/core/js/jquery',
-			'/assets/core/js/require',
-			'/assets/core/js/base'
+		<?php echo $this->assets->script([
+			'/core/js/underscore',
+			'/core/js/jquery',
+			'/core/js/require',
+			'/core/js/base'
 		]) ?>
 		<?php echo $this->scripts() ?>
 

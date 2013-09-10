@@ -17,15 +17,15 @@ FlashMessage::clear();
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?><?= $site['title'] ?></title>
 		<link rel="icon" href="<?= $this->url('assets/ico/site.ico') ?>">
 
-		<?php echo $this->html->style([
-			'/assets/core/css/reset',
-			'/assets/site/css/base'
+		<?php echo $this->assets->style([
+			'/core/css/reset',
+			'/site/css/base'
 		]) ?>
-		<?php echo $this->html->script([
-			'/assets/core/js/underscore',
-			'/assets/core/js/jquery',
-			'/assets/core/js/require',
-			'/assets/core/js/base'
+		<?php echo $this->assets->script([
+			'/core/js/underscore',
+			'/core/js/jquery',
+			'/core/js/require',
+			'/core/js/base'
 		]) ?>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<!--[if IE 8 ]>

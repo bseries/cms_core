@@ -4,11 +4,13 @@ var App = {
 };
 
 App.env = {
+  'project': {
+    'version': 'dev'
+  }
 };
 
 requirejs.config({
-  urlArgs: "v=REV",
-  baseUrl: '//' + window.location.hostname + '/assets',
+  baseUrl: 'http://assets.' + window.location.hostname + '/v' + App.env.project.version,
   waitSeconds: 15,
   paths: {
     'jquery': 'core/js/jquery',

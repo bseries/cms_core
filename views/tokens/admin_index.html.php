@@ -2,7 +2,7 @@
 	<h1><?= $t('Tokens') ?></h1>
 
 	<nav class="actions">
-		<?= $this->html->link($t('generate new token'), ['action' => 'generate', 'library' => 'cms_core']) ?>
+		<?= $this->html->link($t('generate token'), ['action' => 'generate', 'library' => 'cms_core']) ?>
 	</nav>
 
 	<table>

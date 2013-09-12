@@ -43,7 +43,7 @@ FlashMessage::clear();
 			<header>
 				<h1>
 					<?= $site['title'] ?> –
-					<?= $this->html->link('Administration', ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
+					<?= $this->html->link($t('Administration'), ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
 				</h1>
 				<nav>
 					<?php foreach ($modules as $module): ?>
@@ -51,8 +51,8 @@ FlashMessage::clear();
 							'controller' => $module['name'], 'action' => 'index', 'library' => $module['library']
 						]) ?>
 					<?php endforeach ?>
-					<?= $this->html->link('View Site', '/', ['target' => 'new']) ?>
-					<?= $this->html->link('Dashboard', ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
+					<?= $this->html->link($t('View Site'), '/', ['target' => 'new']) ?>
+					<?= $this->html->link($t('Dashboard'), ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
 				</nav>
 			</header>
 			<div id="content">

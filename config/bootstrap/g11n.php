@@ -101,10 +101,6 @@ Catalog::config([
 	'runtime' => [
 		'adapter' => 'Memory'
 	],
-	'app' => [
-	 	'adapter' => 'Gettext',
-	 	'path' => Libraries::get(true, 'resources') . '/g11n/po'
-	 ],
 	'lithium' => [
 		'adapter' => 'Php',
 		'path' => LITHIUM_LIBRARY_PATH . '/lithium/g11n/resources/php'

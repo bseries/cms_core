@@ -2,6 +2,9 @@
 
 use lithium\core\Libraries;
 use lithium\core\Environment;
+use lithium\g11n\Message;
+
+extract(Message::aliases());
 
 Libraries::add('temporary', [
 	'path' => dirname(__DIR__) . '/libraries/temporary/src'
@@ -41,10 +44,10 @@ Environment::set(true, [
 	],
 	'modules' => [
 		'tokens' => [
-			'library' => 'cms_core', 'title' => 'Tokens', 'name' => 'tokens', 'slug' => 'tokens'
+			'library' => 'cms_core', 'title' => $t('Tokens'), 'name' => 'tokens', 'slug' => 'tokens'
 		],
 		'users' => [
-			'library' => 'app', 'title' => 'Users', 'name' => 'users', 'slug' => 'users'
+			'library' => 'app', 'title' => $t('Users'), 'name' => 'users', 'slug' => 'users'
 		]
 	]
 ]);

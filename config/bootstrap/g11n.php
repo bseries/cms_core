@@ -47,11 +47,11 @@ date_default_timezone_set('UTC');
  * @see lithiumm\g11n\Message
  * @see lithiumm\core\Environment
  */
-$locale = 'en';
-$locales = ['en' => 'English'];
+// $locale = 'en';
+// $locales = ['en' => 'English'];
 
-Environment::set('production', compact('locale', 'locales'));
-Environment::set('development', compact('locale', 'locales'));
+// Environment::set('production', compact('locale', 'locales'));
+// Environment::set('development', compact('locale', 'locales'));
 Environment::set('test', ['locale' => 'en', 'locales' => ['en' => 'English']]);
 
 /**

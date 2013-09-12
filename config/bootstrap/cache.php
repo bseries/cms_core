@@ -7,7 +7,7 @@ use lithium\action\Dispatcher;
 use lithium\storage\cache\adapter\Memcache;
 
 if (!Memcache::enabled()) {
-	throw Exception('Memcache not enabled.');
+	throw new Exception('Memcache not enabled.');
 }
 
 Cache::config([

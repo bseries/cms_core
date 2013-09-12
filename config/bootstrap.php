@@ -2,6 +2,7 @@
 
 use lithium\core\Libraries;
 use lithium\core\Environment;
+use lithium\g11n\Catalog;
 
 Libraries::add('temporary', [
 	'path' => dirname(__DIR__) . '/libraries/temporary/src'
@@ -48,5 +49,12 @@ Environment::set(true, [
 		]
 	]
 ]);
+
+Catalog::config([
+	'cms_core' => [
+	 	'adapter' => 'Gettext',
+	 	'path' => Libraries::get('cms_core', 'resources') . '/g11n/po'
+	 ]
+] + Catalog::config());
 
 ?>

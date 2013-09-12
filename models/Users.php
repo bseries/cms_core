@@ -2,6 +2,8 @@
 
 namespace cms_core\models;
 
+use lihtium\security\Password;
+
 class Users extends \lithium\data\Model {
 
 	public static function pdo() {

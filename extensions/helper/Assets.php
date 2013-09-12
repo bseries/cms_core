@@ -6,6 +6,11 @@ use lithium\core\Environment;
 
 class Assets extends \lithium\template\Helper {
 
+	public function image($path, array $options = array()) {
+		$path = $this->url($path);
+		return $this->_context->html->image($path, $options);
+	}
+
 	public function style($path, array $options = array()) {
 		$defaults = array('type' => 'stylesheet', 'inline' => true);
 		list($scope, $options) = $this->_options($defaults, $options);

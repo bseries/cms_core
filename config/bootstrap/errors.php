@@ -7,6 +7,7 @@ use lithium\analysis\Logger;
 use lithium\util\String;
 use lithium\data\Connections;
 use lithium\action\Dispatcher;
+use lithium\action\Request;
 use lithium\action\Response;
 use lithium\net\http\Media;
 
@@ -121,30 +122,24 @@ Logger::applyFilter('write', function ($self, $params, $chain) {
 	return $chain->next($self, $params, $chain);
 });
 
-$errorResponse = function($request, $type = 404) {
-	$response = new Response([
-		'request' => $request,
-		'status' => $type
+// Handle errors rising from exceptions.
+$errorResponse = function($request, $code = 500, $reason = null) {
+	$request = new Request([
+		'url' => '/' . $code,
+		'data' => compact('code', 'reason')
 	]);
-
-	Media::render($response, [], [
-		'library' => true,
-		'controller' => 'errors',
-		'template' => (string) $type,
-		'layout' => 'error',
-		'request' => $request
-	]);
-	return $response;
+	return Dispatcher::run($request);
 };
 
-if (!Environment::is('development')) {
+//if (!Environment::is('development')) {
 	Dispatcher::applyFilter('run', function($self, $params, $chain) use ($errorResponse){
 		try {
 			return $chain->next($self, $params, $chain);
 		} catch (\Exception $e) {
-			return $errorResponse($params['request'], $e->getCode() == 404 ? 404 : 500);
+			return $errorResponse($params['request'], $e->getCode() ?: 500, $e->getMessage());
 		}
 	});
-}
+//}
+
 
 ?>

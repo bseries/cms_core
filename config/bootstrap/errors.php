@@ -123,10 +123,9 @@ Logger::applyFilter('write', function ($self, $params, $chain) {
 });
 
 // Handle errors rising from exceptions.
-$errorResponse = function($request, $code = 500, $reason = null) {
+$errorResponse = function($request, $code) {
 	$request = new Request([
-		'url' => '/' . $code,
-		'data' => compact('code', 'reason')
+		'url' => '/' . $code
 	]);
 	return Dispatcher::run($request);
 };
@@ -136,7 +135,12 @@ $errorResponse = function($request, $code = 500, $reason = null) {
 		try {
 			return $chain->next($self, $params, $chain);
 		} catch (\Exception $e) {
-			return $errorResponse($params['request'], $e->getCode() ?: 500, $e->getMessage());
+			$message  = 'Catching exception and showing error response';
+			$message .= ' ;code was `' . $e->getCode() . '`';
+			$message .= ' ;message was `' . $e->getMessage() . '`.';
+			Logger::debug($message);
+
+			return $errorResponse($params['request'], $e->getCode() ?: 500);
 		}
 	});
 //}

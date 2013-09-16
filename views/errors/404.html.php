@@ -32,36 +32,31 @@ if ($internalReferal) {
 		$searchTerms = str_replace('+', ' ', $query['q']);
 	}
 }
-
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
 	<h1>
-		<span class="code"><?= $code ?></span>
+		<span class="code"><?= $this->_response->status['code'] ?></span>
 		<?= $this->title($t('Not Found')) ?>
 	</h1>
 	<div class="reason">
-		<?php if ($reason): ?>
-			<p><?= $reason ?></p>
-		<?php else: ?>
-			<ul class="reason">
-			<?php if ($internalReferal): ?>
-				<li><?= $t("You've followed a link from within the site. That links seems to be incorrectly setup.") ?></li>
-			<?php elseif ($searchReferal): ?>
-				<li><?= $t(
-					"You did a search on <strong>{:searchReferal}</strong> for <em>{:searchTerms}</em>. However their search index appears to be partially out of date.",
-					[
-						'searchReferal' => ucfirst($searchReferal),
-						'searchTerms' => $searchTerms
-					]
-				) ?></li>
-			<?php elseif ($referer): ?>
-				<li><?= $t("If you've followed a link from somewhere the link may be out of date.") ?></li>
-			<?php elseif (!$referer): ?>
-				<li><?= $t('If you typed in the address, it might have been misspelled.') ?></li>
-				<li><?= $t("If you've bookmarked this page the link may be out of date.") ?></li>
-			<?php endif ?>
-			</ul>
+		<ul>
+		<?php if ($internalReferal): ?>
+			<li><?= $t("You've followed a link from within the site. That links seems to be incorrectly setup.") ?></li>
+		<?php elseif ($searchReferal): ?>
+			<li><?= $t(
+				"You did a search on <strong>{:searchReferal}</strong> for <em>{:searchTerms}</em>. However their search index appears to be partially out of date.",
+				[
+					'searchReferal' => ucfirst($searchReferal),
+					'searchTerms' => $searchTerms
+				]
+			) ?></li>
+		<?php elseif ($referer): ?>
+			<li><?= $t("If you've followed a link from somewhere the link may be out of date.") ?></li>
+		<?php elseif (!$referer): ?>
+			<li><?= $t('If you typed in the address, it might have been misspelled.') ?></li>
+			<li><?= $t("If you've bookmarked this page the link may be out of date.") ?></li>
 		<?php endif ?>
+		</ul>
 	</div>
 	<div class="try">
 		<ul>

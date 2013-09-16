@@ -3,6 +3,22 @@
 use lithium\net\http\Router;
 use lithium\core\Environment;
 
+Router::connect('/404', array(
+	'controller' => 'Errors', 'action' => 'fourohfour', 'library' => 'cms_core'
+));
+Router::connect('/500', array(
+	'controller' => 'Errors', 'action' => 'fiveohoh', 'library' => 'cms_core'
+));
+Router::connect('/503', array(
+	'controller' => 'Errors', 'action' => 'fiveohthree', 'library' => 'cms_core'
+));
+Router::connect('/maintenance', array(
+	'controller' => 'Errors', 'action' => 'maintenance', 'library' => 'cms_core'
+));
+Router::connect('/browser', array(
+	'controller' => 'Errors', 'action' => 'browser', 'library' => 'cms_core'
+));
+
 Router::connect(
 	'/admin/{:args}',
 	['admin' => true],

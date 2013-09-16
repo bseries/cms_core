@@ -1,6 +1,6 @@
 <script>
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '<?php $account ?>']);
+  _gaq.push(['_setAccount', '<?php echo $account ?>']);
   _gaq.push(['_trackPageview']);
 
   (function() {

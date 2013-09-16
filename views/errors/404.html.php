@@ -38,8 +38,7 @@ if ($internalReferal) {
 		<span class="code"><?= $this->_response->status['code'] ?></span>
 		<?= $this->title($t('Not Found')) ?>
 	</h1>
-	<div class="reason">
-		<ul>
+	<ul class="reason">
 		<?php if ($internalReferal): ?>
 			<li><?= $t("You've followed a link from within the site. That links seems to be incorrectly setup.") ?></li>
 		<?php elseif ($searchReferal): ?>
@@ -56,34 +55,31 @@ if ($internalReferal) {
 			<li><?= $t('If you typed in the address, it might have been misspelled.') ?></li>
 			<li><?= $t("If you've bookmarked this page the link may be out of date.") ?></li>
 		<?php endif ?>
-		</ul>
-	</div>
-	<div class="try">
-		<ul>
-			<? if ($internalReferal): ?>
-				<li><?= $t('The administrator of this site has been notified and will fix the link as soon as possible.') ?></li>
-				<li>
-					<?php echo $t(
-						'Go back to the previous page which sent you here <strong>{:url}</strong>.'),
-						['url' => $this->html->link($referer)]
-					?>
-				</li>
-			<? elseif ($searchReferal): ?>
-			<? elseif ($referer): ?>
-			<? elseif (!$referer): ?>
-				<li><?= $t('Double-check the spelling of the address.') ?></li>
-				<li><?= $t('Update your bookmark.') ?></li>
-			<? endif ?>
-				<li>
-					<?php echo $t(
-						'Go to the frontpage at <strong>{:url}</strong>.',
-						[
-							'url' => $this->html->link(
-								$this->url('Pages::home', ['absolute' => true]), 'Pages::home'
-							)
-						]
-					)?>
-				</li>
-		</ul>
-	</div>
+	</ul>
+	<ul class="try">
+		<? if ($internalReferal): ?>
+			<li><?= $t('The administrator of this site has been notified and will fix the link as soon as possible.') ?></li>
+			<li>
+				<?php echo $t(
+					'Go back to the previous page which sent you here <strong>{:url}</strong>.'),
+					['url' => $this->html->link($referer)]
+				?>
+			</li>
+		<? elseif ($searchReferal): ?>
+		<? elseif ($referer): ?>
+		<? elseif (!$referer): ?>
+			<li><?= $t('Double-check the spelling of the address.') ?></li>
+			<li><?= $t('Update your bookmark.') ?></li>
+		<? endif ?>
+			<li>
+				<?php echo $t(
+					'Go to the frontpage at <strong>{:url}</strong>.',
+					[
+						'url' => $this->html->link(
+							$this->url('Pages::home', ['absolute' => true]), 'Pages::home'
+						)
+					]
+				)?>
+			</li>
+	</ul>
 </article>

@@ -12,9 +12,9 @@ $site = Environment::get('site');
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?><?= $site['title'] ?></title>
 		<link rel="icon" href="<?= $this->assets->url('/site/ico/site.png') ?>">
 
-		<?php echo $this->html->style([
-			'/assets/core/css/reset',
-			'/assets/site/css/error'
+		<?php echo $this->assets->style([
+			'/core/css/reset',
+			'/site/css/error'
 		]) ?>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<!--[if IE 8 ]>

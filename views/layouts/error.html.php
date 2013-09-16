@@ -32,10 +32,10 @@ $site = Environment::get('site');
 		<?php echo $this->scripts() ?>
 	</head>
 	<body class="layout-error">
-	<div id="container">
-		<div id="content">
-			<?php echo $this->content() ?>
+		<div id="container">
+			<div id="content">
+				<?php echo $this->content() ?>
+			</div>
 		</div>
-	</div>
 	</body>
 </html>

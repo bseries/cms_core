@@ -27,8 +27,8 @@ FlashMessage::clear();
 			'/core/js/require',
 			'/core/js/base'
 		]) ?>
+		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>
-
 	</head>
 	<body class="layout-admin">
 		<div

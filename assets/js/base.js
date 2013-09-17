@@ -26,7 +26,11 @@ requirejs.config({
     'jquery': 'core/js/jquery',
     'underscore': 'core/js/underscore',
     'notify': 'core/js/notify',
-    'domready': 'core/js/domready'
+    'domready': 'core/js/domready',
+    'editor': 'core/js/editor',
+    'wysihtml5': 'core/js/wysihtml5',
+    'globalize': 'core/js/globalize',
+    'modernizr': 'core/js/modernizr'
   },
   shim: {
     'globalize': {

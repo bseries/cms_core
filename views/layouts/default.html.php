@@ -40,6 +40,7 @@ FlashMessage::clear();
 		for(var b=b||i(a),c=b.frag.cloneNode(),d=0,e=m(),h=e.length;d<h;d++)c.createElement(e[d]);return c}};l.html5=e;q(f)})(this,document);
 		</script>
 		<![endif]-->
+		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>
 		<?=$this->view()->render(['element' => 'ga'], $service['googleAnalytics'], [
 			'library' => 'cms_core'

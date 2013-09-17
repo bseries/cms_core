@@ -140,7 +140,7 @@ $errorResponse = function($request, $code) {
 	return Dispatcher::run($request);
 };
 
-//if (!Environment::is('development')) {
+if (!Environment::is('development')) {
 	Dispatcher::applyFilter('run', function($self, $params, $chain) use ($errorResponse){
 		try {
 			return $chain->next($self, $params, $chain);
@@ -153,7 +153,7 @@ $errorResponse = function($request, $code) {
 			return $errorResponse($params['request'], $e->getCode() ?: 500);
 		}
 	});
-//}
+}
 
 
 ?>

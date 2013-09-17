@@ -15,29 +15,16 @@
   display: block;
   min-height: 15em;
   width: 100%;
-  padding: 0.5em;
   border: 1px solid #e6e6e6;
 }
 textarea {
   color: transparent;
   margin-top: 2.75em;
 }
-.editor {
-  margin-bottom: 1em;
-}
-.editor .toolbar {
-  height: 2em;
-  margin-top: .5em;
-  margin-bottom: .5em;
-}
-.editor .toolbar a {
-  margin-right: 10px;
-}
 
 [data-wysihtml5-dialog] input {
 	width: 200px;
 	margin: 0 10px 0 0;
-
 }
 [data-wysihtml5-dialog] {
 	display: block;

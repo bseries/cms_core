@@ -1,9 +1,13 @@
 <?php
 /**
- * Lithium: the most rad php framework
+ * Bureau Core
  *
- * @copyright     Copyright 2013, Union of RAD (http://union-of-rad.org)
- * @license       http://opensource.org/licenses/bsd-license.php The BSD License
+ * Copyright (c) 2013 Atelier Disko - All rights reserved.
+ *
+ * This software is proprietary and confidential. Redistribution
+ * not permitted. Unless required by applicable law or agreed to
+ * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
 
 use lithium\console\Dispatcher;
@@ -12,7 +16,6 @@ use lithium\core\Environment;
 /**
  * This filter sets the environment based on the current request. By default, `$request->env`, for
  * example in the command `li3 help --env=production`, is used to determine the environment.
- *
  */
 Dispatcher::applyFilter('run', function($self, $params, $chain) {
 	Environment::set($params['request']);

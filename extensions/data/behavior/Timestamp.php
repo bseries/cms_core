@@ -2,6 +2,8 @@
 
 namespace cms_core\extensions\data\behavior;
 
+use \Exception;
+
 class Timestamp extends \li3_behaviors\data\model\Behavior {
 
 	protected $_defaults = [
@@ -11,9 +13,11 @@ class Timestamp extends \li3_behaviors\data\model\Behavior {
 	protected function _init() {
 		parent::_init();
 
+		// @fixme Workaround
+		$this->_config += $this->_defaults;
+
 		$model = $this->_model;
 		$behavior = $this;
-
 
 		foreach ($this->_config['fields'] as $name => $field) {
 			if (!$model::schema()->has($field)) {
@@ -21,7 +25,7 @@ class Timestamp extends \li3_behaviors\data\model\Behavior {
 			}
 		}
 
-		$model::applyFilter('create', function($self, $params, $chain) use ($behavior) {
+		$model::applyFilter('save', function($self, $params, $chain) use ($behavior) {
 			$params['data'] = $behavior->invokeMethod(
 				'_timestamp', [$params['entity'], $params['data']]
 			);

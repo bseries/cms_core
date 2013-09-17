@@ -22,6 +22,9 @@ Libraries::add('temporary', [
 Libraries::add('li3_behaviors', [
 	'path' => dirname(__DIR__) . '/libraries/li3_behaviors'
 ]);
+Libraries::add('li3_taggable', [
+	'path' => dirname(__DIR__) . '/libraries/li3_taggable'
+]);
 Libraries::add('li3_lldr', [
 	'path' => dirname(__DIR__) . '/libraries/li3_lldr'
 ]);

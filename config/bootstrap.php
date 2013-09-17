@@ -19,6 +19,9 @@ extract(Message::aliases());
 Libraries::add('temporary', [
 	'path' => dirname(__DIR__) . '/libraries/temporary/src'
 ]);
+Libraries::add('li3_behaviors', [
+	'path' => dirname(__DIR__) . '/libraries/li3_behaviors'
+]);
 Libraries::add('li3_lldr', [
 	'path' => dirname(__DIR__) . '/libraries/li3_lldr'
 ]);

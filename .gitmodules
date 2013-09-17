@@ -13,3 +13,6 @@
 [submodule "libraries/li3_mailer"]
 	path = libraries/li3_mailer
 	url = git@github.com:atelierdisko/li3_mailer.git
+[submodule "libraries/li3_behaviors"]
+	path = libraries/li3_behaviors
+	url = https://github.com/jails/li3_behaviors.git

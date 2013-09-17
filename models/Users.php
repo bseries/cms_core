@@ -15,10 +15,11 @@ namespace cms_core\models;
 use lithium\security\Password;
 
 class Users extends \lithium\data\Model {
+
 	use \li3_behaviors\data\model\Behaviors;
 
 	protected $_actsAs = [
-		'Timestamp'
+		'cms_core\extensions\data\behavior\Timestamp'
 	];
 
 	public static function pdo() {

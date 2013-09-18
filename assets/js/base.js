@@ -76,3 +76,18 @@ require(['jquery', 'notify', 'domready!'], function($) {
   }
 });
 
+require(['jquery', 'nprogress', 'domready!'], function($, progress) {
+  progress.configure({
+    showSpinner: false
+  });
+  $(document).on('modal:loading', function() {
+    progress.start();
+  });
+  $(document).on('modal:content', function() {
+    progress.done();
+  });
+  $(document).on('modal:ready', function() {
+    progress.remove();
+  });
+});
+

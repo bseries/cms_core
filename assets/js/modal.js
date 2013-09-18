@@ -81,6 +81,7 @@ function($) {
   };
 
   return {
+    init: init,
     fill: fill,
     ready: ready,
     close: close,

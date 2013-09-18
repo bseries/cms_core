@@ -1,5 +1,5 @@
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
-	<h1><?= $t('Users') ?></h1>
+	<h1 class="alpha"><?= $t('Users') ?></h1>
 	<table>
 		<thead>
 			<tr>

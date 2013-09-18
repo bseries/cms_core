@@ -41,7 +41,7 @@ FlashMessage::clear();
 		</div>
 		<div id="container">
 			<header>
-				<h1>
+				<h1 class="alpha">
 					<?= $site['title'] ?> –
 					<?= $this->html->link($t('Administration'), ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
 				</h1>

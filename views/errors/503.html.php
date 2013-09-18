@@ -1,5 +1,5 @@
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
-	<h1>
+	<h1 class="alpha">
 		<span class="code"><?= $this->_response->status['code'] ?></span>
 		<?= $this->title($t('Service Unavailable')) ?>
 	</h1>

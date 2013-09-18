@@ -9,9 +9,9 @@ $project = Environment::get('project');
 
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
-	<h1><?= $this->title($t('Dashboard')) ?></h1>
+	<h1 class="alpha"><?= $this->title($t('Dashboard')) ?></h1>
 
-	<h2><?= $t('Site') ?></h2>
+	<h2 class="beta"><?= $t('Site') ?></h2>
 	<dl>
 	<?php foreach ($site as $name => $value): ?>
 		<dt><?= $name ?></dt>
@@ -19,7 +19,7 @@ $project = Environment::get('project');
 	<?php endforeach ?>
 	</dl>
 
-	<h2><?= $t('Project') ?></h2>
+	<h2 class="beta"><?= $t('Project') ?></h2>
 	<dl>
 	<?php foreach ($project as $name => $value): ?>
 		<dt><?= $name ?></dt>
@@ -27,7 +27,7 @@ $project = Environment::get('project');
 	<?php endforeach ?>
 	</dl>
 
-	<h2><?= $t('Features') ?></h2>
+	<h2 class="beta"><?= $t('Features') ?></h2>
 	<dl>
 	<?php foreach ($features as $name => $value): ?>
 		<dt><?= $name ?></dt>
@@ -35,9 +35,9 @@ $project = Environment::get('project');
 	<?php endforeach ?>
 	</dl>
 
-	<h2><?= $t('Servies') ?></h2>
+	<h2 class="beta"><?= $t('Servies') ?></h2>
 	<?php foreach ($services as $name => $service): ?>
-	<h3><?= $name ?></h3>
+	<h3 class="gamma"><?= $name ?></h3>
 <pre>
 <?php echo json_encode($service) ?>
 </pre>

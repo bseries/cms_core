@@ -20,6 +20,12 @@ App.env = {
 };
 
 requirejs.config({
+  config: {
+    text: {
+      // Allow cross-domain requests, server features CORS.
+      useXhr: function() { return true; }
+    }
+  },
   baseUrl: 'http://assets.' + window.location.hostname + '/v' + App.env.project.version,
   waitSeconds: 15,
   paths: {

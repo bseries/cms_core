@@ -27,12 +27,16 @@ requirejs.config({
     'underscore': 'core/js/underscore',
     'notify': 'core/js/notify',
     'domready': 'core/js/domready',
+    'text': 'core/js/text',
     'editor': 'core/js/editor',
     'wysihtml5': 'core/js/wysihtml5',
     'globalize': 'core/js/globalize',
     'modernizr': 'core/js/modernizr',
     'modal': 'core/js/modal',
-    'nprogress': 'core/js/nprogress'
+    'nprogress': 'core/js/nprogress',
+    'media': 'media/js/media',
+    'ember': 'core/js/ember',
+    'handlebars': 'core/js/handlebars'
   },
   shim: {
     'globalize': {

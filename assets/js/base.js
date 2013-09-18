@@ -15,7 +15,7 @@ var App = {
 
 App.env = {
   'project': {
-    'version': 'dev'
+    'version': 'REV'
   }
 };
 

@@ -30,7 +30,9 @@ requirejs.config({
     'editor': 'core/js/editor',
     'wysihtml5': 'core/js/wysihtml5',
     'globalize': 'core/js/globalize',
-    'modernizr': 'core/js/modernizr'
+    'modernizr': 'core/js/modernizr',
+    'modal': 'core/js/modal',
+    'nprogress': 'core/js/nprogress'
   },
   shim: {
     'globalize': {
@@ -53,7 +55,6 @@ requirejs.config({
     'versioncompare': {
       exports: 'versionCompare'
     },
-    'html5placeholder': {},
     'notify': {
       deps: ['jquery']
     },

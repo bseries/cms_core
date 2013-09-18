@@ -51,6 +51,7 @@ FlashMessage::clear();
 	</head>
 	<body class="layout-default">
 		<div id="fb-root"></div>
+
 		<div
 			id="messages"
 			<?php if ($flash): ?>
@@ -59,6 +60,13 @@ FlashMessage::clear();
 			<?php endif ?>
 		>
 		</div>
+
+		<div id="modal" class="hide">
+			<div class="controls"></div>
+			<div class="content"></div>
+		</div>
+		<div id="modal-overlay" class="hide"></div>
+
 		<div id="container">
 			<header>
 				<?=$this->view()->render(['element' => 'header'], compact('site', 'service'), [

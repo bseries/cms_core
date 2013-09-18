@@ -42,6 +42,7 @@ requirejs.config({
     'nprogress': 'core/js/nprogress',
     'media': 'media/js/media',
     'ember': 'core/js/ember',
+    'ember-data': 'core/js/ember-data',
     'handlebars': 'core/js/handlebars'
   },
   shim: {
@@ -73,6 +74,14 @@ requirejs.config({
     },
     'jquery': {
       exports: '$'
+    },
+    'ember': {
+      exports: 'Ember',
+      deps: ['jquery', 'handlebars']
+    },
+    'ember-data': {
+      exports: 'DS',
+      deps: ['jquery', 'handlebars', 'ember']
     }
   }
 });

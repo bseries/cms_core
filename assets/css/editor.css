@@ -13,13 +13,8 @@
 -------------------------------------------------------------- */
 .wysihtml5-sandbox {
   display: block;
-  min-height: 15em;
   width: 100%;
   border: 1px solid #e6e6e6;
-}
-textarea {
-  color: transparent;
-  margin-top: 2.75em;
 }
 
 [data-wysihtml5-dialog] input {

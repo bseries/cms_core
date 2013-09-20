@@ -105,6 +105,7 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
     var id = elements.main.attr('id');
 
     elements.wrap.addClass('editor');
+    elements.main.hide();
 
     var html = renderToolbar(id, mediaExplorer, advanced);
     html = $(html).hide();

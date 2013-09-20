@@ -49,7 +49,10 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 	$request  = $params['request'];
 	$response = $chain->next($self, $params, $chain);
 
-	$hash = md5(serialize($response->body()));
+	$hash = md5(serialize([
+		$response->body,
+		$response->headers
+	]));
 	$condition = trim($request->get('http:if_none_match'), '"');
 
 	if ($condition === $hash) {

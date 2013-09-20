@@ -42,6 +42,8 @@ requirejs.config({
     'modernizr': 'core/js/compat/modernizr',
     'modal': 'core/js/modal',
     'nprogress': 'core/js/nprogress',
+    'media-explorer-modal': 'media/js/media-explorer-modal',
+    'media-attachment': 'media/js/media-attachment',
     'media-explorer': 'media/js/media-explorer/media-explorer',
     'ember': 'core/js/ember',
     'ember-data': 'core/js/ember-data',
@@ -84,10 +86,14 @@ requirejs.config({
     'ember-data': {
       exports: 'DS',
       deps: ['jquery', 'handlebars', 'ember']
+    },
+    'wysihtml5': {
+      exports: 'wysihtml5'
     }
   }
 });
-require(['jquery', 'notify', 'domready!'], function($) {
+require(['jquery', 'notify', 'domready!'],
+function($) {
   // Bridge between PHP flash messaging and JS notify.
   var flashMessage = $('#messages').data('flash-message');
   var flashLevel = $('#messages').data('flash-level') || 'neutral';
@@ -97,22 +103,23 @@ require(['jquery', 'notify', 'domready!'], function($) {
   }
 });
 
-require(['jquery', 'nprogress', 'domready!'], function($, progress) {
-  progress.configure({
+require(['jquery', 'nprogress', 'domready!'],
+function($, Progress) {
+  Progress.configure({
     showSpinner: false
   });
-  $(document).on('modal:isLoading', function() {
-    progress.start();
-  });
-  $(document).on('modal:newContent', function() {
-    progress.done();
-  });
+  $(document).on('modal:isLoading', function() { Progress.start(); });
+  $(document).on('modal:newContent', function() { Progress.done(); });
   $(document).on('modal:isReady', function() {
-    progress.done();
-    progress.remove();
+    Progress.done();
+    Progress.remove();
   });
+  $(document).on('transfer:start', function() { Progress.start(); });
+  $(document).on('transfer:progress', function(data) { Progress.set(data); });
+  $(document).on('transfer:done', function(data) { Progress.done(); });
 });
 
-require(['compat'], function(Compat) {
+require(['compat'],
+function(Compat) {
   Compat.run();
 });

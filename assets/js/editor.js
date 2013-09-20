@@ -9,8 +9,8 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
 
-define(['jquery', 'wysihtml5', 'globalize'],
-function($, wsihtml5, Globalize) {
+define(['jquery', 'wysihtml5', 'globalize', 'media-explorer-modal'],
+function($, wysihtml5, Globalize, MediaExplorerModal) {
   var instances = {};
 
   var rules = {
@@ -27,6 +27,17 @@ function($, wsihtml5, Globalize) {
       "small": {
           "rename_tag": "span",
           "set_class": "small"
+      },
+      "img": {
+        "check_attributes": {
+          "width": "numbers",
+          "height": "numbers",
+          "title": "title",
+          "class": "class",
+          "alt": "alt",
+          "src": "src",
+          "data-media-id": "data-media-id"
+        }
       },
       h3: {},
       h4: {},
@@ -56,7 +67,7 @@ function($, wsihtml5, Globalize) {
     return Globalize.localize(key) || key;
   };
 
-  var renderToolbar = function(id, advanced) {
+  var renderToolbar = function(id, mediaExplorer, advanced) {
     var html = $('' +
     '<div id="' + id + 'Toolbar" class="toolbar" style="display: none;">' +
        '<a data-wysihtml5-command="bold" class="button">' + _('bold') +'</a>' +
@@ -69,6 +80,7 @@ function($, wsihtml5, Globalize) {
        '<a data-wysihtml5-command="insertHTML" data-wysihtml5-command-value="<hr/>" class="button">―</a>' +
        '<a data-wysihtml5-command="insertUnorderedList" class="button">' + _('list') + '</a>' +
        '<a data-wysihtml5-command="createLink" class="button">' + _('link') + '</a>' +
+       '<a data-wysihtml5-command="insertMedia" class="button media-explorer">' + _('media') + '</a>' +
        '<a data-wysihtml5-command="undo" class="advanced button">' + _('undo') + '</a>' +
        '<a data-wysihtml5-command="redo" class="advanced button">' + _('redo') + '</a>' +
        '<div data-wysihtml5-dialog="createLink" style="display: none;">' +
@@ -77,18 +89,24 @@ function($, wsihtml5, Globalize) {
        '</div>' +
      '</div>');
 
+    if (!mediaExplorer) {
+      html.find('.media-explorer').remove();
+    }
     if (!advanced) {
       html.find('.advanced').remove();
     }
     return html;
   };
 
-  var makeEditor = function(elements, advanced) {
+  var makeEditor = function(elements, mediaExplorer, advanced) {
+    if (mediaExplorer) {
+      imageSupportThroughMediaExplorer();
+    }
     var id = elements.main.attr('id');
 
     elements.wrap.addClass('editor');
 
-    var html = renderToolbar(id, advanced);
+    var html = renderToolbar(id, mediaExplorer, advanced);
     html = $(html).hide();
     elements.wrap.find('label').after(html);
     html.fadeIn();
@@ -107,14 +125,41 @@ function($, wsihtml5, Globalize) {
     return instances[id];
   };
 
+  var imageSupportThroughMediaExplorer = function() {
+    wysihtml5.commands.insertMedia = {
+      exec: function(composer, command, value) {
+        var doc = composer.doc;
+
+        MediaExplorerModal.open();
+
+        $(document).one('media-explorer:selected', function(ev, data) {
+          image = doc.createElement('IMG');
+
+          image.setAttribute('src', data.get('url'));
+          image.setAttribute('class', 'media image');
+          image.setAttribute('alt', 'image');
+          image.setAttribute('title', data.get('title'));
+          image.setAttribute('data-media-id', data.get('id'));
+
+          composer.selection.insertNode(image);
+
+          MediaExplorerModal.close();
+        });
+      },
+      state: function(composer) {
+        wysihtml5.commands.insertImage.state(composer);
+      }
+    };
+  };
+
   return {
-    make: function(elements) {
-      $(elements).each(function(k, element) {
+    make: function(selector, mediaExplorer, advanced) {
+      $(selector).each(function(k, element) {
         var elements = {};
         elements.main = $(element);
         elements.wrap = elements.main.parent();
 
-        var editor = makeEditor(elements);
+        var editor = makeEditor(elements, mediaExplorer, advanced);
 
         editor.on('load', function() {
           // ...

@@ -101,14 +101,18 @@ require(['jquery', 'nprogress', 'domready!'], function($, progress) {
   progress.configure({
     showSpinner: false
   });
-  $(document).on('modal:loading', function() {
+  $(document).on('modal:isLoading', function() {
     progress.start();
   });
-  $(document).on('modal:content', function() {
+  $(document).on('modal:newContent', function() {
     progress.done();
   });
-  $(document).on('modal:ready', function() {
+  $(document).on('modal:isReady', function() {
+    progress.done();
     progress.remove();
   });
 });
 
+require(['compat'], function(Compat) {
+  Compat.run();
+});

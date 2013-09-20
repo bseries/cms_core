@@ -336,7 +336,7 @@ DS.DebugAdapter = Ember.DataAdapter.extend({
 DS.Transform = Ember.Object.extend({
 
   serialize: Ember.required(),
-  
+
   deserialize: Ember.required()
 
 });
@@ -416,7 +416,7 @@ DS.DateTransform = DS.Transform.extend({
     } else {
       return null;
     }
-  } 
+  }
 
 });
 
@@ -4740,7 +4740,7 @@ DS.Model.reopenClass({
     var options = this.metaForProperty(name).options;
 
     if (options.inverse === null) { return null; }
-    
+
     var inverseName, inverseKind;
 
     if (options.inverse) {

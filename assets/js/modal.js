@@ -25,7 +25,7 @@ function($) {
   };
 
   var loading = function() {
-    $(document).trigger('modal:loading');
+    $(document).trigger('modal:isLoading');
 
     elements.controls.hide();
     elements.content.hide();
@@ -36,23 +36,30 @@ function($) {
   };
 
   var fill = function(content, modalClass) {
-    $(document).trigger('modal:content');
 
      elements.content.html(content);
+     this.type(modalClass);
+
+    $(document).trigger('modal:newContent');
+  };
+
+  var type = function(modalClass) {
      elements.modal.addClass(modalClass);
   };
 
   var ready = function() {
-    $(document).trigger('modal:ready');
-
     elements.overlay.fadeIn(200, function() {
       elements.controls.show();
       elements.modal.show();
       elements.content.show();
+
+      $(document).trigger('modal:isReady');
     });
   };
 
   var close = function() {
+    $(document).trigger('modal:isClosing');
+
     elements.modal.fadeOut(100);
     elements.overlay.fadeOut(100);
 
@@ -81,6 +88,8 @@ function($) {
   };
 
   return {
+    elements: elements,
+    type: type,
     init: init,
     fill: fill,
     ready: ready,

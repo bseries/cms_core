@@ -44,6 +44,9 @@ class Assets extends \lithium\template\Helper {
 	}
 
 	public function url($path) {
+		if (strpos($path, '://') !== false) {
+			return $path;
+		}
 		$version = Environment::get('project.version');
 		$base = Environment::get('assets.http');
 		return $base . '/v' . $version . $path;

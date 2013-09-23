@@ -50,7 +50,7 @@ FlashMessage::clear();
 				<div id="user">
 					<?php if ($authedUser = Auth::check('default')): ?>
 						<div class="left">
-							<img class="avatar" src="<?= $this->assets->url('/core/img/bureau_logo.png') ?>"></span>
+							<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($authedUser['email'] )?>.jpg?s=200&d=retro"></span>
 						</div>
 						<div class="right">
 							<div class="welcome">
@@ -86,5 +86,20 @@ FlashMessage::clear();
 				<?php echo $this->content(); ?>
 			</div>
 		</div>
+		<footer>
+			<?=$this->view()->render(['element' => 'copyright'], [
+				'holder' => $this->html->link(
+					'Atelier Disko',
+					'http://atelierdisko.de',
+					['target' => 'new']
+				)
+			], ['library' => 'cms_core']) ?>
+
+			<div class="credits">
+				<?php echo $t('Powered by {:name}.', [
+					'name' => $this->html->link('Bureau', 'http://atlierdisko.de', ['target' => 'new'])
+				]) ?>
+			</div>
+		</footer>
 	</body>
 </html>

@@ -120,7 +120,7 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
       bodyClassName: null,
       composerClassName: 'composer',
       stylesheets: [
-        $('link[href*="/base.css"]').attr('href').replace('base', 'iframe')
+        $('link:first').attr('href').replace('/(base|admin)/', 'iframe')
       ]
     });
     return instances[id];

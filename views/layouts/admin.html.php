@@ -42,6 +42,13 @@ FlashMessage::clear();
 			<?php endif ?>
 		>
 		</div>
+
+		<div id="modal" class="hide">
+			<div class="controls"></div>
+			<div class="content"></div>
+		</div>
+		<div id="modal-overlay" class="hide"></div>
+
 		<div id="container">
 			<header>
 				<h1>

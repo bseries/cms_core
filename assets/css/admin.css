@@ -164,7 +164,7 @@ nav#main [target="new"]:before {
 ---------------------------------------------------------------- */
 #content {
   vertical-align: top;
-  padding: 0 1.5em 0 2em;
+  padding: 0 1.5em 10em 2em;
   width: 79%;
   display: inline-block;
   min-height: 50em;
@@ -244,10 +244,6 @@ textarea {
 form button[type="submit"] {
   margin-top: 1em;
 }
-form .media {
-  max-height: 10em;
-  margin-bottom: 2em;
-}
 
 /* Buttons
 ---------------------------------------------------------------- */
@@ -282,11 +278,54 @@ form button[type="submit"] {
 
 /* Editor
 -------------------------------------------------------------- */
+.wysihtml5-sandbox {
+  display: block;
+  width: 100%;
+  border: 1px solid #e6e6e6;
+}
+
+[data-wysihtml5-dialog] input {
+	width: 200px;
+	margin: 0 10px 0 0;
+}
+[data-wysihtml5-dialog] {
+	display: block;
+	float: left;
+	vertical-align: middle;
+}
+[data-wysihtml5-command] {
+	display: block;
+	float: left;
+	text-align: center;
+}
+[data-wysihtml5-command="bold"] {
+	font-weight: bold;
+}
+[data-wysihtml5-command="italic"] {
+	font-style: italic;
+}
+[data-wysihtml5-command-value="h3"] {
+	font-size: 1.2em;
+	text-transform: uppercase;
+	line-height: 1;
+}
+[data-wysihtml5-command-value="h4"] {
+	font-size: 1em;
+	text-transform: uppercase;
+}
+[data-wysihtml5-command-value="small"] {
+	letter-spacing: .04em;
+}
+[data-wysihtml5-command-value="big"] {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
 .editor {
   margin-bottom: 1em;
 }
 .editor .toolbar {
-  height: 2em;
+  height: 3em;
   margin-top: .5em;
   margin-bottom: .5em;
 }
@@ -295,7 +334,7 @@ form button[type="submit"] {
 }
 textarea {
   color: transparent;
-  margin-top: 2.75em;
+  margin-top: 3.75em;
 }
 .teaser textarea,
 .teaser .wysihtml5-sandbox {
@@ -304,6 +343,35 @@ textarea {
 .body textarea,
 .body .wysihtml5-sandbox {
   min-height: 50em;
+}
+
+/* Modal
+-------------------------------------------------------------- */
+#modal {
+  position: fixed;
+  z-index: 2;
+
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+
+  /* color: #1f1f1f; */
+  /* background: #fdfdfd; */
+  padding: 1em;
+}
+#modal-overlay {
+  position: fixed;
+  z-index: 1;
+
+  top: 0px;
+  left: 0px;
+  height:100%;
+  width:100%;
+
+  background-color: black;
+  cursor: pointer;
+  opacity: .88;
 }
 
 /* Progress (nprogress)
@@ -355,6 +423,17 @@ textarea {
 }
 .media-attachment .remove {
   margin-left: 1%;
+}
+
+/* Media
+---------------------------------------------------------------- */
+form .media {
+  max-height: 10em;
+  margin-bottom: 2em;
+}
+table .media {
+  height: 100%;
+  padding: .3em 0 0 0;
 }
 
 /* Tables
@@ -437,4 +516,79 @@ h1 + .actions {
 
 [class*="index"] section + section {
   margin-top: 4em;
+}
+
+/* Media Explorer
+-------------------------------------------------------------- */
+#modal.media-explorer {
+  color: black;
+  background: white;
+}
+#modal.media-explorer .content {
+  height: 100%;
+  overflow: hidden;
+}
+
+.media-explorer footer {
+  position: relative;
+  padding-top: 1em;
+  height: 10%;
+  bottom: 0;
+}
+.media-explorer .create .title {
+  margin-left: 5%;
+  display: inline-block;
+  width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.media-explorer footer .confirm-selection {
+  float: right;
+}
+.media-explorer footer .create {
+  width: 60%;
+  float: left;
+}
+.media-explorer .content > div {
+  height: 90%;
+}
+.media-explorer .available {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.media-explorer .available > div {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  width: 20%;
+  height: 25%;
+  margin-bottom: 1%;
+  margin-right: 1%;
+}
+.media-explorer .file {
+  overflow: hidden;
+  height: 200px;
+}
+.media-explorer .file:hover {
+  cursor: pointer;
+  background: gray;
+}
+.media-explorer .file img {
+  width: auto
+  height: 100%;
+}
+.media-explorer .file .title {
+  padding: .5em;
+  font-weight: normal;
+  height: 2em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.media-explorer .selected {
+  background: #9475ee;
 }

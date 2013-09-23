@@ -63,7 +63,7 @@ Environment::set(true, [
 			'library' => 'cms_core', 'title' => $t('Tokens'), 'name' => 'tokens', 'slug' => 'tokens'
 		],
 		'users' => [
-			'library' => 'app', 'title' => $t('Users'), 'name' => 'users', 'slug' => 'users'
+			'library' => 'cms_core', 'title' => $t('Users'), 'name' => 'users', 'slug' => 'users'
 		]
 	]
 ]);

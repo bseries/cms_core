@@ -2,6 +2,9 @@
 
 use lithium\core\Environment;
 use li3_flash_message\extensions\storage\FlashMessage;
+use lithium\security\Auth;
+use \DateTime;
+use \IntlDateFormatter;
 
 $site = Environment::get('site');
 $modules = Environment::get('modules');
@@ -41,20 +44,44 @@ FlashMessage::clear();
 		</div>
 		<div id="container">
 			<header>
-				<h1 class="alpha">
-					<?= $site['title'] ?> –
-					<?= $this->html->link($t('Administration'), ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
+				<h1>
+					<?= $this->html->link($site['title'], ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
 				</h1>
-				<nav>
-					<?php foreach ($modules as $module): ?>
-						<?= $this->html->link($module['title'], [
-							'controller' => $module['name'], 'action' => 'index', 'library' => $module['library']
-						]) ?>
-					<?php endforeach ?>
-					<?= $this->html->link($t('View Site'), '/', ['target' => 'new']) ?>
-					<?= $this->html->link($t('Dashboard'), ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
-				</nav>
+				<div id="user">
+					<?php if ($authedUser = Auth::check('default')): ?>
+						<div class="left">
+							<img class="avatar" src="<?= $this->assets->url('/core/img/bureau_logo.png') ?>"></span>
+						</div>
+						<div class="right">
+							<div class="welcome">
+								<?php echo $t('Moin {:name}!', [
+									'name' => '<span class="name">' . strtok($authedUser['name'], ' ') . '</span>'
+								]) ?>
+							</div>
+							<?php
+								$today = new DateTime();
+								$formatter = new IntlDateFormatter(
+									'de_DE',
+									IntlDateFormatter::FULL,
+									IntlDateFormatter::NONE
+								);
+							?>
+							<time class="today" datetime="<?= $today->format(DateTime::W3C) ?>">
+								<?= $formatter->format($today) ?>
+							</time>
+						</div>
+					<?php endif ?>
+				</div>
 			</header>
+			<nav id="main">
+				<?= $this->html->link($t('Dashboard'), ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
+				<?= $this->html->link($t('Site'), '/', ['target' => 'new']) ?>
+				<?php foreach ($modules as $module): ?>
+					<?= $this->html->link($module['title'], [
+						'controller' => $module['name'], 'action' => 'index', 'library' => $module['library']
+					]) ?>
+				<?php endforeach ?>
+			</nav>
 			<div id="content">
 				<?php echo $this->content(); ?>
 			</div>

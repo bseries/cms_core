@@ -26,7 +26,7 @@ $project = Environment::get('project');
 		<dd><?= $value ?></dd>
 	<?php endforeach ?>
 	</dl>
-
+	<!--
 	<h2 class="beta"><?= $t('Features') ?></h2>
 	<dl>
 	<?php foreach ($features as $name => $value): ?>
@@ -35,12 +35,13 @@ $project = Environment::get('project');
 	<?php endforeach ?>
 	</dl>
 
-	<h2 class="beta"><?= $t('Servies') ?></h2>
+	<h2 class="beta"><?= $t('Services') ?></h2>
 	<?php foreach ($services as $name => $service): ?>
 	<h3 class="gamma"><?= $name ?></h3>
 <pre>
 <?php echo json_encode($service) ?>
 </pre>
 	<?php endforeach ?>
+	-->
 
 </article>

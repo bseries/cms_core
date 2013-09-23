@@ -2,7 +2,7 @@
 	<h1 class="alpha"><?= $t('Tokens') ?></h1>
 
 	<nav class="actions">
-		<?= $this->html->link($t('generate token'), ['action' => 'generate', 'library' => 'cms_core']) ?>
+		<?= $this->html->link($t('generate token'), ['action' => 'generate', 'library' => 'cms_core'], ['class' => 'button']) ?>
 	</nav>
 
 	<table>
@@ -19,7 +19,7 @@
 				<td><?= $item->expires ?>
 				<td>
 					<nav class="actions">
-						<?= $this->html->link($t('void'), ['token' => $item->token, 'action' => 'void', 'library' => 'cms_core']) ?>
+						<?= $this->html->link($t('void'), ['token' => $item->token, 'action' => 'void', 'library' => 'cms_core'], ['class' => 'button']) ?>
 					</nav>
 			<?php endforeach ?>
 		</tbody>

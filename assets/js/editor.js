@@ -136,11 +136,12 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
         $(document).one('media-explorer:selected', function(ev, data) {
           image = doc.createElement('IMG');
 
-          image.setAttribute('src', data.get('url'));
+          image.setAttribute('src', data.get('versions_fix1_url'));
           image.setAttribute('class', 'media image');
           image.setAttribute('alt', 'image');
           image.setAttribute('title', data.get('title'));
           image.setAttribute('data-media-id', data.get('id'));
+          image.setAttribute('data-media-version', 'fix1');
 
           composer.selection.insertNode(image);
 

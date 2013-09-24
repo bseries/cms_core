@@ -25,10 +25,11 @@
  */
 
 extract([
-	'holder' => null, // i.e. `'James Brown'`; required.
-	'object' => null, // Additional copyright property to prepend; optional.
-	'begin' => null,  // The beginning year i.e. 2009; optional.
-	'end' => null     // The ending year i.e. 2011; optional.
+	'holder' => null,   // i.e. `'James Brown'`; required.
+	'object' => null,   // Additional copyright property to prepend; optional.
+	'begin' => null,    // The beginning year i.e. 2009; optional.
+	'end' => null,      // The ending year i.e. 2011; optional.
+	'minimal' => false  // Leave out the `'All rights reserved.'` appendix.
 ], EXTR_SKIP);
 
 $end = date('Y');
@@ -48,5 +49,7 @@ if (!isset($begin) || $begin == $end) {
 	<?php else: ?>
 		<?php echo sprintf('&copy; %1$s %2$s.', $years, $holder) ?>
 	<?php endif ?>
-	<?php echo 'All rights reserved.' ?>
+	<?php if (!$minimal): ?>
+		<?php echo $t('All rights reserved.') ?>
+	<?php endif ?>
 </div>

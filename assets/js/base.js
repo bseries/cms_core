@@ -42,9 +42,6 @@ requirejs.config({
     'modernizr': 'core/js/compat/modernizr',
     'modal': 'core/js/modal',
     'nprogress': 'core/js/nprogress',
-    'media-explorer-modal': 'media/js/media-explorer-modal',
-    'media-attachment': 'media/js/media-attachment',
-    'media-explorer': 'media/js/media-explorer/media-explorer',
     'ember': 'core/js/ember',
     'ember-data': 'core/js/ember-data',
     'handlebars': 'core/js/handlebars'

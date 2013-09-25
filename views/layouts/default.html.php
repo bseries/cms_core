@@ -26,7 +26,9 @@ FlashMessage::clear();
 			'/core/js/underscore',
 			'/core/js/jquery',
 			'/core/js/require',
-			'/core/js/base'
+			'/core/js/base',
+			'/media/js/base',
+			'/site/js/base'
 		]) ?>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<!--[if IE 8 ]>

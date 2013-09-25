@@ -29,7 +29,8 @@ FlashMessage::clear();
 			'/core/js/underscore',
 			'/core/js/jquery',
 			'/core/js/require',
-			'/core/js/base'
+			'/core/js/base',
+			'/media/js/base'
 		]) ?>
 		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>

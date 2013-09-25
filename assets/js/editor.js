@@ -16,7 +16,9 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
   var rules = {
     classes: {
       'big': 1,
-      'small': 1
+      'small': 1,
+      'media': 1,
+      'image': 1
     },
     tags: {
       span: {},

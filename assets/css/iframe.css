@@ -1,0 +1,46 @@
+@charset "UTF-8";
+/*!
+ * Admin Iframe Stylesheet
+ *
+ * Copyright (c) 2013 Atelier Disko - All rights reserved.
+ *
+ * This software is proprietary and confidential. Redistribution
+ * not permitted. Unless required by applicable law or agreed to
+ * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+
+/* Basics
+---------------------------------------------------------------- */
+html {
+	overflow-y: auto;
+}
+
+body {
+  font-size: 100%;
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  word-spacing: -.02em;
+
+  text-rendering: optimizeLegibility;
+  -moz-font-feature-settings: "liga" 1, "frac" 1, "kern" 1, "smcp" 1;
+  font-feature-settings: "liga" 1, "frac" 1, "kern" 1, "smcp" 1;
+  -webkit-font-smoothing: antialiased;
+
+  background-color: #0000ff;
+  line-height: 1.35;
+
+  font-weight: bold;
+}
+
+/* Editor
+-------------------------------------------------------------- */
+.composer {
+    font-weight: normal;
+	padding: .5em;
+	padding-right: 10px; /* Distance to scroll bar. */
+}
+.composer:focus {
+    background: white;
+    color: black;
+}

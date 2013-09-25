@@ -5,13 +5,14 @@ use li3_flash_message\extensions\storage\FlashMessage;
 
 $service = Environment::get('service');
 $site = Environment::get('site');
+$locale = Environment::get('locale');
 
 $flash = FlashMessage::read();
 FlashMessage::clear();
 
 ?>
 <!doctype html>
-<html>
+<html lang="<?= strtolower(str_replace('_', '-', $locale)) ?>">
 	<head>
 		<?php echo $this->html->charset() ?>
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?><?= $site['title'] ?></title>

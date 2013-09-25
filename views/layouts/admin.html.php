@@ -8,13 +8,14 @@ use \IntlDateFormatter;
 
 $site = Environment::get('site');
 $modules = Environment::get('modules');
+$locale = Environment::get('locale');
 
 $flash = FlashMessage::read();
 FlashMessage::clear();
 
 ?>
 <!doctype html>
-<html>
+<html lang="<?= strtolower(str_replace('_', '-', $locale)) ?>">
 	<head>
 		<?php echo $this->html->charset() ?>
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?>Admin – <?= $site['title'] ?></title>

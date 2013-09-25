@@ -3,10 +3,11 @@
 use lithium\core\Environment;
 
 $site = Environment::get('site');
+$locale = Environment::get('locale');
 
 ?>
 <!doctype html>
-<html>
+<html lang="<?= strtolower(str_replace('_', '-', $locale)) ?>">
 	<head>
 		<?php echo $this->html->charset() ?>
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?><?= $site['title'] ?></title>

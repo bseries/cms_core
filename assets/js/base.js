@@ -44,7 +44,8 @@ requirejs.config({
     'nprogress': 'core/js/nprogress',
     'ember': 'core/js/ember',
     'ember-data': 'core/js/ember-data',
-    'handlebars': 'core/js/handlebars'
+    'handlebars': 'core/js/handlebars',
+    'imagesloaded': 'core/js/imagesloaded'
   },
   shim: {
     'globalize': {

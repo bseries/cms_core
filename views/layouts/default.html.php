@@ -61,8 +61,7 @@ FlashMessage::clear();
 				data-flash-message="<?= $flash['message'] ?>"
 				data-flash-level="<?= isset($flash['attr']['level']) ? $flash['attr']['level'] : 'neutral' ?>"
 			<?php endif ?>
-		>
-		</div>
+		></div>
 
 		<div id="modal" class="hide">
 			<div class="controls"></div>

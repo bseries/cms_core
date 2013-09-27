@@ -18,7 +18,7 @@ html {
 
 body {
   font-size: 100%;
-  color: white;
+  color: black;
   font-family: Helvetica, Arial, sans-serif;
   word-spacing: -.02em;
 
@@ -27,7 +27,7 @@ body {
   font-feature-settings: "liga" 1, "frac" 1, "kern" 1, "smcp" 1;
   -webkit-font-smoothing: antialiased;
 
-  background-color: #0000ff;
+  background-color: white;
   line-height: 1.35;
 
   font-weight: bold;

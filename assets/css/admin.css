@@ -245,6 +245,44 @@ form button[type="submit"] {
   margin-top: 1em;
 }
 
+form input[type="checkbox"] {
+  width: auto;
+  margin-right: .5em;
+}
+form input[type="checkbox"] + label {
+  display: inline-block;
+}
+
+form .date-range div,
+form .date-range input[type*="date"],
+form .date-range .error,
+form .date-range {
+  float: left;
+}
+form .date-range,
+form .date-range + *,
+form .date-range .error {
+  clear: both;
+}
+form .date-range div > label:first-child {
+  display: none;
+}
+form .date-range .separator {
+  margin: .5em 1em 0 1em;
+}
+form .date-range input[type*="date"] {
+  margin-bottom: 0;
+}
+form .date-range [type="checkbox"] {
+  margin-left: 1.5em;
+}
+form .date-range div:last-of-type {
+  margin-top: .5em;
+}
+form .date-range {
+  margin-bottom: 1em;
+}
+
 /* Buttons
 ---------------------------------------------------------------- */
 a.button {

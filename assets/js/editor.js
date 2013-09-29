@@ -18,7 +18,9 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
       'big': 1,
       'small': 1,
       'media': 1,
-      'image': 1
+      'image': 1,
+      'beta': 1,
+      'gamma': 1
     },
     tags: {
       span: {},
@@ -41,8 +43,18 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
           "data-media-id": "data-media-id"
         }
       },
-      h2: {},
-      h3: {},
+      h2: {
+        "set_class": "beta",
+        "check_attributes": {
+          "class": "class"
+        }
+      },
+      h3: {
+        "set_class": "gamma",
+        "check_attributes": {
+          "class": "class"
+        }
+      },
       dl: {},
       dt: {},
       dd: {},

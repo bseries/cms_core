@@ -45,7 +45,7 @@ FlashMessage::clear();
 		<![endif]-->
 		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>
-		<?php if (isset($service['googleAnalytics'])): ?>
+		<?php if (!empty($service['googleAnalytics'])): ?>
 			<?=$this->view()->render(['element' => 'ga'], $service['googleAnalytics'], [
 				'library' => 'cms_core'
 			]) ?>

@@ -342,12 +342,12 @@ form button[type="submit"] {
 [data-wysihtml5-command="italic"] {
 	font-style: italic;
 }
-[data-wysihtml5-command-value="h3"] {
+[data-wysihtml5-command-value="h1"] {
 	font-size: 1.2em;
 	text-transform: uppercase;
 	line-height: 1;
 }
-[data-wysihtml5-command-value="h4"] {
+[data-wysihtml5-command-value="h2"] {
 	font-size: 1em;
 	text-transform: uppercase;
 }

@@ -45,9 +45,11 @@ FlashMessage::clear();
 		<![endif]-->
 		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>
-		<?=$this->view()->render(['element' => 'ga'], $service['googleAnalytics'], [
-			'library' => 'cms_core'
-		]) ?>
+		<?php if (Environment::is('production')): ?>
+			<?=$this->view()->render(['element' => 'ga'], $service['googleAnalytics'], [
+				'library' => 'cms_core'
+			]) ?>
+		<?php endif ?>
 		<?=$this->view()->render(['element' => 'head'], compact('site', 'service', 'feature'), [
 			'library' => 'app'
 		]) ?>

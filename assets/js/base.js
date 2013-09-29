@@ -113,7 +113,7 @@ function($, Progress) {
     Progress.remove();
   });
   $(document).on('transfer:start', function() { Progress.start(); });
-  $(document).on('transfer:progress', function(data) { Progress.set(data); });
+//  $(document).on('transfer:progress', function(ev, data) { Progress.set(data); });
   $(document).on('transfer:done', function(data) { Progress.done(); });
 });
 

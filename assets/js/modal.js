@@ -36,7 +36,6 @@ function($) {
   };
 
   var fill = function(content, modalClass) {
-
      elements.content.html(content);
      this.type(modalClass);
 
@@ -68,6 +67,10 @@ function($) {
   };
 
   var bindEvents = function() {
+    elements.content.on('click', '*', function(ev) {
+      ev.stopPropagation();
+    });
+    elements.content.click(close);
     elements.overlay.click(close);
 
     elements.close.click(function(e) {

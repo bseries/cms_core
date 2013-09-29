@@ -41,8 +41,8 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
           "data-media-id": "data-media-id"
         }
       },
-      h1: {},
       h2: {},
+      h3: {},
       dl: {},
       dt: {},
       dd: {},
@@ -74,8 +74,8 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
     '<div id="' + id + 'Toolbar" class="toolbar" style="display: none;">' +
        '<a data-wysihtml5-command="bold" class="button">' + _('bold') +'</a>' +
        '<a data-wysihtml5-command="italic" class="button">' + _('italic') + '</a>' +
-       '<a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" class="button">' + _('H1') + '</a>' +
        '<a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" class="button">' + _('H2') + '</a>' +
+       '<a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h3" class="button">' + _('H3') + '</a>' +
        '<a data-wysihtml5-command="formatInline" data-wysihtml5-command-value="big" class="button">' + _('big') + '</a>' +
        '<a data-wysihtml5-command="formatInline" data-wysihtml5-command-value="small" class="button">' + _('small') + '</a>' +
        '<a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="blockquote" class="advanced button">' + _('„quote“') + '</a>' +

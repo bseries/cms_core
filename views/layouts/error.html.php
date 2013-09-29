@@ -32,6 +32,11 @@ $locale = Environment::get('locale');
 		<![endif]-->
 		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>
+		<?php if (!empty($service['googleAnalytics'])): ?>
+			<?=$this->view()->render(['element' => 'ga'], $service['googleAnalytics'], [
+				'library' => 'cms_core'
+			]) ?>
+		<?php endif ?>
 	</head>
 	<body class="layout-error">
 		<div id="container">

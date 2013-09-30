@@ -47,7 +47,8 @@ requirejs.config({
     'ember': 'core/js/ember',
     'ember-data': 'core/js/ember-data',
     'handlebars': 'core/js/handlebars',
-    'imagesloaded': 'core/js/imagesloaded'
+    'imagesloaded': 'core/js/imagesloaded',
+    'moment': 'core/js/moment'
   },
   shim: {
     'globalize': {

@@ -54,7 +54,13 @@ FlashMessage::clear();
 			'library' => 'app'
 		]) ?>
 	</head>
-	<body class="layout-default">
+	<?php
+		$classes = ['layout-default'];
+		if (isset($extraBodyClasses)) {
+			$classes = array_merge($classes, $extraBodyClasses);
+		}
+	?>
+	<body class="<?= implode(' ', $classes) ?>">
 		<div id="fb-root"></div>
 
 		<div

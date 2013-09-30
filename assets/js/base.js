@@ -40,6 +40,8 @@ requirejs.config({
     'compat': 'core/js/compat',
     'versioncompare': 'core/js/compat/versioncompare',
     'modernizr': 'core/js/compat/modernizr',
+    'send-as-binary': 'core/js/compat/send-as-binary',
+    'input-date': 'core/js/compat/input-date',
     'modal': 'core/js/modal',
     'nprogress': 'core/js/nprogress',
     'ember': 'core/js/ember',
@@ -87,6 +89,10 @@ requirejs.config({
     },
     'wysihtml5': {
       exports: 'wysihtml5'
+    },
+    'input-date': {
+      deps: ['jquery'],
+      exports: 'inputDate'
     }
   }
 });

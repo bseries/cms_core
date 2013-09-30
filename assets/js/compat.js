@@ -39,9 +39,37 @@ function($, versionCompare, Modernizr) {
   //   all.push(placeholder);
   // }
 
+  if (!Modernizr.inputtypes.datetime) {
+    var polyfill = function() {
+      require(['input-date', 'moment', 'domready!'], function(P, moment) {
+        P.pattern = '[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}';
+        P.placeholder = '11.08.1991';
+
+        P.canonicalize = function(value) {
+          var parsed = moment(value, 'DD.MM.YYYY');
+
+          if (!parsed.isValid()) {
+             return value;
+          }
+          return parsed.format('YYYY-MM-DD');
+        };
+        P.localize = function(value) {
+          var parsed = moment(value, 'YYYY-MM-DD');
+
+          if (!parsed || !parsed.isValid()) {
+             return value;
+          }
+          return parsed.format('DD.MM.YYYY');
+        };
+
+        P.make('input[type="date"]');
+      });
+    };
+    all.push(polyfill);
+  }
   if (!XMLHttpRequest.prototype.sendAsBinary) {
     var sendAsBinary = function() {
-      require(['compat/send-as-binary']);
+      require(['send-as-binary']);
     };
     all.push(sendAsBinary);
   }

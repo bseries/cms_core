@@ -272,6 +272,13 @@ form input[type="checkbox"] + label {
   display: inline-block;
 }
 
+form .teaser, form .body {
+  margin: 3em 0;
+}
+form .editor {
+  margin-bottom: 4em;
+}
+
 form .date-range div,
 form .date-range input[type*="date"],
 form .date-range .error,
@@ -378,9 +385,6 @@ form button[type="submit"] {
 	text-transform: uppercase;
 }
 
-.editor {
-  margin-bottom: 1em;
-}
 .editor .toolbar {
   height: 3em;
   margin-top: .5em;
@@ -473,6 +477,9 @@ textarea {
 .media-attachment .selected {
   height: 10em;
   margin-bottom: 1em;
+}
+.media-attachment .selected:empty {
+  background: url("../img/none_bg.png") no-repeat -350px 0;
 }
 .media-attachment img {
   max-height: 100%;

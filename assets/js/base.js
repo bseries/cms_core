@@ -92,7 +92,7 @@ requirejs.config({
       exports: 'wysihtml5'
     },
     'input-date': {
-      deps: ['jquery'],
+      deps: ['jquery', 'domready!'],
       exports: 'inputDate'
     }
   }

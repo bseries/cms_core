@@ -41,9 +41,9 @@ function($, versionCompare, Modernizr) {
 
   if (!Modernizr.inputtypes.datetime) {
     var polyfill = function() {
-      require(['input-date', 'moment', 'domready!'], function(P, moment) {
+      require(['input-date', 'moment'], function(P, moment) {
         P.pattern = '[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}';
-        P.placeholder = '11.08.1991';
+        P.placeholder = '11.08.1981';
 
         P.canonicalize = function(value) {
           var parsed = moment(value, 'DD.MM.YYYY');

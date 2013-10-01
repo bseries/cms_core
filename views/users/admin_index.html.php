@@ -1,3 +1,12 @@
+<?php
+
+$dateFormatter = new IntlDateFormatter(
+	'de_DE',
+	IntlDateFormatter::SHORT,
+	IntlDateFormatter::SHORT
+);
+
+?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
 	<h1 class="alpha"><?= $t('Users') ?></h1>
 	<table>
@@ -17,7 +26,9 @@
 				<td><?= $item->name ?>
 				<td><?= $item->email ?>
 				<td><?= $item->role ?>
-				<td><?= $item->created ?>
+				<td>
+					<?php $date = DateTime::createFromFormat('Y-m-d H:i:s', $item->created) ?>
+					<time datetime="<?= $date->format(DateTime::W3C) ?>"><?= $dateFormatter->format($date) ?></time>
 				<td>
 					<nav class="actions">
 						<?= $this->html->link($t('delete'), ['id' => $item->id, 'action' => 'delete', 'library' => 'cms_core'], ['class' => 'button']) ?>

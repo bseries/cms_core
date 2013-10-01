@@ -31,12 +31,27 @@ body {
 
 * {
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 .hide {
   display: none;
 }
 
+small, .small {
+	font-size: .9em;
+	letter-spacing: .04em;
+	line-height: 1.3;
+	color: #222;
+	display: inline-block; /* For line-height to take effect. */
+}
+big, .big {
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 3em;
+	line-height: 1;
+	display: inline-block;
+}
 
 /* Headlines
 ---------------------------------------------------------------- */

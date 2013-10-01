@@ -39,7 +39,7 @@ function($, versionCompare, Modernizr) {
   //   all.push(placeholder);
   // }
 
-  if (!Modernizr.inputtypes.datetime) {
+  if (!Modernizr.inputtypes.date) {
     var polyfill = function() {
       require(['input-date', 'moment'], function(P, moment) {
         P.pattern = '[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}';

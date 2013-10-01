@@ -408,13 +408,12 @@ form button[type="submit"] {
 .editor .toolbar a {
   margin-right: 10px;
 }
-textarea {
+.teaser textarea {
+  min-height: 10em;
+}
+.body textarea {
   color: transparent;
   margin-top: 3.75em;
-}
-.teaser textarea,
-.teaser .wysihtml5-sandbox {
-  min-height: 10em;
 }
 .body textarea,
 .body .wysihtml5-sandbox {

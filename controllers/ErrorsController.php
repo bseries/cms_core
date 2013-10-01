@@ -14,6 +14,12 @@ namespace cms_core\controllers;
 
 class ErrorsController extends \lithium\action\Controller {
 
+	public function fourohthree() {
+		$this->_render['layout'] = 'error';
+		$this->_render['template'] = '403';
+		$this->response->status(403);
+	}
+
 	public function fourohfour() {
 		$this->_render['layout'] = 'error';
 		$this->_render['template'] = '404';

@@ -13,6 +13,9 @@
 use lithium\net\http\Router;
 use lithium\core\Environment;
 
+Router::connect('/403', array(
+	'controller' => 'Errors', 'action' => 'fourohthree', 'library' => 'cms_core'
+));
 Router::connect('/404', array(
 	'controller' => 'Errors', 'action' => 'fourohfour', 'library' => 'cms_core'
 ));

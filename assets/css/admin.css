@@ -621,12 +621,15 @@ h1 + .actions {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
+.media-explorer footer .cancel-selection {
+  margin-right: 1em;
+}
+.media-explorer footer .cancel-selection,
 .media-explorer footer .confirm-selection {
   float: right;
 }
 .media-explorer footer .create {
-  width: 60%;
+  width: 50%;
   float: left;
 }
 .media-explorer .content > div {

@@ -14,6 +14,7 @@ namespace cms_core\controllers;
 
 use cms_core\models\Users;
 use li3_flash_message\extensions\storage\FlashMessage;
+use lithium\g11n\Message;
 
 class UsersController extends \lithium\action\Controller {
 
@@ -51,6 +52,20 @@ class UsersController extends \lithium\action\Controller {
 			FlashMessage::write('Konto deaktiviert.');
 		} else {
 			FlashMessage::write('Das Konto konnte nicht deaktiviert werden.');
+		}
+		$this->redirect($this->request->referer());
+	}
+
+	public function admin_change_role() {
+		extract(Message::aliases());
+
+		$item = Users::findById($this->request->id);
+		$item->role = $this->request->role;
+
+		if ($item->save(null, ['validate' => false, 'whitelist' => ['role']])) {
+			FlashMessage::write($t("Assigned role `{$item->role}`."));
+		} else {
+			FlashMessage::write($t("Failed to assign role `{$item->role}`."));
 		}
 		$this->redirect($this->request->referer());
 	}

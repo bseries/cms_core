@@ -13,6 +13,7 @@
 use lithium\net\http\Router;
 use lithium\core\Environment;
 
+// Errors
 Router::connect('/403', array(
 	'controller' => 'Errors', 'action' => 'fourohthree', 'library' => 'cms_core'
 ));
@@ -32,17 +33,7 @@ Router::connect('/browser', array(
 	'controller' => 'Errors', 'action' => 'browser', 'library' => 'cms_core'
 ));
 
-/*
-Router::connect(
-	'/admin/{:args}',
-	['admin' => true],
-	[
-		'continue' => true,
-		'persist' => ['admin', 'controller']
-	]
-);
-*/
-
+// Administration
 $persist = ['persist' => ['admin', 'controller']];
 
 Router::connect('/admin', [
@@ -58,6 +49,9 @@ Router::connect('/admin/tokens/{:action}/{:args}', [
 	'controller' => 'tokens', 'library' => 'cms_core', 'admin' => true
 ], $persist);
 
+Router::connect('/admin/users/{:id:[0-9]+}/change-role/{:role}', [
+	'controller' => 'users', 'action' => 'change_role', 'library' => 'cms_core', 'admin' => true
+], $persist);
 Router::connect('/admin/users/{:action}/{:id:[0-9]+}', [
 	'controller' => 'users', 'library' => 'cms_core', 'admin' => true
 ], $persist);

@@ -37,6 +37,11 @@ $dateFormatter = new IntlDateFormatter(
 						<?php else: ?>
 							<?= $this->html->link($t('activate'), ['id' => $item->id, 'action' => 'activate', 'library' => 'cms_core'], ['class' => 'button']) ?>
 						<?php endif ?>
+						<?php if ($item->role == 'admin'): ?>
+							<?= $this->html->link($t('make user'), ['id' => $item->id, 'action' => 'change_role', 'role' => 'user', 'library' => 'cms_core'], ['class' => 'button']) ?>
+						<?php else: ?>
+							<?= $this->html->link($t('make admin'), ['id' => $item->id, 'action' => 'change_role', 'role' => 'admin', 'library' => 'cms_core'], ['class' => 'button']) ?>
+						<?php endif ?>
 					</nav>
 			<?php endforeach ?>
 		</tbody>

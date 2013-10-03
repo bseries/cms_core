@@ -67,6 +67,7 @@ function($, versionCompare, Modernizr) {
     };
     all.push(polyfill);
   }
+  // Test(window.XMLHttpRequest && (new XMLHttpRequest().sendAsBinary || (window.Uint8Array && window.ArrayBuffer)))
   if (!XMLHttpRequest.prototype.sendAsBinary) {
     var sendAsBinary = function() {
       require(['send-as-binary']);

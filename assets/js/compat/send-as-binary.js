@@ -1,19 +1,8 @@
-/*\
-|*|
-|*|  :: XMLHttpRequest.prototype.sendAsBinary() Polifyll ::
-|*|
-|*|  https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest#sendAsBinary()
-|*|
-\*/
+XMLHttpRequest.prototype.sendAsBinary = function (data) {
+  ui8a = new Uint8Array(data.length);
+  for (var i = 0; i < data.length; i++) {
+    ui8a[i] = (data.charCodeAt(i) & 0xff);
+  }
+  this.send(ui8a.buffer);
+};
 
-if (!XMLHttpRequest.prototype.sendAsBinary) {
-  XMLHttpRequest.prototype.sendAsBinary = function (sData) {
-    var nBytes = sData.length, ui8Data = new Uint8Array(nBytes);
-    for (var nIdx = 0; nIdx < nBytes; nIdx++) {
-      ui8Data[nIdx] = sData.charCodeAt(nIdx) & 0xff;
-    }
-    /* send as ArrayBufferView...: */
-    this.send(ui8Data);
-    /* ...or as ArrayBuffer (legacy)...: this.send(ui8Data.buffer); */
-  };
-}

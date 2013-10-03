@@ -40,6 +40,9 @@ requirejs.config({
     'compat': 'core/js/compat',
     'versioncompare': 'core/js/compat/versioncompare',
     'modernizr': 'core/js/compat/modernizr',
+    'contentloaded': 'core/js/contentloaded',
+    'cssparser': 'core/js/cssparser',
+    'css-filters': 'core/js/compat/css-filters',
     'send-as-binary': 'core/js/compat/send-as-binary',
     'input-date': 'core/js/compat/input-date',
     'modal': 'core/js/modal',
@@ -94,6 +97,9 @@ requirejs.config({
     'input-date': {
       deps: ['jquery', 'domready!'],
       exports: 'inputDate'
+    },
+    'css-filters': {
+      deps: ['contentloaded', 'cssparser']
     }
   }
 });

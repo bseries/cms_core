@@ -75,6 +75,14 @@ function($, versionCompare, Modernizr) {
     all.push(sendAsBinary);
   }
 
+  if (!Modernizr.cssfilters) {
+    var cssFilters = function() {
+      window.polyfilter_scriptpath = "/core/js/compat/css-filters/";
+      require(['css-filters']);
+    };
+    all.push(cssFilters);
+  }
+
   return {
     run: function() {
       $(all).map(function(k, item) {

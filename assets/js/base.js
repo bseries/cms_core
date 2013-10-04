@@ -40,7 +40,6 @@ requirejs.config({
     'compat': 'core/js/compat',
     'versioncompare': 'core/js/compat/versioncompare',
     'modernizr': 'core/js/compat/modernizr',
-    'contentloaded': 'core/js/contentloaded',
     'cssparser': 'core/js/cssparser',
     'css-filters': 'core/js/compat/css-filters',
     'send-as-binary': 'core/js/compat/send-as-binary',
@@ -102,7 +101,7 @@ requirejs.config({
       exports: 'CSSParser'
     },
     'css-filters': {
-      deps: ['contentloaded', 'cssparser']
+      deps: ['cssparser']
     }
   }
 });

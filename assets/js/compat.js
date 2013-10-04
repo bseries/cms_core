@@ -74,7 +74,11 @@ function($, _, versionCompare, Modernizr) {
   if (!Modernizr.cssfilters) {
     all.cssFilters = function() {
       window.polyfilter_scriptpath = 'http://assets.' + window.location.hostname + '/core/js/compat/css-filters/';
-      require(['css-filters']);
+      require(['imagesloaded', 'domready!'], function() {
+        imagesLoaded(document.getElementsByTagName('body'), function() {
+            require(['css-filters']);
+        });
+      });
     };
   }
 

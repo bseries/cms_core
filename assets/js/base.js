@@ -101,7 +101,7 @@ requirejs.config({
       exports: 'CSSParser'
     },
     'css-filters': {
-      deps: ['cssparser']
+      deps: ['cssparser', 'domready!']
     }
   }
 });

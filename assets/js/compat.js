@@ -77,7 +77,7 @@ function($, versionCompare, Modernizr) {
 
   if (!Modernizr.cssfilters) {
     var cssFilters = function() {
-      window.polyfilter_scriptpath = "/core/js/compat/css-filters/";
+      window.polyfilter_scriptpath = 'http://assets.' + window.location.hostname + '/core/js/compat/css-filters/';
       require(['css-filters']);
     };
     all.push(cssFilters);

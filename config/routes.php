@@ -39,6 +39,9 @@ $persist = ['persist' => ['admin', 'controller']];
 Router::connect('/admin', [
 	'controller' => 'pages', 'action' => 'home', 'library' => 'cms_core', 'admin' => true
 ], $persist);
+Router::connect('/admin/support', [
+	'controller' => 'pages', 'action' => 'support', 'library' => 'cms_core', 'admin' => true
+], $persist);
 
 if (Environment::get('features.registerWithTokenOnly')) {
 	Router::connect('/admin/tokens/{:action}/{:token:[0-9a-f]{8,16}}', [

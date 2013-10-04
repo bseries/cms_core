@@ -130,7 +130,12 @@ function($, Progress) {
   $(document).on('transfer:done', function(data) { Progress.done(); });
 });
 
-require(['compat'],
-function(Compat) {
-  Compat.run();
+require(['jquery', 'domready!'], function($) {
+  // var hasTouch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch);
+  // if (hasTouch) {
+  //   $('body').addClass('touch');
+  // } else {
+    $('body').addClass('no-touch');
+  // }
 });
+

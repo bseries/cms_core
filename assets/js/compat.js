@@ -1,5 +1,5 @@
-define(['jquery', 'versioncompare', 'modernizr', /* 'html5shiv', */ 'domready!'],
-function($, versionCompare, Modernizr) {
+define(['jquery', 'underscore', 'versioncompare', 'modernizr', /* 'html5shiv', */ 'domready!'],
+function($, _, versionCompare, Modernizr) {
   var all = [];
 
   /* ----- Browserswitch  ----- */
@@ -12,16 +12,15 @@ function($, versionCompare, Modernizr) {
 
   url = '/browser';
   if (old && window.location != url) {
-    var browser = function() {
+    all.browser = function() {
         window.location = url;
         return; // No further script execution.
     };
-    all.push(browser);
   }
 
   /* ----- Placeholder ----- */
   // if (!Modernizr.placeholder) {
-  //   var placeholder = function() {
+  //   all.placeholder = function() {
   //     requirejs(['html5placeholder'], function() {
   //       $('input[placeholder]').placeholder({
   //         inputWrapper: '<span class="compat" style="position:relative"></span>',
@@ -36,11 +35,10 @@ function($, versionCompare, Modernizr) {
   //       });
   //     });
   //   };
-  //   all.push(placeholder);
   // }
 
   if (!Modernizr.inputtypes.date) {
-    var polyfill = function() {
+    all.inputDate = function() {
       require(['input-date', 'moment'], function(P, moment) {
         P.pattern = '[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}';
         P.placeholder = 'tt.mm.jjjj';
@@ -65,28 +63,30 @@ function($, versionCompare, Modernizr) {
         P.make('input[type="date"]');
       });
     };
-    all.push(polyfill);
   }
   // Test(window.XMLHttpRequest && (new XMLHttpRequest().sendAsBinary || (window.Uint8Array && window.ArrayBuffer)))
   if (!XMLHttpRequest.prototype.sendAsBinary) {
-    var sendAsBinary = function() {
+    all.sendAsBinary = function() {
       require(['send-as-binary']);
     };
-    all.push(sendAsBinary);
   }
 
   if (!Modernizr.cssfilters) {
-    var cssFilters = function() {
+    all.cssFilters = function() {
       window.polyfilter_scriptpath = 'http://assets.' + window.location.hostname + '/core/js/compat/css-filters/';
       require(['css-filters']);
     };
-    all.push(cssFilters);
   }
 
   return {
-    run: function() {
-      $(all).map(function(k, item) {
-        item();
+    available: function() {
+      return _.keys(all);
+    },
+    run: function(selected) {
+      _.each(selected || _.keys(all), function(v) {
+        if (all.hasOwnProperty(v)) {
+          all[v]();
+        }
       });
     }
   };

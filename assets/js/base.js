@@ -29,11 +29,11 @@ requirejs.config({
   baseUrl: 'http://assets.' + window.location.hostname + '/v' + App.env.project.version,
   waitSeconds: 15,
   paths: {
+    'domready': 'core/js/require/domready',
+    'text': 'core/js/require/text',
     'jquery': 'core/js/jquery',
     'underscore': 'core/js/underscore',
     'notify': 'core/js/notify',
-    'domready': 'core/js/domready',
-    'text': 'core/js/text',
     'editor': 'core/js/editor',
     'wysihtml5': 'core/js/wysihtml5',
     'globalize': 'core/js/globalize',

@@ -63,6 +63,9 @@
 		_stylesheets: 		[],
 		
 		_development_mode: (function(){
+			// PATCH: Never use local storage.
+			return true;
+
 			if(location.hostname === 'localhost' || location.hostname.search(/.local$/) !== -1 || location.hostname.search(/\d+\.\d+\.\d+\.\d+/) !== -1){
 				if(window.console) console.log('Detected localhost or IP address. Assuming you are a developer. Caching of stylesheets is disabled.');
 				return true;

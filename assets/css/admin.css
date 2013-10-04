@@ -217,7 +217,13 @@ nav#main [target="new"]:before {
 
 /* Footer
 ---------------------------------------------------------------- */
-body > footer {
+body > footer a {
+  color: white;
+  border-bottom: 1px solid white;
+}
+body > footer a:hover {
+  color: white;
+  border-color: #9475ee;
 }
 body > footer .copyright,
 body > footer .credits,

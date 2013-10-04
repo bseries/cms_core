@@ -98,6 +98,9 @@ requirejs.config({
       deps: ['jquery', 'domready!'],
       exports: 'inputDate'
     },
+    'cssparser': {
+      exports: 'CSSParser'
+    },
     'css-filters': {
       deps: ['contentloaded', 'cssparser']
     }

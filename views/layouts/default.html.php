@@ -23,8 +23,6 @@ FlashMessage::clear();
 			'/site/css/base'
 		]) ?>
 		<?php echo $this->assets->script([
-			'/core/js/underscore',
-			'/core/js/jquery',
 			'/core/js/require',
 			'/core/js/base',
 			'/media/js/base',

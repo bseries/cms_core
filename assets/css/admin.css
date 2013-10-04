@@ -104,8 +104,16 @@ big, .big {
 /* Hyperlinks
 ---------------------------------------------------------------- */
 a {
-  color: white;
+  color: #3d3d3d;
+  text-decoration: none;
 }
+p a {
+  border-bottom: 1px solid #969696;
+}
+p a:hover {
+  border-color: #3d3d3d;
+}
+
 
 /* Header
 ---------------------------------------------------------------- */

@@ -681,3 +681,11 @@ h1 + .actions {
 .media-explorer .selected {
   background: #9475ee;
 }
+
+/* Organization/Person
+-------------------------------------------------------------- */
+[itemtype$="Person"] label,
+[itemtype$="Organization"] label {
+  display: inline-block;
+  min-width: 4em;
+}

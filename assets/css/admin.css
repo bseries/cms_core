@@ -219,11 +219,11 @@ nav#main [target="new"]:before {
 ---------------------------------------------------------------- */
 body > footer a {
   color: white;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #e0dde3;
 }
 body > footer a:hover {
   color: white;
-  border-color: #9475ee;
+  border-color: #fff;
 }
 body > footer .copyright,
 body > footer .credits,

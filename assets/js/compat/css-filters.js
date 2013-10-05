@@ -64,26 +64,7 @@
 
 		process_stylesheets: function(){
 			var xmlHttp = [];
-			
-			// Check if path to library is correct, do that 2 secs. after this to not disturb initial processing
-			window.setTimeout(function(){
-				if (window.XMLHttpRequest) {
-					var xmlHttpCheck = new XMLHttpRequest();
-				} else if (window.ActiveXObject) {
-					var xmlHttpCheck = new ActiveXObject("Microsoft.XMLHTTP");
-				}
-				xmlHttpCheck.open('GET', window.polyfilter_scriptpath + 'htc/sepia.htc', true);
-				xmlHttpCheck.onreadystatechange = function(){
-					if(xmlHttp.readyState == 4 && xmlHttp.status != 200){
-						alert('The configured path \r\rvar polyfilter_scriptpath = "' + window.polyfilter_scriptpath + '"\r\rseems wrong!\r\rConfigure the polyfill\'s correct absolute(!) script path before referencing the css-filters-polyfill.js, like so:\r\rvar polyfilter_scriptpath = "/js/css-filters-polyfill/";\r\rLeaving IE dead in the water is no option. You damn Mac user... ;)');
-					}
-				};
-				try{
-					xmlHttpCheck.send(null);
-				} catch(e){}
-			},2000);
-			
-			
+
 			var stylesheets = document.querySelectorAll ? document.querySelectorAll('style,link[rel="stylesheet"]') : document.getElementsByTagName('*');
 			
 			for(var i = 0; i < stylesheets.length; i++){
@@ -729,12 +710,6 @@
 	// Inialize, either via jQuery...
 	if(window.jQuery){
 		window.jQuery(document).ready(function(e) {
-			polyfilter.process_stylesheets();
-		});
-	}
-	// or via contentLoaded...
-	else if(window.contentLoaded){
-		contentLoaded(window,function(){
 			polyfilter.process_stylesheets();
 		});
 	}

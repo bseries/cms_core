@@ -6,6 +6,7 @@ use li3_flash_message\extensions\storage\FlashMessage;
 $service = Environment::get('service');
 $site = Environment::get('site');
 $locale = Environment::get('locale');
+$features = Environment::get('features');
 
 $flash = FlashMessage::read();
 FlashMessage::clear();
@@ -77,7 +78,7 @@ FlashMessage::clear();
 
 		<div id="container">
 			<header>
-				<?=$this->view()->render(['element' => 'header'], compact('site', 'service'), [
+				<?=$this->view()->render(['element' => 'header'], compact('site', 'service', 'features'), [
 					'library' => 'app'
 				]) ?>
 			</header>
@@ -86,7 +87,7 @@ FlashMessage::clear();
 			</div>
 		</div>
 		<footer>
-			<?=$this->view()->render(['element' => 'footer'], compact('site', 'service'), [
+			<?=$this->view()->render(['element' => 'footer'], compact('site', 'service', 'features'), [
 				'library' => 'app'
 			]) ?>
 		</footer>

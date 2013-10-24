@@ -39,6 +39,21 @@ $persist = ['persist' => ['admin', 'controller']];
 Router::connect('/admin', [
 	'controller' => 'pages', 'action' => 'home', 'library' => 'cms_core', 'admin' => true
 ], $persist);
+
+Router::connect('/admin/session', [
+	'controller' => 'users', 'action' => 'session', 'library' => 'cms_core', 'admin' => true
+], $persist);
+Router::connect('/admin/login', [
+	'controller' => 'users', 'action' => 'login', 'library' => 'cms_core', 'admin' => true
+], $persist);
+Router::connect('/admin/logout', [
+	'controller' => 'users', 'action' => 'login', 'library' => 'cms_core', 'admin' => true
+], $persist);
+Router::connect('/admin/password/change', [
+	'controller' => 'users', 'action' => 'change_password', 'library' => 'cms_core', 'admin' => true
+], $persist);
+
+
 Router::connect('/admin/support', [
 	'controller' => 'pages', 'action' => 'support', 'library' => 'cms_core', 'admin' => true
 ], $persist);

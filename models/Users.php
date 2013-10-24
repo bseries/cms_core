@@ -13,6 +13,7 @@
 namespace cms_core\models;
 
 use lithium\security\Password;
+use lithium\g11n\Message;
 
 class Users extends \lithium\data\Model {
 
@@ -22,8 +23,63 @@ class Users extends \lithium\data\Model {
 		'cms_core\extensions\data\behavior\Timestamp'
 	];
 
+	public static $roles = [
+		'admin',
+		'user'
+	];
+
 	public static function pdo() {
 		return static::connection()->connection;
+	}
+
+	public static function __init() {
+		extract(Message::aliases());
+
+		$model = static::_object();
+
+		$model->validates['password'] = [
+			[
+				'notEmpty',
+				'on' => ['create'],
+				'message' => $t('This field cannot be empty.')
+			],
+		];
+		$model->validates['password_repeat'] = [
+			[
+				'notEmpty',
+				'on' => ['create'],
+				'message' => $t('This field cannot be empty.')
+			],
+			[
+				'passwordRepeat',
+				'on' => ['create', 'passwordChange'],
+				'message' => $t('The password are not identical.')
+			]
+		];
+		Validator::add('passwordRepeat', function($value, $format, $options) {
+			return Password::check($value, $options['values']['password']);
+		});
+
+		$model->validates['name'] = [
+			[
+				'notEmpty',
+				'on' => ['create'],
+				'message' => $t('This field cannot be empty.')
+			]
+		];
+
+		$model->validates['email'] = [
+			[
+				'notEmpty',
+				'on' => ['create'],
+				'message' => $t('This field cannot be empty.')
+			],
+			[
+				'email',
+				'on' => ['create'],
+				'message' => $t('Invalid e–mail.')
+			]
+		];
 	}
 
 	public function activate($entity) {

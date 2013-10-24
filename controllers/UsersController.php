@@ -75,7 +75,9 @@ class UsersController extends \lithium\action\Controller {
 		$this->redirect($this->request->referer());
 	}
 
-	public function admin_session() {}
+	public function admin_session() {
+		$this->_render['layout'] = 'admin_blank';
+	}
 
 	public function admin_login() {
 		extract(Message::aliases());

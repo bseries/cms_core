@@ -12,6 +12,7 @@
 
 namespace cms_core\models;
 
+use lithium\util\Validator;
 use lithium\security\Password;
 use lithium\g11n\Message;
 

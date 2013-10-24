@@ -85,7 +85,7 @@ class UsersController extends \lithium\action\Controller {
 		if ($this->request->data) {
 			if (Auth::check('default', $this->request)) {
 				FlashMessage::write($t('Authenticated.'));
-				return $this->redirect('/');
+				return $this->redirect('/admin');
 			}
 			FlashMessage::write($t('Failed to authenticate.'));
 			return $this->redirect($this->request->referer());
@@ -98,7 +98,7 @@ class UsersController extends \lithium\action\Controller {
 		Auth::clear('default');
 
 		FlashMessage::write('Successfully logged out.');
-		return $this->redirect('/');
+		return $this->redirect('/admin/session');
 	}
 
 	public function admin_change_password() {

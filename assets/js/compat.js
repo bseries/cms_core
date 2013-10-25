@@ -78,14 +78,21 @@ function($, _, versionCompare, Modernizr) {
     };
   }
 
+  if (!window.compat) {
+    window.compat = {
+      applied: []
+    };
+  }
+
   return {
     available: function() {
       return _.keys(all);
     },
     run: function(selected) {
       _.each(selected || _.keys(all), function(v) {
-        if (all.hasOwnProperty(v)) {
+        if (all.hasOwnProperty(v) && $.inArray(v, window.compat.applied) === -1) {
           all[v]();
+          window.compat.applied.push(v);
         }
       });
     }

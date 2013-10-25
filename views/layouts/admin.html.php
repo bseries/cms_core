@@ -87,7 +87,7 @@ FlashMessage::clear();
 							</div>
 						</div>
 						<div class="actions">
-							<?= $this->html->link($t('Logout', ['controller' => 'users', 'action' => 'logout', 'library' => 'cms_core', 'admin' => true])) ?>
+							<?= $this->html->link($t('Logout'), ['controller' => 'users', 'action' => 'logout', 'library' => 'cms_core', 'admin' => true]) ?>
 						</div>
 					<?php endif ?>
 				</div>

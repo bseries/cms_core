@@ -56,7 +56,7 @@ require __DIR__ . '/bootstrap/auth.php';
 
 Environment::set(true, [
 	'features' => [
-		'registerWithTokenOnly' => true
+	//	'registerWithTokenOnly' => true
 	],
 	'modules' => [
 		'tokens' => [

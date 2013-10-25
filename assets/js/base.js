@@ -140,4 +140,3 @@ require(['jquery', 'domready!'], function($) {
     $('body').addClass('no-touch');
   // }
 });
-

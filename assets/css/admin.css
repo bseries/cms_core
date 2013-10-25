@@ -135,12 +135,16 @@ p a:hover {
 }
 /* Header: User
 ---------------------------------------------------------------- */
-#user {
+#user .inner {
   background: #f1f1f1;
+  padding: 1em;
+  height: 7.5em;
+}
+
+#user {
   width: 30%;
   max-width: 450px;
   min-width: 350px;
-  padding: 1em 1em;
   position: absolute;
   top: 0;
   right: 1.5em;
@@ -171,7 +175,23 @@ p a:hover {
   display: inline-block;
   vertical-align: middle;
 }
-
+#user .actions {
+  background: #e3e3e3;
+  text-align: right;
+}
+#user .actions a {
+  font-size: .9em;
+  display: inline-block;
+  text-align: center;
+  width: 100px;
+  padding: 1.5em 5px;
+  background: #14b9d6;
+  color: white;
+}
+#user .actions a:hover {
+  background: white;
+  color: #111;
+}
 
 /* Sidebar Nav
 ---------------------------------------------------------------- */

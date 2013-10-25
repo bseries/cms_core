@@ -63,26 +63,31 @@ FlashMessage::clear();
 				</h1>
 				<div id="user">
 					<?php if ($authedUser = Auth::check('default')): ?>
-						<div class="left">
-							<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($authedUser['email'] )?>.jpg?s=200&d=retro"></span>
-						</div>
-						<div class="right">
-							<div class="welcome">
-								<?php echo $t('Moin {:name}!', [
-									'name' => '<span class="name">' . strtok($authedUser['name'], ' ') . '</span>'
-								]) ?>
+						<div class="inner">
+							<div class="left">
+								<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($authedUser['email'] )?>.jpg?s=200&d=retro"></span>
 							</div>
-							<?php
-								$today = new DateTime();
-								$formatter = new IntlDateFormatter(
-									'de_DE',
-									IntlDateFormatter::FULL,
-									IntlDateFormatter::NONE
-								);
-							?>
-							<time class="today" datetime="<?= $today->format(DateTime::W3C) ?>">
-								<?= $formatter->format($today) ?>
-							</time>
+							<div class="right">
+								<div class="welcome">
+									<?php echo $t('Moin {:name}!', [
+										'name' => '<span class="name">' . strtok($authedUser['name'], ' ') . '</span>'
+									]) ?>
+								</div>
+								<?php
+									$today = new DateTime();
+									$formatter = new IntlDateFormatter(
+										'de_DE',
+										IntlDateFormatter::FULL,
+										IntlDateFormatter::NONE
+									);
+								?>
+								<time class="today" datetime="<?= $today->format(DateTime::W3C) ?>">
+									<?= $formatter->format($today) ?>
+								</time>
+							</div>
+						</div>
+						<div class="actions">
+							<?= $this->html->link($t('Logout', ['controller' => 'Users', 'action' => 'logout', 'library' => 'cms_core', 'admin' => true])) ?>
 						</div>
 					<?php endif ?>
 				</div>

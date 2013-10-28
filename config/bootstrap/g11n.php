@@ -69,11 +69,14 @@ Environment::set('test', ['locale' => 'en', 'locales' => ['en' => 'English']]);
  * @see lithiumm\core\Environment
  */
 $setLocale = function($self, $params, $chain) {
-	if (!$params['request']->locale()) {
-		$params['request']->locale(Locale::preferred($params['request']));
+	try {
+		if (!$params['request']->locale()) {
+			$params['request']->locale(Locale::preferred($params['request']));
+		}
+		Environment::set(true, ['locale' => $params['request']->locale()]);
+	} catch (\Exception $e) {
+		// Cannot parse locale.
 	}
-	Environment::set(true, ['locale' => $params['request']->locale()]);
-
 	return $chain->next($self, $params, $chain);
 };
 ActionDispatcher::applyFilter('_callable', $setLocale);

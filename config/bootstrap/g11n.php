@@ -68,12 +68,15 @@ Environment::set('test', ['locale' => 'en', 'locales' => ['en' => 'English']]);
  * @see lithiumm\g11n\Message
  * @see lithiumm\core\Environment
  */
+
 $setLocale = function($self, $params, $chain) {
 	try {
 		if (!$params['request']->locale()) {
 			$params['request']->locale(Locale::preferred($params['request']));
 		}
-		Environment::set(true, ['locale' => $params['request']->locale()]);
+		if ($locale = $params['request']->locale()) {
+			Environment::set(true, ['locale' => $locale]);
+		}
 	} catch (\Exception $e) {
 		// Cannot parse locale.
 	}

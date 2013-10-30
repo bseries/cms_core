@@ -15,7 +15,7 @@ $project = Environment::get('project');
 	<dl>
 	<?php foreach ($site as $name => $value): ?>
 		<dt><?= $name ?></dt>
-		<dd><?= $value ?></dd>
+		<dd><?= $value ?: $t('n/a') ?></dd>
 	<?php endforeach ?>
 	</dl>
 
@@ -23,7 +23,7 @@ $project = Environment::get('project');
 	<dl>
 	<?php foreach ($project as $name => $value): ?>
 		<dt><?= $name ?></dt>
-		<dd><?= $value ?></dd>
+		<dd><?= $value ?: $t('n/a') ?></dd>
 	<?php endforeach ?>
 	</dl>
 	<!--

@@ -44,3 +44,10 @@ body {
     background: white;
     color: black;
 }
+
+.composer .page-break {
+  margin: 2em auto;
+  border-top: 1px dotted #111;
+  height: 1px;
+  width: 100%;
+}

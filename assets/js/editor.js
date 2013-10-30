@@ -20,7 +20,8 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
       'media': 1,
       'image': 1,
       'beta': 1,
-      'gamma': 1
+      'gamma': 1,
+      'page-break': 1
     },
     tags: {
       span: {},
@@ -51,6 +52,11 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
       },
       h3: {
         "set_class": "gamma",
+        "check_attributes": {
+          "class": "class"
+        }
+      },
+      div: {
         "check_attributes": {
           "class": "class"
         }
@@ -95,6 +101,7 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
        '<a data-wysihtml5-command="insertUnorderedList" class="button">' + _('list') + '</a>' +
        '<a data-wysihtml5-command="createLink" class="button">' + _('link') + '</a>' +
        '<a data-wysihtml5-command="insertMedia" class="button media-explorer">' + _('media') + '</a>' +
+       '<a data-wysihtml5-command="insertHTML" data-wysihtml5-command-value="<div class=page-break></div>" class="button">' + _('page break') + '</a>' +
        '<a data-wysihtml5-command="undo" class="advanced button">' + _('undo') + '</a>' +
        '<a data-wysihtml5-command="redo" class="advanced button">' + _('redo') + '</a>' +
        '<div data-wysihtml5-dialog="createLink" style="display: none;">' +

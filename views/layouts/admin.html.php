@@ -87,14 +87,14 @@ FlashMessage::clear();
 							</div>
 						</div>
 						<div class="actions">
+							<?= $this->html->link($t('Site'), '/', ['target' => 'new']) ?>
+							<?= $this->html->link($t('Dashboard'), ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
 							<?= $this->html->link($t('Logout'), ['controller' => 'users', 'action' => 'logout', 'library' => 'cms_core', 'admin' => true]) ?>
 						</div>
 					<?php endif ?>
 				</div>
 			</header>
 			<nav id="main">
-				<?= $this->html->link($t('Dashboard'), ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
-				<?= $this->html->link($t('Site'), '/', ['target' => 'new']) ?>
 				<?php foreach ($modules as $module): ?>
 					<?= $this->html->link($module['title'], [
 						'controller' => $module['name'], 'action' => 'index', 'library' => $module['library']

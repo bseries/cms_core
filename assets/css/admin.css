@@ -178,19 +178,34 @@ p a:hover {
 #user .actions {
   background: #e3e3e3;
   text-align: right;
+  float: left;
+  width: 100%;
 }
 #user .actions a {
   font-size: .9em;
-  display: inline-block;
+  float: left;
+  display: block;
   text-align: center;
   width: 100px;
   padding: 1.5em 5px;
   background: #14b9d6;
   color: white;
 }
+#user .actions a[href^="/"] {
+  background: #14b9d6;
+}
+#user .actions a[href^="/admin"] {
+  background: #f27935;
+}
+#user .actions a[href^="/admin/logout"] {
+  background: #1fbba6;
+}
 #user .actions a:hover {
   background: white;
   color: #111;
+}
+#user [target="new"]:before {
+  content: "← ";
 }
 
 /* Sidebar Nav
@@ -219,9 +234,6 @@ nav#main a {
 nav#main a:hover {
   color: #fff;
   background: #555;
-}
-nav#main [target="new"]:before {
-  content: "← ";
 }
 
 /* Content

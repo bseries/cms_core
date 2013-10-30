@@ -342,6 +342,13 @@ form .editor {
   margin-bottom: 4em;
 }
 
+form .type-selector + .editor {
+  margin-top: 1.5em;
+}
+form .type-selector {
+  margin-bottom: 1em;
+}
+
 form .date-range div,
 form .date-range input[type*="date"],
 form .date-range .error,

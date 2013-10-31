@@ -56,6 +56,7 @@ require __DIR__ . '/bootstrap/auth.php';
 
 Environment::set(true, [
 	'features' => [
+	//	'useNewGoogleAnalyticsTrackingCode' => true,
 	//	'registerWithTokenOnly' => true
 	],
 	'modules' => [

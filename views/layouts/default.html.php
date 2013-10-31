@@ -45,11 +45,11 @@ FlashMessage::clear();
 		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>
 		<?php if (!empty($service['googleAnalytics'])): ?>
-			<?=$this->view()->render(['element' => 'ga'], $service['googleAnalytics'], [
+			<?=$this->view()->render(['element' => 'ga'], compact('features', 'service'), [
 				'library' => 'cms_core'
 			]) ?>
 		<?php endif ?>
-		<?=$this->view()->render(['element' => 'head'], compact('site', 'service', 'feature'), [
+		<?=$this->view()->render(['element' => 'head'], compact('site', 'service', 'features'), [
 			'library' => 'app'
 		]) ?>
 	</head>

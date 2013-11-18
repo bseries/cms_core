@@ -99,9 +99,8 @@ function($, _, versionCompare, Modernizr) {
   //   text-wrap: balanced;
   // }
   if (!Modernizr.textwrap) {
-    require('balanceText', function(balanceText) {
-
-    })
+    require(['balanceText']);
+    // Script automatically intializes.
   }
 
   if (!window.compat) {

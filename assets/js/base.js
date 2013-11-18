@@ -125,7 +125,10 @@ function($, Progress) {
   $(document).on('modal:newContent', function() { Progress.done(); });
   $(document).on('modal:isReady', function() {
     Progress.done();
-    Progress.remove();
+
+    setTimeout(function() {
+      Progress.remove();
+    }, 500);
   });
   $(document).on('transfer:start', function() { Progress.start(); });
 //  $(document).on('transfer:progress', function(ev, data) { Progress.set(data); });

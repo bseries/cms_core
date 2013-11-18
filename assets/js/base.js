@@ -29,31 +29,58 @@ requirejs.config({
   baseUrl: 'http://assets.' + window.location.hostname + '/v' + App.env.project.version,
   waitSeconds: 15,
   paths: {
+    // Basics
     'domready': 'core/js/require/domready',
     'text': 'core/js/require/text',
     'jquery': 'core/js/jquery',
     'underscore': 'core/js/underscore',
+    'ember': 'core/js/ember',
+    'ember-data': 'core/js/ember-data',
+
+    // App
+
+    // Other
     'notify': 'core/js/notify',
     'editor': 'core/js/editor',
     'wysihtml5': 'core/js/wysihtml5',
     'globalize': 'core/js/globalize',
-    'compat': 'core/js/compat',
-    'versioncompare': 'core/js/compat/versioncompare',
-    'modernizr': 'core/js/compat/modernizr',
-    'cssparser': 'core/js/cssparser',
-    'cssFilters': 'core/js/compat/cssFilters',
-    'sendAsBinary': 'core/js/compat/sendAsBinary',
-    'inputDate': 'core/js/compat/inputDate',
     'modal': 'core/js/modal',
     'nprogress': 'core/js/nprogress',
-    'ember': 'core/js/ember',
-    'ember-data': 'core/js/ember-data',
     'handlebars': 'core/js/handlebars',
     'imagesloaded': 'core/js/imagesloaded',
     'moment': 'core/js/moment',
-    'scrollTo': 'core/js/scrollTo'
+    'scrollTo': 'core/js/scrollTo',
+
+    // Compat
+    'versioncompare': 'core/js/compat/versioncompare',
+    'compat': 'core/js/compat',
+    'modernizr': 'core/js/compat/modernizr',
+    'cssparser': 'core/js/cssparser',
+    'cssFilters': 'core/js/compat/cssFilters',
+    'balanceText': 'core/js/compat/balanceText',
+    'inputDate': 'core/js/compat/inputDate',
+    'sendAsBinary': 'core/js/compat/sendAsBinary'
   },
   shim: {
+    // Basics
+    'underscore': {
+      exports: '_'
+    },
+    'jquery': {
+      exports: '$'
+    },
+    'ember': {
+      exports: 'Ember',
+      deps: ['jquery', 'handlebars']
+    },
+    'ember-data': {
+      exports: 'DS',
+      deps: ['jquery', 'handlebars', 'ember']
+    },
+
+    // App
+
+    // Other
     'globalize': {
       deps: ['jquery'],
       exports: 'Globalize'
@@ -71,38 +98,30 @@ requirejs.config({
       exports: 'Modernizr',
       deps: ['domready!']
     },
-    'versioncompare': {
-      exports: 'versionCompare'
-    },
     'notify': {
       deps: ['jquery']
-    },
-    'underscore': {
-      exports: '_'
-    },
-    'jquery': {
-      exports: '$'
-    },
-    'ember': {
-      exports: 'Ember',
-      deps: ['jquery', 'handlebars']
-    },
-    'ember-data': {
-      exports: 'DS',
-      deps: ['jquery', 'handlebars', 'ember']
     },
     'wysihtml5': {
       exports: 'wysihtml5'
     },
-    'input-date': {
+
+    // Compat
+    'versioncompare': {
+      exports: 'versionCompare'
+    },
+    'inputDate': {
       deps: ['jquery', 'domready!'],
       exports: 'inputDate'
     },
     'cssparser': {
       exports: 'CSSParser'
     },
-    'css-filters': {
+    'cssFilters': {
       deps: ['cssparser', 'domready!']
+    },
+    'balanceText': {
+      deps: ['jquery'],
+      exports: 'jquery.fn.balanceText'
     }
   }
 });

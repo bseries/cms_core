@@ -50,7 +50,8 @@ requirejs.config({
     'ember-data': 'core/js/ember-data',
     'handlebars': 'core/js/handlebars',
     'imagesloaded': 'core/js/imagesloaded',
-    'moment': 'core/js/moment'
+    'moment': 'core/js/moment',
+    'scrollTo': 'core/js/scrollTo'
   },
   shim: {
     'globalize': {

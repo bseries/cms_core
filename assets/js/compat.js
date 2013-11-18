@@ -93,14 +93,11 @@ function($, _, versionCompare, Modernizr) {
     var style = document.documentElement.style;
     return (style.textWrap || style.WebkitTextWrap || style.MozTextWrap || style.MsTextWrap || style.OTextWrap);
   });
-
-  // Use CSS class:
-  // .balance-text {
-  //   text-wrap: balanced;
-  // }
   if (!Modernizr.textwrap) {
-    require(['balanceText']);
-    // Script automatically intializes.
+    all.balanceText = function() {
+      require(['balanceText']);
+      // Script automatically intializes on CSS class .balance-text.
+    };
   }
 
   if (!window.compat) {

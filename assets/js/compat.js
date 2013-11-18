@@ -39,7 +39,7 @@ function($, _, versionCompare, Modernizr) {
 
   if (!Modernizr.inputtypes.date) {
     all.inputDate = function() {
-      require(['input-date', 'moment'], function(P, moment) {
+      require(['inputDate', 'moment'], function(P, moment) {
         P.pattern = '[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}';
         P.placeholder = 'tt.mm.jjjj';
 
@@ -67,14 +67,14 @@ function($, _, versionCompare, Modernizr) {
   // Test(window.XMLHttpRequest && (new XMLHttpRequest().sendAsBinary || (window.Uint8Array && window.ArrayBuffer)))
   if (!XMLHttpRequest.prototype.sendAsBinary) {
     all.sendAsBinary = function() {
-      require(['send-as-binary']);
+      require(['sendAsBinary']);
     };
   }
 
   if (!Modernizr.cssfilters) {
     all.cssFilters = function() {
-      window.polyfilter_scriptpath = 'http://assets.' + window.location.hostname + '/core/js/compat/css-filters/';
-      require(['css-filters']);
+      window.polyfilter_scriptpath = 'http://assets.' + window.location.hostname + '/core/js/compat/';
+      require(['cssFilters']);
     };
   }
 

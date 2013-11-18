@@ -71,7 +71,7 @@ FlashMessage::clear();
 		></div>
 
 		<div id="modal" class="hide">
-			<div class="controls"></div>
+			<div class="controls"><div class="close">╳</div></div>
 			<div class="content"></div>
 		</div>
 		<div id="modal-overlay" class="hide"></div>

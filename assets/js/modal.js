@@ -75,7 +75,7 @@ function($) {
         return;
       }
       e.preventDefault();
-      modalStateClosed();
+      close();
     });
 
     /* Close modal on ESC key. */

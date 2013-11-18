@@ -32,6 +32,9 @@ requirejs.config({
     // Basics
     'domready': 'core/js/require/domready',
     'text': 'core/js/require/text',
+    'async': 'core/js/require/async',
+    'goog': 'core/js/require/goog',
+    'propertyParser': 'core/js/require/propertyParser',
     'jquery': 'core/js/jquery',
     'underscore': 'core/js/underscore',
     'ember': 'core/js/ember',

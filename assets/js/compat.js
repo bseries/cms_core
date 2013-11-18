@@ -1,4 +1,14 @@
-define(['jquery', 'underscore', 'versioncompare', 'modernizr', /* 'html5shiv', */ 'domready!'],
+/*!
+ * Compat Main Control Script
+ *
+ * Copyright (c) 2013 Atelier Disko - All rights reserved.
+ *
+ * This software is proprietary and confidential. Redistribution
+ * not permitted. Unless required by applicable law or agreed to
+ * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+define(['jquery', 'underscore', 'versioncompare', 'modernizr', 'domready!'],
 function($, _, versionCompare, Modernizr) {
   var all = [];
 
@@ -64,6 +74,7 @@ function($, _, versionCompare, Modernizr) {
       });
     };
   }
+
   // Test(window.XMLHttpRequest && (new XMLHttpRequest().sendAsBinary || (window.Uint8Array && window.ArrayBuffer)))
   if (!XMLHttpRequest.prototype.sendAsBinary) {
     all.sendAsBinary = function() {
@@ -76,6 +87,21 @@ function($, _, versionCompare, Modernizr) {
       window.polyfilter_scriptpath = 'http://assets.' + window.location.hostname + '/core/js/compat/';
       require(['cssFilters']);
     };
+  }
+
+  Modernizr.addTest('textwrap', function() {
+    var style = document.documentElement.style;
+    return (style.textWrap || style.WebkitTextWrap || style.MozTextWrap || style.MsTextWrap || style.OTextWrap);
+  });
+
+  // Use CSS class:
+  // .balance-text {
+  //   text-wrap: balanced;
+  // }
+  if (!Modernizr.textwrap) {
+    require('balanceText', function(balanceText) {
+
+    })
   }
 
   if (!window.compat) {

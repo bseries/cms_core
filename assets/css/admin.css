@@ -503,6 +503,17 @@ form button[type="submit"] {
   cursor: pointer;
   opacity: .88;
 }
+#modal .controls .close {
+  cursor: pointer;
+  opacity: .7;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: right;
+}
+#modal .controls .close:hover {
+  opacity: 1;
+}
 
 /* Progress (nprogress)
 -------------------------------------------------------------- */

@@ -97,10 +97,6 @@ requirejs.config({
     'globalize.de.messages': {
       deps: ['globalize']
     },
-    'modernizr': {
-      exports: 'Modernizr',
-      deps: ['domready!']
-    },
     'notify': {
       deps: ['jquery']
     },
@@ -109,6 +105,10 @@ requirejs.config({
     },
 
     // Compat
+    'modernizr': {
+      exports: 'Modernizr',
+      deps: ['domready!']
+    },
     'versioncompare': {
       exports: 'versionCompare'
     },
@@ -124,7 +124,7 @@ requirejs.config({
     },
     'balanceText': {
       deps: ['jquery'],
-      exports: 'jquery.fn.balanceText'
+      exports: 'jQuery.fn.balanceText'
     }
   }
 });

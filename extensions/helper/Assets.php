@@ -49,7 +49,7 @@ class Assets extends \lithium\template\Helper {
 		}
 		$version = Environment::get('project.version');
 		$base = Environment::get('assets.http');
-		return $base . '/v' . $version . $path;
+		return $base . '/v:' . $version . $path;
 	}
 }
 

@@ -33,7 +33,7 @@ class Users extends \lithium\data\Model {
 		return static::connection()->connection;
 	}
 
-	public static function __init() {
+	public static function init() {
 		extract(Message::aliases());
 
 		$model = static::_object();
@@ -135,5 +135,7 @@ class Users extends \lithium\data\Model {
 		return Password::check($plaintext, $hash);
 	}
 }
+
+Users::init();
 
 ?>

@@ -53,6 +53,12 @@ big, .big {
 	display: inline-block;
 }
 
+pre, code, .fixed {
+  font-family: Consolas, Monaco, Courier, monospace;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
 /* Headlines
 ---------------------------------------------------------------- */
 h1, h2, h3, h4 {

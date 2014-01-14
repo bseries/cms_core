@@ -28,6 +28,10 @@ class Features extends \lithium\core\StaticObject {
 		}
 		return static::$_data[$name];
 	}
+
+	public static function all() {
+		return static::$_data;
+	}
 }
 
 ?>

@@ -1,10 +1,10 @@
 <?php
 
 use lithium\core\Environment;
+use cms_core\extensions\cms\Features;
 
 $services = Environment::get('service');
 $site = Environment::get('site');
-$features = Environment::get('features');
 $project = Environment::get('project');
 
 ?>
@@ -26,15 +26,15 @@ $project = Environment::get('project');
 		<dd><?= $value ?: $t('n/a') ?></dd>
 	<?php endforeach ?>
 	</dl>
-	<!--
 	<h2 class="beta"><?= $t('Features') ?></h2>
 	<dl>
-	<?php foreach ($features as $name => $value): ?>
+	<?php foreach (Features::all() as $name => $value): ?>
 		<dt><?= $name ?></dt>
 		<dd><?= $value ? $t('enabled') : $t('disabled')	 ?></dd>
 	<?php endforeach ?>
 	</dl>
 
+	<!--
 	<h2 class="beta"><?= $t('Services') ?></h2>
 	<?php foreach ($services as $name => $service): ?>
 	<h3 class="gamma"><?= $name ?></h3>

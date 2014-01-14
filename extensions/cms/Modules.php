@@ -15,6 +15,10 @@ class Modules extends \lithium\core\StaticObject {
 		];
 		static::$_data[] = compact('name', 'library') + $options;
 	}
+
+	public static function all() {
+		return static::$_data;
+	}
 }
 
 ?>

@@ -36,10 +36,11 @@ function($) {
   };
 
   var fill = function(content, modalClass) {
+    elements.content.html(content);
 
-     elements.content.html(content);
-     this.type(modalClass);
-
+    if (modalClass) {
+      this.type(modalClass);
+    }
     $(document).trigger('modal:newContent');
   };
 
@@ -68,7 +69,11 @@ function($) {
   };
 
   var bindEvents = function() {
-    elements.overlay.click(close);
+    elements.content.on('click', function(ev) {
+      ev.stopPropagation();
+    });
+    elements.modal.on('click', close);
+    elements.overlay.on('click', close);
 
     elements.close.click(function(e) {
       if (e.button !== 0) {

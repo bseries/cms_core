@@ -62,6 +62,8 @@ class UsersController extends \lithium\action\Controller {
 				$this->request->data['password'] = Users::hashPassword(
 					$this->request->data['password']
 				);
+			} else {
+				unset($this->request->data['password']);
 			}
 
 			if ($item->save($this->request->data)) {

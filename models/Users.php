@@ -16,7 +16,7 @@ use lithium\util\Validator;
 use lithium\security\Password;
 use lithium\g11n\Message;
 
-class Users extends \lithium\data\Model {
+class Users extends \cms_core\models\Base {
 
 	use \li3_behaviors\data\model\Behaviors;
 
@@ -24,9 +24,11 @@ class Users extends \lithium\data\Model {
 		'cms_core\extensions\data\behavior\Timestamp'
 	];
 
-	public static $roles = [
-		'admin',
-		'user'
+	public static $enum = [
+		'role' => [
+			'admin',
+			'user'
+		]
 	];
 
 	public static function pdo() {
@@ -41,7 +43,7 @@ class Users extends \lithium\data\Model {
 		$model->validates['password'] = [
 			[
 				'notEmpty',
-				'on' => ['create'],
+				'on' => ['create', 'passwordChange', 'passwordInit'],
 				'message' => $t('This field cannot be empty.')
 			],
 		];
@@ -53,8 +55,8 @@ class Users extends \lithium\data\Model {
 			],
 			[
 				'passwordRepeat',
-				'on' => ['create', 'passwordChange'],
-				'message' => $t('The password are not identical.')
+				'on' => ['create', 'passwordChange', 'passwordInit'],
+				'message' => $t('The passwords are not identical.')
 			]
 		];
 		Validator::add('passwordRepeat', function($value, $format, $options) {
@@ -79,8 +81,22 @@ class Users extends \lithium\data\Model {
 				'email',
 				'on' => ['create'],
 				'message' => $t('Invalid e–mail.')
+			],
+			[
+				'isUnique',
+				'on' => ['create', 'update'],
+				'message' => $t('The e–mail is already in use.')
 			]
 		];
+		Validator::add('isUnique', function($value, $format, $options) {
+			$conditions = [
+				$options['field'] => $value
+			];
+			if (isset($options['values']['id'])) {
+				$conditions['id'] = '!=' . $options['values']['id'];
+			}
+			return !Users::find('count', compact('conditions'));
+		});
 	}
 
 	public function activate($entity) {

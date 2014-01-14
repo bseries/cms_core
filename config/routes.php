@@ -49,10 +49,9 @@ Router::connect('/admin/login', [
 Router::connect('/admin/logout', [
 	'controller' => 'users', 'action' => 'logout', 'library' => 'cms_core', 'admin' => true
 ], $persist);
-Router::connect('/admin/password/change', [
-	'controller' => 'users', 'action' => 'change_password', 'library' => 'cms_core', 'admin' => true
+Router::connect('/admin/users/generate-passwords.{:type}', [
+	'controller' => 'users', 'action' => 'generate_passwords', 'library' => 'cms_core', 'admin' => true
 ], $persist);
-
 
 Router::connect('/admin/support', [
 	'controller' => 'pages', 'action' => 'support', 'library' => 'cms_core', 'admin' => true

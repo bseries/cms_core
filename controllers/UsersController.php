@@ -24,6 +24,71 @@ class UsersController extends \lithium\action\Controller {
 		return compact('data');
 	}
 
+	public function admin_add() {
+		extract(Message::aliases());
+
+		$item = Users::create();
+
+		if ($this->request->data) {
+			$this->request->data['password'] = Users::hashPassword(
+				$this->request->data['password']
+			);
+			$events = ['create', 'passwordInit'];
+
+			if ($item->save($this->request->data, compact('events'))) {
+				FlashMessage::write($t('Successfully saved.'));
+				return $this->redirect(['action' => 'index', 'library' => 'cms_core']);
+			} else {
+				FlashMessage::write($t('Failed to save.'));
+			}
+		}
+		$roles = Users::enum('role');
+
+		$this->_render['template'] = 'admin_form';
+		return compact('item', 'roles');
+	}
+
+	public function admin_edit() {
+		extract(Message::aliases());
+
+		$item = Users::find($this->request->id);
+
+		if ($this->request->data) {
+			$events = ['create'];
+
+			if ($this->request->data['password']) {
+				$events[] = 'passwordChange';
+
+				$this->request->data['password'] = Users::hashPassword(
+					$this->request->data['password']
+				);
+			}
+
+			if ($item->save($this->request->data)) {
+				FlashMessage::write($t('Successfully saved.'));
+				return $this->redirect(['action' => 'index', 'library' => 'cms_core']);
+			} else {
+				FlashMessage::write($t('Failed to save.'));
+			}
+		}
+		$roles = Users::enum('role');
+
+		$this->_render['template'] = 'admin_form';
+		return compact('item', 'roles');
+	}
+
+	public function admin_generate_passwords() {
+		$passwords = [];
+
+		for ($i = 0; $i < 42; $i++) {
+			$passwords[] = Users::generatePassword(10, 1);
+		}
+		return [
+			'status' => 'success',
+			'data' => compact('passwords')
+		];
+	}
+
 	public function admin_delete() {
 		extract(Message::aliases());
 
@@ -61,6 +126,8 @@ class UsersController extends \lithium\action\Controller {
 		$this->redirect($this->request->referer());
 	}
 
+	// We don't need to check if current user is admin, as
+	// anybody who can access the admin is an admin already.
 	public function admin_change_role() {
 		extract(Message::aliases());
 
@@ -101,43 +168,6 @@ class UsersController extends \lithium\action\Controller {
 		return $this->redirect('/admin/session');
 	}
 
-	public function admin_change_password() {
-		extract(Message::aliases());
-
-		$user = Auth::check('default');
-
-		$item = Users::find('first', [
-			'conditions' => [
-				'id' => $user['id'],
-				'role' => 'admin'
-			]
-		]);
-
-		if ($this->request->data) {
-			// Re-auth; here for additional security; password changes should always be re-authed.
-			$result = Users::checkPassword(
-				$this->request->data['password_old'],
-				$item->password
-			);
-			if (!$result) {
-				$item->errors('password_old', $t('Invalid password.'));
-				return compact('item');
-			}
-
-			// Try to replace existing password.
-			$item->password = Users::hashPassword($this->request->data['password']);
-			$item->password_repeat = $this->request->data['password_repeat'];
-			$result = $item->save(null, [
-				'events' => ['passwordChange'],
-				'whitelist' => ['password']
-			]);
-			if ($result) {
-				FlashMessage::write($t('Password changed.'));
-				return $this->redirect('/');
-			}
-		}
-		return compact('item');
-	}
 }
 
 ?>

@@ -11,7 +11,7 @@
  */
 
 use lithium\net\http\Router;
-use lithium\core\Environment;
+use cms_core\extensions\cms\Features;
 
 // Errors
 Router::connect('/403', array(
@@ -57,7 +57,7 @@ Router::connect('/admin/support', [
 	'controller' => 'pages', 'action' => 'support', 'library' => 'cms_core', 'admin' => true
 ], $persist);
 
-if (Environment::get('features.registerWithTokenOnly')) {
+if (Features::enabled('registerWithTokenOnly')) {
 	Router::connect('/admin/tokens/{:action}/{:token:[0-9a-f]{8,16}}', [
 		'controller' => 'tokens', 'library' => 'cms_core', 'admin' => true
 	], $persist);

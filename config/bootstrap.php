@@ -13,6 +13,8 @@
 use lithium\core\Libraries;
 use lithium\core\Environment;
 use lithium\g11n\Message;
+use cms_core\extensions\cms\Modules;
+use cms_core\extensions\cms\Features;
 
 extract(Message::aliases());
 
@@ -54,19 +56,10 @@ if (PHP_SAPI === 'cli') {
 
 require __DIR__ . '/bootstrap/auth.php';
 
-Environment::set(true, [
-	'features' => [
-	//	'useNewGoogleAnalyticsTrackingCode' => true,
-	//	'registerWithTokenOnly' => true
-	],
-	'modules' => [
-		'tokens' => [
-			'library' => 'cms_core', 'title' => $t('Tokens'), 'name' => 'tokens', 'slug' => 'tokens'
-		],
-		'users' => [
-			'library' => 'cms_core', 'title' => $t('Users'), 'name' => 'users', 'slug' => 'users'
-		]
-	]
-]);
+Modules::register('cms_core', 'tokens', ['title' => $t('Tokens')]);
+Modules::register('cms_core', 'users', ['title' => $t('Users')]);
+
+Features::register('useNewGoogleAnalyticsTrackingCode', true);
+Features::register('registerWithTokenOnly', true);
 
 ?>

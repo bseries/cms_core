@@ -11,7 +11,6 @@
  */
 
 use lithium\core\Libraries;
-use lithium\core\Environment;
 use lithium\g11n\Message;
 use cms_core\extensions\cms\Modules;
 use cms_core\extensions\cms\Features;

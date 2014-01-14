@@ -5,9 +5,9 @@ use li3_flash_message\extensions\storage\FlashMessage;
 use lithium\security\Auth;
 use \DateTime;
 use \IntlDateFormatter;
+use cms_core\extensions\cms\Modules;
 
 $site = Environment::get('site');
-$modules = Environment::get('modules');
 $locale = Environment::get('locale');
 
 $flash = FlashMessage::read();
@@ -100,7 +100,7 @@ FlashMessage::clear();
 				</div>
 			</header>
 			<nav id="main">
-				<?php foreach ($modules as $module): ?>
+				<?php foreach (Modules::all() as $module): ?>
 					<?= $this->html->link($module['title'], [
 						'controller' => $module['name'], 'action' => 'index', 'library' => $module['library']
 					]) ?>

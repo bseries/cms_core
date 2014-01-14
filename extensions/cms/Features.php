@@ -13,6 +13,15 @@ class Features extends \lithium\core\StaticObject {
 		static::$_data[$name] = $default;
 	}
 
+	public static function set($data) {
+		foreach ($data as $name => $flag) {
+			if (!isset(static::$_data[$name])) {
+				throw new \Exception("Unkown feature `{$name}`.");
+			}
+			static::$_data[$name] = $flag;
+		}
+	}
+
 	public static function enabled($name) {
 		if (!isset(static::$_data[$name])) {
 			throw new \Exception("Unkown feature `{$name}`.");

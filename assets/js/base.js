@@ -37,8 +37,6 @@ requirejs.config({
     'propertyParser': 'core/js/require/propertyParser',
     'jquery': 'core/js/jquery',
     'underscore': 'core/js/underscore',
-    'ember': 'core/js/ember',
-    'ember-data': 'core/js/ember-data',
 
     // App
 
@@ -71,14 +69,6 @@ requirejs.config({
     },
     'jquery': {
       exports: '$'
-    },
-    'ember': {
-      exports: 'Ember',
-      deps: ['jquery', 'handlebars']
-    },
-    'ember-data': {
-      exports: 'DS',
-      deps: ['jquery', 'handlebars', 'ember']
     },
 
     // App

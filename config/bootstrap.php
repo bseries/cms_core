@@ -40,7 +40,7 @@ Libraries::add('temporary', [
 	'path' => dirname(__DIR__) . '/libraries/temporary/src'
 ]);
 Libraries::add('guzzle', [
-	'path' => dirname(__DIR__) . '/libraries/guzzle'
+	'path' => dirname(__DIR__) . '/libraries/guzzle/src'
 ]);
 
 require __DIR__ . '/bootstrap/errors.php';

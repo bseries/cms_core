@@ -396,11 +396,16 @@ button,
   border-radius: 3px;
   text-align: center;
   display: inline-block;
-  padding: 7px 5px 4px 5px;
-  padding: .7em .5em .4em .5em;
+  padding: .7em .5em .5em .5em;
   color: #303030;
   border: 1px solid #e3e3e3;
   background: #e3e3e3;
+  font-weight: bold;
+}
+button.large,
+.button.large {
+  font-size: 18px;
+  padding: 1.5em 2em;
 }
 button:hover,
 .button:hover {
@@ -411,9 +416,6 @@ button.small,
 .button.small {
   font-size: .9em;
   padding: 3px 6px 3px 6px;
-}
-form button[type="submit"] {
-  min-width: 150px;
 }
 
 /* Editor

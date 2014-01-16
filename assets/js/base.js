@@ -93,6 +93,9 @@ requirejs.config({
     'wysihtml5': {
       exports: 'wysihtml5'
     },
+    'handlebars': {
+      exports: 'Handlebars'
+    },
 
     // Compat
     'modernizr': {

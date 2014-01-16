@@ -2,7 +2,7 @@
 
 namespace cms_core\extensions\data\behavior;
 
-use \Exception;
+// use \Exception;
 
 class Timestamp extends \li3_behaviors\data\model\Behavior {
 
@@ -19,11 +19,12 @@ class Timestamp extends \li3_behaviors\data\model\Behavior {
 		$model = $this->_model;
 		$behavior = $this;
 
-		foreach ($this->_config['fields'] as $name => $field) {
-			if (!$model::schema()->has($field)) {
-				throw new Exception("Model has no {$name} field `{$field}`.");
-			}
-		}
+	// When model is queried in relation this causes recursive madness.
+	//	foreach ($this->_config['fields'] as $name => $field) {
+	//		if (!$model::schema()->has($field)) {
+	//			throw new Exception("Model has no {$name} field `{$field}`.");
+	//		}
+	//	}
 
 		$model::applyFilter('save', function($self, $params, $chain) use ($behavior) {
 			$params['data'] = $behavior->invokeMethod(

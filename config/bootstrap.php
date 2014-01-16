@@ -17,9 +17,6 @@ use cms_core\extensions\cms\Features;
 
 extract(Message::aliases());
 
-Libraries::add('temporary', [
-	'path' => dirname(__DIR__) . '/libraries/temporary/src'
-]);
 Libraries::add('li3_behaviors', [
 	'path' => dirname(__DIR__) . '/libraries/li3_behaviors'
 ]);
@@ -37,6 +34,13 @@ Libraries::add('li3_access', [
 ]);
 Libraries::add('li3_mailer', [
 	'path' => dirname(__DIR__) . '/libraries/li3_mailer'
+]);
+
+Libraries::add('temporary', [
+	'path' => dirname(__DIR__) . '/libraries/temporary/src'
+]);
+Libraries::add('guzzle', [
+	'path' => dirname(__DIR__) . '/libraries/guzzle'
 ]);
 
 require __DIR__ . '/bootstrap/errors.php';

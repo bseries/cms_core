@@ -574,10 +574,10 @@ button.small,
 /* Media Attachment
 ---------------------------------------------------------------- */
 .media-attachment {
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 }
 .media-attachment .selected {
-  height: 10em;
+  min-height: 10em;
   margin-bottom: 1em;
 }
 .media-attachment .selected:empty {
@@ -587,14 +587,23 @@ button.small,
   max-height: 100%;
   vertical-align: top;
 }
-.media-attachment .remove {
-  margin-left: 1%;
+.media-attachment .media-item {
+  height: 150px;
+  width: 150px;
+  background-position: center;
+  background-size: cover;
+  display: inline-block;
+  text-align: right;
+}
+
+.media-attachment .media-item .remove {
+  background: white;
+  padding: 1px;
 }
 
 /* Media
 ---------------------------------------------------------------- */
 form .media {
-  max-height: 10em;
   margin-bottom: 2em;
 }
 table .media {
@@ -716,6 +725,7 @@ h1 + .actions {
   position: relative;
   width: 100%;
   height: 100%;
+  background-position: center;
   background-size: cover;
   z-index: 10;
 }
@@ -731,6 +741,7 @@ h1 + .actions {
   background: white;
   font-size: 11px;
   padding: 10px 5px;
+  z-index: 31;
 }
 .media-explorer .available .item:hover .title {
   display: block;

@@ -4,6 +4,8 @@ namespace cms_core\models;
 
 class Base extends \lithium\data\Model {
 
+	use \li3_behaviors\data\model\Behaviors;
+
 	public static function enum($field, array $options = []) {
 		$options += ['map' => true];
 

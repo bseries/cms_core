@@ -14,6 +14,7 @@ use lithium\core\Libraries;
 use lithium\g11n\Message;
 use cms_core\extensions\cms\Modules;
 use cms_core\extensions\cms\Features;
+use cms_core\models\Assets;
 
 extract(Message::aliases());
 
@@ -64,5 +65,15 @@ Modules::register('cms_core', 'users', ['title' => $t('Users')]);
 
 Features::register('useNewGoogleAnalyticsTrackingCode', true);
 Features::register('registerWithTokenOnly', true);
+
+Assets::registerScheme('file', [
+	'base' => 'file://' . PROJECT_PATH . '/assets'
+]);
+Assets::registerScheme('http', [
+	'base' => 'http://assets.atelierdisko.de'
+]);
+Assets::registerScheme('https', [
+	'base' => 'https://atelierdisko.de/assets'
+]);
 
 ?>

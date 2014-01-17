@@ -3,6 +3,7 @@
 namespace cms_core\extensions\helper;
 
 use lithium\core\Environment;
+use cms_core\models\Assets as AssetsModel;
 
 class Assets extends \lithium\template\Helper {
 
@@ -48,7 +49,8 @@ class Assets extends \lithium\template\Helper {
 			return $path;
 		}
 		$version = Environment::get('project.version');
-		$base = Environment::get('assets.http');
+
+		$base = AssetsModel::base('http');
 		return $base . '/v:' . $version . $path;
 	}
 }

@@ -12,18 +12,24 @@
 
 namespace cms_core\extensions\cms;
 
-use lithium\util\Inflector;
-
-class Modules extends \lithium\core\StaticObject {
+class Settings extends \lithium\core\StaticObject {
 
 	protected static $_data = [];
 
-	public static function register($library, $name, array $options = []) {
-		$options += [
-			'title' => Inflector::humanize($name),
-			'slug' => strtolower(Inflector::slug($name))
-		];
-		static::$_data[] = compact('name', 'library') + $options;
+	public static function register($name, $default) {
+		if (isset(static::$_data[$name])) {
+			return;
+		}
+		static::$_data[$name] = $default;
+	}
+
+	public static function set($data) {
+		foreach ($data as $name => $flag) {
+			if (!isset(static::$_data[$name])) {
+				throw new \Exception("Unkown feature `{$name}`.");
+			}
+			static::$_data[$name] = $flag;
+		}
 	}
 
 	public static function all() {

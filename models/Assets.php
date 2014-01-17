@@ -12,6 +12,9 @@
 
 namespace cms_core\models;
 
+use lithium\core\Environment;
+use lithium\util\Set;
+
 class Assets extends \cms_core\models\Base {
 
 	protected $_meta = array(
@@ -21,13 +24,19 @@ class Assets extends \cms_core\models\Base {
 	protected static $_schemes = [];
 
 	public static function base($scheme) {
-		return static::$_schemes[$scheme]['base'];
+		$bases = static::$_schemes[$scheme]['base'];
+		return is_array($bases) ? $bases[Environment::get()] : $bases;
 	}
 
 	public static function registerScheme($scheme, array $options = []) {
-		static::$_schemes[$scheme] = $options + [
-			'base' => false
-		];
+		if (isset(static::$_schemes[$scheme])) {
+			$default = $static::$_schemes[$scheme];
+		} else {
+			$default = [
+				'base' => false
+			];
+		}
+		static::$_schemes[$scheme] = Set::merge($default, $options);
 	}
 }
 

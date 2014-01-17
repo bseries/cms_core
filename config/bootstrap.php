@@ -66,14 +66,13 @@ Modules::register('cms_core', 'users', ['title' => $t('Users')]);
 Features::register('useNewGoogleAnalyticsTrackingCode', true);
 Features::register('registerWithTokenOnly', true);
 
-Assets::registerScheme('file', [
-	'base' => 'file://' . PROJECT_PATH . '/assets'
-]);
-Assets::registerScheme('http', [
-	'base' => 'http://assets.atelierdisko.de'
-]);
-Assets::registerScheme('https', [
-	'base' => 'https://atelierdisko.de/assets'
-]);
+// Register "empty" schemes, base must be set
+// through app. Cannot provide sane defaults here.
+Assets::registerScheme('file');
+Assets::registerScheme('http');
+Assets::registerScheme('https');
+
+// Settings::register('service.googleAnalytics.account');
+// Settings::register('service.googleAnalytics.domain');
 
 ?>

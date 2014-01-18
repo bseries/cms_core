@@ -12,28 +12,23 @@
 
 namespace cms_core\extensions\cms;
 
+use lithium\core\Environment;
+
 class Settings extends \lithium\core\StaticObject {
 
-	protected static $_data = [];
+	protected static $_sources = [];
 
-	public static function register($name, $default) {
-		if (isset(static::$_data[$name])) {
-			return;
-		}
-		static::$_data[$name] = $default;
+	public static function register($source, $name, $default = null) {
+		static::$_sources[$name] = $source;
+		Environment::set('settings.' . $name, $default);
 	}
 
-	public static function set($data) {
-		foreach ($data as $name => $flag) {
-			if (!isset(static::$_data[$name])) {
-				throw new \Exception("Unkown feature `{$name}`.");
-			}
-			static::$_data[$name] = $flag;
-		}
+	public static function write($name, $data) {
+		Environment::set('settings.' . $name, $data);
 	}
 
-	public static function all() {
-		return static::$_data;
+	public static function read($name = null) {
+		return Environment::get($name ? 'settings.' . $name : 'settings');
 	}
 }
 

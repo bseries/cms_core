@@ -12,35 +12,27 @@
 
 namespace cms_core\extensions\cms;
 
+use lithium\core\Environment;
+
 class Features extends \lithium\core\StaticObject {
 
-	protected static $_data = [];
+	protected static $_sources = [];
 
-	public static function register($name, $default) {
-		if (isset(static::$_data[$name])) {
-			return;
-		}
-		static::$_data[$name] = $default;
+	public static function register($source, $name, $default) {
+		static::$_sources[$name] = $source;
+		Environment::set('features.' . $name, $default);
 	}
 
-	public static function set($data) {
-		foreach ($data as $name => $flag) {
-			if (!isset(static::$_data[$name])) {
-				throw new \Exception("Unkown feature `{$name}`.");
-			}
-			static::$_data[$name] = $flag;
-		}
+	public static function write($name, $data) {
+		Environment::set('features.' . $name, $data);
 	}
 
 	public static function enabled($name) {
-		if (!isset(static::$_data[$name])) {
-			throw new \Exception("Unkown feature `{$name}`.");
-		}
-		return static::$_data[$name];
+		return Environment::get('features.' . $name);
 	}
 
-	public static function all() {
-		return static::$_data;
+	public static function read($name = null) {
+		return Environment::get($name ? 'features.' . $name : 'features');
 	}
 }
 

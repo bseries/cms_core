@@ -14,6 +14,7 @@ use lithium\core\Libraries;
 use lithium\g11n\Message;
 use cms_core\extensions\cms\Modules;
 use cms_core\extensions\cms\Features;
+use cms_core\extensions\cms\Settings;
 use cms_core\models\Assets;
 
 extract(Message::aliases());
@@ -61,11 +62,10 @@ if (PHP_SAPI === 'cli') {
 
 require __DIR__ . '/bootstrap/auth.php';
 
-Modules::register('cms_core', 'tokens', ['title' => $t('Tokens')]);
 Modules::register('cms_core', 'users', ['title' => $t('Users')]);
+Modules::register('cms_core', 'tokens', ['title' => $t('Tokens')]);
 
-Features::register('useNewGoogleAnalyticsTrackingCode', true);
-Features::register('registerWithTokenOnly', true);
+Features::register('cms_core', 'useNewGoogleAnalyticsTrackingCode', true);
 
 // Register "empty" schemes, base must be set
 // through app. Cannot provide sane defaults here.
@@ -73,7 +73,15 @@ Assets::registerScheme('file');
 Assets::registerScheme('http');
 Assets::registerScheme('https');
 
-// Settings::register('service.googleAnalytics.account');
-// Settings::register('service.googleAnalytics.domain');
+Settings::register('cms_core', 'service.googleAnalytics.default.account');
+Settings::register('cms_core', 'service.googleAnalytics.default.domain');
+Settings::register('cms_core', 'security.cookieSecret');
+
+Settings::register('cms_core', 'project.name');
+Settings::register('cms_core', 'project.version');
+
+Settings::register('cms_core', 'site.title', 'Application');
+Settings::register('cms_core', 'site.email', 'mail@example.com');
+Settings::register('cms_core', 'site.phone');
 
 ?>

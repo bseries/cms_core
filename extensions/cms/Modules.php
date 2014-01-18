@@ -13,21 +13,20 @@
 namespace cms_core\extensions\cms;
 
 use lithium\util\Inflector;
+use lithium\core\Environment;
 
 class Modules extends \lithium\core\StaticObject {
-
-	protected static $_data = [];
 
 	public static function register($library, $name, array $options = []) {
 		$options += [
 			'title' => Inflector::humanize($name),
 			'slug' => strtolower(Inflector::slug($name))
 		];
-		static::$_data[] = compact('name', 'library') + $options;
+		Environmet::set(compact('name', 'library') + $options);
 	}
 
-	public static function all() {
-		return static::$_data;
+	public static function read($name = null) {
+		return Environment::get($name ? 'modules.' . $name : 'modules');
 	}
 }
 

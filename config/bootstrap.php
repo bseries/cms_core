@@ -40,9 +40,10 @@ Libraries::add('li3_mailer', [
 Libraries::add('temporary', [
 	'path' => dirname(__DIR__) . '/libraries/temporary/src'
 ]);
-Libraries::add('guzzle', [
-	'path' => dirname(__DIR__) . '/libraries/guzzle/src'
-]);
+require dirname(__DIR__) . '/libraries/guzzle/vendor/autoload.php';
+// Libraries::add('guzzle', [
+//	'path' => dirname(__DIR__) . '/libraries/guzzle/src',
+// ]);
 
 require __DIR__ . '/bootstrap/errors.php';
 require __DIR__ . '/bootstrap/action.php';

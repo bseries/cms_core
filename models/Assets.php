@@ -30,7 +30,7 @@ class Assets extends \cms_core\models\Base {
 
 	public static function registerScheme($scheme, array $options = []) {
 		if (isset(static::$_schemes[$scheme])) {
-			$default = $static::$_schemes[$scheme];
+			$default = static::$_schemes[$scheme];
 		} else {
 			$default = [
 				'base' => false

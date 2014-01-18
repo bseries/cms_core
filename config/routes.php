@@ -57,6 +57,9 @@ Router::connect('/admin/support', [
 	'controller' => 'pages', 'action' => 'support', 'library' => 'cms_core', 'admin' => true
 ], $persist);
 
+Router::connect('/admin/tokens/{:action}/{:token:[0-9a-f]{8,16}}', [
+	'controller' => 'tokens', 'library' => 'cms_core', 'admin' => true
+], $persist);
 Router::connect('/admin/tokens/{:action}/{:args}', [
 	'controller' => 'tokens', 'library' => 'cms_core', 'admin' => true
 ], $persist);

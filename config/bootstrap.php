@@ -41,6 +41,9 @@ Libraries::add('li3_mailer', [
 Libraries::add('temporary', [
 	'path' => dirname(__DIR__) . '/libraries/temporary/src'
 ]);
+Libraries::add('textual', array(
+	'path' => dirname(__DIR__) . '/libraries/textual/src'
+));
 require dirname(__DIR__) . '/libraries/guzzle/vendor/autoload.php';
 // Libraries::add('guzzle', [
 //	'path' => dirname(__DIR__) . '/libraries/guzzle/src',

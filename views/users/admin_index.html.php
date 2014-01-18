@@ -11,12 +11,13 @@ $dateFormatter = new IntlDateFormatter(
 	<h1 class="alpha"><?= $t('Users') ?></h1>
 
 	<nav class="actions">
-		<?= $this->html->link($t('new'), ['action' => 'add', 'library' => 'cms_core'], ['class' => 'button']) ?>
+		<?= $this->html->link($t('new user'), ['action' => 'add', 'library' => 'cms_core'], ['class' => 'button']) ?>
 	</nav>
 	<table>
 		<thead>
 			<tr>
 				<td class="flag"><?= $t('Active?') ?>
+				<td>
 				<td><?= $t('Name') ?>
 				<td><?= $t('Email') ?>
 				<td><?= $t('Role') ?>
@@ -27,6 +28,8 @@ $dateFormatter = new IntlDateFormatter(
 			<?php foreach ($data as $item): ?>
 			<tr>
 				<td class="flag"><?= $item->is_active ? '✓ ' : '╳' ?>
+				<td>
+					<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($item->email)?>.jpg?s=30&d=retro"></span>
 				<td><?= $item->name ?>
 				<td><?= $item->email ?>
 				<td><?= $item->role ?>

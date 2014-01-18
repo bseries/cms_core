@@ -100,7 +100,7 @@ FlashMessage::clear();
 				</div>
 			</header>
 			<nav id="main">
-				<?php foreach (Modules::all() as $module): ?>
+				<?php foreach (Modules::read() as $module): ?>
 					<?= $this->html->link($module['title'], [
 						'controller' => $module['name'], 'action' => 'index', 'library' => $module['library']
 					]) ?>

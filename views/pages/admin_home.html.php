@@ -28,7 +28,7 @@ $project = Environment::get('project');
 	</dl>
 	<h2 class="beta"><?= $t('Features') ?></h2>
 	<dl>
-	<?php foreach (Features::all() as $name => $value): ?>
+	<?php foreach (Features::read() as $name => $value): ?>
 		<dt><?= $name ?></dt>
 		<dd><?= $value ? $t('enabled') : $t('disabled')	 ?></dd>
 	<?php endforeach ?>

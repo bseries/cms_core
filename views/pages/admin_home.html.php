@@ -1,9 +1,7 @@
 <?php
 
-use cms_core\extensions\cms\Features;
 use cms_core\extensions\cms\Settings;
 
-$services = Settings::read('service');
 $site = Settings::read('site');
 $project = Settings::read('project');
 
@@ -24,13 +22,6 @@ $project = Settings::read('project');
 	<?php foreach ($project as $name => $value): ?>
 		<dt><?= $name ?></dt>
 		<dd><?= $value ?: $t('n/a') ?></dd>
-	<?php endforeach ?>
-	</dl>
-	<h2 class="beta"><?= $t('Features') ?></h2>
-	<dl>
-	<?php foreach (Features::read() as $name => $value): ?>
-		<dt><?= $name ?></dt>
-		<dd><?= $value ? $t('enabled') : $t('disabled')	 ?></dd>
 	<?php endforeach ?>
 	</dl>
 

@@ -13,6 +13,7 @@
 namespace cms_core\extensions\cms;
 
 use lithium\core\Environment;
+use lithium\util\Set;
 
 class Settings extends \lithium\core\StaticObject {
 
@@ -20,11 +21,11 @@ class Settings extends \lithium\core\StaticObject {
 
 	public static function register($source, $name, $default = null) {
 		static::$_sources[$name] = $source;
-		Environment::set(true, ['settings.' . $name => $default]);
+		Environment::set(true, Set::expand(['settings.' . $name => $default]));
 	}
 
 	public static function write($name, $data) {
-		Environment::set(true, ['settings.' . $name =>  $data]);
+		Environment::set(true, Set::expand(['settings.' . $name => $data]));
 	}
 
 	public static function read($name = null) {

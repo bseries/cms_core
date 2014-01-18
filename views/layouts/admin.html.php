@@ -102,9 +102,9 @@ FlashMessage::clear();
 			</header>
 			<nav id="main">
 				<?php foreach (Modules::read() as $module): ?>
-					<?= $this->html->link($module['title'], [
-						'controller' => $module['name'], 'action' => 'index', 'library' => $module['library']
-					]) ?>
+						<?= $this->html->link($module['title'], $module['url']() ?: [
+							'controller' => $module['name'], 'action' => 'index', 'library' => $module['library']
+						]) ?>
 				<?php endforeach ?>
 				<?= $this->html->link($t('Support'), ['controller' => 'pages', 'action' => 'support', 'library' => 'cms_core']) ?>
 			</nav>

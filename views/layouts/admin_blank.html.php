@@ -6,6 +6,7 @@ use lithium\security\Auth;
 use \DateTime;
 use \IntlDateFormatter;
 use cms_core\extensions\cms\Settings;
+use cms_core\extensions\cms\Modules;
 
 $site = Settings::read('site');
 $modules = Modules::read();

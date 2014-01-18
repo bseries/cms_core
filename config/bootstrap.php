@@ -64,6 +64,13 @@ require __DIR__ . '/bootstrap/auth.php';
 
 Modules::register('cms_core', 'users', ['title' => $t('Users')]);
 Modules::register('cms_core', 'tokens', ['title' => $t('Tokens')]);
+Modules::register('cms_core', 'settings', ['title' => $t('Settings & Features')]);
+Modules::register('cms_core', 'statistics', [
+	'title' => $t('Google Analytics'),
+	'url' => function() {
+		return 'https://www.google.com/analytics/web/#report/visitors-overview/' . Settings::read('googleAnalytics.default.propertyId');
+	}
+]);
 
 Features::register('cms_core', 'useNewGoogleAnalyticsTrackingCode', true);
 
@@ -75,6 +82,8 @@ Assets::registerScheme('https');
 
 Settings::register('cms_core', 'service.googleAnalytics.default.account');
 Settings::register('cms_core', 'service.googleAnalytics.default.domain');
+Settings::register('cms_core', 'service.googleAnalytics.default.propertyId');
+
 Settings::register('cms_core', 'security.cookieSecret');
 
 Settings::register('cms_core', 'project.name');

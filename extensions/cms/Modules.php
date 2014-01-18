@@ -19,10 +19,11 @@ class Modules extends \lithium\core\StaticObject {
 
 	public static function register($library, $name, array $options = []) {
 		$options += [
+			'url' => function() {},
 			'title' => Inflector::humanize($name),
 			'slug' => strtolower(Inflector::slug($name))
 		];
-		Environment::set(true, ['modules.' . $name =>   compact('name', 'library') + $options]);
+		Environment::set(true, ['modules' => [$name =>  compact('name', 'library') + $options]]);
 	}
 
 	public static function read($name = null) {

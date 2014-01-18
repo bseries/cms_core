@@ -43,6 +43,8 @@ requirejs.config({
     // Other
     'notify': 'core/js/notify',
     'editor': 'core/js/editor',
+    'editor-media': 'core/js/editor/media',
+    'editor-page-break': 'core/js/editor/page-break',
     'wysihtml5': 'core/js/wysihtml5',
     'globalize': 'core/js/globalize',
     'modal': 'core/js/modal',

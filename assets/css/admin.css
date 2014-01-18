@@ -796,3 +796,12 @@ h1 + .actions {
   display: inline-block;
   min-width: 4em;
 }
+
+/* Help
+-------------------------------------------------------------- */
+form .help {
+  color: gray;
+  margin-top: -.5em;
+  margin-bottom: 2em;
+  font-size: .9em;
+}

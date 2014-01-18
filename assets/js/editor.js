@@ -16,11 +16,8 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
     classes: {
       'big': 1,
       'small': 1,
-      'media': 1,
-      'image': 1,
       'beta': 1,
-      'gamma': 1,
-      'page-break': 1
+      'gamma': 1
     },
     tags: {
       span: {},
@@ -31,17 +28,6 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
       "small": {
           "rename_tag": "span",
           "set_class": "small"
-      },
-      "img": {
-        "check_attributes": {
-          "width": "numbers",
-          "height": "numbers",
-          "title": "title",
-          "class": "class",
-          "alt": "alt",
-          "src": "src",
-          "data-media-id": "data-media-id"
-        }
       },
       h2: {
         "set_class": "beta",
@@ -86,48 +72,63 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
     return Globalize.localize(key) || key;
   };
 
-  var renderToolbar = function(id, mediaExplorer, advanced) {
+  var renderToolbar = function(id, plugins, advanced) {
     var html = $('' +
     '<div id="' + id + 'Toolbar" class="toolbar" style="display: none;">' +
-       '<a data-wysihtml5-command="bold" class="button">' + _('bold') +'</a>' +
-       '<a data-wysihtml5-command="italic" class="button">' + _('italic') + '</a>' +
-       '<a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" class="button">' + _('H2') + '</a>' +
-       '<a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h3" class="button">' + _('H3') + '</a>' +
-       '<a data-wysihtml5-command="formatInline" data-wysihtml5-command-value="big" class="button">' + _('big') + '</a>' +
-       '<a data-wysihtml5-command="formatInline" data-wysihtml5-command-value="small" class="button">' + _('small') + '</a>' +
-       '<a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="blockquote" class="advanced button">' + _('„quote“') + '</a>' +
-       '<a data-wysihtml5-command="insertHTML" data-wysihtml5-command-value="<hr/>" class="button">―</a>' +
-       '<a data-wysihtml5-command="insertUnorderedList" class="button">' + _('list') + '</a>' +
-       '<a data-wysihtml5-command="createLink" class="button">' + _('link') + '</a>' +
-       '<a data-wysihtml5-command="insertMedia" class="button media-explorer">' + _('media') + '</a>' +
-       '<a data-wysihtml5-command="insertHTML" data-wysihtml5-command-value="<div class=page-break></div>" class="button">' + _('page break') + '</a>' +
-       '<a data-wysihtml5-command="undo" class="advanced button">' + _('undo') + '</a>' +
-       '<a data-wysihtml5-command="redo" class="advanced button">' + _('redo') + '</a>' +
+       '<a data-wysihtml5-command="bold" class="plugin-basic button">' + _('bold') +'</a>' +
+       '<a data-wysihtml5-command="italic" class="plugin-basic button">' + _('italic') + '</a>' +
+       '<a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" class="plugin-headline button">' + _('H2') + '</a>' +
+       '<a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h3" class="plugin-headline button">' + _('H3') + '</a>' +
+       '<a data-wysihtml5-command="formatInline" data-wysihtml5-command-value="big" class="plugin-size button">' + _('big') + '</a>' +
+       '<a data-wysihtml5-command="formatInline" data-wysihtml5-command-value="small" class="plugin-size button">' + _('small') + '</a>' +
+       '<a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="blockquote" class="plugin-quote button">' + _('„quote“') + '</a>' +
+       '<a data-wysihtml5-command="insertHTML" data-wysihtml5-command-value="<hr/>" class="plugin-line button">―</a>' +
+       '<a data-wysihtml5-command="insertUnorderedList" class="plugin-list button">' + _('list') + '</a>' +
+       '<a data-wysihtml5-command="createLink" class="plugin-link button">' + _('link') + '</a>' +
+       '<a data-wysihtml5-command="undo" class="plugin-history button">' + _('undo') + '</a>' +
+       '<a data-wysihtml5-command="redo" class="plugin-history button">' + _('redo') + '</a>' +
        '<div data-wysihtml5-dialog="createLink" style="display: none;">' +
          '<input data-wysihtml5-dialog-field="href" value="http://" class="text" />' +
          '<a data-wysihtml5-dialog-action="save" class="button">' + _('OK') + '</a><a data-wysihtml5-dialog-action="cancel" class="button">' + _('cancel') + '</a>' +
        '</div>' +
      '</div>');
 
-    if (!mediaExplorer) {
-      html.find('.media-explorer').remove();
-    }
-    if (!advanced) {
-      html.find('.advanced').remove();
-    }
+    var builtin = [];
+    var external = [];
+
+    $.each(plugins, function(k, plugin) {
+      if (typeof plugin === 'string') {
+        builtin.push('.plugin-' + plugin);
+      } else {
+        external.push(plugin);
+      }
+    });
+
+    html.find('a').not(builtin.join()).remove();
+
+    $.each(external, function(k, plugin) {
+        html.append(plugin.toolbar());
+    });
     return html;
   };
 
-  var makeEditor = function(elements, mediaExplorer, advanced) {
-    if (mediaExplorer) {
-      imageSupportThroughMediaExplorer();
-    }
+  var makeEditor = function(elements, plugins, advanced) {
+    $.each(plugins, function(k, plugin) {
+      if (typeof plugin === 'string') {
+
+      } else {
+        rules.classes = $.extend(rules.classes, plugin.classes());
+        rules.tags = $.extend(rules.tags, plugin.tags());
+        wysihtml5.commands = $.extend(wysihtml5.commands, plugin.commands());
+      }
+    });
+
     var id = elements.main.attr('id');
 
     elements.wrap.addClass('editor');
     elements.main.hide();
 
-    var html = renderToolbar(id, mediaExplorer, advanced);
+    var html = renderToolbar(id, plugins, advanced);
     html = $(html).hide();
     elements.wrap.find('label').after(html);
     html.fadeIn();
@@ -147,42 +148,14 @@ function($, wysihtml5, Globalize, MediaExplorerModal) {
     return instances[id];
   };
 
-  var imageSupportThroughMediaExplorer = function() {
-    wysihtml5.commands.insertMedia = {
-      exec: function(composer, command, value) {
-        var doc = composer.doc;
-
-        MediaExplorerModal.open();
-
-        $(document).one('media-explorer:selected', function(ev, data) {
-          image = doc.createElement('IMG');
-
-          image.setAttribute('src', data.get('versions_fix1_url'));
-          image.setAttribute('class', 'media image');
-          image.setAttribute('alt', 'image');
-          image.setAttribute('title', data.get('title'));
-          image.setAttribute('data-media-id', data.get('id'));
-          image.setAttribute('data-media-version', 'fix1');
-
-          composer.selection.insertNode(image);
-
-          MediaExplorerModal.close();
-        });
-      },
-      state: function(composer) {
-        wysihtml5.commands.insertImage.state(composer);
-      }
-    };
-  };
-
   return {
-    make: function(selector, mediaExplorer, advanced) {
+    make: function(selector, plugins, advanced) {
       $(selector).each(function(k, element) {
         var elements = {};
         elements.main = $(element);
         elements.wrap = elements.main.parent();
 
-        var editor = makeEditor(elements, mediaExplorer, advanced);
+        var editor = makeEditor(elements, plugins || [], advanced);
 
         editor.on('load', function() {
           // ...

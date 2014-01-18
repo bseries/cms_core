@@ -22,7 +22,7 @@ class Modules extends \lithium\core\StaticObject {
 			'title' => Inflector::humanize($name),
 			'slug' => strtolower(Inflector::slug($name))
 		];
-		Environment::set(compact('name', 'library') + $options);
+		Environment::set(true, ['modules.' . $name =>   compact('name', 'library') + $options]);
 	}
 
 	public static function read($name = null) {

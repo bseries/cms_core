@@ -1,8 +1,9 @@
 <?php
 
 use lithium\core\Environment;
+use cms_core\extensions\cms\Settings;
 
-$site = Environment::get('site');
+$site = Settings::read('site');
 $locale = Environment::get('locale');
 
 ?>
@@ -23,8 +24,8 @@ $locale = Environment::get('locale');
 		]) ?>
 		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>
-		<?php if (!empty($service['googleAnalytics'])): ?>
-			<?=$this->view()->render(['element' => 'ga'], $service['googleAnalytics'], [
+		<?php if (Settings::read('googleAnalytics.default')): ?>
+			<?=$this->view()->render(['element' => 'ga'], [], [
 				'library' => 'cms_core'
 			]) ?>
 		<?php endif ?>

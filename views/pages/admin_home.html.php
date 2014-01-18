@@ -1,11 +1,11 @@
 <?php
 
-use lithium\core\Environment;
 use cms_core\extensions\cms\Features;
+use cms_core\extensions\cms\Settings;
 
-$services = Environment::get('service');
-$site = Environment::get('site');
-$project = Environment::get('project');
+$services = Settings::read('service');
+$site = Settings::read('site');
+$project = Settings::read('project');
 
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">

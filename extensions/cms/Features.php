@@ -20,11 +20,11 @@ class Features extends \lithium\core\StaticObject {
 
 	public static function register($source, $name, $default) {
 		static::$_sources[$name] = $source;
-		Environment::set('features.' . $name, $default);
+		Environment::set(true, ['features.' . $name => $default]);
 	}
 
 	public static function write($name, $data) {
-		Environment::set('features.' . $name, $data);
+		Environment::set(true, ['features.' . $name => $data]);
 	}
 
 	public static function enabled($name) {

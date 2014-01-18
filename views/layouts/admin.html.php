@@ -6,8 +6,9 @@ use lithium\security\Auth;
 use \DateTime;
 use \IntlDateFormatter;
 use cms_core\extensions\cms\Modules;
+use cms_core\extensions\cms\Settings;
 
-$site = Environment::get('site');
+$site = Settings::read('site');
 $locale = Environment::get('locale');
 
 $flash = FlashMessage::read();
@@ -39,8 +40,8 @@ FlashMessage::clear();
 		]) ?>
 		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>
-		<?php if (!empty($service['googleAnalytics'])): ?>
-			<?=$this->view()->render(['element' => 'ga'], $service['googleAnalytics'], [
+		<?php if (!empty(Settings::read('googleAnalytics.default'))): ?>
+			<?=$this->view()->render(['element' => 'ga'], [], [
 				'library' => 'cms_core'
 			]) ?>
 		<?php endif ?>

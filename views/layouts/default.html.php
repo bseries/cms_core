@@ -2,11 +2,10 @@
 
 use lithium\core\Environment;
 use li3_flash_message\extensions\storage\FlashMessage;
+use cms_core\extensions\cms\Settings;
 
-$service = Environment::get('service');
-$site = Environment::get('site');
+$site = Settings::read('site');
 $locale = Environment::get('locale');
-$features = Environment::get('features');
 
 $flash = FlashMessage::read();
 FlashMessage::clear();
@@ -36,12 +35,12 @@ FlashMessage::clear();
 		]) ?>
 		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>
-		<?php if (!empty($service['googleAnalytics'])): ?>
-			<?=$this->view()->render(['element' => 'ga'], compact('features', 'service'), [
+		<?php if (Settings::read('googleAnalytics.default')): ?>
+			<?=$this->view()->render(['element' => 'ga'], [], [
 				'library' => 'cms_core'
 			]) ?>
 		<?php endif ?>
-		<?=$this->view()->render(['element' => 'head'], compact('site', 'service', 'features'), [
+		<?=$this->view()->render(['element' => 'head'], [], [
 			'library' => 'app'
 		]) ?>
 	</head>
@@ -70,7 +69,7 @@ FlashMessage::clear();
 
 		<div id="container">
 			<header>
-				<?=$this->view()->render(['element' => 'header'], compact('site', 'service', 'features'), [
+				<?=$this->view()->render(['element' => 'header'], [], [
 					'library' => 'app'
 				]) ?>
 			</header>
@@ -79,7 +78,7 @@ FlashMessage::clear();
 			</div>
 		</div>
 		<footer>
-			<?=$this->view()->render(['element' => 'footer'], compact('site', 'service', 'features'), [
+			<?=$this->view()->render(['element' => 'footer'], [], [
 				'library' => 'app'
 			]) ?>
 		</footer>

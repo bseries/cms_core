@@ -20,11 +20,11 @@ class Settings extends \lithium\core\StaticObject {
 
 	public static function register($source, $name, $default = null) {
 		static::$_sources[$name] = $source;
-		Environment::set('settings.' . $name, $default);
+		Environment::set(true, ['settings.' . $name => $default]);
 	}
 
 	public static function write($name, $data) {
-		Environment::set('settings.' . $name, $data);
+		Environment::set(true, ['settings.' . $name =>  $data]);
 	}
 
 	public static function read($name = null) {

@@ -54,6 +54,7 @@ requirejs.config({
     'thingsLoaded': 'core/js/thingsLoaded',
     'moment': 'core/js/moment',
     'scrollTo': 'core/js/scrollTo',
+    'waypoints': 'core/js/waypoints',
 
     // Compat
     'versioncompare': 'core/js/compat/versioncompare',
@@ -102,6 +103,10 @@ requirejs.config({
     'thingsLoaded': {
       deps: ['jquery'],
       exports: 'ThingsLoaded'
+    },
+    'waypoints': {
+      deps: ['jquery'],
+      exports: 'jQuery.fn.waypoint'
     },
 
     // Compat

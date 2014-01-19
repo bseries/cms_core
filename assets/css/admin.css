@@ -574,6 +574,7 @@ button.small,
 /* Media Attachment
 ---------------------------------------------------------------- */
 .media-attachment {
+  margin-top: 1em;
   margin-bottom: 2em;
 }
 .media-attachment .selected {
@@ -802,6 +803,7 @@ h1 + .actions {
 form .help {
   color: gray;
   margin-top: -.5em;
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
   font-size: .9em;
+  max-width: 600px;
 }

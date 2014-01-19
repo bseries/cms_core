@@ -43,6 +43,6 @@ require(['jquery', 'modal', 'domready!'], function($, modal) {
 
 		<?=$this->form->field('password', ['type' => 'password', 'label' => 'Neues Passwort']) ?>
 		<?=$this->form->field('password_repeat', ['type' => 'password', 'label' => 'Neues Passwort (wiederholen)']) ?>
-		<?= $this->form->button($t('save'), ['type' => 'submit']) ?>
+		<?= $this->form->button($t('save'), ['type' => 'submit', 'class' => 'large']) ?>
 	<?=$this->form->end() ?>
 </article>

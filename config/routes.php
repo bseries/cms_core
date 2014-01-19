@@ -57,6 +57,11 @@ Router::connect('/admin/support', [
 	'controller' => 'pages', 'action' => 'support', 'library' => 'cms_core', 'admin' => true
 ], $persist);
 
+// Do not persist admin as we render this in the apps default layout context.
+Router::connect('/admin/styleguide', [
+	'controller' => 'pages', 'action' => 'styleguide', 'library' => 'cms_core', 'admin' => true
+], ['controller']);
+
 Router::connect('/admin/tokens/{:action}/{:token:[0-9a-f]{8,16}}', [
 	'controller' => 'tokens', 'library' => 'cms_core', 'admin' => true
 ], $persist);

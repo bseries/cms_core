@@ -17,6 +17,10 @@ class PagesController extends \lithium\action\Controller {
 	public function admin_home() {}
 
 	public function admin_support() {}
+
+	public function admin_styleguide() {
+		$this->_render['layout'] = 'default';
+	}
 }
 
 ?>

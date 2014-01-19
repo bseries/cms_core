@@ -77,6 +77,12 @@ Modules::register('cms_core', 'statistics', [
 		return 'https://www.google.com/analytics/web/#report/visitors-overview/' . Settings::read('googleAnalytics.default.propertyId');
 	}
 ]);
+Modules::register('cms_core', 'styleguide', [
+	'title' => $t('Styleguide'),
+	'url' => function() {
+		return ['controller' => 'pages', 'action' => 'styleguide', 'admin' => true, 'library' => 'cms_core'];
+	}
+]);
 
 Features::register('cms_core', 'useNewGoogleAnalyticsTrackingCode', true);
 

@@ -22,3 +22,6 @@
 [submodule "libraries/textual"]
 	path = libraries/textual
 	url = git@github.com:davidpersson/textual.git
+[submodule "libraries/faker"]
+	path = libraries/faker
+	url = git@github.com:fzaninotto/Faker.git

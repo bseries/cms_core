@@ -51,7 +51,7 @@ requirejs.config({
     'modal': 'core/js/modal',
     'nprogress': 'core/js/nprogress',
     'handlebars': 'core/js/handlebars',
-    'imagesloaded': 'core/js/imagesloaded',
+    'thingsLoaded': 'core/js/thingsLoaded',
     'moment': 'core/js/moment',
     'scrollTo': 'core/js/scrollTo',
 
@@ -99,6 +99,10 @@ requirejs.config({
     'handlebars': {
       exports: 'Handlebars'
     },
+    'thingsLoaded': {
+      deps: ['jquery'],
+      exports: 'ThingsLoaded'
+    }
 
     // Compat
     'modernizr': {

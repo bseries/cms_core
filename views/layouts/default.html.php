@@ -68,7 +68,7 @@ FlashMessage::clear();
 		<div id="modal-overlay" class="hide"></div>
 
 		<div id="container">
-			<header>
+			<header class="main">
 				<?=$this->view()->render(['element' => 'header'], [], [
 					'library' => 'app'
 				]) ?>

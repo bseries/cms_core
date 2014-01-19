@@ -64,7 +64,7 @@ FlashMessage::clear();
 		<div id="modal-overlay" class="hide"></div>
 
 		<div id="container">
-			<header>
+			<header class="main">
 				<h1>
 					<?= $this->html->link($site['title'], ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
 				</h1>

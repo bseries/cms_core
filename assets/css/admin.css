@@ -602,11 +602,8 @@ button.small,
   padding: 1px;
 }
 
-/* Media
+/* Media Pane
 ---------------------------------------------------------------- */
-form .media {
-  margin-bottom: 2em;
-}
 table .media {
   height: 100%;
   padding: .3em 0 0 0;
@@ -806,4 +803,11 @@ form .help {
   margin-bottom: 1.5em;
   font-size: .9em;
   max-width: 600px;
+}
+
+/* Settings/Features Pane
+-------------------------------------------------------------- */
+.features .title,
+.settings .title {
+  max-width: none;
 }

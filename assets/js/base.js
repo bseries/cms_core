@@ -9,13 +9,13 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
 
+// Export global App (configuration) object.
 var App = {
-  'debugCompat': false
-};
-
-App.env = {
-  'project': {
-    'version': '__REV__'
+  env: {
+    // debugCompat: false,
+    project: {
+      version: '__REV__'
+    }
   }
 };
 
@@ -39,6 +39,7 @@ requirejs.config({
     'underscore': 'core/js/underscore',
 
     // App
+    'form': 'core/js/form',
 
     // Other
     'notify': 'core/js/notify',

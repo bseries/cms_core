@@ -45,6 +45,21 @@ FlashMessage::clear();
 				'library' => 'cms_core'
 			]) ?>
 		<?php endif ?>
+		<script>
+			<?php $url = ['controller' => 'files', 'library' => 'cms_media', 'admin' => true] ?>
+
+			App.env = $.extend(App.env, {
+				media: {
+					endpoints: {
+						index: '<?= $this->url($url + ['action' => 'api_index']) ?>',
+						view: '<?= $this->url($url + ['action' => 'api_view', 'id' => '__ID__']) ?>',
+						transfer: '<?= $this->url($url + ['action' => 'api_transfer']) ?>'
+					}
+				}
+			});
+
+			require(['form']);
+		</script>
 	</head>
 	<body class="layout-admin">
 		<div

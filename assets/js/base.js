@@ -102,7 +102,7 @@ requirejs.config({
     'thingsLoaded': {
       deps: ['jquery'],
       exports: 'ThingsLoaded'
-    }
+    },
 
     // Compat
     'modernizr': {

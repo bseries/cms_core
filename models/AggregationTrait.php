@@ -32,11 +32,12 @@ use Exception;
  *   - The data returned from the `all` finder will be encapsulated
  *     in a plain `Collection` object instead of a `RecordSet`.
  *
- * The find operations (espcially with the all finder) are optimized
+ * The find operations (especially with the all finder) are optimized
  * so that they query for as little results as possible. However
  * in case the registered models are all filled up well and regulary
- * exceed a limit given the numer of items being worked with will
- * be O(number of registered models).
+ * exceed the `limit` provided directly through the limit option or
+ * indirectly when using paging functionality, the  numer of items
+ * being worked with will be O(number of registered models).
  *
  * On top of the aggregation functionality, paging functionality is
  * provided. Use it by providing the `page` option. How many items

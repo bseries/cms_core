@@ -1,0 +1,194 @@
+<?php
+/**
+ * Bureau Core
+ *
+ * Copyright (c) 2013-2014 Atelier Disko - All rights reserved.
+ *
+ * This software is proprietary and confidential. Redistribution
+ * not permitted. Unless required by applicable law or agreed to
+ * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+
+namespace cms_core\models;
+
+use lithium\util\Collection;
+use Exception;
+
+/**
+ * This trait allows to combine results from multiple models into one
+ * consistent "stream". This is accomplished by overriding the find model
+ * method. The behavior of the original find method is tried to be matched
+ * as closely as possible. Current finders that are available are `all`,
+ * `first`, `count` as well as additionally `pages` (read more about
+ * this later).
+ *
+ * There are - however - a couple of differences to normal model usage:
+ *
+ *   - The model this trait is used with *must* be connection-less.
+ *   - Models must register to the aggregation stream.
+ *   - There is no `order` functionality. As a replacement use the
+ *     `sorter` option and provide a custom compare function with it.
+ *   - The data returned from the `all` finder will be encapsulated
+ *     in a plain `Collection` object instead of a `RecordSet`.
+ *
+ * The find operations (espcially with the all finder) are optimized
+ * so that they query for as little results as possible. However
+ * in case the registered models are all filled up well and regulary
+ * exceed a limit given the numer of items being worked with will
+ * be O(number of registered models).
+ *
+ * On top of the aggregation functionality, paging functionality is
+ * provided. Use it by providing the `page` option. How many items
+ * are assigned to each page can be controlled via the `perPage`
+ * option which defaults to 10 items per page. Pages are *not*
+ * zero based.
+ *
+ * @link http://php.net/uasort
+ */
+trait AggregationTrait {
+
+	protected static $_models = [];
+
+	public static function registerAggregation($model, $name) {
+		static::$_models[$name] = $model;
+	}
+
+	public static function find($type, array $options = []) {
+		if (!isset($options['aggregate'])) {
+			throw new Exception('The aggregate option is mandatory.');
+		}
+		if (isset($options['order'])) {
+			throw new Exception('The order option is not supported, use sorter instead.');
+		}
+
+		if ($type == 'all') {
+			$data = [];
+
+			$options += [
+				'page' => null,
+				'perPage' => 10,
+				'sorter' => null, // function() {}
+				'limit' => null // overall aggreation limit
+			];
+
+			if ($options['page'] && $options['limit']) {
+				throw new Exception('Page and limit options are mutually exclusive.');
+			}
+
+			foreach ($options['aggregate'] as $n => $o) {
+				// We assume that in the worst case where only results
+				// for one model will be returned after sorting and limiting,
+				// that we'll need maximum of `limit`'ed items per model.
+				if ($options['page']) {
+					// FIXME Calculate limit
+					$o['limit'] = static::$itemsPerPage;
+				} elseif ($options['limit']) {
+					$o['limit'] = $options['limit'];
+				}
+				$model = static::$_models[$n];
+
+				foreach ($model::find('all', $o) as $result) {
+					// Prefix key with model to make it unique
+					// and allow for quick lookup by index lookup.
+					$data[$model . ':' . $result->id] = static::create([
+						'original' => $result
+					]);
+				}
+			}
+
+			// We cannot use the sort method on a collection here as we
+			// cannot use a collection object earlier as array_slice()
+			// will refuse to operate on a collection object.
+			if ($options['sorter']) {
+				uasort($data, $options['sorter']);
+			}
+
+			if ($options['page']) {
+				$data = array_slice(
+					$data,
+					$options['page'] > 1 ? $options['perPage'] * $options['page'] : 0,
+					static::$itemsPerPage
+				);
+			} elseif ($options['limit']) {
+				$data = array_slice($data, 0, $options['limit']);
+			}
+			return new Collection(['data' => &$data]);
+
+		} elseif ($type == 'first') {
+			if (!is_string($options['aggregate'])) {
+				throw new Exception('Aggregation option must be name string.');
+			}
+			$model = static::$_models[$options['aggregation']];
+
+			if (!$result = $model::find('first', $options)) {
+				return $result;
+			}
+			return static::create(['original' => $result]);
+		} elseif ($type == 'count') {
+			if (!is_array($options['aggregate'])) {
+				throw new Exception('Aggregation option must be array of names.');
+			}
+			$result = 0;
+
+			foreach ($options['aggregate'] as $name) {
+				$model = static::$_models[$name];
+				$result += $model::find('count');
+			}
+			return $result;
+		} elseif ($type == 'pages') {
+			return floor(static::find('count', $options) / $options['perPage']);
+		}
+	}
+
+	/*
+	public static function neighbors($item) {
+		$results = array_values(static::_lookup());
+		$next = $prev = null;
+
+		for ($k = 0, $c = count($results); $k <= $c; $k++) {
+			list($model, $id) = $results[$k];
+
+			if ($item->id !== $id || $model !== $item->original->model()) {
+				continue;
+			}
+			if (isset($results[$k + 1])) {
+				list($model, $id) = $results[$k + 1];
+				$next = static::_convert($model::find($id));
+			}
+			if (isset($results[$k - 1])) {
+				list($model, $id) = $results[$k - 1];
+				$prev = static::_convert($model::find($id));
+			}
+			break;
+		}
+		return compact('prev', 'next');
+	}
+	*/
+
+
+	// Forward method calls to original.
+	public function __call($method, $args) {
+		$entity = array_shift($args);
+		return call_user_func_array([$entity->original, $method], $args);
+	}
+
+	/*
+	public function __get($name) {
+		var_dump(func_get_args());
+		die;
+	}
+	 */
+
+	public function type($entity) {
+		foreach (static::$_models as $name => $model) {
+			if ($model === $entity->original->model()) {
+				return $name;
+			}
+		}
+		return false;
+	}
+}
+
+
+?>

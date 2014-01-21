@@ -18,8 +18,8 @@ class Features extends \lithium\core\StaticObject {
 
 	protected static $_sources = [];
 
-	public static function register($source, $name, $default) {
-		static::$_sources[$name] = $source;
+	public static function register($library, $name, $default) {
+		static::$_sources[$name] = $library;
 		Environment::set(true, ['features' => [$name => $default]]);
 	}
 

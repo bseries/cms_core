@@ -226,6 +226,9 @@ nav#main a:hover {
   color: #fff;
   background: #555;
 }
+nav#main .group {
+  margin-bottom: .5em;
+}
 
 /* Content
 ---------------------------------------------------------------- */

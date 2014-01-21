@@ -5,7 +5,7 @@ use li3_flash_message\extensions\storage\FlashMessage;
 use lithium\security\Auth;
 use \DateTime;
 use \IntlDateFormatter;
-use cms_core\extensions\cms\Modules;
+use cms_core\extensions\cms\Panes;
 use cms_core\extensions\cms\Settings;
 
 $site = Settings::read('site');
@@ -116,12 +116,13 @@ FlashMessage::clear();
 				</div>
 			</header>
 			<nav id="main">
-				<?php foreach (Modules::read() as $module): ?>
-						<?= $this->html->link($module['title'], $module['url']() ?: [
-							'controller' => $module['name'], 'action' => 'index', 'library' => $module['library']
-						]) ?>
+				<?php foreach (Panes::grouped() as $group => $panes): ?>
+					<div class="group group-<?= $group ?>">
+						<?php foreach ($panes as $pane): ?>
+							<?= $this->html->link($pane['title'], $pane['url']) ?>
+						<?php endforeach ?>
+					</div>
 				<?php endforeach ?>
-				<?= $this->html->link($t('Support'), ['controller' => 'pages', 'action' => 'support', 'library' => 'cms_core']) ?>
 			</nav>
 			<div id="content">
 				<?php echo $this->content(); ?>

@@ -29,6 +29,8 @@ Settings::register('cms_core', 'contact.default.website');
 Settings::register('cms_core', 'contact.default.street_address');
 Settings::register('cms_core', 'contact.default.postal_code');
 Settings::register('cms_core', 'contact.default.city');
+Settings::register('cms_core', 'contact.default.country');
+Settings::register('cms_core', 'contact.default.district');
 
 Settings::register('cms_core', 'contact.exec.name');
 Settings::register('cms_core', 'contact.exec.type');
@@ -38,6 +40,8 @@ Settings::register('cms_core', 'contact.exec.website');
 Settings::register('cms_core', 'contact.exec.street_address');
 Settings::register('cms_core', 'contact.exec.postal_code');
 Settings::register('cms_core', 'contact.exec.city');
+Settings::register('cms_core', 'contact.exec.country');
+Settings::register('cms_core', 'contact.exec.district');
 
 Settings::register('cms_core', 'service.googleAnalytics.default.account');
 Settings::register('cms_core', 'service.googleAnalytics.default.domain');

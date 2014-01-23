@@ -3,6 +3,7 @@
 use lithium\core\Environment;
 use li3_flash_message\extensions\storage\FlashMessage;
 use cms_core\extensions\cms\Settings;
+use cms_core\models\Assets;
 
 $site = Settings::read('site');
 $locale = Environment::get('locale');
@@ -33,6 +34,17 @@ FlashMessage::clear();
 			'/media/js/base',
 			'/site/js/base'
 		]) ?>
+		<?php
+			// Load corresponding view scripts automatically.
+			$view = $this->_config['controller'] . '/' . $this->_config['template'];
+
+			$file  = parse_url(Assets::base('file'), PHP_URL_PATH);
+			$file .= '/site/js/views/' . $view . '.js';
+
+			if (file_exists($file)) {
+				echo $this->assets->script(['/site/js/views/' . $view]);
+			}
+		?>
 		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>
 		<?php if (Settings::read('googleAnalytics.default')): ?>

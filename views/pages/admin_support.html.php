@@ -1,6 +1,6 @@
 <?php
 
-use lithium\core\Environment;
+use cms_core\extensions\cms\Settings;
 
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
@@ -10,7 +10,7 @@ use lithium\core\Environment;
 		<strong>Wir freuen uns über Ihre Fragen und Ideen.</strong>
 	</p>
 
-	<?=$this->view()->render(['element' => 'contact_atelier_disko'], [], [
+	<?=$this->view()->render(['element' => 'contact'], ['item' => Settings::read('contact.exec')], [
 		'library' => 'cms_core'
 	]) ?>
 </article>

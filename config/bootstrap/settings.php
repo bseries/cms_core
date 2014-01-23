@@ -31,10 +31,10 @@ Settings::register('cms_core', 'contact.default.street_address');
 Settings::register('cms_core', 'contact.default.postal_code');
 Settings::register('cms_core', 'contact.default.city');
 
-Settings::register('cms_core', 'contact.exec.name', 'Atelier Disko');
-Settings::register('cms_core', 'contact.exec.type', 'organization');
-Settings::register('cms_core', 'contact.exec.email', 'mail@atelierdisko.de');
-Settings::register('cms_core', 'contact.exec.phone', '+49 (0) 12 345 678');
-Settings::register('cms_core', 'contact.exec.website', 'http://atelierdisko.de');
+Settings::register('cms_core', 'contact.exec.name');
+Settings::register('cms_core', 'contact.exec.type');
+Settings::register('cms_core', 'contact.exec.email');
+Settings::register('cms_core', 'contact.exec.phone');
+Settings::register('cms_core', 'contact.exec.website');
 
 ?>

@@ -18,12 +18,12 @@ class Assets extends \lithium\template\Helper {
 
 		if (is_array($path)) {
 			foreach ($path as $i => $item) {
-				$item = $this->url($item . '.css');
+				$item = $this->url($item, '.css');
 				$path[$i] = $this->_context->html->style($item, $scope);
 			}
 			return ($scope['inline']) ? join("\n\t", $path) . "\n" : null;
 		}
-		$path = $this->url($path . '.css');
+		$path = $this->url($path, '.css');
 		return $this->_context->html->style($path, $options);
 	}
 
@@ -33,25 +33,25 @@ class Assets extends \lithium\template\Helper {
 
 		if (is_array($path)) {
 			foreach ($path as $i => $item) {
-				$item = $this->url($item . '.js');
+				$item = $this->url($item, '.js');
 				$path[$i] = $this->script($item, $scope);
 			}
 			return ($scope['inline']) ? join("\n\t", $path) . "\n" : null;
 		}
 		if (strpos($path, '://') === false) {
-			$path = $this->url($path . '.js');
+			$path = $this->url($path, '.js');
 		}
 		return $this->_context->html->script($path, $options);
 	}
 
-	public function url($path) {
+	public function url($path, $suffix = null) {
 		if (strpos($path, '://') !== false) {
 			return $path;
 		}
 		$version = Settings::read('project.version');
 
 		$base = AssetsModel::base('http');
-		return $base . '/v:' . $version . $path;
+		return $base . '/v:' . $version . $path . $suffix;
 	}
 }
 

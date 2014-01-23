@@ -14,8 +14,7 @@ use cms_core\extensions\cms\Settings;
 
 Settings::register('cms_core', 'project.name', PROJECT_NAME);
 Settings::register('cms_core', 'project.version', PROJECT_VERSION);
-
-Settings::register('cms_core', 'site.title', 'Application');
+Settings::register('cms_core', 'site.title');
 
 // FIXME Use a pseudo number generator seeded with project
 // name to generate cookie secret. Simple md5'ing wont work as
@@ -36,5 +35,12 @@ Settings::register('cms_core', 'contact.exec.type');
 Settings::register('cms_core', 'contact.exec.email');
 Settings::register('cms_core', 'contact.exec.phone');
 Settings::register('cms_core', 'contact.exec.website');
+Settings::register('cms_core', 'contact.exec.street_address');
+Settings::register('cms_core', 'contact.exec.postal_code');
+Settings::register('cms_core', 'contact.exec.city');
+
+Settings::register('cms_core', 'service.googleAnalytics.default.account');
+Settings::register('cms_core', 'service.googleAnalytics.default.domain');
+Settings::register('cms_core', 'service.googleAnalytics.default.propertyId');
 
 ?>

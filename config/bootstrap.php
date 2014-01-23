@@ -62,6 +62,8 @@ require __DIR__ . '/bootstrap/session.php';
 require __DIR__ . '/bootstrap/g11n.php';
 require __DIR__ . '/bootstrap/media.php';
 
+require __DIR__ . '/bootstrap/settings.php';
+
 if (PHP_SAPI === 'cli') {
 	require __DIR__ . '/bootstrap/console.php';
 }
@@ -108,18 +110,5 @@ Features::register('cms_core', 'useNewGoogleAnalyticsTrackingCode', true);
 Assets::registerScheme('file');
 Assets::registerScheme('http');
 Assets::registerScheme('https');
-
-Settings::register('cms_core', 'service.googleAnalytics.default.account');
-Settings::register('cms_core', 'service.googleAnalytics.default.domain');
-Settings::register('cms_core', 'service.googleAnalytics.default.propertyId');
-
-Settings::register('cms_core', 'security.cookieSecret');
-
-Settings::register('cms_core', 'project.name');
-Settings::register('cms_core', 'project.version');
-
-Settings::register('cms_core', 'site.title', 'Application');
-Settings::register('cms_core', 'site.email', 'mail@example.com');
-Settings::register('cms_core', 'site.phone');
 
 ?>

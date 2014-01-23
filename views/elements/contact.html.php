@@ -7,7 +7,8 @@ $item += [
 	'postal_code' => null,
 	'city' => null,
 	'phone' => null,
-	'email' => null
+	'email' => null,
+	'website' => null
 ];
 
 ?>
@@ -26,8 +27,18 @@ $item += [
 	</p>
 	<p>
 		<?php if ($item['phone']): ?>
-			<label><?= $t('Phone')?>:</label> <span itemprop="tel"><?= $item['phone'] ?></span><br/>
+			<label><?= $t('Phone')?>:</label> <span itemprop="tel"><?= $item['phone'] ?></span>
+			<br>
 		<?php endif ?>
-		<label><?= $t('E–Mail') ?>:</label> <?= $this->html->link($item['email'], "mailto:{$item['email']}") ?>
+
+		<label><?= $t('E–Mail') ?>:</label>
+		<?= $this->html->link($item['email'], "mailto:{$item['email']}") ?>
+		<br>
+
+		<?php if ($item['website']): ?>
+			<label>Website:</label> <a itemprop="url" href="<?= $item['website'] ?>" target="new">
+				<?= parse_url($item['website'], PHP_URL_HOST)?>
+			</a>
+		<?php endif ?>
 	</p>
 </article>

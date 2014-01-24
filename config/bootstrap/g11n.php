@@ -72,7 +72,9 @@ Environment::set('test', ['locale' => 'en', 'locales' => ['en' => 'English']]);
 $setLocale = function($self, $params, $chain) {
 	try {
 		if (!$params['request']->locale()) {
-			$params['request']->locale(Locale::preferred($params['request']));
+			$params['request']->locale(Locale::preferred(
+				$params['request'], Environment::get('locales')
+			));
 		}
 		if ($locale = $params['request']->locale()) {
 			Environment::set(true, ['locale' => $locale]);

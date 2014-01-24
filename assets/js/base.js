@@ -55,6 +55,8 @@ requirejs.config({
     'moment': 'core/js/moment',
     'scrollTo': 'core/js/scrollTo',
     'waypoints': 'core/js/waypoints',
+    'frameByFrameAnimation': 'core/js/frameByFrameAnimation',
+    'sprintf': 'core/js/sprintf',
 
     // Compat
     'versioncompare': 'core/js/compat/versioncompare',
@@ -107,6 +109,9 @@ requirejs.config({
     'waypoints': {
       deps: ['jquery'],
       exports: 'jQuery.fn.waypoint'
+    },
+    'sprintf': {
+      exports: 'window.sprintf'
     },
 
     // Compat

@@ -46,7 +46,7 @@ $item += [
 				<span class="district"><?= $item['district'] ?></span>
 			<?php endif ?>
 			<?php if ($item['country']): ?>
-				<span class="country"><?= $item['country'] ?></span>
+				<span itemprop="country-name" class="country"><?= $item['country'] ?></span>
 			<?php endif ?>
 		</div>
 	</p>

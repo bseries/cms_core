@@ -13,15 +13,38 @@ function($, _, versionCompare, Modernizr) {
   var all = [];
 
   /* ----- Browserswitch  ----- */
-  $.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
-  var old = false;
+  // We split browsers into groups of HTML5 (modern) and HTML4 (legacy).
+  // Assignment to one group or another is done by using feature detection.
+  //
+  // This approach replaces the user agent sniffing technique deployed
+  // before as that is considered to be bad practice and support for
+  // sniffing has been removed from jQuery >= 1.9 already.
+  //
+  // Modern browsers are:
+  //
+  // IE9+
+  // Firefox 3.5+
+  // Opera 9+ (and probably further back)
+  // Safari 4+
+  // Chrome 1+ (I think)
+  // iPhone and iPad iOS1+
+  // Android phone and tablets 2.1+
+  // Blackberry OS6+
+  // Windows 7.5+ (new Mango version)
+  // Mobile Firefox
+  // Opera Mobile
+  //
+  // http://responsivenews.co.uk/post/18948466399/cutting-the-mustard
+  var modern = 'querySelector' in document && 'localStorage' in window && 'addEventListener' in window;
 
-  old = App.debugCompat;
-  old = old || $.browser.msie && versionCompare($.browser.version, '8.0') < 0;
-  old = old || $.browser.mozilla && versionCompare($.browser.version, '1.9.2') < 0;
+  // If debugCompat is set to true, pretend if we are an old browser always.
+  // This allows to preview what happens if users of such browsers get here.
+  if (App.debugCompat) {
+    modern = false;
+  }
 
   url = '/browser';
-  if (old && window.location != url) {
+  if (!modern && window.location != url) {
     all.browser = function() {
         window.location = url;
         return; // No further script execution.

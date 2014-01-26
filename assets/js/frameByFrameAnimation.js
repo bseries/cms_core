@@ -8,125 +8,165 @@
  * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
-define(['jquery', 'thingsLoaded'], function($, ThingsLoaded) {
+define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
+
+  Compat.run([
+    'animationFrame',
+    'performanceNow'
+  ]);
 
   function FrameByFrameAnimation() {
     var _this = this;
 
+    // Holds the element (most often a div) which
+    // background will be animated.
     this.element = null;
-
-    this.totalFrames = 0;
-
-    this.frames = [];
 
     this.fps = 0;
 
-    // this.duration = 0;
+    // Holds the current animation frame id in
+    // case there is an ongoing animation.
+    this.animationFrame = undefined;
 
-    // The current frame.
+    // The current frame. May be of float type
+    // use Math.floor() to get to current frame.
     this.currentFrame = 0;
 
     this.paused = true;
 
     this.loop = true;
 
-    this.url = function(frame) {};
+    // Set once initiation is done.
+    this.frames = [];
+
+    // The width of each sprite in a spritesheet
+    // given in pixels.
+    this.blocksize = 800;
 
     this.init = function(element, options) {
       this.element = $(element);
 
+      options = $.extends({
+        url: function(sheet) {},
+        loop: _this.loop,
+        fps: _this.fps,
+        blocksize: _this.blocksize,
+        totalSheets: 1
+      }, options);
+
       this.fps = options.fps;
-      this.totalFrames = options.totalFrames;
-      this.currentFrame = options.currentFrame;
+      this.loop = options.loop;
 
-      this.url = options.url;
+      // Make a sequence out of loaded sheets and
+      // their frames. Can only run once all are
+      // loaded.
+      //
+      // FIXME Find a better solution for this. One that
+      // can make a sequence even if sheets come in
+      // asynchronously.
 
-      for (var i = 0; i < _this.totalFrames; i++) {
-        var frame = new Frame();
+      var sheets = [];
+      var totalSheets = options.totalSheets;
+      var dfrs = [];
 
-        if (i == _this.currentFrame) {
-          frame.active = true;
-        }
-        frame.index = i;
-        frame.url = _this.url(i);
-
-        frame.preload();
-        _this.frames.push(frame);
+      for (var i = 0; i < (totalSheets); i++) {
+        sheets[i] = $.extend((new Sheet()), {
+          index: i,
+          url: options.url(i),
+          blocksize: options.blocksize
+        });
+        dfrs.push(sheets[i].load());
       }
+
+      // Join all sheet loading promoises.
+      var initiated =  $.when.apply($, dfrs);
+
+      initiated.done(function() {
+        $.each(sheets, function(k, sheet) {
+          $.each(sheet.frames, function(k, frame) {
+            _this.frames.push(frame);
+          });
+        });
+      });
+
+      return initiated;
     };
 
+    // Do not run before initiation is done.
     this.start = function() {
-      this.paused = false;
+      _this.paused = false;
 
-      var currentTime = this.rightNow();
+      var currentTime = window.performance.now();
 
-      (function nextloop(time) {
+      var next = function next(time) {
         var delta = (time - currentTime) / 1000;
-
         _this.currentFrame += (delta * _this.fps);
-        var frameNum = Math.floor(_this.currentFrame);
 
-        if (frameNum >= _this.totalFrames) {
-          _this.currentFrame = frameNum = 0;
+        var frame = _this.frames[Math.floor(_this.currentFrame)];
+        if (!frame) {
+          _this.currentFrame = 0;
+          frame = _this.frames[0];
         }
-        requestAnimationFrame(nextloop);
-
-        var frame = _this.frames[frameNum];
-        _this.element.attr('src', frame.url);
-
+        _this.element.css({
+          'background-image': 'url(' + frame.url + ')',
+          'background-position': '-' + frame.offset + 'px 0'
+        });
+        _this.animationFrame = requestAnimationFrame(next);
         currentTime = time;
-      })(currentTime);
+      };
+      requestAnimationFrame(next);
     };
 
     this.pause = function() {
+      cancelAnimationFrame(_this.animationFrame);
+    console.debug('pause');
       this.paused = true;
     };
 
     this.stop = function() {
       this.paused = true;
       this.currentFrame = 0;
-    };
-
-    this.rightNow = function() {
-      /* jshint ignore:start */
-      if (window['performance'] && window['performance']['now']) {
-        return window['performance']['now']();
-      } else {
-        return +(new Date());
-      }
-      /* jshint ignore:end */
-    };
-
-    this.animLoop = function() {
+      cancelAnimationFrame(_this.animationFrame);
     };
   }
 
-  function Frame() {
+  // Sheet class which will populate its frames array
+  // once its spritesheet has been loaded. Automatically
+  // calculates number of total sprites using given
+  // blocksize.
+  function Sheet() {
     var _this = this;
 
-    this.index = undefined;
-
-    this.preloaded = false;
+    this.frames = [];
 
     this.url = null;
+    this.index = undefined;
+    this.blocksize = null;
 
-    this.active = false;
+    this.load = function() {
+      var checker = new ThingsLoaded.ImageChecker();
 
-    // Will preload as element is inserted into DOM.
-    this.preload = function() {
-      if (_this.preloaded) {
-        return (new $.Deferred()).resolve();
-      }
-      var preloader = new ThingsLoaded.ImagePreloader();
+      element = new Image();
+      element.src = _this.url;
 
-      preloader.addUrl(_this.url);
-      var result = preloader.run();
+      checker.addImage(element);
+      var run = checker.run();
 
-      return result.always(function() {
-        _this.preloaded = true;
+      run.done(function() {
+        var totalFrames = element.width / _this.blocksize;
+
+        for (var d = 0; d < totalFrames; d++) {
+          _this.frames.push({
+            url: _this.url,
+            offset: _this.blocksize * d
+          });
+        }
       });
+
+      return run;
     };
   }
+
 
   return FrameByFrameAnimation;
 });

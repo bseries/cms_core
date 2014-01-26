@@ -66,7 +66,9 @@ requirejs.config({
     'cssFilters': 'core/js/compat/cssFilters',
     'balanceText': 'core/js/compat/balanceText',
     'inputDate': 'core/js/compat/inputDate',
-    'sendAsBinary': 'core/js/compat/sendAsBinary'
+    'sendAsBinary': 'core/js/compat/sendAsBinary',
+    'animationFrame': 'core/js/compat/animationFrame',
+    'performanceNow': 'core/js/compat/performanceNow'
   },
   shim: {
     // Basics

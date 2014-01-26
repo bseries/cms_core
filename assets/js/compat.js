@@ -1,7 +1,7 @@
 /*!
  * Compat Main Control Script
  *
- * Copyright (c) 2013 Atelier Disko - All rights reserved.
+ * Copyright (c) 2013-2014 Atelier Disko - All rights reserved.
  *
  * This software is proprietary and confidential. Redistribution
  * not permitted. Unless required by applicable law or agreed to
@@ -139,6 +139,18 @@ function($, _, versionCompare, Modernizr) {
     all.balanceText = function() {
       require(['balanceText']);
       // Script automatically intializes on CSS class .balance-text.
+    };
+  }
+
+  if (!window.requestAnimationFrame) {
+    all.animationFrame = function() {
+      require(['animationFrame']);
+    };
+  }
+
+  if (!window.performance) {
+    all.performanceNow = function() {
+      require(['performanceNow']);
     };
   }
 

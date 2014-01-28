@@ -15,10 +15,12 @@ define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
     'performanceNow'
   ]);
 
-  // Features a lay queue which sequentially plays queued
-  // animationen sequences while honoring
-  // connection frames. Also handles looping.
-
+  // Allows for animating a sprites as collection of frames contained
+  // in one or multiple spritesheets. Will play sub-frame-sequences
+  // sequentially when being added through the start() method. When
+  // playing multiple sequences honors connection frames. Adding a
+  // new sequence will cause others to switch into drain mode and
+  // stop looping.
   function FrameByFrameAnimation() {
     var _this = this;
 

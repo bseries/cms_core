@@ -46,13 +46,13 @@ define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
     this.init = function(element, options) {
       this.element = $(element);
 
-      options = $.extends({
+      options = $.extend({
         url: function(sheet) {},
         loop: _this.loop,
         fps: _this.fps,
         blocksize: _this.blocksize,
         totalSheets: 1
-      }, options);
+      }, options || {});
 
       this.fps = options.fps;
       this.loop = options.loop;
@@ -61,9 +61,8 @@ define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
       // their frames. Can only run once all are
       // loaded.
       //
-      // FIXME Find a better solution for this. One that
-      // can make a sequence even if sheets come in
-      // asynchronously.
+      // FIXME Find a (mathematical/CS) better solution for this. One that
+      // can make a sequence even if sheets come in asynchronously.
 
       var sheets = [];
       var totalSheets = options.totalSheets;
@@ -107,11 +106,11 @@ define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
           _this.currentFrame = 0;
           frame = _this.frames[0];
         }
+        _this.animationFrame = requestAnimationFrame(next);
         _this.element.css({
           'background-image': 'url(' + frame.url + ')',
           'background-position': '-' + frame.offset + 'px 0'
         });
-        _this.animationFrame = requestAnimationFrame(next);
         currentTime = time;
       };
       requestAnimationFrame(next);
@@ -119,7 +118,6 @@ define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
 
     this.pause = function() {
       cancelAnimationFrame(_this.animationFrame);
-    console.debug('pause');
       this.paused = true;
     };
 
@@ -146,7 +144,7 @@ define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
     this.load = function() {
       var checker = new ThingsLoaded.ImageChecker();
 
-      element = new Image();
+      var element = new Image();
       element.src = _this.url;
 
       checker.addImage(element);

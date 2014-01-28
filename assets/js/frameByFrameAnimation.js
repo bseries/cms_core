@@ -8,20 +8,12 @@
  * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
-define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
+define(['jquery', 'animationSequence', 'sprite'], function($, Sequence, Sprite) {
 
-  Compat.run([
-    'animationFrame',
-    'performanceNow'
-  ]);
-
-  // Allows for animating a sprites as collection of frames contained
-  // in one or multiple spritesheets. Will play sub-frame-sequences
-  // sequentially when being added through the start() method. When
-  // playing multiple sequences honors connection frames. Adding a
-  // new sequence will cause others to switch into drain mode and
-  // stop looping.
-  function FrameByFrameAnimation() {
+  // Base class for all frame-by-frame animation clases. Allows for animating sprites.
+  // General support for looping, fps and using sprites from multiple spritesheets as
+  // sources.
+  function Base() {
     var _this = this;
 
     // Holds the element (most often a div) which
@@ -35,9 +27,6 @@ define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
 
     // Set once initiation is done.
     this.frames = [];
-
-    // jQuery object to use for custom queue.
-    this.plays = $({});
 
     // Indicates if a sequence from the queue
     // is currently being played.
@@ -56,10 +45,12 @@ define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
         // given in pixels.
         blocksize: _this.blocksize,
         // Number of total sheets.
-        totalSheets: 1
+        totalSheets: 1,
+        queuePlays: _this._queuePlays
       }, options || {});
 
       this.fps = options.fps;
+      this.queuePlays = options.queuePlays;
 
       // Make a sequence out of loaded sheets and
       // their frames. Can only run once all are
@@ -72,7 +63,7 @@ define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
       var dfrs = [];
 
       for (var i = 0; i < options.totalSheets; i++) {
-        sheets[i] = $.extend((new Sheet()), {
+        sheets[i] = $.extend((new Sprite.Sheet()), {
           index: i,
           // Resolve URL already here.
           url: options.url(i),
@@ -92,17 +83,65 @@ define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
         });
       });
 
+      // Call child classes init method.
+      if (_this._init) {
+        _this._init(initiated);
+      }
       return initiated;
     };
+
+    // Seeks current to a relative position given in percentages (i.e. '20%').
+    this.seek = function(to) {
+      if (_this.queuePlays) {
+        throw 'Incompatible usage; cannot seek when using queue.';
+      }
+      _this.element.trigger('animation:seek', [to]);
+    };
+  }
+
+  // Supports just a single sequence, will not play automatically
+  // but allows for seeking manually through the sequence.
+  function Static() {
+    Base.call(this);
+
+    var _this = this;
+
+    this.sequence = undefined;
+
+    this._init = function(dfr) {
+      return dfr.done(function() {
+        _this.sequence = new Sequence();
+        _this.sequence.init(_this.element, _this.frames);
+      });
+    };
+
+    // Seeks to a frame in the sequence. Relative values
+    // like '20%' can be used.
+    //
+    // -- Do not run before initiation is done. --
+    //
+    this.seek = function(to) {
+      _this.sequence.seek(to);
+    };
+  }
+  Static.prototype = Object.create(Static.prototype);
+
+  // Queues multiple plays when calling the start() method. Honors
+  // connection frames and can put sequences into drain mode when
+  // a new one is added in order to get to play the newly added
+  // sequence as early as possible. Allows for playing sub-sequences.
+  function Queued() {
+    Base.call(this);
+
+    var _this = this;
 
     // Starts to play a sequence.
     //
     // -- Do not run before initiation is done. --
     //
-    // Will push play to queue. When a play is pushed the sequences
-    // that lead up the just pushed one will stop looping
-    // but each one play until the end until it reaches the just
-    // pushed one.
+    // When play queuing is enabled, will push play to queue. When a play is
+    // pushed the sequences that lead up the just pushed one will stop looping
+    // but each one play until the end until it reaches the just pushed one.
     this.start = function(from, to, loop) {
       from = from || 0;
       to   = to || _this.frames.length - 1;
@@ -117,12 +156,24 @@ define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
 
       sequence.init(_this.element, _this.frames.slice(from, to), {
         fps: _this.fps,
-        loop: _this.loop
+        loop: loop
       });
+
+      if (!_this.useQueue) {
+        _this.playing = true;
+
+        sequence.start()
+          .done(function() {
+            _this.playing = false;
+          });
+
+        return;
+      }
+      var plays = $({});
 
       // Will automatically start playing once sequence queued if
       // it is not already playing another sequence.
-      _this.plays.queue(function(next) {
+      plays.queue(function(next) {
         _this.playing = true;
 
         sequence.start()
@@ -133,128 +184,10 @@ define(['jquery', 'thingsLoaded', 'compat'], function($, ThingsLoaded, Compat) {
       });
     };
   }
+  Queued.prototype = Object.create(Base.prototype);
 
-  // Sheet class which will populate its frames array
-  // once its spritesheet has been loaded. Automatically
-  // calculates number of total sprites using given
-  // blocksize.
-  function Sheet() {
-    var _this = this;
-
-    this.frames = [];
-
-    this.url = null;
-
-    this.index = undefined;
-
-    this.blocksize = null;
-
-    this.load = function() {
-      var checker = new ThingsLoaded.ImageChecker();
-
-      var element = new Image();
-      element.src = _this.url;
-
-      checker.addImage(element);
-      var run = checker.run();
-
-      run.done(function() {
-        var totalFrames = element.width / _this.blocksize;
-
-        for (var d = 0; d < totalFrames; d++) {
-          _this.frames.push({
-            url: _this.url,
-            offset: _this.blocksize * d
-          });
-        }
-      });
-
-      return run;
-    };
-  }
-
-  function Sequence() {
-    var _this = this;
-
-    this.fps = 12;
-
-    this.loop = true;
-
-    this.looped = 0;
-
-    // Holds the current animation frame id in
-    // case there is an ongoing animation.
-    this.animationFrame = undefined;
-
-    // The current frame number. May be of float type
-    // use Math.floor() to get to current frame.
-    this.currentFrame = 0;
-
-    this.frames = [];
-
-    this.element = undefined;
-
-    this.drain = false;
-
-    this.init = function(element, frames, options) {
-      _this.element = element;
-      _this.frames = frames;
-
-      options = $.extend({
-        loop: _this.loop,
-        fps: _this.fps
-      }, options || {});
-
-      _this.fps = options.fps;
-      _this.loop = options.loop;
-
-      // Listen on element for signals.
-      _this.element.on('animation:drain', function() {
-        _this.drain = true;
-      });
-    };
-
-    this.start = function() {
-      var dfr = new $.Deferred();
-
-      // Gets high-resolution timestamp.
-      var currentTime = window.performance.now();
-
-      // Will show frame by frame using requestAnimationFrame.
-      var next = function next(time) {
-        var delta = (time - currentTime) / 1000;
-        _this.currentFrame += (delta * _this.fps);
-
-        var frame = _this.frames[Math.floor(_this.currentFrame)];
-        if (!frame) {
-          _this.looped++;
-
-          // Reset sequence even we might stop, that way we get
-          // a clean start - if needed.
-          _this.currentFrame = 0;
-          frame = _this.frames[0];
-
-          // Will stop looping if in drain mode or loop count has been reached.
-          if (_this.drain || (_this.loop !== true && _this.looped >= _this.loop)) {
-            // Break out of animation here and signal that we are done to outer code.
-            dfr.resolve();
-            return;
-          }
-        }
-        _this.animationFrame = requestAnimationFrame(next);
-        _this.element.css({
-          'background-image': 'url(' + frame.url + ')',
-          'background-position': '-' + frame.offset + 'px 0'
-        });
-        currentTime = time;
-      };
-
-      // Kickoff animation loop.
-      requestAnimationFrame(next);
-
-      return dfr;
-    };
-  }
-
-  return FrameByFrameAnimation;
+  return {
+    Static: Static,
+    Queued: Queued
+  };
 });

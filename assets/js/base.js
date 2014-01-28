@@ -56,6 +56,8 @@ requirejs.config({
     'scrollTo': 'core/js/scrollTo',
     'waypoints': 'core/js/waypoints',
     'frameByFrameAnimation': 'core/js/frameByFrameAnimation',
+    'animationSequence': 'core/js/animationSequence',
+    'sprite': 'core/js/sprite',
     'sprintf': 'core/js/sprintf',
 
     // Compat

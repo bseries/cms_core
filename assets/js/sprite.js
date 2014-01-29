@@ -25,6 +25,12 @@ define(['jquery', 'thingsLoaded'], function($, ThingsLoaded) {
 
     this.blocksize = null;
 
+    // FIXME Force browser to prerender image
+    // on screen just preloading isn't enough.
+    // Check if it is enough to set insert image in DOM
+    // or set background on DOM element or must set
+    // background on element itself. Browsers are
+    // pretty eager with drawing.
     this.load = function() {
       var checker = new ThingsLoaded.ImageChecker();
 

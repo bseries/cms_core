@@ -11,8 +11,7 @@
 define(['jquery', 'compat'], function($, Compat) {
 
   Compat.run([
-    'animationFrame',
-    'performanceNow'
+    'animationFrame'
   ]);
 
   // Represents a sequence of frames. This can
@@ -28,9 +27,9 @@ define(['jquery', 'compat'], function($, Compat) {
     // Number of times we've run through all frames.
     this.looped = 0;
 
-    // Holds the current animation frame id in
-    // case there is an ongoing animation.
-    this.animationFrame = undefined;
+    // Holds the current interval id in
+    // case there is an ongoing animation loop.
+    this.interval = undefined;
 
     // The current frame number. May be of float type
     // use Math.floor() to get to current frame.
@@ -65,18 +64,24 @@ define(['jquery', 'compat'], function($, Compat) {
       });
     };
 
+
     // Plays the animation until certain conditions are met.
     this.start = function() {
       var dfr = new $.Deferred();
 
-      // Gets high-resolution timestamp.
-      var currentTime = window.performance.now();
+      if (_this.drain) {
+        dfr.resolve();
+        return dfr;
+      }
 
-      // Will show frame by frame using requestAnimationFrame.
-      var next = function next(time) {
-        var delta = (time - currentTime) / 1000;
-        _this.currentFrame += (delta * _this.fps);
-        var frame = _this.frames[Math.floor(_this.currentFrame)];
+      // Initial.
+      var frame = _this.frames[_this.currentFrame];
+
+      _this.update(frame);
+      _this.currentFrame++;
+
+      _this.interval = setInterval(function() {
+        frame = _this.frames[_this.currentFrame];
 
         if (!frame) {
           _this.looped++;
@@ -84,23 +89,20 @@ define(['jquery', 'compat'], function($, Compat) {
           // Reset sequence even we might stop, that way we get
           // a clean start - if needed.
           _this.currentFrame = 0;
-          frame = _this.frames[0];
+          frame = _this.frames[_this.currentFrame];
 
           // Will stop looping if in drain mode or loop count has been reached.
           if (_this.drain || (_this.loop !== true && _this.looped >= _this.loop)) {
             // Break out of animation here and signal that we are done to outer code.
             dfr.resolve();
+            clearInterval(_this.interval);
             return;
           }
         }
-        _this.animationFrame = requestAnimationFrame(next);
+
         _this.update(frame);
-
-        currentTime = time;
-      };
-
-      // Kickoff animation loop.
-      requestAnimationFrame(next);
+        _this.currentFrame++;
+      }, (1 / _this.fps) * 1000);
 
       return dfr;
     };
@@ -112,8 +114,8 @@ define(['jquery', 'compat'], function($, Compat) {
         to = parseInt(to.replace('%', ''), 10);
         to = (to / 100) * (_this.frames.length - 1);
       }
-      _this.currentFrame = to;
-      var frame = _this.frames[Math.floor(_this.currentFrame)];
+      _this.currentFrame = Math.floor(to);
+      var frame = _this.frames[_this.currentFrame];
 
       _this.update(frame);
     };
@@ -121,9 +123,11 @@ define(['jquery', 'compat'], function($, Compat) {
     // Updates the element with frame informations, effectively
     // switching out visible frames.
     this.update = function(frame) {
-       _this.element.css({
-        'background-image': 'url(' + frame.url + ')',
-        'background-position': '-' + frame.offset + 'px 0'
+      requestAnimationFrame(function() {
+         _this.element.css({
+          'background-image': 'url(' + frame.url + ')',
+          'background-position': '-' + (frame.offset) + 'px 0'
+        });
       });
     };
 

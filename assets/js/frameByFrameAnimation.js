@@ -46,11 +46,9 @@ define(['jquery', 'animationSequence', 'sprite'], function($, Sequence, Sprite) 
         blocksize: _this.blocksize,
         // Number of total sheets.
         totalSheets: 1,
-        queuePlays: _this._queuePlays
       }, options || {});
 
       this.fps = options.fps;
-      this.queuePlays = options.queuePlays;
 
       // Make a sequence out of loaded sheets and
       // their frames. Can only run once all are
@@ -89,14 +87,6 @@ define(['jquery', 'animationSequence', 'sprite'], function($, Sequence, Sprite) 
       }
       return initiated;
     };
-
-    // Seeks current to a relative position given in percentages (i.e. '20%').
-    this.seek = function(to) {
-      if (_this.queuePlays) {
-        throw 'Incompatible usage; cannot seek when using queue.';
-      }
-      _this.element.trigger('animation:seek', [to]);
-    };
   }
 
   // Supports just a single sequence, will not play automatically
@@ -124,7 +114,7 @@ define(['jquery', 'animationSequence', 'sprite'], function($, Sequence, Sprite) 
       _this.sequence.seek(to);
     };
   }
-  Static.prototype = Object.create(Static.prototype);
+  Static.prototype = Object.create(Base.prototype);
 
   // Queues multiple plays when calling the start() method. Honors
   // connection frames and can put sequences into drain mode when
@@ -134,6 +124,8 @@ define(['jquery', 'animationSequence', 'sprite'], function($, Sequence, Sprite) 
     Base.call(this);
 
     var _this = this;
+
+    this.plays = $({});
 
     // Starts to play a sequence.
     //
@@ -154,34 +146,33 @@ define(['jquery', 'animationSequence', 'sprite'], function($, Sequence, Sprite) 
 
       var sequence = new Sequence();
 
-      sequence.init(_this.element, _this.frames.slice(from, to), {
+      // Make to inclusive.
+      sequence.init(_this.element, _this.frames.slice(from, to + 1), {
         fps: _this.fps,
         loop: loop
       });
 
-      if (!_this.useQueue) {
-        _this.playing = true;
-
-        sequence.start()
-          .done(function() {
-            _this.playing = false;
-          });
-
-        return;
-      }
-      var plays = $({});
+      // Allows signaling outer listeners if the sequence has been
+      // stopped playing or it has been stopped because of drain.
+      var dfr = new $.Deferred();
 
       // Will automatically start playing once sequence queued if
       // it is not already playing another sequence.
-      plays.queue(function(next) {
+      _this.plays.queue(function(next) {
         _this.playing = true;
-
         sequence.start()
           .done(function() {
+            if (sequence.drain) {
+              dfr.reject();
+            } else {
+              dfr.resolve();
+            }
             _this.playing = false;
             next();
           });
       });
+
+      return dfr;
     };
   }
   Queued.prototype = Object.create(Base.prototype);

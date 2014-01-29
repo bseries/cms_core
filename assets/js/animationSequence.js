@@ -110,7 +110,7 @@ define(['jquery', 'compat'], function($, Compat) {
     this.seek = function(to) {
       if (to.indexOf('%') !== -1) {
         to = parseInt(to.replace('%', ''), 10);
-        to = (to / 100) * _this.frames.length;
+        to = (to / 100) * (_this.frames.length - 1);
       }
       _this.currentFrame = to;
       var frame = _this.frames[Math.floor(_this.currentFrame)];

@@ -1,5 +1,5 @@
 /*!
- * Compat Main Control Script
+ * Compat Manager
  *
  * Copyright (c) 2013-2014 Atelier Disko - All rights reserved.
  *
@@ -64,8 +64,9 @@ function($, _, versionCompare, Modernizr) {
   // Users of legacy browsers will by default be redirected to a browser upgrade page.
   url = '/browser';
   if (!modern && window.location != url) {
-    all.browser = function() {
+    all.browser = function(dfr) {
         window.location = url;
+        dfr.resolve();
         return; // No further script execution.
     };
   }
@@ -90,7 +91,7 @@ function($, _, versionCompare, Modernizr) {
   // }
 
   if (!Modernizr.inputtypes.date) {
-    all.inputDate = function() {
+    all.inputDate = function(dfr) {
       require(['inputDate', 'moment'], function(P, moment) {
         P.pattern = '[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}';
         P.placeholder = 'tt.mm.jjjj';
@@ -113,44 +114,45 @@ function($, _, versionCompare, Modernizr) {
         };
 
         P.make('input[type="date"]');
+        dfr.resolve();
       });
     };
   }
 
   // Test(window.XMLHttpRequest && (new XMLHttpRequest().sendAsBinary || (window.Uint8Array && window.ArrayBuffer)))
   if (!XMLHttpRequest.prototype.sendAsBinary) {
-    all.sendAsBinary = function() {
-      require(['sendAsBinary']);
+    all.sendAsBinary = function(dfr) {
+      require(['sendAsBinary'], dfr.resolve);
     };
   }
 
   if (!Modernizr.cssfilters) {
-    all.cssFilters = function() {
+    all.cssFilters = function(dfr) {
       window.polyfilter_scriptpath = 'http://assets.' + window.location.hostname + '/core/js/compat/';
-      require(['cssFilters']);
+      require(['cssFilters'], dfr.resolve);
     };
   }
 
-  Modernizr.addTest('textwrap', function() {
+  Modernizr.addTest('textwrap', function(dfr) {
     var style = document.documentElement.style;
     return (style.textWrap || style.WebkitTextWrap || style.MozTextWrap || style.MsTextWrap || style.OTextWrap);
   });
   if (!Modernizr.textwrap) {
-    all.balanceText = function() {
-      require(['balanceText']);
+    all.balanceText = function(dfr) {
+      require(['balanceText'], dfr.resolve);
       // Script automatically intializes on CSS class .balance-text.
     };
   }
 
   if (!window.requestAnimationFrame) {
-    all.animationFrame = function() {
-      require(['animationFrame']);
+    all.animationFrame = function(dfr) {
+      require(['animationFrame'], dfr.resolve);
     };
   }
 
   if (!window.performance) {
-    all.performanceNow = function() {
-      require(['performanceNow']);
+    all.performanceNow = function(dfr) {
+      require(['performanceNow'], dfr.resolve);
     };
   }
 
@@ -165,12 +167,26 @@ function($, _, versionCompare, Modernizr) {
       return _.keys(all);
     },
     run: function(selected) {
+      var dfrs = [];
+
       _.each(selected || _.keys(all), function(v) {
-        if (all.hasOwnProperty(v) && $.inArray(v, window.compat.applied) === -1) {
-          all[v]();
-          window.compat.applied.push(v);
+        var dfr = new $.Deferred();
+
+        if (!all.hasOwnProperty(v)) {
+          dfr.reject();
+        } else if ($.inArray(v, window.compat.applied) === -1) {
+          all[v](dfr);
+
+          dfr.done(function() {
+            window.compat.applied.push(v);
+          });
+        } else {
+          dfr.resolve();
         }
+        dfrs.push(dfr);
       });
+
+      return dfrs ? $.when(dfrs) : (new $.Deferred()).resolve();
     }
   };
 });

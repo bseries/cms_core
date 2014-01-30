@@ -30,6 +30,7 @@ requirejs.config({
   waitSeconds: 15,
   paths: {
     // Basics
+    'compat': 'core/js/require/compat',
     'domready': 'core/js/require/domready',
     'text': 'core/js/require/text',
     'async': 'core/js/require/async',
@@ -62,7 +63,7 @@ requirejs.config({
 
     // Compat
     'versioncompare': 'core/js/compat/versioncompare',
-    'compat': 'core/js/compat',
+    'compatManager': 'core/js/compatManager',
     'modernizr': 'core/js/compat/modernizr',
     'cssparser': 'core/js/cssparser',
     'cssFilters': 'core/js/compat/cssFilters',

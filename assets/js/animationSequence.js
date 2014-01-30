@@ -8,11 +8,7 @@
  * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
-define(['jquery', 'compat'], function($, Compat) {
-
-  Compat.run([
-    'animationFrame'
-  ]);
+define(['jquery', 'compat!animationFrame'], function($) {
 
   // Represents a sequence of frames. This can
   // be a subset of all frames available. Listens

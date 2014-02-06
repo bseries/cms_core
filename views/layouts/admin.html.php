@@ -26,6 +26,12 @@ FlashMessage::clear();
 		<!--[if lt IE 9]>>
 			<script src="<?= $this->assets->url('/core/js/compat/html5shiv.js') ?>"></script>
 		<![endif]-->
+		<noscript>
+			<link rel="stylesheet" type="text/css" href="<?= $this->assets->url('/core/css/compat/admin_noscript.css') ?>">
+		</noscript>
+		<!--[if lt IE 10]>
+			<link rel="stylesheet" type="text/css" href="<?= $this->assets->url('/core/css/compat/admin_ie9.css') ?>">
+		<![endif]-->
 
 		<?php echo $this->assets->style([
 			'/core/css/reset',

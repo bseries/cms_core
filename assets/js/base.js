@@ -60,6 +60,8 @@ requirejs.config({
     'animationSequence': 'core/js/animationSequence',
     'sprite': 'core/js/sprite',
     'sprintf': 'core/js/sprintf',
+    'hurry': 'core/js/hurry',
+    'hammer': 'core/js/hammer',
 
     // Compat
     'versioncompare': 'core/js/compat/versioncompare',
@@ -117,6 +119,10 @@ requirejs.config({
     },
     'sprintf': {
       exports: 'window.sprintf'
+    },
+    'hurry': {
+      deps: ['jquery'],
+      exports: 'Hurry'
     },
 
     // Compat

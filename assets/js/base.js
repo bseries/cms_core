@@ -37,6 +37,7 @@ requirejs.config({
     'goog': 'core/js/require/goog',
     'propertyParser': 'core/js/require/propertyParser',
     'jquery': 'core/js/jquery',
+    'jqueryUi': 'core/js/jqueryUi',
     'underscore': 'core/js/underscore',
 
     // App
@@ -81,6 +82,10 @@ requirejs.config({
       exports: '_'
     },
     'jquery': {
+      exports: '$'
+    },
+    'jqueryUi': {
+      deps: ['jquery'],
       exports: '$'
     },
 

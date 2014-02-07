@@ -29,10 +29,6 @@ class Users extends \cms_core\models\Base {
 		]
 	];
 
-	public static function pdo() {
-		return static::connection()->connection;
-	}
-
 	public static function init() {
 		extract(Message::aliases());
 

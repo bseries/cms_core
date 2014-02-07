@@ -6,6 +6,10 @@ class Base extends \lithium\data\Model {
 
 	use \li3_behaviors\data\model\Behaviors;
 
+	public static function pdo() {
+		return static::connection()->connection;
+	}
+
 	public static function enum($field, array $options = []) {
 		$options += ['map' => true];
 

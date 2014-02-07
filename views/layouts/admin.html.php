@@ -7,6 +7,7 @@ use \DateTime;
 use \IntlDateFormatter;
 use cms_core\extensions\cms\Panes;
 use cms_core\extensions\cms\Settings;
+use cms_core\models\Assets;
 
 $site = Settings::read('site');
 $locale = Environment::get('locale');
@@ -44,13 +45,24 @@ FlashMessage::clear();
 			'/core/js/base',
 			'/media/js/base'
 		]) ?>
+		<?php
+			// Load corresponding layout script.
+			echo $this->assets->script(["/core/js/views/layouts/{$this->_config['layout']}"]);
+
+			// Load corresponding view scripts automatically.
+			$view = $this->_config['controller'] . '/' . $this->_config['template'];
+			$library = str_replace('cms_', '', $this->_config['library']);
+			$library = $library == 'app' ? 'site' : $library;
+
+			$file  = parse_url(Assets::base('file'), PHP_URL_PATH);
+			$file .= "/{$library}/js/views/{$view}.js";
+
+			if (file_exists($file)) {
+				echo $this->assets->script(["/{$library}/js/views/{$view}"]);
+			}
+		?>
 		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>
-		<?php if (!empty(Settings::read('googleAnalytics.default'))): ?>
-			<?=$this->view()->render(['element' => 'ga'], [], [
-				'library' => 'cms_core'
-			]) ?>
-		<?php endif ?>
 		<script>
 			<?php $url = ['controller' => 'files', 'library' => 'cms_media', 'admin' => true] ?>
 

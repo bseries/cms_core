@@ -41,14 +41,19 @@ FlashMessage::clear();
 			'/site/js/base'
 		]) ?>
 		<?php
+			// Load corresponding layout script.
+			// echo $this->assets->script(["/core/js/views/layouts/{$this->_config['layout']}"]);
+
 			// Load corresponding view scripts automatically.
 			$view = $this->_config['controller'] . '/' . $this->_config['template'];
+			$library = str_replace('cms_', '', $this->_config['library']);
+			$library = $library == 'app' ? 'site' : $library;
 
 			$file  = parse_url(Assets::base('file'), PHP_URL_PATH);
-			$file .= '/site/js/views/' . $view . '.js';
+			$file .= "/{$library}/js/views/{$view}.js";
 
 			if (file_exists($file)) {
-				echo $this->assets->script(['/site/js/views/' . $view]);
+				echo $this->assets->script(["/{$library}/js/views/{$view}"]);
 			}
 		?>
 		<?php echo $this->styles() ?>

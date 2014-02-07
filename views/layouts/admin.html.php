@@ -75,8 +75,6 @@ FlashMessage::clear();
 					}
 				}
 			});
-
-			require(['form']);
 		</script>
 	</head>
 	<body class="layout-admin">

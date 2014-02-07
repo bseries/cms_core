@@ -8,7 +8,9 @@
  * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
-define(['jquery', 'domready!'], function($) {
+require(['jquery', 'domready!'], function($) {
+
+  // Automatically bind media attachment.
   var attachDirect = $('.use-media-attachment-direct');
   var attachJoined = $('.use-media-attachment-joined');
 
@@ -23,6 +25,7 @@ define(['jquery', 'domready!'], function($) {
     });
   }
 
+  // Automaticlly bind editors.
   var editorElements = $('.use-editor');
 
   if (editorElements.length) {
@@ -60,5 +63,32 @@ define(['jquery', 'domready!'], function($) {
         });
     });
   }
-});
 
+  // Automatically bind sortables.
+  var sortableElement = $('.use-manual-sorting');
+  if (sortableElement.length) {
+    require(['jquery', 'jqueryUi'],
+      function($, Editor, EditorMedia, EditorPageBreak) {
+        sortableElement.sortable({
+          items: '> tr',
+          update: function(ev, ui) {
+            var ids = [];
+            sortableElement.find('tr').each(function(k, v) {
+              ids.push($(v).data('id'));
+            });
+
+            $.ajax({
+              type: 'POST',
+              // Assumes we are on an index page and can relatively get to the endpoint.
+              url: window.location.pathname + '/order',
+              data: {'ids': ids},
+            }).done(function() {
+              $.notify('Sortierung gespeichert.', 'success');
+            });
+          }
+        });
+    });
+  }
+
+
+});

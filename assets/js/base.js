@@ -40,9 +40,6 @@ requirejs.config({
     'jqueryUi': 'core/js/jqueryUi',
     'underscore': 'core/js/underscore',
 
-    // App
-    'form': 'core/js/form',
-
     // Other
     'notify': 'core/js/notify',
     'editor': 'core/js/editor',

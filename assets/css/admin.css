@@ -799,3 +799,16 @@ form .help {
 .settings .title {
   max-width: none;
 }
+
+/* Sortable
+-------------------------------------------------------------- */
+.ui-sortable-helper {
+ cursor: -moz-grabbing;
+ cursor: -webkit-grabbing;
+ -webkit-transform: rotate(3deg);
+ -webkit-backface-visibility: hidden;
+ transform: rotate(3deg);
+}
+.sortable-placeholder {
+  background: #f8f8f8;
+}

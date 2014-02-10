@@ -70,6 +70,7 @@ require(['jquery', 'domready!'], function($) {
     require(['jquery', 'jqueryUi'],
       function($, Editor, EditorMedia, EditorPageBreak) {
         sortableElement.sortable({
+          placeholder: 'sortable-placeholder',
           items: '> tr',
           update: function(ev, ui) {
             var ids = [];

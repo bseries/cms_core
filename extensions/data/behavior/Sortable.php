@@ -43,26 +43,27 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 		'descend' => true
 	];
 
-	protected function _filters($model, $behavior, $config) {
-		$behavior = $this;
-
-		$model::applyFilter('save', function($self, $params, $chain) use ($behavior, $config) {
+	protected static function _filters($model, $behavior) {
+		$model::applyFilter('save', function($self, $params, $chain) use ($model, $behavior) {
 			if (!$params['entity']->exists()) {
-				$cluster = $behavior->_cluster(null, false, $params['data']);
-				$params['data'][$config['field']] = $behavior->_highestWeight($cluster) + 1;
+				$cluster = static::_cluster(
+					$model, $behavior,
+					null, false, $params['data']
+				);
+				$params['data'][$config['field']] = static::_highestWeight(
+					$model, $behavior, $cluster
+				) + 1;
 			}
 			return $chain->next($self, $params, $chain);
 		});
 	}
 
-	protected function _highestWeight($cluster = []) {
-		$model = $this->_model;
-		$field = $this->_config['field'];
+	protected static function _highestWeight($model, $behavior, $cluster = []) {
+		$field = $behavior->config('field');
 		$fieldEscaped = $model::connection()->name($field);
 
-		$conditions = $cluster;
-
-		$result = $model::find('first', compact('conditions') + array(
+		$result = $model::find('first', array(
+			'conditions' => $cluster,
 			'fields' => 'MAX(' . $fieldEscaped . ') AS `highest_weight`',
 		));
 		return current($result->data());
@@ -78,20 +79,24 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 	 *
 	 * Uses transactions automatically for isolation.
 	 *
+	 * Flow (ID/ORDER:
+	 * 1 - 1                 1 - 1      2 - 2     2 - 1
+	 * 2 - 2  [1 below 2]--> 2 - 2  --> 1 - 3 --> 1 - 2
+	 * 3 - 3                 3 - 4      3 - 4     3 - 3
+	 *
 	 * @param array $ids
 	 * @return boolean
 	 */
-	public static function weightSequence($model, $ids) {
-		if ($this->_config['descend']) {
-			$ids = array_revers($ids);
+	public static function weightSequence($model, $behavior, $ids) {
+		if ($behavior->config('descend')) {
+			$ids = array_reverse($ids);
 		}
 		$connection = $model::connection()->connection;
 
 		$connection->beginTransaction();
-		$cluster = $behavior->_cluster($previous = array_shift($ids));
-
-		foreach (array_reverse($ids) as $id) {
-			if (!static::_moveBelow($id, $previous, $cluster)) {
+		$cluster = static::_cluster($model, $behavior, $previous = array_shift($ids));
+		foreach ($ids as $id) {
+			if (!static::_moveBelow($model, $behavior, $id, $previous, $cluster)) {
 				$connection->rollback();
 				return false;
 			}
@@ -111,15 +116,11 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 	 * @param array $data Data that already contains (parts of) cluster fields.
 	 * @return array Cluster fields with values for $id usable as conditions.
 	 */
-	protected function _cluster($id = null, $forceFind = false, array $data = []) {
-		$model = $this->_model;
-		$field = $this->_config['field'];
-		$cluster = $this->_config['cluster'];
-
+	protected static function _cluster($model, $behavior, $id = null, $forceFind = false, array $data = []) {
 		$missing = [];
 		$conditions = [];
 
-		foreach ($cluster as $field) {
+		foreach ($behavior->config('cluster') as $field) {
 			if (empty($data[$field]) || $forceFind) {
 				$missing[] = $field;
 			} else {
@@ -149,15 +150,17 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 	 * Opens a gap, sets weight of entity, filling the gap, then ensuring the gap
 	 * is closed correctly.
 	 */
-	protected static function _moveBelow($id, $belowId, $cluster = []) {
-		$field = $this->_config['field'];
-		$model = $this->_model;
-
-		$weights = $model::find('list', array(
+	protected static function _moveBelow($model, $behavior, $id, $belowId, $cluster = []) {
+		$weights = [];
+		$results = $model::find('all', array(
 			'conditions' => array('id' => array($id, $belowId)),
-			'fields' => array('id', $field),
+			'fields' => array('id', $field = $behavior->config('field')),
 			'order' => false
 		));
+		foreach ($results as $result) {
+			$weights[$result->id] = $result->{$field};
+		}
+
 		if (count($weights) != 2) {
 			throw new Exception("Could not retrieve weights for id `{$id}` and ``{$belowId}`");
 		}
@@ -166,7 +169,7 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 			return true;
 		}
 
-		if (!static::_openGap($weights[$belowId], $cluster)) {
+		if (!static::_openGap($model, $behavior, $weights[$belowId], $cluster)) {
 			return false;
 		}
 		$result = $model::update(
@@ -176,18 +179,26 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 		if (!$result) {
 			return false;
 		}
-		return static::_closeGap($weights[$id], $cluster);
+		return static::_closeGap($model, $behavior, $weights[$id], $cluster);
 	}
 
-	protected static function _openGap($atWeight, $cluster = []) {
-		$model = $this->_model;
-		$field = $this->_config['field'];
+	protected static function _openGap($model, $behavior, $atWeight, $cluster = []) {
+		$field = $behavior->config('field');
 		$fieldEscaped = $model::connection()->name($field);
 
+		/*
 		$result = $model::update(
-			array($field => $fieldEscaped . ' + 1'),
-			array($field . ' >' => $atWeight) + $cluster
-		);
+		 array($field => $fieldEscaped . ' + 1')  + $cluster ,
+		 array($fieldEscaped . ' >= ' . $atWeight)
+		 );
+		*/
+		$connection = $model::connection()->connection;
+		$table = $model::meta('source');
+
+		$sql  =  "UPDATE `$table` SET {$fieldEscaped} = ($fieldEscaped + 1)";
+		$sql .= " WHERE {$fieldEscaped} > $atWeight";
+		$result = $connection->query($sql);
+		$result = $result->errorCode() == '00000';
 
 		if (!$result) {
 			throw new Exception("Failed to create gap below id `{$belowId}`");
@@ -195,15 +206,23 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 		return $result;
 	}
 
-	protected static function _closeGap($atWeight, $cluster = []) {
-		$model = $this->_model;
-		$field = $this->_config['field'];
+	protected static function _closeGap($model, $behavior, $atWeight, $cluster = []) {
+		$field = $behavior->config('field');
 		$fieldEscaped = $model::connection()->name($field);
 
+		/*
 		return $model::update(
 			array($field => $fieldEscaped . ' - 1'),
 			array($fieldEscaped . ' >' => $atWeight) + $cluster
 		);
+		*/
+		$connection = $model::connection()->connection;
+		$table = $model::meta('source');
+
+		$sql  =  "UPDATE `$table` SET {$fieldEscaped} = ($fieldEscaped - 1)";
+		$sql .= " WHERE {$fieldEscaped} > $atWeight";
+		$result = $connection->query($sql);
+		return $result->errorCode() == '00000';
 	}
 }
 

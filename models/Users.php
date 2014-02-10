@@ -18,7 +18,7 @@ use lithium\g11n\Message;
 
 class Users extends \cms_core\models\Base {
 
-	protected $_actsAs = [
+	protected static $_actsAs = [
 		'cms_core\extensions\data\behavior\Timestamp'
 	];
 

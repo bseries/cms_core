@@ -20,7 +20,7 @@ class Timestamp extends \li3_behaviors\data\model\Behavior {
 		'fields' => ['created' => 'created', 'modified' => 'modified']
 	];
 
-	protected function _filters($model, $behavior, $config) {
+	protected static function _filters($model, $behavior) {
 		$model::applyFilter('save', function($self, $params, $chain) use ($behavior) {
 			$params['data'] = $behavior->invokeMethod(
 				'_timestamp', [$params['entity'], $params['data']]
@@ -29,13 +29,14 @@ class Timestamp extends \li3_behaviors\data\model\Behavior {
 		});
 	}
 
-	protected function _timestamp($entity, $data) {
+	protected static function _timestamp($behavior, $entity, $data) {
 		$now = date('Y-m-d H:i:s');
+		$fields = $behavior->config('fields');
 
 		if (!$entity->exists()) {
-			$data[$this->_config['fields']['created']] = $now;
+			$data[$fields['created']] = $now;
 		}
-		$data[$this->_config['fields']['modified']] = $now;
+		$data[$fields['modified']] = $now;
 
 		return $data;
 	}

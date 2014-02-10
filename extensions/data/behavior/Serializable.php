@@ -17,7 +17,7 @@ use lithium\util\Set;
 
 class Serializable extends \li3_behaviors\data\model\Behavior {
 
-	protected function _config($config, $defaults) {
+	protected static function _config($model, $behavior, $config, $defaults) {
 		$config += ['fields' => []];
 
 		foreach (Set::normalize($config['fields']) as $field => &$pass) {
@@ -25,39 +25,33 @@ class Serializable extends \li3_behaviors\data\model\Behavior {
 				$pass = 'json';
 			}
 		}
-		$this->_config = $config;
+		$behavior->config($config);
 	}
 
-	protected function _filters($model, $behavior, $config) {
-		$model::applyFilter('save', function($self, $params, $chain) use ($behavior, $config) {
-			$model = $self;
-
-			foreach ($config['fields'] as $field => $type) {
+	protected static function _filters($model, $behavior) {
+		$model::applyFilter('save', function($self, $params, $chain) use ($behavior) {
+			foreach ($behavior->config('fields') as $field => $type) {
 				if (!isset($params['data'][$field])) {
 					continue;
 				}
-				$params['data'][$field] = $behavior::invokeMethod('_normalize', [
-					$params['data'][$field], $type
-				]);
-				$params['data'][$field] = $behavior::invokeMethod('_serialize', [
-					$params['data'][$field], $type
-				]);
+				$params['data'][$field] = static::_normalize($params['data'][$field], $type);
+				$params['data'][$field] = static::_serialize($params['data'][$field], $type);
 			}
 			return $chain->next($self, $params, $chain);
 		});
 
 		$methods = [];
-		foreach ($this->_config['fields'] as $field => $pass) {
+		foreach ($behavior->config('fields') as $field => $pass) {
 			$methods[$field] = function($entity, array $options = []) use ($behavior, $field, $pass) {
 				$options += ['serialized' => true];
 
 				$result = $entity->{$field};
-				$result = $behavior::invokeMethod('_normalize', [$result, $pass]);
+				$result = static::_normalize($result, $pass);
 
 				if (!$options['serialized']) {
 					return $result;
 				}
-				return $behavior::invokeMethod('_serialize', [$result, $pass]);
+				return static::_serialize($result, $pass);
 			};
 		}
 		$model::instanceMethods($methods);

@@ -17,8 +17,12 @@ use lithium\util\Set;
 
 class Serializable extends \li3_behaviors\data\model\Behavior {
 
+	protected $_defaults = [
+		'fields' => [],
+	];
+
 	protected static function _config($model, $behavior, $config, $defaults) {
-		$config += ['fields' => []];
+		$config += $defaults;
 
 		foreach (Set::normalize($config['fields']) as $field => &$pass) {
 			if (!$pass) {

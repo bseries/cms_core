@@ -17,30 +17,38 @@ use lithium\util\Set;
 
 /**
  * Allows for storing a sequential weight value with your entities. And
- * manipulating these if required. The entity with the highest weight
- * have the highest priority. By default - when order by weight descending -
- * new entities will receive the highest weight possible and thus be
- * placed at the very beginning of the order.
+ * manipulating these if required.
+ *
+ * By default - when order by weight descending - new entities will
+ * receive the highest weight possible and thus be placed at the very
+ * beginning of the order.
+ *
+ * @fixme Currently is tied to sources using database adapters.
  */
 class Sortable extends \li3_behaviors\data\model\Behavior {
 
+	/**
+	 * Default options.
+	 *
+	 * `'descend'`: When `true` a highest weight indicates top order position, use it
+	 *              when sorting by weight descending and want new entities to be
+	 *              inserted at the very top.
+	 *              When `false` a highest weight indicates bottom order position, use
+	 *              it when sorting by weight asceding and want new entities to
+	 *              be inserted at the very bottom.
+	 */
 	protected $_defaults = [
 		'field' => 'order',
-		'cluster' => []
+		'cluster' => [],
+		'descend' => true
 	];
 
-	protected function _init() {
-		parent::_init();
-
-		$model = $this->_model;
+	protected function _filters($model, $behavior, $config) {
 		$behavior = $this;
-		$config = $this->_config += $this->_defaults;
 
 		$model::applyFilter('save', function($self, $params, $chain) use ($behavior, $config) {
-			$model = $self;
-
 			if (!$params['entity']->exists()) {
-				$cluster = $this->_cluster(null, false, $params['data']);
+				$cluster = $behavior->_cluster(null, false, $params['data']);
 				$params['data'][$config['field']] = $behavior->_highestWeight($cluster) + 1;
 			}
 			return $chain->next($self, $params, $chain);
@@ -65,7 +73,8 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 	 * set. The order of the ids in the sequence dictates the final
 	 * order of the corresponding entities _relative_ to each other.
 	 *
-	 * First ID will get the heighest weight.
+	 * When `descend` is true, first ID will get the highest weight,
+	 * else first ID will get lowest weight.
 	 *
 	 * Uses transactions automatically for isolation.
 	 *
@@ -73,6 +82,9 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 	 * @return boolean
 	 */
 	public static function weightSequence($model, $ids) {
+		if ($this->_config['descend']) {
+			$ids = array_revers($ids);
+		}
 		$connection = $model::connection()->connection;
 
 		$connection->beginTransaction();

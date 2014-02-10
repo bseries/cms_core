@@ -16,15 +16,14 @@ namespace cms_core\extensions\data\behavior;
 
 class Timestamp extends \li3_behaviors\data\model\Behavior {
 
-	protected $_defaults = [
+	protected static $_defaults = [
 		'fields' => ['created' => 'created', 'modified' => 'modified']
 	];
 
 	protected static function _filters($model, $behavior) {
 		$model::applyFilter('save', function($self, $params, $chain) use ($behavior) {
-			$params['data'] = $behavior->invokeMethod(
-				'_timestamp', [$params['entity'], $params['data']]
-			);
+			$params['data'] = static::_timestamp($behavior, $params['entity'], $params['data']);
+
 			return $chain->next($self, $params, $chain);
 		});
 	}

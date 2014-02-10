@@ -37,7 +37,7 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 	 *              it when sorting by weight asceding and want new entities to
 	 *              be inserted at the very bottom.
 	 */
-	protected $_defaults = [
+	protected static $_defaults = [
 		'field' => 'order',
 		'cluster' => [],
 		'descend' => true
@@ -79,10 +79,12 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 	 *
 	 * Uses transactions automatically for isolation.
 	 *
-	 * Flow (ID/ORDER:
-	 * 1 - 1                 1 - 1      2 - 2     2 - 1
-	 * 2 - 2  [1 below 2]--> 2 - 2  --> 1 - 3 --> 1 - 2
-	 * 3 - 3                 3 - 4      3 - 4     3 - 3
+	 * Flow for ID 1 below ID 2 (ID/ORDER):
+	 * {{{
+	 * 1 - 1                 1 - 1                  2 - 2                 2 - 1
+	 * 2 - 2  [open gap] --> 2 - 2  [set order] --> 1 - 3 [close gap] --> 1 - 2
+	 * 3 - 3                 3 - 4                  3 - 4                 3 - 3
+	 * }}}
 	 *
 	 * @param array $ids
 	 * @return boolean

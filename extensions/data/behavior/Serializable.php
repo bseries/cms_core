@@ -17,14 +17,15 @@ use lithium\util\Set;
 
 class Serializable extends \li3_behaviors\data\model\Behavior {
 
-	protected $_defaults = [
+	protected static $_defaults = [
 		'fields' => [],
 	];
 
 	protected static function _config($model, $behavior, $config, $defaults) {
 		$config += $defaults;
+		$config['fields'] = Set::normalize($config['fields']);
 
-		foreach (Set::normalize($config['fields']) as $field => &$pass) {
+		foreach ($config['fields'] as $field => &$pass) {
 			if (!$pass) {
 				$pass = 'json';
 			}

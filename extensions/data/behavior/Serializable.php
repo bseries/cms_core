@@ -21,7 +21,7 @@ class Serializable extends \li3_behaviors\data\model\Behavior {
 		'fields' => [],
 	];
 
-	protected static function _config($model, $behavior, $config, $defaults) {
+	protected static function _config($config, $defaults) {
 		$config += $defaults;
 		$config['fields'] = Set::normalize($config['fields']);
 
@@ -30,7 +30,7 @@ class Serializable extends \li3_behaviors\data\model\Behavior {
 				$pass = 'json';
 			}
 		}
-		$behavior->config($config);
+		return $config;
 	}
 
 	protected static function _filters($model, $behavior) {

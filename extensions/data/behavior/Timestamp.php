@@ -1,4 +1,14 @@
 <?php
+/**
+ * Bureau
+ *
+ * Copyright (c) 2013-2014 Atelier Disko - All rights reserved.
+ *
+ * This software is proprietary and confidential. Redistribution
+ * not permitted. Unless required by applicable law or agreed to
+ * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
 
 namespace cms_core\extensions\data\behavior;
 
@@ -10,22 +20,7 @@ class Timestamp extends \li3_behaviors\data\model\Behavior {
 		'fields' => ['created' => 'created', 'modified' => 'modified']
 	];
 
-	protected function _init() {
-		parent::_init();
-
-		// @fixme Workaround
-		$this->_config += $this->_defaults;
-
-		$model = $this->_model;
-		$behavior = $this;
-
-	// When model is queried in relation this causes recursive madness.
-	//	foreach ($this->_config['fields'] as $name => $field) {
-	//		if (!$model::schema()->has($field)) {
-	//			throw new Exception("Model has no {$name} field `{$field}`.");
-	//		}
-	//	}
-
+	protected function _filters($model, $behavior, $config) {
 		$model::applyFilter('save', function($self, $params, $chain) use ($behavior) {
 			$params['data'] = $behavior->invokeMethod(
 				'_timestamp', [$params['entity'], $params['data']]

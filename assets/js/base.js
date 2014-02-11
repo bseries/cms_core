@@ -60,6 +60,7 @@ requirejs.config({
     'sprintf': 'core/js/sprintf',
     'hurry': 'core/js/hurry',
     'hammer': 'core/js/hammer',
+    'tween': 'core/js/tween',
 
     // Compat
     'versioncompare': 'core/js/compat/versioncompare',
@@ -125,6 +126,9 @@ requirejs.config({
     'hurry': {
       deps: ['jquery'],
       exports: 'Hurry'
+    },
+    'tween': {
+      exports: 'TWEEN'
     },
 
     // Compat

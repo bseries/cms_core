@@ -53,6 +53,18 @@ class Assets extends \lithium\template\Helper {
 		$base = AssetsModel::base('http');
 		return $base . '/v:' . $version . $path . $suffix;
 	}
+
+	public function urls($pattern) {
+		$fileBase = parse_url(AssetsModel::base('file'), PHP_URL_PATH);
+		$httpBase = AssetsModel::base('http');
+
+		$results = glob($fileBase . $pattern);
+
+		foreach ($results as &$result) {
+			$result = str_replace($fileBase, $httpBase, $result);
+		}
+		return $results;
+	}
 }
 
 ?>

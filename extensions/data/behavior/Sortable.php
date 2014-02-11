@@ -50,7 +50,7 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 					$model, $behavior,
 					null, false, $params['data']
 				);
-				$params['data'][$config['field']] = static::_highestWeight(
+				$params['data'][$behavior->config('field')] = static::_highestWeight(
 					$model, $behavior, $cluster
 				) + 1;
 			}

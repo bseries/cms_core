@@ -144,7 +144,7 @@ FlashMessage::clear();
 				<?php echo $this->content(); ?>
 			</div>
 		</div>
-		<footer>
+		<footer class="main">
 			<?=$this->view()->render(['element' => 'copyright'], [
 				'holder' => $this->html->link(
 					'Atelier Disko',

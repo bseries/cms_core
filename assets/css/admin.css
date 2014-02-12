@@ -245,20 +245,20 @@ nav#main .group {
 
 /* Footer
 ---------------------------------------------------------------- */
-body > footer a {
+footer.main a {
   color: white;
   border-bottom: 1px solid #e0dde3;
 }
-body > footer a:hover {
+footer.main a:hover {
   color: white;
   border-color: #fff;
 }
-body > footer .copyright,
-body > footer .credits,
-body > footer nav {
+footer.main .copyright,
+footer.main .credits,
+footer.main nav {
   display: inline;
 }
-body > footer {
+footer.main {
   color: white;
   width: 100%;
   background: black;
@@ -278,7 +278,7 @@ html {
 body {
   margin: 0 0 100px; /* bottom = footer height */
 }
-body > footer {
+footer.main {
   position: absolute;
   left: 0;
   bottom: 0;

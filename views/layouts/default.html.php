@@ -100,7 +100,7 @@ FlashMessage::clear();
 				<?php echo $this->content() ?>
 			</div>
 		</div>
-		<footer>
+		<footer class="main">
 			<?=$this->view()->render(['element' => 'footer'], [], [
 				'library' => 'app'
 			]) ?>

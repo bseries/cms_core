@@ -15,12 +15,9 @@ namespace cms_core\controllers;
 use cms_core\models\Tokens;
 use li3_flash_message\extensions\storage\FlashMessage;
 
-class TokensController extends \lithium\action\Controller {
+class TokensController extends \cms_core\controllers\BaseController {
 
-	public function admin_index() {
-		$data = Tokens::find('all');
-		return compact('data');
-	}
+	use \cms_core\controllers\AdminIndexTrait;
 
 	public function admin_generate() {
 		Tokens::generate();

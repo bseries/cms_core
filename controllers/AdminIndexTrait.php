@@ -1,6 +1,6 @@
 <?php
 /**
- * Bureau Core
+ * Bureau
  *
  * Copyright (c) 2013-2014 Atelier Disko - All rights reserved.
  *
@@ -12,15 +12,15 @@
 
 namespace cms_core\controllers;
 
-use cms_core\extensions\cms\Settings;
-use cms_core\extensions\cms\Features;
-
-class SettingsController extends \cms_core\controllers\BaseController {
+trait AdminIndexTrait {
 
 	public function admin_index() {
-		$settings = Settings::read();
-		$features = Features::read();
-		return compact('settings', 'features');
+		$model = $this->_model;
+
+		$data = $model::find('all', [
+			'order' => ['created' => 'DESC']
+		]);
+		return compact('data');
 	}
 }
 

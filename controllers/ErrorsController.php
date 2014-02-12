@@ -12,7 +12,7 @@
 
 namespace cms_core\controllers;
 
-class ErrorsController extends \lithium\action\Controller {
+class ErrorsController extends \cms_core\controllers\BaseController {
 
 	public function fourohthree() {
 		$this->_render['layout'] = 'error';

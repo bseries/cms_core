@@ -17,10 +17,15 @@ use li3_flash_message\extensions\storage\FlashMessage;
 use lithium\g11n\Message;
 use lithium\security\Auth;
 
-class UsersController extends \lithium\action\Controller {
+class UsersController extends \cms_core\controllers\BaseController {
+
+	use \cms_core\controllers\AdminDeleteTrait;
+	use \cms_core\controllers\AdminActivateTrait;
 
 	public function admin_index() {
-		$data = Users::find('all');
+		$data = Users::find('all', [
+			'order' => ['name' => 'ASC']
+		]);
 		return compact('data');
 	}
 
@@ -89,43 +94,6 @@ class UsersController extends \lithium\action\Controller {
 			'status' => 'success',
 			'data' => compact('passwords')
 		];
-	}
-
-	public function admin_delete() {
-		extract(Message::aliases());
-
-		$item = Users::findById($this->request->id);
-
-		if ($item->delete()) {
-			FlashMessage::write($t('Deleted.'));
-		} else {
-			FlashMessage::write($t('Failed to delete.'));
-		}
-		$this->redirect($this->request->referer());
-	}
-
-	public function admin_activate() {
-		extract(Message::aliases());
-
-		$item = Users::findById($this->request->id);
-
-		if ($item->activate()) {
-			FlashMessage::write($t('Activated.'));
-		} else {
-			FlashMessage::write($t('Failed to activate.'));
-		}
-		$this->redirect($this->request->referer());
-	}
-
-	public function admin_deactivate() {
-		$item = Users::findById($this->request->id);
-
-		if ($item->deactivate()) {
-			FlashMessage::write($t('Deactivated.'));
-		} else {
-			FlashMessage::write($t('Failed to deactivate.'));
-		}
-		$this->redirect($this->request->referer());
 	}
 
 	// We don't need to check if current user is admin, as

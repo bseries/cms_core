@@ -1,6 +1,6 @@
 <?php
 /**
- * Bureau Core
+ * Bureau
  *
  * Copyright (c) 2013-2014 Atelier Disko - All rights reserved.
  *
@@ -12,15 +12,20 @@
 
 namespace cms_core\controllers;
 
-use cms_core\extensions\cms\Settings;
-use cms_core\extensions\cms\Features;
+use lithium\g11n\Message;
+use li3_flash_message\extensions\storage\FlashMessage;
 
-class SettingsController extends \cms_core\controllers\BaseController {
+trait AdminOrderTrait {
 
-	public function admin_index() {
-		$settings = Settings::read();
-		$features = Features::read();
-		return compact('settings', 'features');
+	public function admin_order() {
+		extract(Message::aliases());
+		$model = $this->_model;
+
+		$ids = $this->request->data['ids'];
+		$model::weightSequence($ids);
+		FlashMessage::write($t('Successfully updated order.'));
+
+		return $this->render(['head' => true]);
 	}
 }
 

@@ -93,16 +93,6 @@ class Users extends \cms_core\models\Base {
 		});
 	}
 
-	public function activate($entity) {
-		$entity->is_active = true;
-		return $entity->save(null, ['validate' => false, 'whitelist' => ['is_active']]);
-	}
-
-	public function deactivate($entity) {
-		$entity->is_active = false;
-		return $entity->save(null, ['validate' => false, 'whitelist' => ['is_active']]);
-	}
-
 	// Generates a random (pronounceable) plaintext password.
 	public static function generatePassword($length = 8, $alphabet = 0) {
 		// Alphabets in descending order of complexity.

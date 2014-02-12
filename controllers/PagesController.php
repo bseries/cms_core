@@ -12,7 +12,7 @@
 
 namespace cms_core\controllers;
 
-class PagesController extends \lithium\action\Controller {
+class PagesController extends \cms_core\controllers\BaseController {
 
 	public function admin_home() {}
 

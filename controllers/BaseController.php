@@ -12,6 +12,42 @@
 
 namespace cms_core\controllers;
 
-class BaseController extends \lithium\action\Controller {}
+use lithium\util\Inflector;
+
+class BaseController extends \lithium\action\Controller {
+
+	/**
+	 * Fully namespaced name of the model that can
+	 * be associated mainly with the controller.
+	 *
+	 * - Redefine in your controller, to prevent that
+	 *   this is set automatically. -
+	 *
+	 * @var string
+	 */
+	protected $_model;
+
+	/**
+	 * Name of the library the controller belongs to.
+	 *
+	 * @var string
+	 */
+	protected $_library;
+
+	/**
+	 * Initializes parent, then populates more properties.
+	 */
+	protected function _init() {
+		parent::_init();
+
+		$class = explode('\\', get_called_class());
+
+		if (!$this->_model) {
+			$this->_model  = Inflector::pluralize(reset($class));
+			$this->_model .= '\models\\' . str_replace('Controller', '', end($class));
+		}
+		$this->_library = reset($class);
+	}
+}
 
 ?>

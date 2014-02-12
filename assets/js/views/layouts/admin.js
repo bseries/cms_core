@@ -68,7 +68,7 @@ require(['jquery', 'domready!'], function($) {
   var sortableElement = $('.use-manual-sorting');
   if (sortableElement.length) {
     require(['jquery', 'jqueryUi'],
-      function($, Editor, EditorMedia, EditorPageBreak) {
+      function($) {
         sortableElement.sortable({
           placeholder: 'sortable-placeholder',
           items: '> tr',
@@ -77,7 +77,6 @@ require(['jquery', 'domready!'], function($) {
             sortableElement.find('tr').each(function(k, v) {
               ids.push($(v).data('id'));
             });
-
             $.ajax({
               type: 'POST',
               // Assumes we are on an index page and can relatively get to the endpoint.
@@ -85,6 +84,9 @@ require(['jquery', 'domready!'], function($) {
               data: {'ids': ids},
             }).done(function() {
               $.notify('Sortierung gespeichert.', 'success');
+            }).fail(function() {
+              $.notify('Speichern der Sortierung fehlgeschlagen.', 'error');
+              $.notify('Stellen Sie sicher, dass AdBlock für diese Domain deaktiviert ist.');
             });
           }
         });

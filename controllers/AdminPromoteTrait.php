@@ -21,10 +21,15 @@ trait AdminPromoteTrait {
 		extract(Message::aliases());
 		$model = $this->_model;
 
-		$item = $model::find($this->request->id);
-		$item->save(['is_promoted' => true]);
-		FlashMessage::write($t('Successfully promoted.'));
-
+		$result = $model::first($this->request->id)->save(
+			['is_promoted' => true],
+			['whitelist' => ['is_promoted'], 'validate' => false]
+		);
+		if ($result) {
+			FlashMessage::write($t('Successfully promoted.'), ['level' => 'success']);
+		} else {
+			FlashMessage::write($t('Failed to promote.'), ['level' => 'error']);
+		}
 		return $this->redirect($this->request->referer());
 	}
 
@@ -32,10 +37,15 @@ trait AdminPromoteTrait {
 		extract(Message::aliases());
 		$model = $this->_model;
 
-		$item = $model::find($this->request->id);
-		$item->save(['is_promoted' => false]);
-		FlashMessage::write($t('Successfully unpromoted.'));
-
+		$result = $model::first($this->request->id)->save(
+			['is_promoted' => false],
+			['whitelist' => ['is_promoted'], 'validate' => false]
+		);
+		if ($result) {
+			FlashMessage::write($t('Successfully unpromoted.'), ['level' => 'success']);
+		} else {
+			FlashMessage::write($t('Failed to unpromote.'), ['level' => 'error']);
+		}
 		return $this->redirect($this->request->referer());
 	}
 }

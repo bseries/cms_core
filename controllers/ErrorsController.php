@@ -15,6 +15,9 @@ namespace cms_core\controllers;
 class ErrorsController extends \cms_core\controllers\BaseController {
 
 	public function fourohthree() {
+		if ($this->request->url == '/admin') {
+			return $this->redirect('/admin/session');
+		}
 		$this->_render['layout'] = 'error';
 		$this->_render['template'] = '403';
 		$this->response->status(403);

@@ -668,6 +668,14 @@ table .flag {
   background: white;
   padding: 1em;
 }
+#messages .message.error {
+  background: #f24543;
+  color: white;
+}
+#messages .message.success {
+  background: #1fbba6;
+  color: white;
+}
 
 /* Misc
 -------------------------------------------------------------- */
@@ -787,7 +795,6 @@ h1 + .actions {
 -------------------------------------------------------------- */
 form .help {
   color: gray;
-  margin-top: -.5em;
   margin-bottom: 1.5em;
   font-size: 14px;
   max-width: 600px;

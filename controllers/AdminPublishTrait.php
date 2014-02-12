@@ -21,10 +21,15 @@ trait AdminPublishTrait {
 		extract(Message::aliases());
 		$model = $this->_model;
 
-		$item = $model::find($this->request->id);
-		$item->save(['is_published' => true]);
-		FlashMessage::write($t('Successfully published.'));
-
+		$result = $model::first($this->request->id)->save(
+			['is_published' => true],
+			['whitelist' => ['is_published'], 'validate' => false]
+		);
+		if ($result) {
+			FlashMessage::write($t('Successfully published.'), ['level' => 'success']);
+		} else {
+			FlashMessage::write($t('Failed to publish.'), ['level' => 'error']);
+		}
 		return $this->redirect($this->request->referer());
 	}
 
@@ -32,10 +37,15 @@ trait AdminPublishTrait {
 		extract(Message::aliases());
 		$model = $this->_model;
 
-		$item = $model::find($this->request->id);
-		$item->save(['is_published' => false]);
-		FlashMessage::write($t('Successfully unpublished.'));
-
+		$result = $model::first($this->request->id)->save(
+			['is_published' => false],
+			['whitelist' => ['is_published'], 'validate' => false]
+		);
+		if ($result) {
+			FlashMessage::write($t('Successfully unpublished.'), ['level' => 'success']);
+		} else {
+			FlashMessage::write($t('Failed to unpublish.'), ['level' => 'error']);
+		}
 		return $this->redirect($this->request->referer());
 	}
 }

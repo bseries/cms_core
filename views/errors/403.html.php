@@ -13,13 +13,20 @@
 	</ul>
 	<ul class="try">
 		<?php if (!$authedUser): ?>
-			<li><?= $this->html->link('Login to your account.','Users::session') ?>
+			<li><?= $this->html->link('Login to your account.', [
+				'controller' => 'Users', 'action' => 'session', 'admin' => true,
+				'library' => 'cms_core'
+			]) ?>
 		<?php endif ?>
 		<li><?php echo $t(
 			'Go to the frontpage at <strong>{:url}</strong>.',
 			[
 				'url' => $this->html->link(
-					$this->url('Pages::home', ['absolute' => true]), 'Pages::home'
+					$this->url(
+						['controller' => 'Pages', 'action' => 'home', 'admin' => true, 'library' => 'cms_core'],
+						['absolute' => true]
+					),
+					['controller' => 'Pages', 'action' => 'home', 'admin' => true, 'library' => 'cms_core']
 				)
 			]
 		)?></li>

@@ -25,10 +25,10 @@ trait AdminEditTrait {
 
 		if ($this->request->data) {
 			if ($item->save($this->request->data)) {
-				FlashMessage::write($t('Successfully saved.'));
+				FlashMessage::write($t('Successfully saved.'), ['level' => 'success']);
 				return $this->redirect(['action' => 'index', 'library' => $this->_library]);
 			} else {
-				FlashMessage::write($t('Failed to save.'));
+				FlashMessage::write($t('Failed to save.'), ['level' => 'error']);
 			}
 		}
 		$this->_render['template'] = 'admin_form';

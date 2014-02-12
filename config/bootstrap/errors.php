@@ -150,7 +150,17 @@ if (!Environment::is('development')) {
 			$message .= ' ;message was `' . $e->getMessage() . '`.';
 			Logger::debug($message);
 
-			return $errorResponse($params['request'], $e->getCode() ?: 500);
+			$controller = Libraries::instance('controllers', 'cms_core.Errors', ['request' => $params['request']]);
+
+			$map = [
+				500 => 'fiveohoh',
+				404 => 'fourohfour',
+				403 => 'fourohthree'
+			];
+			return $controller(
+				$params['request'],
+				['action' => $map[$e->getCode() ?: 500]]
+			);
 		}
 	});
 }

@@ -24,9 +24,9 @@ trait AdminDeleteTrait {
 		$item = $model::find($this->request->id);
 
 		if ($item->delete()) {
-			FlashMessage::write($t('Successfully deleted.'));
+			FlashMessage::write($t('Successfully deleted.'), ['level' => 'success']);
 		} else {
-			FlashMessage::write($t('Failed to delete.'));
+			FlashMessage::write($t('Failed to delete.'), ['level' => 'error']);
 		}
 		return $this->redirect($this->request->referer());
 	}

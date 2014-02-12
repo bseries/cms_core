@@ -21,12 +21,14 @@ trait AdminActivateTrait {
 		extract(Message::aliases());
 		$model = $this->_model;
 
-		$item = $model::create(['id' => $this->request->id, 'is_active' => true]);
-
-		if ($item->save()) {
-			FlashMessage::write($t('Activated.'));
+		$result = $model::first($this->request->id)->save(
+			['is_active' => true],
+			['whitelist' => ['is_active'], 'validate' => false]
+		);
+		if ($result) {
+			FlashMessage::write($t('Activated.'), ['level' => 'success']);
 		} else {
-			FlashMessage::write($t('Failed to activate.'));
+			FlashMessage::write($t('Failed to activate.'), ['level' => 'error']);
 		}
 		return $this->redirect($this->request->referer());
 	}
@@ -35,12 +37,14 @@ trait AdminActivateTrait {
 		extract(Message::aliases());
 		$model = $this->_model;
 
-		$item = $model::create(['id' => $this->request->id, 'is_active' => false]);
-
-		if ($item->save()) {
-			FlashMessage::write($t('Deactivated.'));
+		$result = $model::first($this->request->id)->save(
+			['is_active' => false],
+			['whitelist' => ['is_active'], 'validate' => false]
+		);
+		if ($result) {
+			FlashMessage::write($t('Deactivated.'), ['level' => 'success']);
 		} else {
-			FlashMessage::write($t('Failed to deactivate.'));
+			FlashMessage::write($t('Failed to deactivate.'), ['level' => 'error']);
 		}
 		return $this->redirect($this->request->referer());
 	}

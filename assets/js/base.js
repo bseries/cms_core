@@ -162,7 +162,7 @@ function($) {
   var flashLevel = $('#messages').data('flash-level') || 'neutral';
 
   if (flashMessage) {
-    $.notify(flashMessage, 'notify-level-' + flashLevel);
+    $.notify(flashMessage, flashLevel);
   }
 });
 

@@ -23,7 +23,7 @@ trait AdminOrderTrait {
 
 		$ids = $this->request->data['ids'];
 		$model::weightSequence($ids);
-		FlashMessage::write($t('Successfully updated order.'));
+		FlashMessage::write($t('Successfully updated order.'), ['level' => 'success']);
 
 		return $this->render(['head' => true]);
 	}

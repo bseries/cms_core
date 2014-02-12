@@ -43,8 +43,8 @@ class BaseController extends \lithium\action\Controller {
 		$class = explode('\\', get_called_class());
 
 		if (!$this->_model) {
-			$this->_model  = Inflector::pluralize(reset($class));
-			$this->_model .= '\models\\' . str_replace('Controller', '', end($class));
+			$this->_model  = reset($class) . '\models\\';
+			$this->_model .= Inflector::pluralize(str_replace('Controller', '', end($class)));
 		}
 		$this->_library = reset($class);
 	}

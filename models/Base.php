@@ -2,6 +2,8 @@
 
 namespace cms_core\models;
 
+use DateTime;
+
 class Base extends \lithium\data\Model {
 
 	use \li3_behaviors\data\model\Behaviors;
@@ -28,6 +30,10 @@ class Base extends \lithium\data\Model {
 			}
 		}
 		return $result;
+	}
+
+	public function date($entity) {
+		return DateTime::createFromFormat('Y-m-d H:i:s', $entity->created);
 	}
 }
 

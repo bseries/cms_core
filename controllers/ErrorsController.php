@@ -12,6 +12,8 @@
 
 namespace cms_core\controllers;
 
+use jsend\Response as JSendResponse;
+
 class ErrorsController extends \cms_core\controllers\BaseController {
 
 	public function fourohthree() {
@@ -33,6 +35,16 @@ class ErrorsController extends \cms_core\controllers\BaseController {
 		$this->_render['layout'] = 'error';
 		$this->_render['template'] = '500';
 		$this->response->status(500);
+
+		if ($this->request->accepts() === 'json') {
+			$response = new JSendResponse();
+			$response->error('An unkown error occured.');
+
+			$this->render(array(
+				'type' => $this->request->accepts(),
+				'data' => $response->to('array')
+			));
+		}
 	}
 
 	public function fiveohthree() {

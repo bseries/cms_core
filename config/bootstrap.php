@@ -47,6 +47,9 @@ Libraries::add('temporary', [
 Libraries::add('textual', array(
 	'path' => dirname(__DIR__) . '/libraries/textual/src'
 ));
+Libraries::add('jsend', array(
+	'path' => dirname(__DIR__) . '/libraries/jsend/src'
+));
 require dirname(__DIR__) . '/libraries/guzzle/vendor/autoload.php';
 // Libraries::add('guzzle', [
 //	'path' => dirname(__DIR__) . '/libraries/guzzle/src',

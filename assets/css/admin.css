@@ -568,8 +568,13 @@ button.small,
 .media-attachment .selected {
   min-height: 10em;
   margin-bottom: 1em;
+  opacity: 0;
+  transition: opacity .15s ease;
 }
-.media-attachment .selected:empty {
+.media-attachment .selected.populated {
+  opacity: 1;
+}
+.media-attachment .selected.populated:empty {
   background: url("../img/none_bg.png") no-repeat -350px 0;
 }
 .media-attachment img {

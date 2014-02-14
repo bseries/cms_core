@@ -22,14 +22,14 @@ class TokensController extends \cms_core\controllers\BaseController {
 	public function admin_generate() {
 		Tokens::generate();
 
-		FlashMessage::write('Token generated.');
+		FlashMessage::write('Token generated.', ['level' => 'success']);
 		return $this->redirect(['action' => 'index', 'library' => 'cms_core']);
 	}
 
 	public function admin_void() {
 		Tokens::void($token = $this->request->token);
 
-		FlashMessage::write("Voided token `{$token}`.");
+		FlashMessage::write("Voided token `{$token}`.", ['level' => 'success']);
 		return $this->redirect(['action' => 'index', 'library' => 'cms_core']);
 	}
 }

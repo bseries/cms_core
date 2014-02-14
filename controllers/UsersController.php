@@ -41,10 +41,10 @@ class UsersController extends \cms_core\controllers\BaseController {
 			$events = ['create', 'passwordInit'];
 
 			if ($item->save($this->request->data, compact('events'))) {
-				FlashMessage::write($t('Successfully saved.'));
+				FlashMessage::write($t('Successfully saved.'), ['level' => 'success']);
 				return $this->redirect(['action' => 'index', 'library' => 'cms_core']);
 			} else {
-				FlashMessage::write($t('Failed to save.'));
+				FlashMessage::write($t('Failed to save.'), ['level' => 'error']);
 			}
 		}
 		$roles = Users::enum('role');
@@ -72,10 +72,10 @@ class UsersController extends \cms_core\controllers\BaseController {
 			}
 
 			if ($item->save($this->request->data)) {
-				FlashMessage::write($t('Successfully saved.'));
+				FlashMessage::write($t('Successfully saved.'), ['level' => 'success']);
 				return $this->redirect(['action' => 'index', 'library' => 'cms_core']);
 			} else {
-				FlashMessage::write($t('Failed to save.'));
+				FlashMessage::write($t('Failed to save.'), ['level' => 'error']);
 			}
 		}
 		$roles = Users::enum('role');
@@ -105,9 +105,9 @@ class UsersController extends \cms_core\controllers\BaseController {
 		$item->role = $this->request->role;
 
 		if ($item->save(null, ['validate' => false, 'whitelist' => ['role']])) {
-			FlashMessage::write($t("Assigned role `{$item->role}`."));
+			FlashMessage::write($t("Assigned role `{$item->role}`."), ['level' => 'success']);
 		} else {
-			FlashMessage::write($t("Failed to assign role `{$item->role}`."));
+			FlashMessage::write($t("Failed to assign role `{$item->role}`."), ['level' => 'error']);
 		}
 		$this->redirect($this->request->referer());
 	}
@@ -121,10 +121,10 @@ class UsersController extends \cms_core\controllers\BaseController {
 
 		if ($this->request->data) {
 			if (Auth::check('default', $this->request)) {
-				FlashMessage::write($t('Authenticated.'));
+				FlashMessage::write($t('Authenticated.'), ['level' => 'success']);
 				return $this->redirect('/admin');
 			}
-			FlashMessage::write($t('Failed to authenticate.'));
+			FlashMessage::write($t('Failed to authenticate.'), ['level' => 'error']);
 			return $this->redirect($this->request->referer());
 		}
 	}
@@ -134,7 +134,7 @@ class UsersController extends \cms_core\controllers\BaseController {
 
 		Auth::clear('default');
 
-		FlashMessage::write('Successfully logged out.');
+		FlashMessage::write($t('Successfully logged out.'), ['level' => 'success']);
 		return $this->redirect('/admin/session');
 	}
 

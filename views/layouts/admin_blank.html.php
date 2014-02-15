@@ -22,9 +22,6 @@ FlashMessage::clear();
 		<link rel="icon" href="<?= $this->assets->url('/core/ico/admin.png') ?>">
 
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<!--[if lt IE 9]>>
-			<script src="<?= $this->assets->url('/core/js/compat/html5shiv.js') ?>"></script>
-		<![endif]-->
 
 		<?php echo $this->assets->style([
 			'/core/css/reset',

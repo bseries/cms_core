@@ -8,7 +8,7 @@
  * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
-define('compat', function(module) {
+define(function(module) {
   var normalize = function(name, normalize) {
     return normalize(name);
   };

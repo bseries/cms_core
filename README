@@ -3,8 +3,10 @@ BUREAU Core
 
 Synopsis
 --------
-n/a
-Bureau is an opinionated CMS-like distibutions framework that make several assumptions:
+
+Bureau is explicit.
+
+Bureau is an opinionated CMS framework that make several assumptions:
 
 - Caching through memcached; don't hit the filesystem, memcached as the
   most superior caching system.

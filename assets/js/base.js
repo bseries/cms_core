@@ -52,7 +52,7 @@ requirejs.config({
     'thingsLoaded': 'core/js/thingsLoaded',
     'moment': 'core/js/moment',
     'sprintf': 'core/js/sprintf',
-    'casync': 'core/js/async',
+    'caolan/async': 'core/js/async',
 
     // Compat
     'versioncompare': 'core/js/compat/versioncompare',

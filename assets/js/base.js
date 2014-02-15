@@ -12,7 +12,6 @@
 // Export global App (configuration) object.
 var App = {
   env: {
-    // debugCompat: false,
     project: {
       version: '__REV__'
     }
@@ -52,15 +51,7 @@ requirejs.config({
     'handlebars': 'core/js/handlebars',
     'thingsLoaded': 'core/js/thingsLoaded',
     'moment': 'core/js/moment',
-    'scrollTo': 'core/js/scrollTo',
-    'waypoints': 'core/js/waypoints',
-    'frameByFrameAnimation': 'core/js/frameByFrameAnimation',
-    'animationSequence': 'core/js/animationSequence',
-    'sprite': 'core/js/sprite',
     'sprintf': 'core/js/sprintf',
-    'hurry': 'core/js/hurry',
-    'hammer': 'core/js/hammer',
-    'tween': 'core/js/tween',
     'casync': 'core/js/async',
 
     // Compat
@@ -73,7 +64,6 @@ requirejs.config({
     'inputDate': 'core/js/compat/inputDate',
     'sendAsBinary': 'core/js/compat/sendAsBinary',
     'animationFrame': 'core/js/compat/animationFrame',
-    'performanceNow': 'core/js/compat/performanceNow'
   },
   shim: {
     // Basics
@@ -117,19 +107,8 @@ requirejs.config({
       deps: ['jquery'],
       exports: 'ThingsLoaded'
     },
-    'waypoints': {
-      deps: ['jquery'],
-      exports: 'jQuery.fn.waypoint'
-    },
     'sprintf': {
       exports: 'window.sprintf'
-    },
-    'hurry': {
-      deps: ['jquery'],
-      exports: 'Hurry'
-    },
-    'tween': {
-      exports: 'TWEEN'
     },
 
     // Compat

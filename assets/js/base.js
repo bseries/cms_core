@@ -61,6 +61,7 @@ requirejs.config({
     'hurry': 'core/js/hurry',
     'hammer': 'core/js/hammer',
     'tween': 'core/js/tween',
+    'casync': 'core/js/async',
 
     // Compat
     'versioncompare': 'core/js/compat/versioncompare',

@@ -2,6 +2,11 @@
 /*!
  * Placeholder Stylesheet
  *
+ * This stylesheet is loaded when the browser doesn't support
+ * the placeholder element - through the compat manager. It makes
+ * labels of form inputs visible again in cases they were hidden
+ * when placeholders were used as their replacement.
+ *
  * Copyright (c) 2013-2014 Atelier Disko - All rights reserved.
  *
  * This software is proprietary and confidential. Redistribution

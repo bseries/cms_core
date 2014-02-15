@@ -186,7 +186,7 @@ function($, _, versionCompare, Modernizr) {
         dfrs.push(dfr);
       });
 
-      return dfrs ? $.when(dfrs) : (new $.Deferred()).resolve();
+      return dfrs ? $.when.apply(dfrs) : (new $.Deferred()).resolve();
     }
   };
 });

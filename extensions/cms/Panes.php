@@ -27,12 +27,13 @@ class Panes extends \lithium\core\StaticObject {
 		$options += [
 			'title' => Inflector::humanize($name),
 			'url' => null,
-			'group' => Panes::GROUP_NONE
+			'group' => Panes::GROUP_NONE,
+			'nested' => []
 		];
 		if (is_callable($options['url'])) {
 			$options['url'] = $options['url']();
 		}
-		Environment::set(true, ['panes' => [$name =>  compact('name', 'library') + $options]]);
+		Environment::set(true, ['panes' => [$name => compact('name', 'library') + $options]]);
 	}
 
 	public static function grouped() {

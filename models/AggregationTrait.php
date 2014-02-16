@@ -174,13 +174,6 @@ trait AggregationTrait {
 		return call_user_func_array([$entity->original, $method], $args);
 	}
 
-	/*
-	public function __get($name) {
-		var_dump(func_get_args());
-		die;
-	}
-	 */
-
 	public function type($entity) {
 		foreach (static::$_models as $name => $model) {
 			if ($model === $entity->original->model()) {

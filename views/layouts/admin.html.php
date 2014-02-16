@@ -122,7 +122,7 @@ FlashMessage::clear();
 					<?php endif ?>
 				</div>
 			</header>
-			<nav id="main">
+			<nav class="main">
 				<?php foreach (Panes::grouped() as $group => $panes): ?>
 					<div class="group group-<?= $group ?>">
 						<?php foreach ($panes as $pane): ?>

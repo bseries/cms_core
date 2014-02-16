@@ -21,17 +21,20 @@ body {
   -moz-font-feature-settings: "liga" 1, "frac" 1, "kern" 1, "smcp" 1;
   font-feature-settings: "liga" 1, "frac" 1, "kern" 1, "smcp" 1;
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 
   line-height: 1.35;
 
   color: #303030;
   background-color: #fff;
 
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 * {
   box-sizing: border-box;
-  -moz-box-sizing: border-box;
 }
 
 .hide {
@@ -112,7 +115,7 @@ p a:hover {
   text-decoration: none;
 }
 #container > header {
-  box-shadow: inset 0px -5px 5px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 -5px 5px 2px rgba(0, 0, 0, 0.5);
   height: 280px;
   background: url("../img/stones.jpg");
   padding: 1em 1.5em;
@@ -201,20 +204,19 @@ p a:hover {
 
 /* Sidebar Nav
 ---------------------------------------------------------------- */
-nav#main {
+nav.main {
   padding: 1em 0 0 1em;
   display: inline-block;
   width: 20%;
   min-width: 200px;
 }
-nav#main :first-child {
+nav.main :first-child {
   border-radius: 3px 3px 0 0;
 }
-nav#main :last-child {
+nav.main :last-child {
   border-radius: 0 0 3px 3px;
 }
-nav#main a {
-  vertical-align: middle;
+nav.main a {
   padding: 1em;
   height: 3em;
   color: #303030;
@@ -222,11 +224,11 @@ nav#main a {
   background: #e3e3e3;
   text-decoration: none;
 }
-nav#main a:hover {
+nav.main a:hover {
   color: #fff;
   background: #555;
 }
-nav#main .group {
+nav.main .group {
   margin-bottom: .5em;
 }
 
@@ -262,7 +264,7 @@ footer.main {
   color: white;
   width: 100%;
   background: black;
-  box-shadow: inset 0px 5px 5px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 5px 5px 2px rgba(0, 0, 0, 0.5);
   height: 280px;
   background: url("../img/stones.jpg");
   padding: 2em 1.5em;
@@ -421,7 +423,6 @@ button.small,
 [data-wysihtml5-dialog] {
 	display: block;
 	float: left;
-	vertical-align: middle;
 }
 [data-wysihtml5-command] {
 	display: block;
@@ -491,8 +492,8 @@ button.small,
   position: fixed;
   z-index: 1;
 
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   height:100%;
   width:100%;
 
@@ -522,7 +523,7 @@ button.small,
 }
 #modal.passwords .content {
   text-align: center;
-  -webkit-columns: 3;
+  -columns: 3;
 }
 
 /* Progress (nprogress)
@@ -548,15 +549,12 @@ button.small,
 #nprogress .peg {
   display: block;
   position: absolute;
-  right: 0px;
+  right: 0;
   width: 100px;
   height: 100%;
   box-shadow: 0 0 10px #29d, 0 0 5px #29d;
   opacity: 1.0;
-
-  -webkit-transform: rotate(3deg) translate(0px, -4px);
-      -ms-transform: rotate(3deg) translate(0px, -4px);
-          transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
 }
 
 /* Media Attachment
@@ -749,7 +747,8 @@ h1 + .actions {
 .media-explorer .available .item.selected .overlay {
   position: absolute;
   top: 0;
-  background: rgba(31, 187, 166, .5); /* #1fbba6 */
+  background: #1fbba6;
+  background: rgba(31, 187, 166, .5);
   width: 100%;
   height: 100%;
   display: block;
@@ -775,7 +774,7 @@ h1 + .actions {
   padding: 0 1em 2em 1em;
   width: 100%;
   z-index: 30;
-  box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.5);
 }
 .media-explorer .transfer div + div {
   margin-top: 1em;

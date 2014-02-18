@@ -10,9 +10,6 @@ $dateFormatter = new IntlDateFormatter(
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
 	<h1 class="alpha"><?= $t('Users') ?></h1>
 
-	<nav class="actions">
-		<?= $this->html->link($t('new user'), ['action' => 'add', 'library' => 'cms_core'], ['class' => 'button']) ?>
-	</nav>
 	<table>
 		<thead>
 			<tr>

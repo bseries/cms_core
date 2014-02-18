@@ -10,9 +10,6 @@ $dateFormatter = new IntlDateFormatter(
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
 	<h1 class="alpha"><?= $t('Tokens') ?></h1>
 
-	<nav class="actions">
-		<?= $this->html->link($t('generate new token'), ['action' => 'generate', 'library' => 'cms_core'], ['class' => 'button']) ?>
-	</nav>
 	<?php if ($data->count()): ?>
 		<table>
 			<thead>

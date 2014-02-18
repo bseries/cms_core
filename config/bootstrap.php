@@ -76,12 +76,20 @@ require __DIR__ . '/bootstrap/auth.php';
 Panes::register('cms_core', 'users', [
 	'title' => $t('Users'),
 	'group' =>  Panes::GROUP_ACCESS,
-	'url' => ['controller' => 'users', 'action' => 'index', 'library' => 'cms_core', 'admin' => true]
+	'url' => $base = ['controller' => 'users', 'action' => 'index', 'library' => 'cms_core', 'admin' => true],
+	'actions' => [
+		$t('List Users') => ['action' => 'index'] + $base,
+		$t('New User') => ['action' => 'add'] + $base
+	]
 ]);
 Panes::register('cms_core', 'tokens', [
 	'title' => $t('Tokens'),
 	'group' => Panes::GROUP_ACCESS,
-	'url' => ['controller' => 'tokens', 'action' => 'index', 'library' => 'cms_core', 'admin' => true]
+	'url' => $base = ['controller' => 'tokens', 'action' => 'index', 'library' => 'cms_core', 'admin' => true],
+	'actions' => [
+		$t('List Tokens') => ['action' => 'index'] + $base,
+		$t('Generate Token') => ['action' => 'generate'] + $base
+	]
 ]);
 Panes::register('cms_core', 'settings', [
 	'title' => $t('Settings & Features'),

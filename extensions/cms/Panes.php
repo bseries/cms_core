@@ -28,7 +28,7 @@ class Panes extends \lithium\core\StaticObject {
 			'title' => Inflector::humanize($name),
 			'url' => null,
 			'group' => Panes::GROUP_NONE,
-			'nested' => []
+			'actions' => []
 		];
 		if (is_callable($options['url'])) {
 			$options['url'] = $options['url']();

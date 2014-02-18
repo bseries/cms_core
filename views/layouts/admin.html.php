@@ -126,7 +126,14 @@ FlashMessage::clear();
 				<?php foreach (Panes::grouped() as $group => $panes): ?>
 					<div class="group group-<?= $group ?>">
 						<?php foreach ($panes as $pane): ?>
-							<?= $this->html->link($pane['title'], $pane['url']) ?>
+							<div class="pane">
+								<?= $this->html->link($pane['title'], $pane['url'] ?: '#') ?>
+								<ul class="actions">
+								<?php foreach ($pane['actions'] as $title => $url): ?>
+									<li><?= $this->html->link($title, $url) ?>
+								<?php endforeach ?>
+								</ul>
+							</div>
 						<?php endforeach ?>
 					</div>
 				<?php endforeach ?>

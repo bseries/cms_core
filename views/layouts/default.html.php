@@ -40,12 +40,33 @@ FlashMessage::clear();
 				'/core/js/require',
 			];
 
-			// Load base js files in cms_* assets/js.
-			foreach (Libraries::get() as $name => $library) {
-				if (strpos($name, 'cms_') !== 0) {
-					continue;
+			// Filter out any non-cms libraries, then sort.
+			$libraries = Libraries::get();
+			$libraries = array_filter($libraries, function($a) {
+				return strpos($a['name'], 'cms_') === 0 || $a['name'] === 'app';
+			});
+			uasort($libraries, function($a, $b) {
+				// Keep app last...
+				if ($a['name'] === 'app') {
+					return 1;
 				}
+				if ($b['name'] === 'app') {
+					return -1;
+				}
+				// ... and core first.
+				if ($a['name'] === 'cms_core') {
+					return -1;
+				}
+				if ($b['name'] === 'cms_core') {
+					return 1;
+				}
+				return strcmp($a['name'] ,$b['name']);
+			});
+
+			// Load base js files in cms_* assets/js.
+			foreach ($libraries as $name => $library) {
 				if (file_exists($library['path'] . '/assets/js/base.js')) {
+					$library = $library == 'app' ? 'site' : $library;
 					$library = str_replace('cms_', '', $name);
 					$scripts[] = "/{$library}/js/base";
 				}

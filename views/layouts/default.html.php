@@ -66,8 +66,7 @@ FlashMessage::clear();
 			// Load base js files in cms_* assets/js.
 			foreach ($libraries as $name => $library) {
 				if (file_exists($library['path'] . '/assets/js/base.js')) {
-					$library = $library == 'app' ? 'site' : $library;
-					$library = str_replace('cms_', '', $name);
+					$library = $name == 'app' ? 'site' : str_replace('cms_', '', $name);
 					$scripts[] = "/{$library}/js/base";
 				}
 			}

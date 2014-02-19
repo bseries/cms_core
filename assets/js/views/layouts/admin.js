@@ -10,6 +10,22 @@
  */
 require(['jquery'/*, 'moment' */, 'domready!'], function($, moment) {
 
+  var $headingTitle = $('h1 .title');
+  var originalValue = 'untitled';
+  // var originalValue = $headingTitle.text();
+  var $headTitle = $('head title');
+  $('form input[name="title"]').on('keyup', function(ev) {
+    var $el = $(this);
+
+    if ($.trim($el.val())) {
+      $headingTitle.text($el.val());
+      $headTitle.text($headTitle.text().replace(/^[\w\s]+\s\-/, $el.val() + ' -'));
+    } else {
+      $headingTitle.text(originalValue);
+      $headTitle.text($headTitle.text().replace(/^[\w\s]+\s\-/, originalValue + ' -'));
+    }
+  });
+
   /*
   moment.lang('de');
 

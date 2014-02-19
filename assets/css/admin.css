@@ -262,6 +262,9 @@ nav.main .actions {
 #content > article > h1 {
   margin-top: .45em;
 }
+#content > article > h1 .title {
+  font-weight: normal;
+}
 
 /* Footer
 ---------------------------------------------------------------- */

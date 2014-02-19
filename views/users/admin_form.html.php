@@ -1,4 +1,13 @@
+<?php
 
+$title = [
+	'action' => ucfirst($this->_request->action === 'add' ? $t('creating') : $t('editing')),
+	'title' => $item->title ?: $t('untitled'),
+	'object' => [ucfirst($t('user')), ucfirst($t('users'))]
+];
+$this->title("{$title['title']} - {$title['object'][1]}");
+
+?>
 <?php ob_start() ?>
 <script>
 require(['jquery', 'modal', 'domready!'], function($, modal) {
@@ -22,7 +31,10 @@ require(['jquery', 'modal', 'domready!'], function($, modal) {
 <?php $this->scripts(ob_get_clean()) ?>
 
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
-	<h1 class="alpha"><?= $this->title($t('User')) ?></h1>
+	<h1 class="alpha">
+		<span class="action"><?= $title['action'] ?></span>
+		<span class="title"><?= $title['title'] ?></span>
+	</h1>
 
 	<nav class="actions">
 		<?= $this->html->link($t('generate random password'), [

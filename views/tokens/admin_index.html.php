@@ -8,7 +8,7 @@ $dateFormatter = new IntlDateFormatter(
 
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
-	<h1 class="alpha"><?= $t('Tokens') ?></h1>
+	<h1 class="alpha"><?= $this->title($t('Tokens')) ?></h1>
 
 	<?php if ($data->count()): ?>
 		<table>

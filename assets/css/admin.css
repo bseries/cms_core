@@ -116,7 +116,7 @@ p a:hover {
 }
 #container > header {
   box-shadow: inset 0 -5px 5px 2px rgba(0, 0, 0, 0.5);
-  height: 200px;
+  height: 280px;
   background: url("../img/stones.jpg");
   padding: 1em 1.5em;
 }
@@ -205,11 +205,8 @@ p a:hover {
 /* Sidebar Nav
 ---------------------------------------------------------------- */
 nav.main {
-  padding: 4.4em 0 0 0;
   display: inline-block;
   width: 220px;
-  height: 100vh;
-  background: #e3e3e3;
 }
 
 nav.main .pane {
@@ -256,9 +253,6 @@ nav.main .actions {
 
 /* Content
 ---------------------------------------------------------------- */
-.content-wrap {
-  width: 1360px;
-}
 #content {
   vertical-align: top;
   padding: 0 1.5em 10em 2em;
@@ -501,7 +495,7 @@ button.small,
 -------------------------------------------------------------- */
 #modal {
   position: fixed;
-  z-index: 2;
+  z-index: 102;
 
   width: 80%;
   height: 80%;
@@ -513,7 +507,7 @@ button.small,
 }
 #modal-overlay {
   position: fixed;
-  z-index: 1;
+  z-index: 101;
 
   top: 0;
   left: 0;
@@ -654,7 +648,7 @@ thead {
 }
 thead td {
   height: 1em;
-  padding: .5em .5em;
+  padding: .5em .5em 1.5em .5em;
 }
 
 tbody tr:hover td {
@@ -669,6 +663,8 @@ tbody td {
 }
 
 table .actions {
+  margin-right: -.3em;
+  margin-left: -20px;
   text-align: right;
 }
 table .actions a {
@@ -685,8 +681,23 @@ table .flag {
   text-align: center;
 }
 
-table .title {
-  font-weight: bold;
+table .date {
+  max-width: none;
+  width: 150px;
+}
+/*
+table tbody .date time {
+  transition: opacity .1s;
+}
+table tbody .date.created time:not(.relative),
+table tbody .date.modified time:not(.relative) {
+  opacity: 0;
+}
+*/
+
+table tbody .emphasize {
+  color: black;
+  max-width: 240px;
 }
 
 /* Notifications

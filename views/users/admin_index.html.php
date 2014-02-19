@@ -15,10 +15,10 @@ $dateFormatter = new IntlDateFormatter(
 			<tr>
 				<td class="flag"><?= $t('Active?') ?>
 				<td>
-				<td><?= $t('Name') ?>
+				<td class="emphasize"><?= $t('Name') ?>
 				<td><?= $t('Email') ?>
 				<td><?= $t('Role') ?>
-				<td><?= $t('Created') ?>
+				<td class="date created"><?= $t('Created') ?>
 				<td>
 		</thead>
 		<tbody>
@@ -27,10 +27,10 @@ $dateFormatter = new IntlDateFormatter(
 				<td class="flag"><?= $item->is_active ? '✓ ' : '╳' ?>
 				<td>
 					<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($item->email)?>.jpg?s=30&d=retro"></span>
-				<td><?= $item->name ?>
+				<td class="emphasize"><?= $item->name ?>
 				<td><?= $item->email ?>
 				<td><?= $item->role ?>
-				<td>
+				<td class="date created">
 					<?php $date = DateTime::createFromFormat('Y-m-d H:i:s', $item->created) ?>
 					<time datetime="<?= $date->format(DateTime::W3C) ?>"><?= $dateFormatter->format($date) ?></time>
 				<td>

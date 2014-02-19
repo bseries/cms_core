@@ -2349,106 +2349,65 @@
         }
     });
 
-    // moment.js language configuration
-// language : Moroccan Arabic (ar-ma)
-// author : ElFadili Yassine : https://github.com/ElFadiliY
-// author : Abdel Said : https://github.com/abdelsaid
-
-(function (factory) {
-    factory(moment);
-}(function (moment) {
-    return moment.lang('ar-ma', {
-        months : "يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر".split("_"),
-        monthsShort : "يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر".split("_"),
-        weekdays : "الأحد_الإتنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت".split("_"),
-        weekdaysShort : "احد_اتنين_ثلاثاء_اربعاء_خميس_جمعة_سبت".split("_"),
-        weekdaysMin : "ح_ن_ث_ر_خ_ج_س".split("_"),
-        longDateFormat : {
-            LT : "HH:mm",
-            L : "DD/MM/YYYY",
-            LL : "D MMMM YYYY",
-            LLL : "D MMMM YYYY LT",
-            LLLL : "dddd D MMMM YYYY LT"
-        },
-        calendar : {
-            sameDay: "[اليوم على الساعة] LT",
-            nextDay: '[غدا على الساعة] LT',
-            nextWeek: 'dddd [على الساعة] LT',
-            lastDay: '[أمس على الساعة] LT',
-            lastWeek: 'dddd [على الساعة] LT',
-            sameElse: 'L'
-        },
-        relativeTime : {
-            future : "في %s",
-            past : "منذ %s",
-            s : "ثوان",
-            m : "دقيقة",
-            mm : "%d دقائق",
-            h : "ساعة",
-            hh : "%d ساعات",
-            d : "يوم",
-            dd : "%d أيام",
-            M : "شهر",
-            MM : "%d أشهر",
-            y : "سنة",
-            yy : "%d سنوات"
-        },
-        week : {
-            dow : 6, // Saturday is the first day of the week.
-            doy : 12  // The week that contains Jan 1st is the first week of the year.
-        }
-    });
-}));
 // moment.js language configuration
-// language : australian english (en-au)
+// language : german (de)
+// author : lluchs : https://github.com/lluchs
+// author: Menelion Elensúle: https://github.com/Oire
 
 (function (factory) {
     factory(moment);
 }(function (moment) {
-    return moment.lang('en-au', {
-        months : "January_February_March_April_May_June_July_August_September_October_November_December".split("_"),
-        monthsShort : "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_"),
-        weekdays : "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),
-        weekdaysShort : "Sun_Mon_Tue_Wed_Thu_Fri_Sat".split("_"),
-        weekdaysMin : "Su_Mo_Tu_We_Th_Fr_Sa".split("_"),
+    function processRelativeTime(number, withoutSuffix, key, isFuture) {
+        var format = {
+            'm': ['eine Minute', 'einer Minute'],
+            'h': ['eine Stunde', 'einer Stunde'],
+            'd': ['ein Tag', 'einem Tag'],
+            'dd': [number + ' Tage', number + ' Tagen'],
+            'M': ['ein Monat', 'einem Monat'],
+            'MM': [number + ' Monate', number + ' Monaten'],
+            'y': ['ein Jahr', 'einem Jahr'],
+            'yy': [number + ' Jahre', number + ' Jahren']
+        };
+        return withoutSuffix ? format[key][0] : format[key][1];
+    }
+
+    return moment.lang('de', {
+        months : "Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember".split("_"),
+        monthsShort : "Jan._Febr._Mrz._Apr._Mai_Jun._Jul._Aug._Sept._Okt._Nov._Dez.".split("_"),
+        weekdays : "Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag".split("_"),
+        weekdaysShort : "So._Mo._Di._Mi._Do._Fr._Sa.".split("_"),
+        weekdaysMin : "So_Mo_Di_Mi_Do_Fr_Sa".split("_"),
         longDateFormat : {
-            LT : "h:mm A",
-            L : "DD/MM/YYYY",
-            LL : "D MMMM YYYY",
-            LLL : "D MMMM YYYY LT",
-            LLLL : "dddd, D MMMM YYYY LT"
+            LT: "H:mm [Uhr]",
+            L : "DD.MM.YYYY",
+            LL : "D. MMMM YYYY",
+            LLL : "D. MMMM YYYY LT",
+            LLLL : "dddd, D. MMMM YYYY LT"
         },
         calendar : {
-            sameDay : '[Today at] LT',
-            nextDay : '[Tomorrow at] LT',
-            nextWeek : 'dddd [at] LT',
-            lastDay : '[Yesterday at] LT',
-            lastWeek : '[Last] dddd [at] LT',
-            sameElse : 'L'
+            sameDay: "[Heute um] LT",
+            sameElse: "L",
+            nextDay: '[Morgen um] LT',
+            nextWeek: 'dddd [um] LT',
+            lastDay: '[Gestern um] LT',
+            lastWeek: '[letzten] dddd [um] LT'
         },
         relativeTime : {
             future : "in %s",
-            past : "%s ago",
-            s : "a few seconds",
-            m : "a minute",
-            mm : "%d minutes",
-            h : "an hour",
-            hh : "%d hours",
-            d : "a day",
-            dd : "%d days",
-            M : "a month",
-            MM : "%d months",
-            y : "a year",
-            yy : "%d years"
+            past : "vor %s",
+            s : "ein paar Sekunden",
+            m : processRelativeTime,
+            mm : "%d Minuten",
+            h : processRelativeTime,
+            hh : "%d Stunden",
+            d : processRelativeTime,
+            dd : processRelativeTime,
+            M : processRelativeTime,
+            MM : processRelativeTime,
+            y : processRelativeTime,
+            yy : processRelativeTime
         },
-        ordinal : function (number) {
-            var b = number % 10,
-                output = (~~ (number % 100 / 10) === 1) ? 'th' :
-                (b === 1) ? 'st' :
-                (b === 2) ? 'nd' :
-                (b === 3) ? 'rd' : 'th';
-            return number + output;
-        },
+        ordinal : '%d.',
         week : {
             dow : 1, // Monday is the first day of the week.
             doy : 4  // The week that contains Jan 4th is the first week of the year.

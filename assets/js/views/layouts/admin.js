@@ -8,7 +8,16 @@
  * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
-require(['jquery', 'domready!'], function($) {
+require(['jquery'/*, 'moment' */, 'domready!'], function($, moment) {
+
+  /*
+  moment.lang('de');
+
+  $('table .date.modified, table .date.created').each(function(k, v) {
+   $(v).find('time').html(moment($(v).find('time').attr('datetime')).fromNow());
+   $(v).find('time').addClass('relative');
+  });
+  */
 
   // Automatically bind media attachment.
   var attachDirect = $('.use-media-attachment-direct');

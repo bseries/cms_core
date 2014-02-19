@@ -14,15 +14,15 @@ $dateFormatter = new IntlDateFormatter(
 		<table>
 			<thead>
 				<tr>
-					<td><?= $t('Token') ?>
-					<td><?= $t('Expires') ?>
+					<td class="emphasize"><?= $t('Token') ?>
+					<td class="date expires"><?= $t('Expires') ?>
 					<td>
 			</thead>
 			<tbody>
 				<?php foreach ($data as $item): ?>
 				<tr>
-					<td><code><?= $item->token ?></code>
-					<td>
+					<td class="emphasize"><code><?= $item->token ?></code>
+					<td class="date expires">
 						<?php $date = DateTime::createFromFormat('Y-m-d H:i:s', $item->expires) ?>
 						<time datetime="<?= $date->format(DateTime::W3C) ?>"><?= $dateFormatter->format($date) ?></time>
 					<td>

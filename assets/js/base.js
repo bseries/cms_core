@@ -40,6 +40,7 @@ requirejs.config({
     'underscore': 'core/js/underscore',
 
     // Other
+    'util': 'core/js/util',
     'notify': 'core/js/notify',
     'editor': 'core/js/editor',
     'editor-media': 'core/js/editor/media',

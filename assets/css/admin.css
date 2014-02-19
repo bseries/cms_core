@@ -256,10 +256,12 @@ nav.main .actions {
 
 /* Content
 ---------------------------------------------------------------- */
+.content-wrap {
+  width: 1360px;
+}
 #content {
   vertical-align: top;
   padding: 0 1.5em 10em 2em;
-  width: 79%;
   display: inline-block;
   min-height: 50em;
 }
@@ -681,6 +683,10 @@ table .button {
 }
 table .flag {
   text-align: center;
+}
+
+table .title {
+  font-weight: bold;
 }
 
 /* Notifications

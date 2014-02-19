@@ -122,24 +122,26 @@ FlashMessage::clear();
 					<?php endif ?>
 				</div>
 			</header>
-			<nav class="main">
-				<?php foreach (Panes::grouped() as $group => $panes): ?>
-					<div class="group group-<?= $group ?>">
-						<?php foreach ($panes as $pane): ?>
-							<div class="pane">
-								<?= $this->html->link($pane['title'], $pane['url'] ?: '#') ?>
-								<ul class="actions">
-								<?php foreach ($pane['actions'] as $title => $url): ?>
-									<li><?= $this->html->link($title, $url) ?>
-								<?php endforeach ?>
-								</ul>
-							</div>
-						<?php endforeach ?>
-					</div>
-				<?php endforeach ?>
-			</nav>
-			<div id="content">
-				<?php echo $this->content(); ?>
+			<div class="content-wrap">
+				<nav class="main">
+					<?php foreach (Panes::grouped() as $group => $panes): ?>
+						<div class="group group-<?= $group ?>">
+							<?php foreach ($panes as $pane): ?>
+								<div class="pane">
+									<?= $this->html->link($pane['title'], $pane['url'] ?: '#') ?>
+									<ul class="actions">
+									<?php foreach ($pane['actions'] as $title => $url): ?>
+										<li><?= $this->html->link($title, $url) ?>
+									<?php endforeach ?>
+									</ul>
+								</div>
+							<?php endforeach ?>
+						</div>
+					<?php endforeach ?>
+				</nav>
+				<div id="content">
+					<?php echo $this->content(); ?>
+				</div>
 			</div>
 		</div>
 		<footer class="main">

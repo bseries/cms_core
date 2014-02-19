@@ -1,5 +1,6 @@
 <?php
 
+use lithium\core\Libraries;
 use lithium\core\Environment;
 use li3_flash_message\extensions\storage\FlashMessage;
 use cms_core\extensions\cms\Settings;
@@ -34,15 +35,25 @@ FlashMessage::clear();
 			'/core/css/reset',
 			'/site/css/base'
 		]) ?>
-		<?php echo $this->assets->script([
-			'/core/js/require',
-			'/core/js/base',
-			'/media/js/base',
-			'/site/js/base'
-		]) ?>
 		<?php
+			$scripts = [
+				'/core/js/require',
+			];
+
+			// Load base js files in cms_* assets/js.
+			foreach (Libraries::get() as $name => $library) {
+				if (strpos($name, 'cms_') !== 0) {
+					continue;
+				}
+				if (file_exists($library['path'] . '/assets/js/base.js')) {
+					$library = str_replace('cms_', '', $name);
+					$scripts[] = "/{$library}/js/base";
+				}
+			}
+			$scripts[] = '/site/js/base';
+
 			// Load corresponding layout script.
-			// echo $this->assets->script(["/core/js/views/layouts/{$this->_config['layout']}"]);
+			// $scripts[] = "/core/js/views/layouts/{$this->_config['layout']}";
 
 			// Load corresponding view scripts automatically.
 			$view = $this->_config['controller'] . '/' . $this->_config['template'];
@@ -53,10 +64,11 @@ FlashMessage::clear();
 			$file .= "/{$library}/js/views/{$view}.js";
 
 			if (file_exists($file)) {
-				echo $this->assets->script(["/{$library}/js/views/{$view}"]);
+				$scripts[] = "/{$library}/js/views/{$view}";
 			}
 		?>
 		<?php echo $this->styles() ?>
+		<?php echo $this->assets->script($scripts) ?>
 		<?php echo $this->scripts() ?>
 		<?php if (Settings::read('googleAnalytics.default')): ?>
 			<?=$this->view()->render(['element' => 'ga'], [], [

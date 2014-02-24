@@ -27,7 +27,8 @@ FlashMessage::clear();
 
 		<?php echo $this->assets->style([
 			'/core/css/reset',
-			'/core/css/admin'
+			'/core/css/admin',
+			'/site/css/admin'
 		]) ?>
 		<?php echo $this->assets->script([
 			'/core/js/underscore',

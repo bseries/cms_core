@@ -14,7 +14,14 @@ require(['jquery'/*, 'moment' */, 'domready!'], function($, moment) {
   var originalValue = 'untitled';
   // var originalValue = $headingTitle.text();
   var $headTitle = $('head title');
-  $('form input[name="title"]').on('keyup', function(ev) {
+
+  var $titleInput = $('form input[name="title"]');
+
+  if (!$titleInput.length) {
+    $titleInput = $('form input[name="name"]');
+  }
+
+  $titleInput.on('keyup', function(ev) {
     var $el = $(this);
 
     if ($.trim($el.val())) {

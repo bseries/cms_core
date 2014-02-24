@@ -2,7 +2,7 @@
 
 $title = [
 	'action' => ucfirst($this->_request->action === 'add' ? $t('creating') : $t('editing')),
-	'title' => $item->title ?: $t('untitled'),
+	'title' => $item->name ?: $t('untitled'),
 	'object' => [ucfirst($t('user')), ucfirst($t('users'))]
 ];
 $this->title("{$title['title']} - {$title['object'][1]}");

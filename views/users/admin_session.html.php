@@ -3,7 +3,7 @@
 $this->title($t('Session'));
 
 ?>
-<article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
+<article class="view-<?= $this->_config['controller'] . '-' . str_replace('_', '-', $this->_config['template']) ?>">
 	<h1 class="alpha"><?= $t('Login') ?></h1>
 
 	<?=$this->form->create(null, ['url' => ['action' => 'login', 'library' => 'cms_core']]) ?>

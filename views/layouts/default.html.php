@@ -19,6 +19,9 @@ FlashMessage::clear();
 		<?php echo $this->html->charset() ?>
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?><?= $site['title'] ?></title>
 		<link rel="icon" href="<?= $this->assets->url('/site/ico/site.png') ?>">
+		<?php if (isset($seo['description'])): ?>
+			<meta name="description" content="<?= $seo['description'] ?>">
+		<?php endif ?>
 
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<!--[if lt IE 9]>>

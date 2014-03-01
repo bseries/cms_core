@@ -167,10 +167,10 @@ function($, Progress) {
 });
 
 require(['jquery', 'domready!'], function($) {
-  // var hasTouch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch);
-  // if (hasTouch) {
-  //   $('body').addClass('touch');
-  // } else {
+  var hasTouch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch);
+  if (hasTouch) {
+    $('body').addClass('touch');
+  } else {
     $('body').addClass('no-touch');
-  // }
+  }
 });

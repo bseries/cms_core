@@ -22,6 +22,7 @@ if (!Memcache::enabled()) {
 
 Cache::config([
 	'default' => [
+		'scope' => PROJECT_NAME,
 		'adapter' => 'Memcache',
 		'host' => '127.0.0.1:11211'
 	]
@@ -59,8 +60,7 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 		$response->status(304);
 		$response->body = [];
 	}
-
-	$response->headers['ETag'] = "\"{$hash}\"";;
+	$response->headers['ETag'] = "W/\"{$hash}\"";;
 	return $response;
 });
 

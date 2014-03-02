@@ -14,13 +14,19 @@ use lithium\storage\Session;
 use lithium\core\Environment;
 
 Session::config([
-	'default' => ['adapter' => 'Php', 'session.name' => Environment::get('project.name')]
-	// 'default' => array(
-	// 	'adapter' => 'Cookie',
-	// 	'strategies' => array(
-	// 		'Hmac' => array('secret' => Environment::get('security.cookieSecret'))
-	// 	)
-	// )
+	'session' => [
+		'adapter' => 'Php',
+		'session.name' => PROJECT_NAME . '_session',
+		'session.cache_limiter' => 'private_no_expire'
+	],
+	'default' => [
+		'adapter' => 'Cookie',
+		'name' => PROJECT_NAME . '_cookie',
+		'strategies' => [
+			// 'Hmac' => ['secret' => Environment::get('security.cookieSecret')],
+			'Encrypt' => ['secret' => Environment::get('security.cookieSecret')],
+		]
+	]
 ]);
 
 ?>

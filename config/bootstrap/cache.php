@@ -50,7 +50,7 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 	$request  = $params['request'];
 	$response = $chain->next($self, $params, $chain);
 
-	$hash = md5(serialize([
+	$hash = 'W/' . md5(serialize([
 		$response->body,
 		$response->headers
 	]));
@@ -60,7 +60,7 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 		$response->status(304);
 		$response->body = [];
 	}
-	$response->headers['ETag'] = "W/\"{$hash}\"";;
+	$response->headers['ETag'] = "\"{$hash}\"";
 	return $response;
 });
 

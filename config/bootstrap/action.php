@@ -65,12 +65,13 @@ $retrieveUaInfo = function($request) {
 	$cacheKey = 'ua_' . md5($cacheKey);
 
 	if ($ua = Cache::read('default', $cacheKey)) {
-		return $ua;
+	//	return $ua;
 	}
 	$ua = [
 		'isMobile' => $detect->isMobile(),
 		'isTablet' => $detect->isTablet(),
-		'mobileGrade' => $detect->mobileGrade()
+		'mobileGrade' => $detect->mobileGrade(),
+		'isIos' => $detect->isiOS()
 	];
 	Cache::write('default', $cacheKey, $ua, '+1 week');
 

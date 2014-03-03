@@ -17,7 +17,10 @@ Auth::config([
 		'adapter' => 'Form',
 		'model' => 'Users',
 		'fields' => ['email', 'password'],
-		'scope' => ['is_active' => true]
+		'scope' => ['is_active' => true],
+		'session' => [
+			'name' => 'cookie'
+		]
 	]
 ]);
 

@@ -1,6 +1,7 @@
 <?php
 
 use lithium\core\Environment;
+use lithium\util\Inflector;
 use cms_core\extensions\cms\Settings;
 
 $site = Settings::read('site');
@@ -20,7 +21,7 @@ $locale = Environment::get('locale');
 
 		<?php echo $this->assets->style([
 			'/core/css/reset',
-			'/site/css/error'
+			'/site/css/base'
 		]) ?>
 		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>
@@ -29,8 +30,26 @@ $locale = Environment::get('locale');
 				'library' => 'cms_core'
 			]) ?>
 		<?php endif ?>
+		<?=$this->view()->render(['element' => 'head'], [], [
+			'library' => 'app'
+		]) ?>
 	</head>
-	<body class="layout-error">
+	<?php
+		$classes = ['layout-error'];
+
+		foreach ($ua as $name => $flag) {
+			if (is_bool($flag) && $flag ) {
+				$classes[] = strtolower(Inflector::slug($name));
+			} elseif (is_string($flag)) {
+				$classes[] = strtolower(Inflector::slug($name)) . '-' . strtolower($flag);
+			}
+		}
+
+		if (isset($extraBodyClasses)) {
+			$classes = array_merge($classes, $extraBodyClasses);
+		}
+	?>
+	<body class="<?= implode(' ', $classes) ?>">
 		<div id="container">
 			<div id="content">
 				<?php echo $this->content() ?>

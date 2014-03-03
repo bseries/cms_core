@@ -1,5 +1,15 @@
 /* Modernizr 2.7.1 (Custom Build) | MIT & BSD
- * Build: http://modernizr.com/download/#-fontface-backgroundsize-borderimage-borderradius-boxshadow-flexbox-hsla-multiplebgs-opacity-rgba-textshadow-cssanimations-csscolumns-generatedcontent-cssgradients-cssreflections-csstransforms-csstransforms3d-csstransitions-applicationcache-canvas-canvastext-draganddrop-hashchange-history-audio-video-indexeddb-input-inputtypes-localstorage-postmessage-sessionstorage-websockets-websqldatabase-webworkers-geolocation-inlinesvg-smil-svg-svgclippaths-touch-webgl-addtest-prefixed-teststyles-testprop-testallprops-hasevent-prefixes-domprefixes-contenteditable-cors-css_boxsizing-css_calc-css_hyphens-css_remunit-css_vhunit-css_vmaxunit-css_vminunit-css_vwunit-forms_placeholder-forms_validation-fullscreen_api-svg_filters
+ * Build:
+http://modernizr.com/download/#-fontface-backgroundsize-borderimage-borderr
+adius-boxshadow-flexbox-hsla-multiplebgs-opacity-rgba-textshadow-cssanimati
+ons-csscolumns-generatedcontent-cssgradients-cssreflections-csstransforms-c
+sstransforms3d-csstransitions-applicationcache-canvas-canvastext-draganddro
+p-hashchange-history-audio-video-indexeddb-input-inputtypes-localstorage-po
+stmessage-sessionstorage-websockets-websqldatabase-webworkers-geolocation-i
+nlinesvg-smil-svg-svgclippaths-touch-webgl-addtest-prefixed-teststyles-test
+prop-testallprops-hasevent-prefixes-domprefixes-contenteditable-cors-css_bo
+xsizing-css_calc-css_hyphens-css_remunit-css_vhunit-css_vmaxunit-css_vminun
+it-css_vwunit-forms_placeholder-forms_validation-fullscreen_api-svg_filters
  */
 ;
 
@@ -44,7 +54,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
     slice = classes.slice,
 
-    featureName, 
+    featureName,
 
 
     injectElementWithStyles = function( rule, callback, nodes, testnames ) {
@@ -133,7 +143,7 @@ window.Modernizr = (function( window, document, undefined ) {
       };
     }
     else {
-      hasOwnProp = function (object, property) { 
+      hasOwnProp = function (object, property) {
         return ((property in object) && is(object.constructor.prototype[property], 'undefined'));
       };
     }
@@ -601,7 +611,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
        }
 
-       return Modernizr; 
+       return Modernizr;
      };
 
 
@@ -694,12 +704,12 @@ Modernizr.addTest('cssremunit', function(){
 // Similar to http://jsfiddle.net/FWeinb/etnYC/
 Modernizr.addTest('cssvhunit', function() {
     var bool;
-    Modernizr.testStyles("#modernizr { height: 50vh; }", function(elem, rule) {   
+    Modernizr.testStyles("#modernizr { height: 50vh; }", function(elem, rule) {
         var height = parseInt(window.innerHeight/2,10),
             compStyle = parseInt((window.getComputedStyle ?
                       getComputedStyle(elem, null) :
                       elem.currentStyle)["height"],10);
-        
+
         bool= (compStyle == height);
     });
     return bool;
@@ -739,7 +749,7 @@ Modernizr.addTest('cssvwunit', function(){
             compStyle = parseInt((window.getComputedStyle ?
                       getComputedStyle(elem, null) :
                       elem.currentStyle)["width"],10);
-        
+
         bool= (compStyle == width);
     });
     return bool;
@@ -954,14 +964,14 @@ More details at https://github.com/Modernizr/Modernizr/issues/312
 
 Modernizr.addTest('placeholder', function(){
 
-  return !!( 'placeholder' in ( Modernizr.input    || document.createElement('input')    ) && 
+  return !!( 'placeholder' in ( Modernizr.input    || document.createElement('input')    ) &&
              'placeholder' in ( Modernizr.textarea || document.createElement('textarea') )
            );
 
 });
 // This implementation only tests support for interactive form validation.
 // To check validation for a specific type or a specific other constraint,
-// the test can be combined: 
+// the test can be combined:
 //    - Modernizr.inputtypes.numer && Modernizr.formvalidation (browser supports rangeOverflow, typeMismatch etc. for type=number)
 //    - Modernizr.input.required && Modernizr.formvalidation (browser supports valueMissing)
 //
@@ -997,13 +1007,13 @@ Modernizr.addTest('formvalidation', function(){
         e.stopPropagation();
     };
 
-    // Calling form.submit() doesn't trigger interactive validation, 
+    // Calling form.submit() doesn't trigger interactive validation,
     // use a submit button instead
     //older opera browsers need a name attribute
     form.innerHTML = '<input name="modTest" required><button></button>';
 
     // FF4 doesn't trigger "invalid" event if form is not in the DOM tree
-    // Chrome throws error if invalid input is not visible when submitting 
+    // Chrome throws error if invalid input is not visible when submitting
     form.style.position = 'absolute';
     form.style.top = '-99999em';
 
@@ -1018,7 +1028,7 @@ Modernizr.addTest('formvalidation', function(){
 
     body.appendChild(form);
 
-    input = form.getElementsByTagName('input')[0];	
+    input = form.getElementsByTagName('input')[0];
 
     // Record whether "invalid" event is fired
     input.oninvalid = function(e) {

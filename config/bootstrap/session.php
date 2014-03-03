@@ -14,12 +14,12 @@ use lithium\storage\Session;
 use lithium\core\Environment;
 
 Session::config([
-	'session' => [
+	'default' => [
 		'adapter' => 'Php',
 		'session.name' => PROJECT_NAME . '_session',
 		'session.cache_limiter' => 'private_no_expire'
 	],
-	'default' => [
+	'cookie' => [
 		'adapter' => 'Cookie',
 		'name' => PROJECT_NAME . '_cookie',
 		'strategies' => [

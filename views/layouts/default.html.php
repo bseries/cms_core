@@ -1,5 +1,6 @@
 <?php
 
+use lithium\util\Inflector;
 use lithium\core\Libraries;
 use lithium\core\Environment;
 use li3_flash_message\extensions\storage\FlashMessage;
@@ -105,8 +106,12 @@ FlashMessage::clear();
 	<?php
 		$classes = ['layout-default'];
 
-		if ($ua['isMobile']) {
-			$classes[] = 'is-mobile';
+		foreach ($ua as $name => $flag) {
+			if (is_bool($flag) && $flag ) {
+				$classes[] = strtolower(Inflector::slug($name));
+			} elseif (is_string($flag)) {
+				$classes[] = strtolower(Inflector::slug($name)) . '-' . strtolower($flag);
+			}
 		}
 
 		if (isset($extraBodyClasses)) {

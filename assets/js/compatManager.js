@@ -8,9 +8,8 @@
  */
 define(['jquery', 'modernizr', 'domready!'],
 function($, Modernizr) {
-  var CompatManager = (function() {
-    var _this = this;
 
+  var CompatManager = (function() {
     // Holds all registered compat modules, keyed
     // by name.
     var all = {};
@@ -25,7 +24,7 @@ function($, Modernizr) {
     // The load function will receive a promise as its first parameter
     // which must be resolved when the loading finished.
     var register = function(name, precondition, load) {
-      _this.all[name] = function(dfr) {
+      all[name] = function(dfr) {
         if (($.isFunction(precondition) && precondition()) || precondition) {
           load(dfr);
         }
@@ -35,7 +34,7 @@ function($, Modernizr) {
     // Returns an array of available compat modules names.
     var available = function() {
         var keys = [];
-        $.each(_this.all, function(k, v) { keys.push(k); });
+        $.each(all, function(k, v) { keys.push(k); });
         return keys;
     };
 
@@ -45,13 +44,13 @@ function($, Modernizr) {
     var run = function(selected) {
       var dfrs = [];
 
-      $.each(selected || _this.available(), function(v) {
+      $.each(selected || available(), function(v) {
         var dfr = new $.Deferred();
 
-        if (!_this.all.hasOwnProperty(v)) {
+        if (!all.hasOwnProperty(v)) {
           dfr.reject();
         } else if ($.inArray(v, window.Compat.applied) === -1) {
-          _this.all[v](dfr);
+          all[v](dfr);
 
           dfr.done(function() {
             window.Compat.applied.push(v);
@@ -108,12 +107,12 @@ function($, Modernizr) {
 
   // Test(window.XMLHttpRequest && (new XMLHttpRequest().sendAsBinary || (window.Uint8Array && window.ArrayBuffer)))
   CompatManager.register('sendAsBinary', !XMLHttpRequest.prototype.sendAsBinary, function(dfr) {
-      require(['sendAsBinary'], dfr.resolve);
+    require(['sendAsBinary'], dfr.resolve);
   });
 
   CompatManager.register('cssFilters', !Modernizr.cssfilters, function(dfr) {
-      window.polyfilter_scriptpath = 'http://assets.' + window.location.hostname + '/core/js/compat/';
-      require(['cssFilters'], dfr.resolve);
+    window.polyfilter_scriptpath = 'http://assets.' + window.location.hostname + '/core/js/compat/';
+    require(['cssFilters'], dfr.resolve);
   });
 
   CompatManager.register(
@@ -128,8 +127,12 @@ function($, Modernizr) {
     }
   );
 
-  CompatManger.register('animationFrame', !window.requestAnimationFrame, function(dfr) {
-      require(['animationFrame'], dfr.resolve);
+  CompatManager.register('animationFrame', !window.requestAnimationFrame, function(dfr) {
+    require(['animationFrame'], dfr.resolve);
+  });
+
+  CompatManager.register('vunits', !Modernizr.cssvhunit, function(dfr) {
+    require(['vunits'], dfr.resolve);
   });
 
   return CompatManager;

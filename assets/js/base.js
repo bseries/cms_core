@@ -139,6 +139,9 @@ requirejs.config({
     },
     'styleFix': {
       exports: 'styleFix'
+    },
+    'vunits': {
+      deps: ['styleFix']
     }
   }
 });

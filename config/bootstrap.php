@@ -50,6 +50,13 @@ Libraries::add('textual', array(
 Libraries::add('jsend', array(
 	'path' => dirname(__DIR__) . '/libraries/jsend/src'
 ));
+Libraries::add('mobile_detect', array(
+	'path' => dirname(__DIR__) . '/libraries/mobile_detect',
+	'prefix' => 'Mobile_Detect',
+	'transform' => function($class, $config) {
+		return $config['path'] . '/' . $class . '.php';
+	}
+));
 require dirname(__DIR__) . '/libraries/guzzle/vendor/autoload.php';
 // Libraries::add('guzzle', [
 //	'path' => dirname(__DIR__) . '/libraries/guzzle/src',

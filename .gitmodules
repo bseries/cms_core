@@ -25,3 +25,6 @@
 [submodule "libraries/faker"]
 	path = libraries/faker
 	url = git@github.com:fzaninotto/Faker.git
+[submodule "libraries/mobile_detect"]
+	path = libraries/mobile_detect
+	url = git@github.com:serbanghita/Mobile-Detect.git

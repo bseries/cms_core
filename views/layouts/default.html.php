@@ -104,6 +104,11 @@ FlashMessage::clear();
 	</head>
 	<?php
 		$classes = ['layout-default'];
+
+		if ($ua['isMobile']) {
+			$classes[] = 'is-mobile';
+		}
+
 		if (isset($extraBodyClasses)) {
 			$classes = array_merge($classes, $extraBodyClasses);
 		}

@@ -65,6 +65,8 @@ requirejs.config({
     'inputDate': 'core/js/compat/inputDate',
     'sendAsBinary': 'core/js/compat/sendAsBinary',
     'animationFrame': 'core/js/compat/animationFrame',
+    'styleFix': 'core/js/compat/styleFix',
+    'vunits': 'core/js/compat/vunits',
   },
   shim: {
     // Basics
@@ -133,6 +135,9 @@ requirejs.config({
     'balanceText': {
       deps: ['jquery'],
       exports: 'jQuery.fn.balanceText'
+    },
+    'styleFix': {
+      exports: 'styleFix'
     }
   }
 });

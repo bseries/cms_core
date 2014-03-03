@@ -67,6 +67,7 @@ requirejs.config({
     'animationFrame': 'core/js/compat/animationFrame',
     'styleFix': 'core/js/compat/styleFix',
     'vunits': 'core/js/compat/vunits',
+    'browserSwitch': 'core/js/browserSwitch'
   },
   shim: {
     // Basics

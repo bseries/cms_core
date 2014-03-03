@@ -83,7 +83,7 @@ trait AggregationTrait {
 				// that we'll need maximum of `limit`'ed items per model.
 				if ($options['page']) {
 					// FIXME Calculate limit
-					$o['limit'] = static::$itemsPerPage;
+					$o['limit'] = $options['perPage'];
 				} elseif ($options['limit']) {
 					$o['limit'] = $options['limit'];
 				}
@@ -109,7 +109,7 @@ trait AggregationTrait {
 				$data = array_slice(
 					$data,
 					$options['page'] > 1 ? $options['perPage'] * $options['page'] : 0,
-					static::$itemsPerPage
+					$options['perPage']
 				);
 			} elseif ($options['limit']) {
 				$data = array_slice($data, 0, $options['limit']);
@@ -132,7 +132,7 @@ trait AggregationTrait {
 			}
 			$result = 0;
 
-			foreach ($options['aggregate'] as $name) {
+			foreach ($options['aggregate'] as $name => $value) {
 				$model = static::$_models[$name];
 				$result += $model::find('count');
 			}

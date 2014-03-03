@@ -44,7 +44,7 @@ function($, Modernizr) {
     var run = function(selected) {
       var dfrs = [];
 
-      $.each(selected || available(), function(v) {
+      $.each(selected || available(), function(k, v) {
         var dfr = new $.Deferred();
 
         if (!all.hasOwnProperty(v)) {

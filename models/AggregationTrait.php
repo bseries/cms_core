@@ -81,12 +81,11 @@ trait AggregationTrait {
 				// We assume that in the worst case where only results
 				// for one model will be returned after sorting and limiting,
 				// that we'll need maximum of `limit`'ed items per model.
-				if ($options['page']) {
-					// FIXME Calculate limit
-					$o['limit'] = ($options['page'] * $options['perPage']) . ',' . $options['perPage'];
-				} elseif ($options['limit']) {
-					$o['limit'] = $options['limit'];
-				}
+				//
+				// We canot however calculate limits when paging as sorting
+				// is applied later.
+				$o['limit'] = $options['limit'];
+
 				$model = static::$_models[$n];
 
 				foreach ($model::find('all', $o) as $result) {

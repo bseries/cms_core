@@ -11,7 +11,7 @@ use cms_core\extensions\cms\Settings;
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', '<?php echo Settings::read('googleAnalytics.default.account') ?>', '<?php echo Settings::read('googleAnalytics.default.domain') ?>');
+  ga('create', '<?php echo Settings::read('service.googleAnalytics.default.account') ?>', '<?php echo Settings::read('googleAnalytics.default.domain') ?>');
   ga('send', 'pageview');
 
 </script>
@@ -19,7 +19,7 @@ use cms_core\extensions\cms\Settings;
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '<?php echo Settings::read('googleAnalytics.default.account') ?>']);
+  _gaq.push(['_setAccount', '<?php echo Settings::read('service.googleAnalytics.default.account') ?>']);
   _gaq.push(['_trackPageview']);
 
   (function() {

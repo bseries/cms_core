@@ -94,7 +94,7 @@ FlashMessage::clear();
 		<?php echo $this->styles() ?>
 		<?php echo $this->assets->script($scripts) ?>
 		<?php echo $this->scripts() ?>
-		<?php if (Settings::read('googleAnalytics.default')): ?>
+		<?php if (Settings::read('service.googleAnalytics.default')): ?>
 			<?=$this->view()->render(['element' => 'ga'], [], [
 				'library' => 'cms_core'
 			]) ?>

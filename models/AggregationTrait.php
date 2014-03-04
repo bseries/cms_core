@@ -83,7 +83,7 @@ trait AggregationTrait {
 				// that we'll need maximum of `limit`'ed items per model.
 				if ($options['page']) {
 					// FIXME Calculate limit
-					$o['limit'] = $options['perPage'];
+					$o['limit'] = ($options['page'] * $options['perPage']) . ',' . $options['perPage'];
 				} elseif ($options['limit']) {
 					$o['limit'] = $options['limit'];
 				}

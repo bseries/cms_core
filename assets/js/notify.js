@@ -10,7 +10,7 @@
   var queue = $({});
   var queuedTexts = [];
 
-  var render = function(html, level, sticky, complete) {
+  var render = function(html, level, sticky, timeout, complete) {
     var m = $('<div>').attr('class', 'message');
 
     if (level) {
@@ -35,12 +35,9 @@
       return;
     }
 
-    var timeout = 2100;
-    if ($($.parseHTML(html)).text().length >= 25) {
-      // Double the timeout for complex messages,
-      // giving comprehension time.
-      timeout = timeout * 2;
-    }
+    // Multiply the timeout for complex messages,
+    // giving comprehension time. Give 1s per 30chars over the first 25 chars.
+    timeout += 1000 * (($($.parseHTML(html)).text().length - 25) / 30);
 
     setTimeout(function(){
       m.fadeOut('fast', function() {
@@ -50,7 +47,7 @@
     }, timeout);
   };
 
-  $.notify = function(html, level, sticky) {
+  $.notify = function(html, level, sticky, timeout) {
     // Prevent flooding; no more than 2 pending messages. We start at
     // zero as this is called before the first item is queued.
     if (queue.queue().length >= 2) {
@@ -59,7 +56,7 @@
     // Currently only one message at the time. Allowing showing multiple
     // message here will might need a more sophisticated method of managment.
     queue.queue(function(next) {
-      render(html, level, sticky || false, next);
+      render(html, level, sticky || false, timeout || 2100, next);
     });
   };
 })(jQuery);

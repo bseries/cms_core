@@ -7,4 +7,5 @@ ALTER TABLE `users` MODIFY COLUMN `created` DATETIME NOT NULL AFTER `phone`;
 ALTER TABLE `users` MODIFY COLUMN `modified` DATETIME NOT NULL AFTER `created`;
 ALTER TABLE `users` MODIFY COLUMN `phone` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `timezone`;
 ALTER TABLE `users` MODIFY COLUMN `phone` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `email`;
+ALTER TABLE `users` ADD `locale` VARCHAR(5)  NULL  DEFAULT 'de'  AFTER `is_active`;
 

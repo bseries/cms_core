@@ -62,7 +62,11 @@ class UsersController extends \cms_core\controllers\BaseController {
 			'EUR' => 'EUR',
 			'USD' => 'USD'
 		];
-		return compact('roles', 'timezones', 'currencies') + $parent;
+		$locales = [
+			'de' => 'Deutsch',
+			'en' => 'English'
+		];
+		return compact('roles', 'timezones', 'currencies', 'locales') + $parent;
 	}
 
 	public function admin_edit() {

@@ -56,11 +56,20 @@ require(['jquery', 'modal', 'domready!'], function($, modal) {
 			]) ?>
 			<?= $this->form->field('is_active', ['type' => 'checkbox', 'label' => $t('Aktiv?')]) ?>
 
+		</section>
+		<section>
+		<?php if (Features::enabled('useG11n')): ?>
+			<?= $this->form->field('locale', [
+				'type' => 'select',
+				'label' => $t('Locale'),
+				'list' => $locales
+			]) ?>
 			<?= $this->form->field('timezone', [
 				'type' => 'select',
 				'label' => $t('Timezone'),
 				'list' => $timezones
 			]) ?>
+		<?php endif ?>
 		</section>
 		<?php if (Features::enabled('useBilling')): ?>
 			<section>

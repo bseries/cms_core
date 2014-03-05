@@ -59,6 +59,7 @@ require dirname(__DIR__) . '/libraries/guzzle/vendor/autoload.php';
 
 Features::register('cms_core', 'useNewGoogleAnalyticsTrackingCode', true);
 Features::register('cms_core', 'useBilling', false);
+Features::register('cms_core', 'useG11n', true);
 
 // Register "empty" schemes, base must be set
 // through app. Cannot provide sane defaults here.

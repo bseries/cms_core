@@ -51,24 +51,6 @@ class UsersController extends \cms_core\controllers\BaseController {
 		return compact('item') + $this->_selects();
 	}
 
-	protected function _selects() {
-		$parent = parent::_selects();
-		$roles = Users::enum('role');
-		$timezones = [
-			'Europe/Berlin' => 'Europe/Berlin',
-			'UTC' => 'UTC'
-		];
-		$currencies = [
-			'EUR' => 'EUR',
-			'USD' => 'USD'
-		];
-		$locales = [
-			'de' => 'Deutsch',
-			'en' => 'English'
-		];
-		return compact('roles', 'timezones', 'currencies', 'locales') + $parent;
-	}
-
 	public function admin_edit() {
 		extract(Message::aliases());
 
@@ -96,6 +78,24 @@ class UsersController extends \cms_core\controllers\BaseController {
 		}
 		$this->_render['template'] = 'admin_form';
 		return compact('item') + $this->_selects();
+	}
+
+	protected function _selects() {
+		$parent = parent::_selects();
+		$roles = Users::enum('role');
+		$timezones = [
+			'Europe/Berlin' => 'Europe/Berlin',
+			'UTC' => 'UTC'
+		];
+		$currencies = [
+			'EUR' => 'EUR',
+			'USD' => 'USD'
+		];
+		$locales = [
+			'de' => 'Deutsch',
+			'en' => 'English'
+		];
+		return compact('roles', 'timezones', 'currencies', 'locales') + $parent;
 	}
 
 	public function admin_generate_passwords() {

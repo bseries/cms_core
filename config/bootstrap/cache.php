@@ -15,6 +15,7 @@ use lithium\core\Libraries;
 use lithium\core\Environment;
 use lithium\action\Dispatcher;
 use lithium\storage\cache\adapter\Memcache;
+use lithium\storage\Session;
 
 if (!Memcache::enabled()) {
 	throw new Exception('Memcache not enabled.');
@@ -52,7 +53,10 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 
 	// Cache only HTML responses, JSON responses come from
 	// APIs and are most often highly dynamic.
-	if ($response->type() !== 'html') {
+	if ($response->type() !== 'html' || strpos($request->url, '/admi') === 0 || Session::read('default')) {
+		$response->headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+		$response->headers['Pragma'] = 'no-cache';
+		$response->headers['Expires'] = '0';
 		return $response;
 	}
 

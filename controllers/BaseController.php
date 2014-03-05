@@ -48,6 +48,13 @@ class BaseController extends \lithium\action\Controller {
 		}
 		$this->_library = reset($class);
 	}
+
+	/**
+	 * Populates select data.
+	 */
+	protected function _selects() {
+		return [];
+	}
 }
 
 ?>

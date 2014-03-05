@@ -47,10 +47,22 @@ class UsersController extends \cms_core\controllers\BaseController {
 				FlashMessage::write($t('Failed to save.'), ['level' => 'error']);
 			}
 		}
-		$roles = Users::enum('role');
-
 		$this->_render['template'] = 'admin_form';
-		return compact('item', 'roles');
+		return compact('item') + $this->_selects();
+	}
+
+	protected function _selects() {
+		$parent = parent::_selects();
+		$roles = Users::enum('role');
+		$timezones = [
+			'Europe/Berlin' => 'Europe/Berlin',
+			'UTC' => 'UTC'
+		];
+		$currencies = [
+			'EUR' => 'EUR',
+			'USD' => 'USD'
+		];
+		return compact('roles', 'timezones', 'currencies') + $parent;
 	}
 
 	public function admin_edit() {
@@ -78,10 +90,8 @@ class UsersController extends \cms_core\controllers\BaseController {
 				FlashMessage::write($t('Failed to save.'), ['level' => 'error']);
 			}
 		}
-		$roles = Users::enum('role');
-
 		$this->_render['template'] = 'admin_form';
-		return compact('item', 'roles');
+		return compact('item') + $this->_selects();
 	}
 
 	public function admin_generate_passwords() {

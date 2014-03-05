@@ -17,7 +17,7 @@ Session::config([
 	'default' => [
 		'adapter' => 'Php',
 		'session.name' => PROJECT_NAME . '_session',
-		'session.cache_limiter' => 'private_no_expire'
+		'session.cache_limiter' => 'private'
 	],
 	'cookie' => [
 		'adapter' => 'Cookie',

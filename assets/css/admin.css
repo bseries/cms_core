@@ -437,6 +437,10 @@ input[type="checkbox"]:checked + label {
   background-image: url("../ico/checkbox_checked.png?v=__REV__")
 }
 
+input.title {
+  font-weight: bold;
+}
+
 /* Buttons
 ---------------------------------------------------------------- */
 a.button {
@@ -767,9 +771,11 @@ table tbody .emphasize {
 h1 + .actions {
   text-align: right;
 }
-
-[class*="index"] section + section {
+.section-spacing section + section {
   margin-top: 4em;
+}
+.section-spacing form section + section {
+  margin-top: 2em;
 }
 
 /* Media Explorer

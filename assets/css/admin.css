@@ -437,6 +437,11 @@ input[type="checkbox"]:checked + label {
   background-image: url("../ico/checkbox_checked.png?v=__REV__")
 }
 
+input[disabled] {
+  background: #e3e3e3;
+  border-color: #e3e3e3;
+}
+
 input.title {
   font-weight: bold;
 }
@@ -887,6 +892,7 @@ h1 + .actions {
 -------------------------------------------------------------- */
 form .help {
   color: gray;
+  margin-top: -.5em;
   margin-bottom: 1.5em;
   font-size: 14px;
   max-width: 600px;

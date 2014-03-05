@@ -50,6 +50,12 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 	$request  = $params['request'];
 	$response = $chain->next($self, $params, $chain);
 
+	// Cache only HTML responses, JSON responses come from
+	// APIs and are most often highly dynamic.
+	if ($response->type() !== 'html') {
+		return $response;
+	}
+
 	$hash = 'W/' . md5(serialize([
 		$response->body,
 		$response->headers

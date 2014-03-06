@@ -10,16 +10,15 @@
  */
 require(['jquery'/*, 'moment' */, 'domready!'], function($, moment) {
 
-  var $headingTitle = $('h1 .title');
-  var originalValue = 'untitled';
-  // var originalValue = $headingTitle.text();
+  //
+  // Dynamic Title
+  //
   var $headTitle = $('head title');
+  var $headingTitle = $('h1 .title');
+  var $titleInput = $('form input.use-for-title');
 
-  var $titleInput = $('form input[name="title"]');
-
-  if (!$titleInput.length) {
-    $titleInput = $('form input[name="name"]');
-  }
+  var originalValue = $headingTitle.data('untitled');
+  // var originalValue = $headingTitle.text();
 
   $titleInput.on('keyup', function(ev) {
     var $el = $(this);

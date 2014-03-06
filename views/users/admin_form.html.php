@@ -35,7 +35,7 @@ require(['jquery', 'modal', 'domready!'], function($, modal) {
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> section-spacing">
 	<h1 class="alpha">
 		<span class="action"><?= $title['action'] ?></span>
-		<span class="title"><?= $title['title'] ?></span>
+		<span class="title" data-untitled="<?= $t('Unnamed') ?>"><?= $title['title'] ?></span>
 	</h1>
 
 	<nav class="actions">
@@ -47,7 +47,7 @@ require(['jquery', 'modal', 'domready!'], function($, modal) {
 	<?=$this->form->create($item) ?>
 		<section>
 			<?= $this->form->field('id', ['type' => 'hidden']) ?>
-			<?= $this->form->field('name', ['type' => 'text', 'label' => $t('Name'), 'class' => 'title']) ?>
+			<?= $this->form->field('name', ['type' => 'text', 'label' => $t('Name'), 'class' => 'use-for-title']) ?>
 			<?= $this->form->field('email', ['type' => 'email', 'label' => $t('E–mail')]) ?>
 			<?= $this->form->field('role', [
 				'type' => 'select',

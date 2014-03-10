@@ -58,7 +58,6 @@ require(['jquery', 'modal', 'domready!'], function($, modal) {
 
 		</section>
 		<section>
-		<?php if (Features::enabled('useG11n')): ?>
 			<?= $this->form->field('locale', [
 				'type' => 'select',
 				'label' => $t('Locale'),
@@ -69,7 +68,6 @@ require(['jquery', 'modal', 'domready!'], function($, modal) {
 				'label' => $t('Timezone'),
 				'list' => $timezones
 			]) ?>
-		<?php endif ?>
 		</section>
 		<?php if (Features::enabled('useBilling')): ?>
 			<section>

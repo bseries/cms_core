@@ -11,6 +11,40 @@
 require(['jquery'/*, 'moment' */, 'domready!'], function($, moment) {
 
   //
+  // Nested management
+  //
+  var $nested = $('.use-nested');
+
+  var $nestedAdd = $nested.find('.nested-add');
+  $nestedAdd.hide();
+
+  $nested.find('.button.add-nested').on('click', function(ev) {
+    ev.preventDefault();
+    var $newNested = $nestedAdd.clone().show();
+
+    var key = parseInt(Math.random() * 10000, 10);
+
+    $newNested.find('input').each(function() {
+      $(this).attr('name', $(this).attr('name').replace(/\[new\]/, '[' + key + ']'));
+    });
+    $newNested.insertBefore(this);
+  });
+  $nested.on('click', '.delete-nested',function(ev) {
+    ev.preventDefault();
+
+    var $existing = $(this).parents('.nested-item');
+    var $del = $existing.find('[name*=_delete]');
+
+    $existing.fadeOut(function() {
+      if ($del.length) {
+        $del.val(true);
+      } else {
+        $existing.remove();
+      }
+    });
+   });
+
+  //
   // Dynamic Title
   //
   var $headTitle = $('head title');
@@ -32,6 +66,9 @@ require(['jquery'/*, 'moment' */, 'domready!'], function($, moment) {
     }
   });
 
+  //
+  // Relative dates/times.
+  //
   /*
   moment.lang('de');
 
@@ -41,7 +78,9 @@ require(['jquery'/*, 'moment' */, 'domready!'], function($, moment) {
   });
   */
 
+  //
   // Automatically bind media attachment.
+  //
   var attachDirect = $('.use-media-attachment-direct');
   var attachJoined = $('.use-media-attachment-joined');
 
@@ -56,7 +95,9 @@ require(['jquery'/*, 'moment' */, 'domready!'], function($, moment) {
     });
   }
 
+  //
   // Automaticlly bind editors.
+  //
   var editorElements = $('.use-editor');
 
   if (editorElements.length) {
@@ -95,7 +136,9 @@ require(['jquery'/*, 'moment' */, 'domready!'], function($, moment) {
     });
   }
 
+  //
   // Automatically bind sortables.
+  //
   var sortableElement = $('.use-manual-sorting');
   if (sortableElement.length) {
     require(['jquery', 'jqueryUi'],

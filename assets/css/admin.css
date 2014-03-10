@@ -437,6 +437,8 @@ input[type="checkbox"]:checked + label {
   background-image: url("../ico/checkbox_checked.png?v=__REV__")
 }
 
+select[disabled],
+textarea[disabled],
 input[disabled] {
   background: #e3e3e3;
   border-color: #e3e3e3;
@@ -444,6 +446,16 @@ input[disabled] {
 
 input.title {
   font-weight: bold;
+}
+
+form .nested {
+  margin-bottom: 2em;
+}
+form .nested-item + .nested-item {
+  margin-top: 2em;
+}
+form .add-nested {
+  margin-top: 2em;
 }
 
 /* Buttons

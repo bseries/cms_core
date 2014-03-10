@@ -24,27 +24,25 @@ class Addresses extends \cms_core\models\Base {
 		];
 	}
 
-	/*
-	public $belongsTo = [
-		'UserBilling' => [
-			'class' => 'cms_core\models\Users',
-			'key' => 'billing_address_id'
-		],
-		'UserShipping' => [
-			'class' => 'cms_core\models\Users',
-			'key' => 'billing_shipping_id'
-		]
-	];
-	*/
-
-	public function format($entity, $type) {
+	public function format($entity, $type, $locale = null) {
 		if ($type == 'oneline') {
 			$result = [];
+
 			$result[] = $entity->name;
 			$result[] = $entity->street;
 			$result[] = $entity->city;
 
 			return implode(', ', $result);
+		}
+		if ($type == 'postal') {
+			$result = [];
+
+			$result[] = $entity->name;
+			$result[] = $entity->street;
+			$result[] = $entity->zip . ' ' . $entity->city;
+			$result[] = $entity->country;
+
+			return implode("\n", $result);
 		}
 	}
 }

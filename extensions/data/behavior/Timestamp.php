@@ -32,10 +32,12 @@ class Timestamp extends \li3_behaviors\data\model\Behavior {
 		$now = date('Y-m-d H:i:s');
 		$fields = $behavior->config('fields');
 
-		if (!$entity->exists()) {
+		if (!$entity->exists() && $fields['created']) {
 			$data[$fields['created']] = $now;
 		}
-		$data[$fields['modified']] = $now;
+		if ($fields['modified']) {
+			$data[$fields['modified']] = $now;
+		}
 
 		return $data;
 	}

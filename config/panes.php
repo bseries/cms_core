@@ -24,6 +24,15 @@ Panes::register('cms_core', 'tokens', [
 		$t('Generate Token') => ['action' => 'generate'] + $base
 	]
 ]);
+Panes::register('cms_core', 'addresses', [
+	'title' => $t('Addresses'),
+	'group' =>  Panes::GROUP_ACCESS,
+	'url' => $base = ['controller' => 'addresses', 'action' => 'index', 'library' => 'cms_core', 'admin' => true],
+	'actions' => [
+		$t('List Addresses') => ['action' => 'index'] + $base,
+		$t('New Address') => ['action' => 'add'] + $base
+	]
+]);
 Panes::register('cms_core', 'settings', [
 	'title' => $t('Settings & Features'),
 	'group' => Panes::GROUP_MANAGE,

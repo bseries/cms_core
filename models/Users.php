@@ -15,6 +15,7 @@ namespace cms_core\models;
 use lithium\util\Validator;
 use lithium\security\Password;
 use lithium\g11n\Message;
+use cms_core\models\Addresses;
 
 class Users extends \cms_core\models\Base {
 
@@ -133,6 +134,16 @@ class Users extends \cms_core\models\Base {
 
 	public static function checkPassword($plaintext, $hash) {
 		return Password::check($plaintext, $hash);
+	}
+
+	public function address($entity, $type = 'billing') {
+		$field = "{$type}_address_id";
+
+		return Addresses::find('first', [
+			'conditions' => [
+				'id' => $entity->$field
+			]
+		]);
 	}
 }
 

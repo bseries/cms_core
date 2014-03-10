@@ -13,6 +13,7 @@
 namespace cms_core\controllers;
 
 use cms_core\models\Users;
+use cms_core\models\Addresses;
 use li3_flash_message\extensions\storage\FlashMessage;
 use lithium\g11n\Message;
 use lithium\security\Auth;
@@ -81,6 +82,8 @@ class UsersController extends \cms_core\controllers\BaseController {
 	}
 
 	protected function _selects() {
+		$user = Auth::check('default', $this->request);
+
 		$parent = parent::_selects();
 		$roles = Users::enum('role');
 		$timezones = [
@@ -95,7 +98,17 @@ class UsersController extends \cms_core\controllers\BaseController {
 			'de' => 'Deutsch',
 			'en' => 'English'
 		];
-		return compact('roles', 'timezones', 'currencies', 'locales') + $parent;
+		$results = Addresses::find('all', [
+			'conditions' => [
+				'user_id' => $user['id']
+			]
+		]);
+		$addresses = [];
+
+		foreach ($results as $result) {
+			$addresses[$result->id] = $result->format('oneline');
+		}
+		return compact('roles', 'timezones', 'currencies', 'locales', 'addresses') + $parent;
 	}
 
 	public function admin_generate_passwords() {

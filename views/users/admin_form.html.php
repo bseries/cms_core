@@ -85,6 +85,20 @@ require(['jquery', 'modal', 'domready!'], function($, modal) {
 				]) ?>
 			</section>
 		<?php endif ?>
+		<?php if (Features::enabled('useBilling')): ?>
+			<section>
+				<?= $this->form->field('billing_address_id', [
+					'type' => 'select',
+					'label' => $t('Billing Address'),
+					'list' => $addresses
+				]) ?>
+				<?= $this->form->field('shipping_address_id', [
+					'type' => 'select',
+					'label' => $t('Shipping Address'),
+					'list' => $addresses
+				]) ?>
+			</section>
+		<?php endif ?>
 		<section>
 			<?=$this->form->field('password', ['type' => 'password', 'label' => 'Neues Passwort', 'autocomplete' => 'off']) ?>
 			<?=$this->form->field('password_repeat', ['type' => 'password', 'label' => 'Neues Passwort (wiederholen)', 'autocomplete' => 'off']) ?>

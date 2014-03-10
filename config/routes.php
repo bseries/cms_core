@@ -79,6 +79,13 @@ Router::connect('/admin/users/{:action}/{:args}', [
 	'controller' => 'users', 'library' => 'cms_core', 'admin' => true
 ], $persist);
 
+Router::connect('/admin/addresses/{:action}/{:id:[0-9]+}', [
+	'controller' => 'addresses', 'library' => 'cms_core', 'admin' => true
+], $persist);
+Router::connect('/admin/addresses/{:action}/{:args}', [
+	'controller' => 'addresses', 'library' => 'cms_core', 'admin' => true
+], $persist);
+
 Router::connect('/admin/settings', [
 	'controller' => 'settings', 'action' => 'index', 'library' => 'cms_core', 'admin' => true
 ], $persist);

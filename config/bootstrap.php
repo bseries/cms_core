@@ -34,7 +34,7 @@ Libraries::add('li3_mailer', [
 ]);
 
 Libraries::add('Finite', array(
-	'path' => dirname(__DIR__) . '/libraries/finitie/src',
+	'path' => dirname(__DIR__) . '/libraries/finite/src/Finite',
 	'prefix' => 'Finite\\'
 ));
 Libraries::add('Faker', [

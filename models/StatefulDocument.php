@@ -12,9 +12,7 @@
 
 namespace cms_core\models;
 
-use Finite\State\StateInterface;
-
-class StatefulDocument implements Finite\StatefulInterface {
+class StatefulDocument implements \Finite\StatefulInterface {
 
 	protected $_state;
 

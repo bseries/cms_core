@@ -28,3 +28,6 @@
 [submodule "libraries/mobile_detect"]
 	path = libraries/mobile_detect
 	url = git@github.com:serbanghita/Mobile-Detect.git
+[submodule "libraries/finite"]
+	path = libraries/finite
+	url = git@github.com:yohang/Finite.git

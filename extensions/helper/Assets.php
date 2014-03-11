@@ -14,6 +14,7 @@ namespace cms_core\extensions\helper;
 
 use cms_core\extensions\cms\Settings;
 use cms_core\models\Assets as AssetsModel;
+use lithium\core\Libraries;
 
 class Assets extends \lithium\template\Helper {
 
@@ -74,6 +75,77 @@ class Assets extends \lithium\template\Helper {
 			$result = str_replace($fileBase, $httpBase, $result);
 		}
 		return $results;
+	}
+
+	public function availableScripts($type, array $options = []) {
+		$options += ['admin' => false];
+
+		$scripts = [];
+
+		if ($type == 'base') {
+			// Load base js files in cms_* assets/js.
+			// Filter out any non-cms libraries, then sort.
+			$libraries = Libraries::get();
+			$libraries = array_filter($libraries, function($a) {
+				return strpos($a['name'], 'cms_') === 0 || $a['name'] === 'app';
+			});
+			uasort($libraries, function($a, $b) {
+				// Keep app last...
+				if ($a['name'] === 'app') {
+					return 1;
+				}
+				if ($b['name'] === 'app') {
+					return -1;
+				}
+				// ... and core first.
+				if ($a['name'] === 'cms_core') {
+					return -1;
+				}
+				if ($b['name'] === 'cms_core') {
+					return 1;
+				}
+				return strcmp($a['name'], $b['name']);
+			});
+			foreach ($libraries as $name => $library) {
+				if ($name == 'app' && $options['admin']) {
+					continue;
+				}
+				if ($script = $this->_script($name, 'base')) {
+					$scripts[] = $script;
+				}
+			}
+		} elseif ($type == 'layout') {
+			// Load corresponding layout script.
+			$library = $this->_context->_config['library'];
+			$layout = $this->_context->_config['layout'];
+
+			if ($script = $this->_script($library, "views/layouts/{$layout}")) {
+				$scripts[] = $script;
+			}
+		} elseif ($type == 'view') {
+			// Load corresponding view scripts automatically.
+			$library = $this->_context->_config['library'];
+			$controller = $this->_context->_config['controller'];
+			$template = $this->_context->_config['template'];
+
+			if ($script = $this->_script($library, "views/{$controller}/{$template}")) {
+				$scripts[] = $script;
+			}
+		} elseif ($type == 'element') {
+
+		}
+		return $scripts;
+	}
+
+	protected function _script($library, $file) {
+		$library = str_replace('cms_', '', $library);
+		$library = $library == 'app' ? 'site' : $library;
+
+		$base = parse_url(AssetsModel::base('file'), PHP_URL_PATH) . '/' . $library;
+
+		if (file_exists("{$base}/js/{$file}.js")) {
+			return "/{$library}/js/{$file}";
+		}
 	}
 }
 

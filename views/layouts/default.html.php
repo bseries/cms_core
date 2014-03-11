@@ -39,59 +39,15 @@ FlashMessage::clear();
 			'/core/css/reset',
 			'/site/css/base'
 		]) ?>
-		<?php
-			$scripts = [
-				'/core/js/require',
-			];
-
-			// Filter out any non-cms libraries, then sort.
-			$libraries = Libraries::get();
-			$libraries = array_filter($libraries, function($a) {
-				return strpos($a['name'], 'cms_') === 0 || $a['name'] === 'app';
-			});
-			uasort($libraries, function($a, $b) {
-				// Keep app last...
-				if ($a['name'] === 'app') {
-					return 1;
-				}
-				if ($b['name'] === 'app') {
-					return -1;
-				}
-				// ... and core first.
-				if ($a['name'] === 'cms_core') {
-					return -1;
-				}
-				if ($b['name'] === 'cms_core') {
-					return 1;
-				}
-				return strcmp($a['name'] ,$b['name']);
-			});
-
-			// Load base js files in cms_* assets/js.
-			foreach ($libraries as $name => $library) {
-				if (file_exists($library['path'] . '/assets/js/base.js')) {
-					$library = $name == 'app' ? 'site' : str_replace('cms_', '', $name);
-					$scripts[] = "/{$library}/js/base";
-				}
-			}
-			$scripts[] = '/site/js/base';
-
-			// Load corresponding layout script.
-			// $scripts[] = "/core/js/views/layouts/{$this->_config['layout']}";
-
-			// Load corresponding view scripts automatically.
-			$view = $this->_config['controller'] . '/' . $this->_config['template'];
-			$library = str_replace('cms_', '', $this->_config['library']);
-			$library = $library == 'app' ? 'site' : $library;
-
-			$file  = parse_url(Assets::base('file'), PHP_URL_PATH);
-			$file .= "/{$library}/js/views/{$view}.js";
-
-			if (file_exists($file)) {
-				$scripts[] = "/{$library}/js/views/{$view}";
-			}
-		?>
 		<?php echo $this->styles() ?>
+		<?php
+			$scripts = array_merge(
+				['/core/js/require'],
+				$this->assets->availableScripts('base'),
+				$this->assets->availableScripts('view'),
+				$this->assets->availableScripts('layout')
+			);
+		?>
 		<?php echo $this->assets->script($scripts) ?>
 		<?php echo $this->scripts() ?>
 		<?php if (Settings::read('service.googleAnalytics.default')): ?>

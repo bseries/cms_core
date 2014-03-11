@@ -30,30 +30,16 @@ FlashMessage::clear();
 			'/core/css/admin',
 			'/site/css/admin'
 		]) ?>
-		<?php echo $this->assets->script([
-			'/core/js/underscore',
-			'/core/js/jquery',
-			'/core/js/require',
-			'/core/js/base',
-			'/media/js/base'
-		]) ?>
-		<?php
-			// Load corresponding layout script.
-			echo $this->assets->script(["/core/js/views/layouts/{$this->_config['layout']}"]);
-
-			// Load corresponding view scripts automatically.
-			$view = $this->_config['controller'] . '/' . $this->_config['template'];
-			$library = str_replace('cms_', '', $this->_config['library']);
-			$library = $library == 'app' ? 'site' : $library;
-
-			$file  = parse_url(Assets::base('file'), PHP_URL_PATH);
-			$file .= "/{$library}/js/views/{$view}.js";
-
-			if (file_exists($file)) {
-				echo $this->assets->script(["/{$library}/js/views/{$view}"]);
-			}
-		?>
 		<?php echo $this->styles() ?>
+		<?php
+			$scripts = array_merge(
+				['/core/js/require'],
+				$this->assets->availableScripts('base', ['admin' => true]),
+				$this->assets->availableScripts('view', ['admin' => true]),
+				$this->assets->availableScripts('layout', ['admin' => true])
+			);
+		?>
+		<?php echo $this->assets->script($scripts) ?>
 		<?php echo $this->scripts() ?>
 		<script>
 			<?php $url = ['controller' => 'files', 'library' => 'cms_media', 'admin' => true] ?>

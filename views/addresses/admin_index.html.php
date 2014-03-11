@@ -10,6 +10,7 @@ $dateFormatter = new IntlDateFormatter(
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
 	<h1 class="alpha"><?= $this->title($t('Addresses')) ?></h1>
 
+	<?php if ($data->count()): ?>
 	<table>
 		<thead>
 			<tr>
@@ -32,4 +33,7 @@ $dateFormatter = new IntlDateFormatter(
 			<?php endforeach ?>
 		</tbody>
 	</table>
+	<?php else: ?>
+		<div class="none-available"><?= $t('No items available, yet.') ?></div>
+	<?php endif ?>
 </article>

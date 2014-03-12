@@ -28,12 +28,11 @@ class AddressesController extends \cms_core\controllers\BaseController {
 		return compact('data');
 	}
 
-	protected function _selects() {
-		$parent = parent::_selects();
+	protected function _selects($item) {
 		$users = Users::find('list');
 		$countries = Addresses::countries();
 
-		return compact('users', 'countries') + $parent;
+		return compact('users', 'countries');
 	}
 }
 

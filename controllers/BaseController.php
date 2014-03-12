@@ -52,7 +52,7 @@ class BaseController extends \lithium\action\Controller {
 	/**
 	 * Populates select data.
 	 */
-	protected function _selects() {
+	protected function _selects($item) {
 		return [];
 	}
 }

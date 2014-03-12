@@ -32,7 +32,7 @@ trait AdminEditTrait {
 			}
 		}
 		$this->_render['template'] = 'admin_form';
-		return compact('item') + $this->_selects();
+		return compact('item') + $this->_selects($item);
 	}
 }
 

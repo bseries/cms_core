@@ -49,7 +49,7 @@ class UsersController extends \cms_core\controllers\BaseController {
 			}
 		}
 		$this->_render['template'] = 'admin_form';
-		return compact('item') + $this->_selects();
+		return compact('item') + $this->_selects($item);
 	}
 
 	public function admin_edit() {
@@ -78,13 +78,12 @@ class UsersController extends \cms_core\controllers\BaseController {
 			}
 		}
 		$this->_render['template'] = 'admin_form';
-		return compact('item') + $this->_selects();
+		return compact('item') + $this->_selects($item);
 	}
 
-	protected function _selects() {
+	protected function _selects($item) {
 		$user = Auth::check('default', $this->request);
 
-		$parent = parent::_selects();
 		$roles = Users::enum('role');
 		$timezones = [
 			'Europe/Berlin' => 'Europe/Berlin',
@@ -108,7 +107,7 @@ class UsersController extends \cms_core\controllers\BaseController {
 		foreach ($results as $result) {
 			$addresses[$result->id] = $result->format('oneline');
 		}
-		return compact('roles', 'timezones', 'currencies', 'locales', 'addresses') + $parent;
+		return compact('roles', 'timezones', 'currencies', 'locales', 'addresses');
 	}
 
 	public function admin_generate_passwords() {

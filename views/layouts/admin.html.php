@@ -33,6 +33,7 @@ FlashMessage::clear();
 		<?php echo $this->styles() ?>
 		<?php
 			$scripts = array_merge(
+				['/core/js/jquery'],
 				['/core/js/require'],
 				$this->assets->availableScripts('base', ['admin' => true]),
 				$this->assets->availableScripts('view', ['admin' => true]),

@@ -116,7 +116,7 @@ class Assets extends \lithium\template\Helper {
 			}
 		} elseif ($type == 'layout') {
 			// Load corresponding layout script.
-			$library = $this->_context->_config['library'];
+			$library = $options['admin'] ? 'cms_core' : 'app';
 			$layout = $this->_context->_config['layout'];
 
 			if ($script = $this->_script($library, "views/layouts/{$layout}")) {
@@ -138,12 +138,12 @@ class Assets extends \lithium\template\Helper {
 	}
 
 	protected function _script($library, $file) {
+
 		$library = str_replace('cms_', '', $library);
 		$library = $library == 'app' ? 'site' : $library;
-
 		$base = parse_url(AssetsModel::base('file'), PHP_URL_PATH) . '/' . $library;
 
-		if (file_exists("{$base}/js/{$file}.js")) {
+		if (file_exists($a = "{$base}/js/{$file}.js")) {
 			return "/{$library}/js/{$file}";
 		}
 	}

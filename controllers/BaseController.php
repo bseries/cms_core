@@ -35,6 +35,13 @@ class BaseController extends \lithium\action\Controller {
 	protected $_library;
 
 	/**
+	 * Url used after i.e. edit or add.
+	 *
+	 * @var string
+	 */
+	protected $_redirectUrl = [];
+
+	/**
 	 * Initializes parent, then populates more properties.
 	 */
 	protected function _init() {

@@ -19,14 +19,18 @@ trait AdminEditTrait {
 
 	public function admin_edit() {
 		extract(Message::aliases());
+
 		$model = $this->_model;
+		$redirectUrl = $this->_redirectUrl + [
+			'action' => 'index', 'library' => $this->_library
+		];
 
 		$item = $model::find($this->request->id);
 
 		if ($this->request->data) {
 			if ($item->save($this->request->data)) {
 				FlashMessage::write($t('Successfully saved.'), ['level' => 'success']);
-				return $this->redirect(['action' => 'index', 'library' => $this->_library]);
+				return $this->redirect($redirectUrl);
 			} else {
 				FlashMessage::write($t('Failed to save.'), ['level' => 'error']);
 			}

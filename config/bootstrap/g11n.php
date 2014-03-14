@@ -120,6 +120,10 @@ Catalog::config([
 	'lithium' => [
 		'adapter' => 'Php',
 		'path' => LITHIUM_LIBRARY_PATH . '/lithium/g11n/resources/php'
+	],
+	'cldr' => [
+		'adapter' => 'Cldr',
+		'path' => dirname(dirname(__DIR__)) . '/resources/g11n/cldr'
 	]
 ] + Catalog::config());
 
@@ -185,7 +189,7 @@ Inflector::rules('transliteration', Catalog::read(true, 'inflection.transliterat
  * @see lithium\util\Validator
  */
 foreach (['phone', 'postalCode', 'ssn'] as $name) {
-	Validator::add($name, Catalog::read(true, "validation.{$name}", 'en_US'));
+	Validator::add($name, Catalog::read('lithium', "validation.{$name}", 'en_US'));
 }
 Validator::add('lengthBetween', function($value, $format, $options) {
 	$length = Multibyte::strlen($value);

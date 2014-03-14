@@ -16,6 +16,7 @@ use lithium\util\Validator;
 use lithium\security\Password;
 use lithium\g11n\Message;
 use cms_core\models\Addresses;
+use cms_billing\models\TaxZones;
 
 class Users extends \cms_core\models\Base {
 
@@ -26,7 +27,9 @@ class Users extends \cms_core\models\Base {
 	public static $enum = [
 		'role' => [
 			'admin',
-			'user'
+			'user',
+			'merchant',
+			'customer'
 		]
 	];
 
@@ -94,6 +97,10 @@ class Users extends \cms_core\models\Base {
 		});
 	}
 
+	public function isVirtual() {
+		return false;
+	}
+
 	// Generates a random (pronounceable) plaintext password.
 	public static function generatePassword($length = 8, $alphabet = 0) {
 		// Alphabets in descending order of complexity.
@@ -137,13 +144,25 @@ class Users extends \cms_core\models\Base {
 	}
 
 	public function address($entity, $type = 'billing') {
-		$field = "{$type}_address_id";
+		$field = "{$type}_address";
+		if ($entity->$field) {
+			return $entity->$field;
+		}
 
+		$field = "{$type}_address_id";
 		return Addresses::find('first', [
 			'conditions' => [
 				'id' => $entity->$field
 			]
 		]);
+	}
+
+	public function taxZone($entity) {
+		return TaxZones::generate(
+			$entity->address('billing')->country,
+			$entity->vat_reg_no,
+			$entity->locale
+		);
 	}
 }
 

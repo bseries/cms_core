@@ -19,6 +19,7 @@ trait AdminActivateTrait {
 
 	public function admin_activate() {
 		extract(Message::aliases());
+
 		$model = $this->_model;
 
 		$result = $model::first($this->request->id)->save(

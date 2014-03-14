@@ -16,6 +16,8 @@ use lithium\core\Environment;
 use lithium\action\Dispatcher;
 use lithium\storage\cache\adapter\Memcache;
 use lithium\storage\Session;
+use lithium\data\Connections;
+use lithium\data\source\Database;
 
 if (!Memcache::enabled()) {
 	throw new Exception('Memcache not enabled.');
@@ -33,18 +35,42 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 	if (!Environment::is('production')) {
 		return $chain->next($self, $params, $chain);
 	}
-	$key = md5(LITHIUM_APP_PATH) . '.core.libraries';
+	$cacheKey = 'core.libraries';
 
-	if ($cache = Cache::read('default', $key)) {
-		$cache = (array) $cache + Libraries::cache();
-		Libraries::cache($cache);
+	if ($cached = Cache::read('default', $cacheKey)) {
+		$cached = (array) $cached + Libraries::cache();
+		Libraries::cache($cached);
 	}
 	$result = $chain->next($self, $params, $chain);
 
-	if ($cache != Libraries::cache()) {
-		Cache::write('default', $key, Libraries::cache(), '+1 day');
+	if ($cached != ($data = Libraries::cache())) {
+		Cache::write('default', $cacheKey, $data, '+1 day');
 	}
 	return $result;
+});
+
+Dispatcher::applyFilter('run', function($self, $params, $chain) {
+	if (!Environment::is('production')) {
+		return $chain->next($self, $params, $chain);
+	}
+	foreach (Connections::get() as $name) {
+		if (!(($connection = Connections::get($name)) instanceof Database)) {
+			continue;
+		}
+		$connection->applyFilter('describe', function($self, $params, $chain) use ($name) {
+			if ($params['fields']) {
+				return $chain->next($self, $params, $chain);
+			}
+			$cacheKey = "data.connections.{$name}.sources.{$params['entity']}.schema";
+
+			return Cache::read('default', $cacheKey, array(
+				'write' => function() use ($self, $params, $chain) {
+					return array('+1 day' => $chain->next($self, $params, $chain));
+				}
+			));
+		});
+	}
+	return $chain->next($self, $params, $chain);
 });
 
 Dispatcher::applyFilter('run', function($self, $params, $chain) {

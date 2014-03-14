@@ -89,6 +89,8 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) use ($retrieveUa
 			$params['data']['authedUser'] = Auth::check('default');
 
 			$params['data']['ua'] = $ua;
+			$params['data']['locale'] = Environment::get('locale');
+
 			// $params['data']['site'] = Environment::get('site');
 			// $params['data']['service'] = Environment::get('service');
 		}

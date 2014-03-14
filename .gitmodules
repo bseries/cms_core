@@ -31,3 +31,6 @@
 [submodule "libraries/finite"]
 	path = libraries/finite
 	url = git@github.com:yohang/Finite.git
+[submodule "libraries/li3_cldr"]
+	path = libraries/li3_cldr
+	url = https://github.com/UnionOfRAD/li3_cldr.git

@@ -19,7 +19,11 @@ trait AdminAddTrait {
 
 	public function admin_add() {
 		extract(Message::aliases());
+
 		$model = $this->_model;
+		$redirectUrl = $this->_redirectUrl + [
+			'action' => 'index', 'library' => $this->_library
+		];
 
 		$item = $model::create();
 
@@ -27,7 +31,7 @@ trait AdminAddTrait {
 			if ($item->save($this->request->data)) {
 				FlashMessage::write($t('Successfully saved.'), ['level' => 'success']);
 
-				return $this->redirect(['action' => 'index', 'library' => $this->_library]);
+				return $this->redirect($redirectUrl);
 			} else {
 				FlashMessage::write($t('Failed to save.'), ['level' => 'error']);
 			}

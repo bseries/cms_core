@@ -82,6 +82,8 @@ class UsersController extends \cms_core\controllers\BaseController {
 	}
 
 	protected function _selects($item) {
+		extract(Message::aliases());
+
 		$roles = Users::enum('role');
 		$timezones = [
 			'Europe/Berlin' => 'Europe/Berlin',
@@ -101,7 +103,9 @@ class UsersController extends \cms_core\controllers\BaseController {
 					'user_id' => $item->id
 				]
 			]);
-			$addresses = [];
+			$addresses = [
+				null => '-- ' . $t('no address') . ' --'
+			];
 
 			foreach ($results as $result) {
 				$addresses[$result->id] = $result->format('oneline');

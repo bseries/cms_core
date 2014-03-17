@@ -82,8 +82,6 @@ class UsersController extends \cms_core\controllers\BaseController {
 	}
 
 	protected function _selects($item) {
-		$user = Auth::check('default', $this->request);
-
 		$roles = Users::enum('role');
 		$timezones = [
 			'Europe/Berlin' => 'Europe/Berlin',
@@ -97,15 +95,17 @@ class UsersController extends \cms_core\controllers\BaseController {
 			'de' => 'Deutsch',
 			'en' => 'English'
 		];
-		$results = Addresses::find('all', [
-			'conditions' => [
-				'user_id' => $user['id']
-			]
-		]);
-		$addresses = [];
+		if ($item) {
+			$results = Addresses::find('all', [
+				'conditions' => [
+					'user_id' => $item->id
+				]
+			]);
+			$addresses = [];
 
-		foreach ($results as $result) {
-			$addresses[$result->id] = $result->format('oneline');
+			foreach ($results as $result) {
+				$addresses[$result->id] = $result->format('oneline');
+			}
 		}
 		return compact('roles', 'timezones', 'currencies', 'locales', 'addresses');
 	}

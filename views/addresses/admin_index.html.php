@@ -14,13 +14,32 @@ $dateFormatter = new IntlDateFormatter(
 	<table>
 		<thead>
 			<tr>
+				<td><?= $t('User') ?>
 				<td class="emphasize"><?= $t('Address') ?>
 				<td class="date created"><?= $t('Created') ?>
 				<td>
 		</thead>
 		<tbody>
 			<?php foreach ($data as $item): ?>
+				<?php $user = $item->user() ?>
 			<tr>
+				<?php if ($user->isVirtual()): ?>
+					<td>
+						<?= $this->html->link($user->name . '/' . $user->id, [
+							'controller' => 'VirtualUsers', 'action' => 'edit', 'id' => $user->id, 'library' => 'cms_core'
+						]) ?>
+						(<?= $this->html->link('virtual', [
+							'controller' => 'VirtualUsers', 'action' => 'index', 'library' => 'cms_core'
+						]) ?>)
+				<?php else: ?>
+					<td>
+						<?= $this->html->link($user->name . '/' . $user->id, [
+							'controller' => 'Users', 'action' => 'edit', 'id' => $user->id, 'library' => 'cms_core'
+						]) ?>
+						(<?= $this->html->link('real', [
+							'controller' => 'Users', 'action' => 'index', 'library' => 'cms_core'
+						]) ?>)
+				<?php endif ?>
 				<td class="emphasize"><?= $item->format('oneline') ?>
 				<td class="date created">
 					<?php $date = DateTime::createFromFormat('Y-m-d H:i:s', $item->created) ?>

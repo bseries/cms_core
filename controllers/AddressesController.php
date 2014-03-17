@@ -14,6 +14,7 @@ namespace cms_core\controllers;
 
 use cms_core\models\Users;
 use cms_core\models\Addresses;
+use lithium\core\Environment;
 
 class AddressesController extends \cms_core\controllers\BaseController {
 
@@ -30,7 +31,7 @@ class AddressesController extends \cms_core\controllers\BaseController {
 
 	protected function _selects($item) {
 		$users = Users::find('list');
-		$countries = Addresses::countries();
+		$countries = Addresses::countries(Environment::get('locale'));
 
 		return compact('users', 'countries');
 	}

@@ -14,12 +14,21 @@ namespace cms_core\models;
 
 use lithium\g11n\Catalog;
 use Collator;
+use cms_core\models\Users;
+use cms_core\models\VirtualUsers;
 
 class Addresses extends \cms_core\models\Base {
 
 	protected static $_actsAs = [
 		'cms_core\extensions\data\behavior\Timestamp'
 	];
+
+	public function user($entity) {
+		if ($entity->user_id) {
+			return Users::findById($entity->user_id);
+		}
+		return VirtualUsers::findById($entity->virtual_user_id);
+	}
 
 	public static function findExact($data) {
 		return static::find('first', [
@@ -69,7 +78,9 @@ class Addresses extends \cms_core\models\Base {
 		return $countries;
 	}
 
-	public function format($entity, $type, $locale) {
+	public function format($entity, $type, $locale = null) {
+		$locale = $locale ?: $entity->user()->locale;
+
 		if ($type == 'oneline') {
 			$result = [];
 

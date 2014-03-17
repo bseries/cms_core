@@ -78,6 +78,16 @@ Router::connect('/admin/users/{:action}/{:id:[0-9]+}', [
 Router::connect('/admin/users/{:action}/{:args}', [
 	'controller' => 'users', 'library' => 'cms_core', 'admin' => true
 ], $persist);
+Router::connect('/admin/virtual-users/{:id:[0-9]+}/change-role/{:role}', [
+	'controller' => 'VirtualUsers', 'action' => 'change_role', 'library' => 'cms_core', 'admin' => true
+], $persist);
+Router::connect('/admin/virtual-users/{:action}/{:id:[0-9]+}', [
+	'controller' => 'VirtualUsers', 'library' => 'cms_core', 'admin' => true
+], $persist);
+Router::connect('/admin/virtual-users/{:action}/{:args}', [
+	'controller' => 'VirtualUsers', 'library' => 'cms_core', 'admin' => true
+], $persist);
+
 
 Router::connect('/admin/addresses/{:action}/{:id:[0-9]+}', [
 	'controller' => 'addresses', 'library' => 'cms_core', 'admin' => true

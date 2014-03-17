@@ -13,17 +13,12 @@ Panes::register('cms_core', 'users', [
 	'actions' => [
 		$t('List Users') => ['action' => 'index'] + $base,
 		$t('New User') => ['action' => 'add'] + $base,
+		$t('List Virtual Users') => ['controller' => 'VirtualUsers', 'action' => 'index'] + $base,
+		$t('New Virtual User') => ['controller' => 'VirtualUsers', 'action' => 'add'] + $base,
+		$t('List Addresses') => ['controller' => 'Addresses', 'action' => 'index'] + $base,
+		$t('New Address') => ['controller' => 'Addresses', 'action' => 'add'] + $base,
 		$t('List Tokens') => ['controller' => 'tokens', 'action' => 'index'] + $base,
-		$t('Generate Token') => ['controller' => 'tokens', 'action' => 'generate'] + $base
-	]
-]);
-Panes::register('cms_core', 'addresses', [
-	'title' => $t('Addresses'),
-	'group' =>  Panes::GROUP_ACCESS,
-	'url' => $base = ['controller' => 'addresses', 'action' => 'index', 'library' => 'cms_core', 'admin' => true],
-	'actions' => [
-		$t('List Addresses') => ['action' => 'index'] + $base,
-		$t('New Address') => ['action' => 'add'] + $base
+		$t('Generate Token') => ['controller' => 'tokens', 'action' => 'generate'] + $base,
 	]
 ]);
 Panes::register('cms_core', 'settings', [

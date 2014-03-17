@@ -8,7 +8,7 @@ $dateFormatter = new IntlDateFormatter(
 
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
-	<h1 class="alpha"><?= $this->title($t('Users')) ?></h1>
+	<h1 class="alpha"><?= $this->title($t('Virtual Users')) ?></h1>
 
 	<table>
 		<thead>
@@ -26,7 +26,9 @@ $dateFormatter = new IntlDateFormatter(
 			<tr>
 				<td class="flag"><?= $item->is_active ? '✓ ' : '╳' ?>
 				<td>
-					<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($item->email)?>.jpg?s=30&d=retro" />
+					<?php if ($item->email): ?>
+						<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($item->email)?>.jpg?s=30&d=retro">
+					<?php endif ?>
 				<td class="emphasize"><?= $item->name ?>
 				<td><?= $item->email ?>
 				<td><?= $item->role ?>
@@ -40,11 +42,6 @@ $dateFormatter = new IntlDateFormatter(
 							<?= $this->html->link($t('deactivate'), ['id' => $item->id, 'action' => 'deactivate', 'library' => 'cms_core'], ['class' => 'button']) ?>
 						<?php else: ?>
 							<?= $this->html->link($t('activate'), ['id' => $item->id, 'action' => 'activate', 'library' => 'cms_core'], ['class' => 'button']) ?>
-						<?php endif ?>
-						<?php if ($item->role == 'admin'): ?>
-							<?= $this->html->link($t('make user'), ['id' => $item->id, 'action' => 'change_role', 'role' => 'user', 'library' => 'cms_core'], ['class' => 'button']) ?>
-						<?php else: ?>
-							<?= $this->html->link($t('make admin'), ['id' => $item->id, 'action' => 'change_role', 'role' => 'admin', 'library' => 'cms_core'], ['class' => 'button']) ?>
 						<?php endif ?>
 						<?= $this->html->link($t('edit'), ['id' => $item->id, 'action' => 'edit', 'library' => 'cms_core'], ['class' => 'button']) ?>
 					</nav>

@@ -46,7 +46,8 @@ class Localizable extends \li3_behaviors\data\model\Behavior {
 				return $value = $formatter->parse($value);
 			case 'money':
 				$formatter = new NumberFormatter(static::_locale(), NumberFormatter::DECIMAL);
-				return (integer) ($formatter->parse($value) * 100);
+				$result = ($formatter->parse($value) * 100);
+				return intval($result . '.0'); // Prevent float to int rounding issues.
 		}
 		throw new Exception('Field value is in unsupported format.');
 	}

@@ -25,6 +25,7 @@ use lithium\util\Validator;
 use lithium\net\http\Media;
 use lithium\action\Dispatcher as ActionDispatcher;
 use lithium\console\Dispatcher as ConsoleDispatcher;
+use lithium\security\Auth;
 
 /**
  * Dates
@@ -68,8 +69,14 @@ Environment::set('test', ['locale' => 'en', 'locales' => ['en' => 'English']]);
  * @see lithiumm\g11n\Message
  * @see lithiumm\core\Environment
  */
-
 $setLocale = function($self, $params, $chain) {
+	if ($user = Auth::check('default')) {
+		$timezone = $user['timezone'];
+	} else {
+		$timezone = 'UTC';
+	}
+	Environment::set(true, compact('timezone'));
+
 	try {
 		if (!$params['request']->locale()) {
 			$params['request']->locale(Locale::preferred(

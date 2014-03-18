@@ -53,11 +53,15 @@ class Addresses extends \cms_core\models\Base {
 		$item = [];
 
 		foreach ($data as $field => $value) {
-			if (strpos($field, $prefix) === false) {
+			if (strpos($field, 'user_') !== false) {
+				$item[$field] = $value;
 				continue;
 			}
-			$field = str_replace($prefix, '', $field);
-			$item[$field] = $value;
+			if (strpos($field, $prefix) !== false) {
+				$field = str_replace($prefix, '', $field);
+				$item[$field] = $value;
+				continue;
+			}
 		}
 		return static::create($item);
 	}

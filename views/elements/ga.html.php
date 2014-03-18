@@ -12,6 +12,7 @@ use cms_core\extensions\cms\Settings;
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', '<?php echo Settings::read('service.googleAnalytics.default.account') ?>', '<?php echo Settings::read('googleAnalytics.default.domain') ?>');
+  ga('anonymizeIp', true);
   ga('send', 'pageview');
 
 </script>
@@ -20,6 +21,7 @@ use cms_core\extensions\cms\Settings;
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', '<?php echo Settings::read('service.googleAnalytics.default.account') ?>']);
+  _gaq.push(['_gat._anonymizeIp']);
   _gaq.push(['_trackPageview']);
 
   (function() {

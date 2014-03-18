@@ -1,12 +1,3 @@
-<?php
-
-$dateFormatter = new IntlDateFormatter(
-	'de_DE',
-	IntlDateFormatter::SHORT,
-	IntlDateFormatter::SHORT
-);
-
-?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
 	<h1 class="alpha"><?= $this->title($t('Tokens')) ?></h1>
 
@@ -23,8 +14,9 @@ $dateFormatter = new IntlDateFormatter(
 				<tr>
 					<td class="emphasize"><code><?= $item->token ?></code>
 					<td class="date expires">
-						<?php $date = DateTime::createFromFormat('Y-m-d H:i:s', $item->expires) ?>
-						<time datetime="<?= $date->format(DateTime::W3C) ?>"><?= $dateFormatter->format($date) ?></time>
+						<time datetime="<?= $this->date->format($item->expires, 'w3c') ?>">
+							<?= $this->date->format($item->expires, 'datetime') ?>
+						</time>
 					<td>
 						<nav class="actions">
 							<?= $this->html->link($t('void'), ['token' => $item->token, 'action' => 'void', 'library' => 'cms_core'], ['class' => 'button']) ?>

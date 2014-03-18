@@ -1,12 +1,3 @@
-<?php
-
-$dateFormatter = new IntlDateFormatter(
-	'de_DE',
-	IntlDateFormatter::SHORT,
-	IntlDateFormatter::SHORT
-);
-
-?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
 	<h1 class="alpha"><?= $this->title($t('Virtual Users')) ?></h1>
 
@@ -33,8 +24,9 @@ $dateFormatter = new IntlDateFormatter(
 				<td><?= $item->email ?>
 				<td><?= $item->role ?>
 				<td class="date created">
-					<?php $date = DateTime::createFromFormat('Y-m-d H:i:s', $item->created) ?>
-					<time datetime="<?= $date->format(DateTime::W3C) ?>"><?= $dateFormatter->format($date) ?></time>
+					<time datetime="<?= $this->date->format($item->created, 'w3c') ?>">
+						<?= $this->date->format($item->created, 'date') ?>
+					</time>
 				<td>
 					<nav class="actions">
 						<?= $this->html->link($t('delete'), ['id' => $item->id, 'action' => 'delete', 'library' => 'cms_core'], ['class' => 'button']) ?>

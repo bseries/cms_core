@@ -11,7 +11,7 @@ $this->title("{$title['title']} - {$title['object'][1]}");
 
 ?>
 
-<article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
+<article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> section-spacing">
 	<h1 class="alpha">
 		<span class="action"><?= $title['action'] ?></span>
 		<span class="title" data-untitled="<?= $t('Untitled') ?>"><?= $title['title'] ?></span>
@@ -19,33 +19,44 @@ $this->title("{$title['title']} - {$title['object'][1]}");
 	<?=$this->form->create($item) ?>
 		<?= $this->form->field('id', ['type' => 'hidden']) ?>
 
-		<?= $this->form->field('user_id', [
-			'type' => 'select',
-			'label' => $t('User'),
-			'list' => $users
-		]) ?>
+		<section>
+			<?= $this->form->field('user_id', [
+				'type' => 'select',
+				'label' => $t('User'),
+				'list' => $users
+			]) ?>
+		</section>
 
-		<?= $this->form->field('name', [
-			'type' => 'text',
-			'label' => $t('Name')
-		]) ?>
-		<?= $this->form->field('street', [
-			'type' => 'text',
-			'label' => $t('Street')
-		]) ?>
-		<?= $this->form->field('city', [
-			'type' => 'text',
-			'label' => $t('City')
-		]) ?>
-		<?= $this->form->field('zip', [
-			'type' => 'text',
-			'label' => $t('ZIP')
-		]) ?>
-		<?= $this->form->field('country', [
-			'type' => 'select',
-			'label' => $t('Country'),
-			'list' => $countries
-		]) ?>
+		<section>
+			<?= $this->form->field('name', [
+				'type' => 'text',
+				'label' => $t('Name')
+			]) ?>
+			<?= $this->form->field('street', [
+				'type' => 'text',
+				'label' => $t('Street')
+			]) ?>
+			<?= $this->form->field('city', [
+				'type' => 'text',
+				'label' => $t('City')
+			]) ?>
+			<?= $this->form->field('zip', [
+				'type' => 'text',
+				'label' => $t('ZIP')
+			]) ?>
+			<?= $this->form->field('country', [
+				'type' => 'select',
+				'label' => $t('Country'),
+				'list' => $countries
+			]) ?>
+		</section>
+
+		<section>
+			<?= $this->form->field('phone', [
+				'type' => 'phone',
+				'label' => $t('Phone')
+			]) ?>
+		</section>
 
 		<?= $this->form->button($t('save'), ['type' => 'submit', 'class' => 'large']) ?>
 	<?=$this->form->end() ?>

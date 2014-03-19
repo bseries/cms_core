@@ -13,6 +13,7 @@
 use lithium\core\Libraries;
 use cms_core\extensions\cms\Features;
 use cms_core\models\Assets;
+use lithium\net\http\Media as HttpMedia;
 
 Libraries::add('li3_behaviors', [
 	'path' => dirname(__DIR__) . '/libraries/li3_behaviors'
@@ -73,5 +74,12 @@ Features::register('cms_core', 'useBilling', false);
 Assets::registerScheme('file');
 Assets::registerScheme('http');
 Assets::registerScheme('https');
+
+HttpMedia::type('binary', 'application/octet-stream', [
+	'cast' => false,
+	'encode' => function($data) {
+		return $data;
+	}
+]);
 
 ?>

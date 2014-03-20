@@ -87,7 +87,7 @@ class Assets extends \lithium\template\Helper {
 			// Filter out any non-cms libraries, then sort.
 			$libraries = Libraries::get();
 			$libraries = array_filter($libraries, function($a) {
-				return strpos($a['name'], 'cms_') === 0 || $a['name'] === 'app';
+				return preg_match('/^(cms|ecommerce)_/', $a['name']) || $a['name'] === 'app';
 			});
 			uasort($libraries, function($a, $b) {
 				// Keep app last...
@@ -138,8 +138,7 @@ class Assets extends \lithium\template\Helper {
 	}
 
 	protected function _script($library, $file) {
-
-		$library = str_replace('cms_', '', $library);
+		$library = str_replace(['cms_', 'ecommerce_'], '', $library);
 		$library = $library == 'app' ? 'site' : $library;
 		$base = parse_url(AssetsModel::base('file'), PHP_URL_PATH) . '/' . $library;
 

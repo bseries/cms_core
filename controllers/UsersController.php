@@ -17,6 +17,7 @@ use cms_core\models\Addresses;
 use li3_flash_message\extensions\storage\FlashMessage;
 use lithium\g11n\Message;
 use lithium\security\Auth;
+use cms_core\extensions\cms\Features;
 
 class UsersController extends \cms_core\controllers\BaseController {
 
@@ -167,6 +168,38 @@ class UsersController extends \cms_core\controllers\BaseController {
 		FlashMessage::write($t('Successfully logged out.'), ['level' => 'success']);
 		return $this->redirect('/admin/session');
 	}
+
+	// Overridden from trait.
+	public function admin_activate() {
+		extract(Message::aliases());
+
+		$model = $this->_model;
+		$model::pdo()->beginTransaction();
+		$item = $model::first($this->request->id);
+
+		$result = $item->save(
+			['is_active' => true],
+			['whitelist' => ['is_active'], 'validate' => false]
+		);
+		if (Features::read('sendUserActivationMail')) {
+			$result = $result && Mailer::deliver('user_activated', [
+				'to' => $item->email,
+				'subject' => 'Ihr Konto wurde aktiviert.',
+				'data' => [
+					'user' => $item
+				]
+			]);
+		}
+		if ($result) {
+			$model::pdo()->commit();
+			FlashMessage::write($t('Activated.'), ['level' => 'success']);
+		} else {
+			$model::pdo()->rollback();
+			FlashMessage::write($t('Failed to activate.'), ['level' => 'error']);
+		}
+		return $this->redirect($this->request->referer());
+	}
+
 }
 
 ?>

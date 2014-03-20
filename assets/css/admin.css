@@ -723,9 +723,6 @@ tbody tr:hover td {
 tbody tr:hover td a {
   color: #fff;
 }
-tbody td {
-  color: #000;
-}
 
 table .actions {
   margin-right: -.3em;
@@ -742,27 +739,20 @@ table .button {
 .actions + table {
   margin-top: 2em;
 }
+
 table .flag {
   text-align: center;
 }
-
 table .date {
   max-width: none;
   width: 150px;
 }
-/*
-table tbody .date time {
-  transition: opacity .1s;
-}
-table tbody .date.created time:not(.relative),
-table tbody .date.modified time:not(.relative) {
-  opacity: 0;
-}
-*/
-
-table tbody .emphasize {
+tbody .emphasize {
   color: black;
   max-width: 240px;
+}
+tbody .status {
+  color: #067387;
 }
 
 /* Notifications

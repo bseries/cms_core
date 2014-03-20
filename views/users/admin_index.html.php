@@ -1,26 +1,32 @@
-<article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
+<article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> use-list">
 	<h1 class="alpha"><?= $this->title($t('Users')) ?></h1>
 
 	<table>
 		<thead>
 			<tr>
-				<td class="flag"><?= $t('Active?') ?>
+				<td data-sort="is-active" class="is-active flag list-sort"><?= $t('Active?') ?>
 				<td>
-				<td class="emphasize"><?= $t('Name') ?>
-				<td><?= $t('Email') ?>
-				<td><?= $t('Role') ?>
+				<td data-sort="name" class="name emphasize list-sort"><?= $t('Name') ?>
+				<td data-sort="email" class="email list-sort"><?= $t('Email') ?>
+				<td data-sort="role" class="role list-sort"><?= $t('Role') ?>
 				<td class="date created"><?= $t('Created') ?>
 				<td>
+					<?= $this->form->field('search', [
+						'type' => 'search',
+						'label' => false,
+						'placeholder' => $t('Filter'),
+						'class' => 'list-search'
+					]) ?>
 		</thead>
-		<tbody>
+		<tbody class="list">
 			<?php foreach ($data as $item): ?>
 			<tr>
-				<td class="flag"><?= $item->is_active ? '✓ ' : '╳' ?>
+				<td class="is-active flag"><?= $item->is_active ? '✓ ' : '╳' ?>
 				<td>
 					<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($item->email)?>.jpg?s=30&d=retro" />
-				<td class="emphasize"><?= $item->name ?>
-				<td><?= $item->email ?>
-				<td><?= $item->role ?>
+				<td class="name emphasize"><?= $item->name ?>
+				<td class="email"><?= $item->email ?>
+				<td class="role"><?= $item->role ?>
 				<td class="date created">
 					<time datetime="<?= $this->date->format($item->created, 'w3c') ?>">
 						<?= $this->date->format($item->created, 'date') ?>

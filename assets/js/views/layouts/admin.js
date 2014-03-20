@@ -8,7 +8,25 @@
  * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
-require(['jquery'/*, 'moment' */, 'domready!'], function($, moment) {
+require(['jquery', 'list', 'domready!'], function($, List) {
+
+  //
+  // Table sorting/filtering
+  //
+  var $list = $('.use-list');
+  if ($list.length) {
+    var listValueNames = [];
+
+    $list.find('thead .list-sort').each(function() {
+      listValueNames.push($(this).data('sort'));
+    });
+
+    var list = new List($list.get(0), {
+      searchClass: 'list-search',
+      sortClass: 'list-sort',
+      valueNames: listValueNames
+    });
+  }
 
   //
   // Nested management

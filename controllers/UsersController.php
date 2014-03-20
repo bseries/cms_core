@@ -167,7 +167,6 @@ class UsersController extends \cms_core\controllers\BaseController {
 		FlashMessage::write($t('Successfully logged out.'), ['level' => 'success']);
 		return $this->redirect('/admin/session');
 	}
-
 }
 
 ?>

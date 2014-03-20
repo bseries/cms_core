@@ -54,6 +54,8 @@ requirejs.config({
     'moment': 'core/js/moment',
     'sprintf': 'core/js/sprintf',
     'caolan/async': 'core/js/async',
+    'list': 'core/js/list',
+    'listPagination': 'core/js/listPagination',
 
     // Compat
     'versioncompare': 'core/js/compat/versioncompare',
@@ -113,6 +115,13 @@ requirejs.config({
     },
     'sprintf': {
       exports: 'window.sprintf'
+    },
+    'list': {
+      exports: 'window.List'
+    },
+    'listPagination': {
+      exports: 'window.ListPagination',
+      deps: ['list']
     },
 
     // Compat

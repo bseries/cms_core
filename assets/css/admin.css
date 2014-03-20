@@ -917,6 +917,31 @@ form .help {
   max-width: none;
 }
 
+/* List & Table Filtering/Search
+-------------------------------------------------------------- */
+.list-search {
+  max-width: 200px;
+}
+/*
+.list-sort {
+  color: #111;
+}
+*/
+.list-sort:hover {
+  cursor: pointer;
+  color: #111;
+}
+.list-sort.asc,
+.list-sort.desc {
+  color: #111;
+}
+.list-sort.asc:after {
+  content: "⌄";
+}
+.list-sort.desc:after {
+  content: "⌃";
+}
+
 /* Sortable
 -------------------------------------------------------------- */
 .ui-sortable-helper {

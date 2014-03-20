@@ -30,10 +30,10 @@ class Localizable extends \li3_behaviors\data\model\Behavior {
 				return $chain->next($self, $params, $chain);
 			}
 			foreach ($behavior->config('fields') as $field => $type) {
-				if (!isset($params['entity']->$field)) {
+				if (!isset($params['data'][$field])) {
 					continue;
 				}
-				$params['entity']->$field = static::_normalize($params['entity']->$field, $type);
+				$params['data'][$field] = static::_normalize($params['data'][$field], $type);
 			}
 			return $chain->next($self, $params, $chain);
 		});

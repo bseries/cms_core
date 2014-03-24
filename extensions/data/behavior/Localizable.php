@@ -26,14 +26,16 @@ class Localizable extends \li3_behaviors\data\model\Behavior {
 		$model::applyFilter('save', function($self, $params, $chain) use ($behavior) {
 			$params['options'] += ['localize' => true];
 
+			$data = $params['data'] + $params['entity']->data();
+
 			if (!$params['options']['localize']) {
 				return $chain->next($self, $params, $chain);
 			}
 			foreach ($behavior->config('fields') as $field => $type) {
-				if (!isset($params['data'][$field])) {
+				if (!isset($data[$field])) {
 					continue;
 				}
-				$params['data'][$field] = static::_normalize($params['data'][$field], $type);
+				$params['data'][$field] = static::_normalize($data[$field], $type);
 			}
 			return $chain->next($self, $params, $chain);
 		});

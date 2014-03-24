@@ -12,7 +12,8 @@
 
 namespace cms_core\extensions\helper;
 
-use lihtium\core\Environment;
+use lithium\core\Environment;
+use NumberFormatter;
 
 class Number extends \lithium\template\Helper {
 

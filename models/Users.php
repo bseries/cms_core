@@ -17,11 +17,18 @@ use lithium\security\Password;
 use lithium\g11n\Message;
 use cms_core\models\Addresses;
 use cms_billing\models\TaxZones;
+use cms_core\extensions\cms\Settings;
 
 class Users extends \cms_core\models\Base {
 
 	protected static $_actsAs = [
-		'cms_core\extensions\data\behavior\Timestamp'
+		'cms_core\extensions\data\behavior\Timestamp',
+		'cms_core\extensions\data\behavior\ReferenceNumber' => [
+			'models' => [
+				'cms_core\models\Users',
+				'cms_core\models\VirtualUsers'
+			]
+		]
 	];
 
 	public static $enum = [
@@ -35,8 +42,11 @@ class Users extends \cms_core\models\Base {
 
 	public static function init() {
 		extract(Message::aliases());
-
 		$model = static::_object();
+
+		static::behavior('cms_core\extensions\data\behavior\ReferenceNumber')->config(
+			Settings::read('user.number')
+		);
 
 		$model->validates['password'] = [
 			[

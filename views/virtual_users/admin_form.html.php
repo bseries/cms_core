@@ -20,6 +20,13 @@ $this->title("{$title['title']} - {$title['object'][1]}");
 		<section>
 			<?= $this->form->field('id', ['type' => 'hidden']) ?>
 			<?= $this->form->field('name', ['type' => 'text', 'label' => $t('Name'), 'class' => 'use-for-title']) ?>
+			<?php if (Features::enabled('useBilling')): ?>
+				<?= $this->form->field('number', [
+					'type' => 'text',
+					'label' => $t('Number')
+				]) ?>
+				<div class="help"><?= $t('Leave empty to autogenerate number.') ?></div>
+			<?php endif ?>
 			<?= $this->form->field('email', ['type' => 'email', 'label' => $t('E–mail')]) ?>
 			<?= $this->form->field('role', [
 				'type' => 'select',

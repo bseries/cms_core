@@ -16,11 +16,18 @@ use lithium\util\Validator;
 use lithium\g11n\Message;
 use cms_core\models\Addresses;
 use cms_billing\models\TaxZones;
+use cms_core\extensions\cms\Settings;
 
 class VirtualUsers extends \cms_core\models\Base {
 
 	protected static $_actsAs = [
-		'cms_core\extensions\data\behavior\Timestamp'
+		'cms_core\extensions\data\behavior\Timestamp',
+		'cms_core\extensions\data\behavior\ReferenceNumber' => [
+			'models' => [
+				'cms_core\models\Users',
+				'cms_core\models\VirtualUsers'
+			]
+		]
 	];
 
 	public static $enum = [
@@ -31,6 +38,14 @@ class VirtualUsers extends \cms_core\models\Base {
 			'customer'
 		]
 	];
+
+	public static function init() {
+		$model = static::_object();
+
+		static::behavior('cms_core\extensions\data\behavior\ReferenceNumber')->config(
+			Settings::read('user.number')
+		);
+	}
 
 	public function isVirtual() {
 		return true;
@@ -58,5 +73,7 @@ class VirtualUsers extends \cms_core\models\Base {
 		);
 	}
 }
+
+VirtualUsers::init();
 
 ?>

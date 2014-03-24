@@ -1,3 +1,8 @@
+<?php
+
+use cms_core\extensions\cms\Features;
+
+?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
 	<h1 class="alpha"><?= $this->title($t('Virtual Users')) ?></h1>
 
@@ -6,6 +11,9 @@
 			<tr>
 				<td class="flag"><?= $t('Active?') ?>
 				<td>
+				<?php if (Features::enabled('useBilling')): ?>
+					<td data-sort="number" class="number list-sort"><?= $t('Number') ?>
+				<?php endif ?>
 				<td class="emphasize"><?= $t('Name') ?>
 				<td><?= $t('Email') ?>
 				<td><?= $t('Role') ?>
@@ -20,6 +28,9 @@
 					<?php if ($item->email): ?>
 						<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($item->email)?>.jpg?s=30&d=retro">
 					<?php endif ?>
+				<?php if (Features::enabled('useBilling')): ?>
+					<td class="number emphasize"><?= $item->number ?>
+				<?php endif ?>
 				<td class="emphasize"><?= $item->name ?>
 				<td><?= $item->email ?>
 				<td><?= $item->role ?>

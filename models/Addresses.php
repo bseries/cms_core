@@ -12,6 +12,7 @@
 
 namespace cms_core\models;
 
+use lithium\core\Environment;
 use lithium\g11n\Catalog;
 use Collator;
 use cms_core\models\Users;
@@ -83,7 +84,9 @@ class Addresses extends \cms_core\models\Base {
 	}
 
 	public function format($entity, $type, $locale = null) {
-		$locale = $locale ?: $entity->user()->locale;
+		if (!$locale) {
+			$locale = ($user = $entity->user()) ? $user->locale : Environment::get('locale');
+		}
 
 		if ($type == 'oneline') {
 			$result = [];

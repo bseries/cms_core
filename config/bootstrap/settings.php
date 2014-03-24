@@ -47,4 +47,10 @@ Settings::register('cms_core', 'service.googleAnalytics.default.account');
 Settings::register('cms_core', 'service.googleAnalytics.default.domain');
 Settings::register('cms_core', 'service.googleAnalytics.default.propertyId');
 
+Settings::register('cms_core', 'user.number', [
+	'sort' => '/([0-9]{4}-[0-9]{4})/',
+	'extract' => '/[0-9]{4}-([0-9]{4})/',
+	'generate' => '%Y-%04.d'
+]);
+
 ?>

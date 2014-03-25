@@ -31,36 +31,37 @@ require(['jquery', 'list', 'domready!'], function($, List) {
   //
   // Nested management
   //
-  var $nested = $('.use-nested');
+  $('.use-nested').each(function() {
+    var $nested = $(this);
+    var $nestedAdd = $nested.find('.nested-add');
+    $nestedAdd.hide();
 
-  var $nestedAdd = $nested.find('.nested-add');
-  $nestedAdd.hide();
+    $nested.find('.button.add-nested').on('click', function(ev) {
+      ev.preventDefault();
+      var $newNested = $nestedAdd.clone().show();
 
-  $nested.find('.button.add-nested').on('click', function(ev) {
-    ev.preventDefault();
-    var $newNested = $nestedAdd.clone().show();
+      var key = parseInt(Math.random() * 10000, 10);
 
-    var key = parseInt(Math.random() * 10000, 10);
-
-    $newNested.find('input').each(function() {
-      $(this).attr('name', $(this).attr('name').replace(/\[new\]/, '[' + key + ']'));
+      $newNested.find('input').each(function() {
+        $(this).attr('name', $(this).attr('name').replace(/\[new\]/, '[' + key + ']'));
+      });
+      $nested.find('tbody').append($newNested);
     });
-    $newNested.insertBefore(this);
+    $nested.on('click', '.delete-nested',function(ev) {
+      ev.preventDefault();
+
+      var $existing = $(this).parents('.nested-item');
+      var $del = $existing.find('[name*=_delete]');
+
+      $existing.fadeOut(function() {
+        if ($del.length) {
+          $del.val(true);
+        } else {
+          $existing.remove();
+        }
+      });
+     });
   });
-  $nested.on('click', '.delete-nested',function(ev) {
-    ev.preventDefault();
-
-    var $existing = $(this).parents('.nested-item');
-    var $del = $existing.find('[name*=_delete]');
-
-    $existing.fadeOut(function() {
-      if ($del.length) {
-        $del.val(true);
-      } else {
-        $existing.remove();
-      }
-    });
-   });
 
   //
   // Dynamic Title

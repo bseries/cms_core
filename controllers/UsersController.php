@@ -181,7 +181,7 @@ class UsersController extends \cms_core\controllers\BaseController {
 			['is_active' => true],
 			['whitelist' => ['is_active'], 'validate' => false]
 		);
-		if (Features::read('sendUserActivationMail')) {
+		if (Features::read('user.sendActivationMail')) {
 			$result = $result && Mailer::deliver('user_activated', [
 				'to' => $item->email,
 				'subject' => 'Ihr Konto wurde aktiviert.',

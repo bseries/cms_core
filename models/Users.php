@@ -18,6 +18,7 @@ use lithium\g11n\Message;
 use cms_core\models\Addresses;
 use cms_billing\models\TaxZones;
 use cms_core\extensions\cms\Settings;
+use cms_core\extensions\cms\Features;
 
 class Users extends \cms_core\models\Base {
 
@@ -39,6 +40,13 @@ class Users extends \cms_core\models\Base {
 			'customer'
 		]
 	];
+
+	public function title($entity) {
+		if (Features::enabled('useBilling')) {
+			return $entity->name . '/' . $entity->number;
+		}
+		return $entity->name;
+	}
 
 	public static function init() {
 		extract(Message::aliases());

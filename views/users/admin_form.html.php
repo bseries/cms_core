@@ -4,7 +4,7 @@ use cms_core\extensions\cms\Features;
 
 $title = [
 	'action' => ucfirst($this->_request->action === 'add' ? $t('creating') : $t('editing')),
-	'title' => $item->name ?: $t('untitled'),
+	'title' => $item->name ?: $t('unnamed'),
 	'object' => [ucfirst($t('user')), ucfirst($t('users'))]
 ];
 $this->title("{$title['title']} - {$title['object'][1]}");
@@ -35,7 +35,8 @@ require(['jquery', 'modal', 'domready!'], function($, modal) {
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> section-spacing">
 	<h1 class="alpha">
 		<span class="action"><?= $title['action'] ?></span>
-		<span class="title" data-untitled="<?= $t('Unnamed') ?>"><?= $title['title'] ?></span>
+		<span class="object"><?= $title['object'][0] ?></span>
+		<span class="title" data-untitled="<?= $t('unnamed') ?>"><?= $title['title'] ?></span>
 	</h1>
 
 	<nav class="actions">

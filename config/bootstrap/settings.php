@@ -53,4 +53,12 @@ Settings::register('cms_core', 'user.number', [
 	'generate' => '%Y-%04.d'
 ]);
 
+Settings::register('cms_core', 'availableCountries', [
+	'DE', 'US', 'CA'
+]);
+
+Settings::register('cms_core', 'availableCurrencies', [
+	'EUR', 'USD'
+]);
+
 ?>

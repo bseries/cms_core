@@ -410,7 +410,7 @@ select {
   padding: .4em 40px .2em .5em !important;
 }
 select:not([multiple]) {
-  background: url("../ico/field_arrow_down.png") no-repeat right 8px center;
+  background: white url("../ico/field_arrow_down.png") no-repeat right 8px center;
 }
 
 input[type="radio"],

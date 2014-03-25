@@ -12,21 +12,17 @@ class Base extends \lithium\data\Model {
 		return static::connection()->connection;
 	}
 
-	public static function enum($field, array $options = []) {
-		$options += ['map' => true];
-
+	public static function enum($field, array $map = []) {
 		if (!isset(static::$enum[$field])) {
 			return false;
 		}
 		$result = [];
 
-		if ($options['map']) {
-			foreach (static::$enum[$field] as $value) {
-				if (is_array($options['map']) && isset($options['map'][$value])) {
-					$result[$value] = $options['map'][$value];
-				} else {
-					$result[$value] = $value;
-				}
+		foreach (static::$enum[$field] as $value) {
+			if (isset($map[$value])) {
+				$result[$value] = $map[$value];
+			} else {
+				$result[$value] = $value;
 			}
 		}
 		return $result;

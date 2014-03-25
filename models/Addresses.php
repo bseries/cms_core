@@ -13,10 +13,9 @@
 namespace cms_core\models;
 
 use lithium\core\Environment;
-use lithium\g11n\Catalog;
-use Collator;
 use cms_core\models\Users;
 use cms_core\models\VirtualUsers;
+use cms_core\models\Countries;
 
 class Addresses extends \cms_core\models\Base {
 
@@ -67,22 +66,6 @@ class Addresses extends \cms_core\models\Base {
 		return static::create($item);
 	}
 
-	public static function countries($locale) {
-		$countries = [];
-		$results = Catalog::read(true, 'territory', $locale);
-
-		foreach ($results as $key => $value) {
-			if (is_numeric($key)) {
-				continue;
-			}
-			$countries[$key] = $value;
-		}
-		$collator = new Collator($locale);
-		$collator->asort($countries);
-
-		return $countries;
-	}
-
 	public function format($entity, $type, $locale = null) {
 		if (!$locale) {
 			$locale = ($user = $entity->user()) ? $user->locale : Environment::get('locale');
@@ -100,13 +83,15 @@ class Addresses extends \cms_core\models\Base {
 		if ($type == 'postal') {
 			$result = [];
 
-			$countries = static::countries($locale);
-
 			$result[] = $entity->name;
 			$result[] = $entity->street;
 			$result[] = $entity->zip . ' ' . $entity->city;
-			$result[] = $countries[$entity->country];
-
+			$result[] = Countries::find('first', [
+				'conditions' => [
+					'id' => $entity->country
+				],
+				'locale' => $locale
+			])->name;
 			return implode("\n", $result);
 		}
 	}

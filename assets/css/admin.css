@@ -727,7 +727,7 @@ table .actions {
 table .actions a {
   color: transparent;
 }
-table .button {
+tbody .button {
   background: transparent;
   border-color: transparent;
 }

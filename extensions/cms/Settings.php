@@ -17,19 +17,54 @@ use lithium\util\Set;
 
 class Settings extends \lithium\core\StaticObject {
 
+	protected static $_data = [];
+
 	protected static $_sources = [];
 
 	public static function register($source, $name, $default = null) {
 		static::$_sources[$name] = $source;
-		Environment::set(true, Set::expand(['settings.' . $name => $default]));
+		static::$_data = Set::merge(static::$_data, Set::expand([$name => $default]));
 	}
 
 	public static function write($name, $data) {
-		Environment::set(true, Set::expand(['settings.' . $name => $data]));
+		$current = static::read($name);
+
+		if (is_array(($current)) && is_numeric(key($current))) {
+			// Prevent merging list like settings.
+			static::$_data = array_merge(
+				static::$_data,
+				Set::expand([$name => $data])
+			);
+		} else {
+			static::$_data = Set::merge(
+				static::$_data,
+				Set::expand([$name => $data])
+			);
+		}
 	}
 
 	public static function read($name = null) {
-		return Environment::get($name ? 'settings.' . $name : 'settings');
+		if (!$name) {
+			return static::$_data;
+		}
+		return static::_processDotPath($name, static::$_data);
+	}
+
+	protected static function _processDotPath($path, &$arrayPointer) {
+		if (isset($arrayPointer[$path])) {
+			return $arrayPointer[$path];
+		}
+		if (strpos($path, '.') === false) {
+			return null;
+		}
+		$pathKeys = explode('.', $path);
+		foreach ($pathKeys as $pathKey) {
+			if (!is_array($arrayPointer) || !isset($arrayPointer[$pathKey])) {
+				return false;
+			}
+			$arrayPointer = &$arrayPointer[$pathKey];
+		}
+		return $arrayPointer;
 	}
 }
 

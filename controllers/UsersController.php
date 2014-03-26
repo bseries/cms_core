@@ -19,6 +19,7 @@ use li3_flash_message\extensions\storage\FlashMessage;
 use lithium\g11n\Message;
 use lithium\security\Auth;
 use cms_core\extensions\cms\Features;
+use li3_mailer\action\Mailer;
 
 class UsersController extends \cms_core\controllers\BaseController {
 

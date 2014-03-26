@@ -115,7 +115,7 @@ class ReferenceNumber extends \li3_behaviors\data\model\Behavior {
 				if (!preg_match($config, $value, $matches)) {
 					// Cannot throw exception here as this modifies the value in sort.
 					$message = "Cannot extract number for sorting from value `{$value}`.`";
-					trigger_error(E_USER_NOTICE, $message);
+					trigger_error($message, E_USER_NOTICE);
 
 					return false;
 				}
@@ -140,7 +140,7 @@ class ReferenceNumber extends \li3_behaviors\data\model\Behavior {
 		return function($value) use ($config) {
 			if (!preg_match($config, $value, $matches)) {
 				$message = "Cannot extract number from value `{$value}`.`";
-				trigger_error(E_USER_NOTICE, $message);
+				trigger_error($message, E_USER_NOTICE);
 
 				return $value;
 			}

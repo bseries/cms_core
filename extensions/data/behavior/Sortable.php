@@ -77,7 +77,7 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 	 * When `descend` is true, first ID will get the highest weight,
 	 * else first ID will get lowest weight.
 	 *
-	 * Uses transactions automatically for isolation.
+	 * Note: You should use transactions for isolation.
 	 *
 	 * Flow for ID 1 below ID 2 (ID/ORDER):
 	 * {{{
@@ -93,18 +93,13 @@ class Sortable extends \li3_behaviors\data\model\Behavior {
 		if ($behavior->config('descend')) {
 			$ids = array_reverse($ids);
 		}
-		$connection = $model::connection()->connection;
-
-		$connection->beginTransaction();
 		$cluster = static::_cluster($model, $behavior, $previous = array_shift($ids));
 		foreach ($ids as $id) {
 			if (!static::_moveBelow($model, $behavior, $id, $previous, $cluster)) {
-				$connection->rollback();
 				return false;
 			}
 			$previous = $id;
 		}
-		$connection->commit();
 		return true;
 	}
 

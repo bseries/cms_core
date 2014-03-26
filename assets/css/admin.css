@@ -266,6 +266,26 @@ nav.main .actions {
 }
 #content > article > h1 .title {
   font-weight: normal;
+  margin-right: 10px;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  margin-bottom: -5px;
+}
+#content > article > h1 .object {
+  text-transform: capitalize;
+}
+#content > article > h1 .status {
+  font-weight: normal;
+  font-size: 16px;
+  color: white;
+  background: #14b9d6;
+  padding: 5px 10px;
+  display: inline-block;
+  position: relative;
+  top: -3px;
 }
 
 /* Footer
@@ -723,6 +743,7 @@ table .actions {
   margin-right: -.3em;
   margin-left: -20px;
   text-align: right;
+  min-width: 140px;
 }
 table .actions a {
   color: transparent;
@@ -746,6 +767,7 @@ tbody .emphasize {
   color: black;
   max-width: 240px;
 }
+form [name*=status],
 tbody .status {
   color: #067387;
 }
@@ -772,6 +794,8 @@ tbody .status {
 -------------------------------------------------------------- */
 h1 + .actions {
   text-align: right;
+  margin-top: -3.9em;
+  margin-bottom: .9em;
 }
 .section-spacing section + section {
   margin-top: 4em;
@@ -887,12 +911,18 @@ h1 + .actions {
 
 /* Help
 -------------------------------------------------------------- */
-form .help {
+.help {
   color: gray;
-  margin-top: -.5em;
-  margin-bottom: 1.5em;
   font-size: 14px;
   max-width: 600px;
+}
+.actions + .help,
+h1 + .help {
+  margin-bottom: 2em;
+}
+form .help {
+  margin-top: -.5em;
+  margin-bottom: 1.5em;
 }
 
 /* Settings/Features Pane
@@ -905,7 +935,7 @@ form .help {
 /* List & Table Filtering/Search
 -------------------------------------------------------------- */
 .list-search {
-  max-width: 200px;
+  width: 140px;
 }
 /*
 .list-sort {

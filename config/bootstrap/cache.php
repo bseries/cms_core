@@ -79,7 +79,7 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 
 	// Cache only HTML responses, JSON responses come from
 	// APIs and are most often highly dynamic.
-	if ($response->type() !== 'html' || strpos($request->url, '/admi') === 0 || Session::read('default')) {
+	if ($response->type() !== 'html' || strpos($request->url, '/admin') === 0 || Session::read('default')) {
 		$response->headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
 		$response->headers['Pragma'] = 'no-cache';
 		$response->headers['Expires'] = '0';

@@ -25,7 +25,7 @@ class AddressesController extends \cms_core\controllers\BaseController {
 
 	public function admin_index() {
 		$data = Addresses::find('all', [
-			'order' => ['id' => 'DESC']
+			'order' => ['created' => 'DESC']
 		]);
 		return compact('data');
 	}

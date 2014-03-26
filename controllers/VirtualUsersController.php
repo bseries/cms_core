@@ -13,6 +13,7 @@
 namespace cms_core\controllers;
 
 use cms_core\models\VirtualUsers;
+use cms_core\models\Currencies;
 use cms_core\models\Addresses;
 use li3_flash_message\extensions\storage\FlashMessage;
 use lithium\g11n\Message;
@@ -40,27 +41,20 @@ class VirtualUsersController extends \cms_core\controllers\BaseController {
 			'Europe/Berlin' => 'Europe/Berlin',
 			'UTC' => 'UTC'
 		];
-		$currencies = [
-			'EUR' => 'EUR',
-			'USD' => 'USD'
-		];
+		$currencies = Currencies::find('list');
 		$locales = [
 			'de' => 'Deutsch',
 			'en' => 'English'
 		];
 		if ($item) {
-			$results = Addresses::find('all', [
+			$addresses = [
+				null => '-- ' . $t('no address') . ' --'
+			];
+			$addresses += Addresses::find('list', [
 				'conditions' => [
 					'virtual_user_id' => $item->id
 				]
 			]);
-			$addresses = [
-				null => '-- ' . $t('no address') . ' --'
-			];
-
-			foreach ($results as $result) {
-				$addresses[$result->id] = $result->format('oneline');
-			}
 		}
 		return compact('roles', 'timezones', 'currencies', 'locales', 'addresses');
 	}

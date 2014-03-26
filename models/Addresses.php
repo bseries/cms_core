@@ -23,6 +23,10 @@ class Addresses extends \cms_core\models\Base {
 		'cms_core\extensions\data\behavior\Timestamp'
 	];
 
+	public function title($entity) {
+		return $entity->format('oneline');
+	}
+
 	public function user($entity) {
 		if ($entity->user_id) {
 			return Users::findById($entity->user_id);

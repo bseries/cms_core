@@ -17,6 +17,7 @@ use lithium\g11n\Catalog;
 use Collator;
 use lithium\util\Collection;
 use lithium\core\Environment;
+use lithium\storage\Cache;
 
 class Currencies extends \cms_core\models\Base {
 
@@ -28,26 +29,33 @@ class Currencies extends \cms_core\models\Base {
 		$options += ['locale' => Environment::get('locale')];
 		$available = Settings::read('availableCurrencies');
 
-		$data = [];
-		$results = Catalog::read(true, 'currency', $options['locale']);
-
-		foreach ($results as $key => $value) {
-			if (is_numeric($key)) {
-				continue;
-			}
-			$data[$key] = $value;
-		}
-		if ($available) {
-			$all = $data;
+		$cacheKey = 'currencies_' . md5(serialize([
+			$available,
+			$options['locale']
+		]));
+		if (!$data = Cache::read('default', $cacheKey)) {
 			$data = [];
+			$results = Catalog::read(true, 'currency', $options['locale']);
 
-			foreach ($available as $currency) {
-				$data[$currency] = $all[$currency];
+			foreach ($results as $key => $value) {
+				if (is_numeric($key)) {
+					continue;
+				}
+				$data[$key] = $value;
 			}
-		}
-		$collator = new Collator($options['locale']);
-		$collator->asort($data);
+			if ($available) {
+				$all = $data;
+				$data = [];
 
+				foreach ($available as $currency) {
+					$data[$currency] = $all[$currency];
+				}
+			}
+			$collator = new Collator($options['locale']);
+			$collator->asort($data);
+
+			Cache::write('default', $cacheKey, $data, Cache::PERSIST);
+		}
 		if ($type == 'all') {
 			foreach ($data as $key => &$item) {
 				$item = static::create([

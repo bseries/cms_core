@@ -62,9 +62,7 @@ Libraries::add('mobile_detect', array(
 	}
 ));
 require dirname(__DIR__) . '/libraries/guzzle/vendor/autoload.php';
-// Libraries::add('guzzle', [
-//	'path' => dirname(__DIR__) . '/libraries/guzzle/src',
-// ]);
+require_once dirname(__DIR__) . '/libraries/autoload.php';
 
 Features::register('cms_core', 'useNewGoogleAnalyticsTrackingCode', true);
 Features::register('cms_core', 'useBilling', false);

@@ -1,5 +1,8 @@
 {
     "config": {
         "vendor-dir": "libraries"
+    },
+    "require": {
+        "naneau/semver": "dev-master"
     }
 }

@@ -37,9 +37,16 @@ require(['jquery', 'modal', 'domready!'], function($, modal) {
 		<span class="action"><?= $title['action'] ?></span>
 		<span class="object"><?= $title['object'][0] ?></span>
 		<span class="title" data-untitled="<?= $t('unnamed') ?>"><?= $title['title'] ?></span>
+		<span class="status"><?= $item->is_active ? $t('activated') : $t('deactivated') ?></span>
 	</h1>
 
 	<nav class="actions">
+		<?php if ($item->is_active): ?>
+			<?= $this->html->link($t('deactivate'), ['id' => $item->id, 'action' => 'deactivate', 'library' => 'cms_core'], ['class' => 'button']) ?>
+		<?php else: ?>
+			<?= $this->html->link($t('activate'), ['id' => $item->id, 'action' => 'activate', 'library' => 'cms_core'], ['class' => 'button']) ?>
+		<?php endif ?>
+
 		<?= $this->html->link($t('generate random password'), [
 			'action' => 'generate_passwords', 'type' => 'json', 'library' => 'cms_core'
 		], ['class' => 'button generate-passwords']) ?>

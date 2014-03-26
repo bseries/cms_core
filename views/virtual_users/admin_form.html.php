@@ -13,6 +13,7 @@ $this->title("{$title['title']} - {$title['object'][1]}");
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> section-spacing">
 	<h1 class="alpha">
 		<span class="action"><?= $title['action'] ?></span>
+		<span class="object"><?= $title['object'][0] ?></span>
 		<span class="title" data-untitled="<?= $t('Unnamed') ?>"><?= $title['title'] ?></span>
 	</h1>
 

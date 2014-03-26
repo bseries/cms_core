@@ -1,46 +1,48 @@
-<article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
+<article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> use-list">
 	<h1 class="alpha"><?= $this->title($t('Addresses')) ?></h1>
+
+	<div class="help">
+		<?= $t("Addresses can be owned by a user but addresses without an owner are possible, too.") ?>
+	</div>
+
 
 	<?php if ($data->count()): ?>
 	<table>
 		<thead>
 			<tr>
-				<td><?= $t('User') ?>
-				<td class="emphasize"><?= $t('Address') ?>
-				<td class="date created"><?= $t('Created') ?>
-				<td>
+				<td data-sort="user" class="user list-sort"><?= $t('User') ?>
+				<td data-sort="address" class="emphasize address list-sort"><?= $t('Address') ?>
+				<td data-sort="created" class="date created list-sort desc"><?= $t('Created') ?>
+				<td class="actions">
+					<?= $this->form->field('search', [
+						'type' => 'search',
+						'label' => false,
+						'placeholder' => $t('Filter'),
+						'class' => 'list-search'
+					]) ?>
 		</thead>
-		<tbody>
+		<tbody class="list">
 			<?php foreach ($data as $item): ?>
 				<?php $user = $item->user() ?>
 			<tr>
-				<?php if ($user->isVirtual()): ?>
-					<td>
-						<?= $this->html->link($user->name . '/' . $user->id, [
-							'controller' => 'VirtualUsers', 'action' => 'edit', 'id' => $user->id, 'library' => 'cms_core'
-						]) ?>
-						(<?= $this->html->link('virtual', [
-							'controller' => 'VirtualUsers', 'action' => 'index', 'library' => 'cms_core'
-						]) ?>)
+				<td class="user">
+				<?php if ($user): ?>
+					<?= $this->html->link($user->title(), [
+						'controller' => $user->isVirtual() ? 'VirtualUsers' : 'Users',
+						'action' => 'edit', 'id' => $user->id,
+						'library' => 'cms_core'
+					]) ?>
 				<?php else: ?>
-					<td>
-						<?= $this->html->link($user->name . '/' . $user->id, [
-							'controller' => 'Users', 'action' => 'edit', 'id' => $user->id, 'library' => 'cms_core'
-						]) ?>
-						(<?= $this->html->link('real', [
-							'controller' => 'Users', 'action' => 'index', 'library' => 'cms_core'
-						]) ?>)
+					-
 				<?php endif ?>
-				<td class="emphasize"><?= $item->format('oneline') ?>
+				<td class="emphasize address"><?= $item->format('oneline') ?>
 				<td class="date created">
 					<time datetime="<?= $this->date->format($item->created, 'w3c') ?>">
 						<?= $this->date->format($item->created, 'date') ?>
 					</time>
-				<td>
-					<nav class="actions">
-						<?= $this->html->link($t('delete'), ['id' => $item->id, 'action' => 'delete', 'library' => 'cms_core'], ['class' => 'button']) ?>
-						<?= $this->html->link($t('edit'), ['id' => $item->id, 'action' => 'edit', 'library' => 'cms_core'], ['class' => 'button']) ?>
-					</nav>
+				<td class="actions">
+					<?= $this->html->link($t('delete'), ['id' => $item->id, 'action' => 'delete', 'library' => 'cms_core'], ['class' => 'button']) ?>
+					<?= $this->html->link($t('edit'), ['id' => $item->id, 'action' => 'edit', 'library' => 'cms_core'], ['class' => 'button']) ?>
 			<?php endforeach ?>
 		</tbody>
 	</table>

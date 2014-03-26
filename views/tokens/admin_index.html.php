@@ -7,7 +7,7 @@
 				<tr>
 					<td class="emphasize"><?= $t('Token') ?>
 					<td class="date expires"><?= $t('Expires') ?>
-					<td>
+					<td class="actions">
 			</thead>
 			<tbody>
 				<?php foreach ($data as $item): ?>
@@ -17,10 +17,8 @@
 						<time datetime="<?= $this->date->format($item->expires, 'w3c') ?>">
 							<?= $this->date->format($item->expires, 'datetime') ?>
 						</time>
-					<td>
-						<nav class="actions">
-							<?= $this->html->link($t('void'), ['token' => $item->token, 'action' => 'void', 'library' => 'cms_core'], ['class' => 'button']) ?>
-						</nav>
+					<td class="actions">
+						<?= $this->html->link($t('void'), ['token' => $item->token, 'action' => 'void', 'library' => 'cms_core'], ['class' => 'button']) ?>
 				<?php endforeach ?>
 			</tbody>
 		</table>

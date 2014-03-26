@@ -6,6 +6,10 @@ use cms_core\extensions\cms\Features;
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
 	<h1 class="alpha"><?= $this->title($t('Virtual Users')) ?></h1>
 
+	<div class="help">
+		<?= $t("Virtual users are users which you want to track and associated with other items (i.e. an order), These users didn't sign up directly but may have been creating a temporary account.") ?>
+	</div>
+
 	<table>
 		<thead>
 			<tr>
@@ -18,7 +22,7 @@ use cms_core\extensions\cms\Features;
 				<td><?= $t('Email') ?>
 				<td><?= $t('Role') ?>
 				<td class="date created"><?= $t('Created') ?>
-				<td>
+				<td class="actions">
 		</thead>
 		<tbody>
 			<?php foreach ($data as $item): ?>
@@ -38,16 +42,14 @@ use cms_core\extensions\cms\Features;
 					<time datetime="<?= $this->date->format($item->created, 'w3c') ?>">
 						<?= $this->date->format($item->created, 'date') ?>
 					</time>
-				<td>
-					<nav class="actions">
-						<?= $this->html->link($t('delete'), ['id' => $item->id, 'action' => 'delete', 'library' => 'cms_core'], ['class' => 'button']) ?>
-						<?php if ($item->is_active): ?>
-							<?= $this->html->link($t('deactivate'), ['id' => $item->id, 'action' => 'deactivate', 'library' => 'cms_core'], ['class' => 'button']) ?>
-						<?php else: ?>
-							<?= $this->html->link($t('activate'), ['id' => $item->id, 'action' => 'activate', 'library' => 'cms_core'], ['class' => 'button']) ?>
-						<?php endif ?>
-						<?= $this->html->link($t('edit'), ['id' => $item->id, 'action' => 'edit', 'library' => 'cms_core'], ['class' => 'button']) ?>
-					</nav>
+				<td class="actions">
+					<?= $this->html->link($t('delete'), ['id' => $item->id, 'action' => 'delete', 'library' => 'cms_core'], ['class' => 'button']) ?>
+					<?php if ($item->is_active): ?>
+						<?= $this->html->link($t('deactivate'), ['id' => $item->id, 'action' => 'deactivate', 'library' => 'cms_core'], ['class' => 'button']) ?>
+					<?php else: ?>
+						<?= $this->html->link($t('activate'), ['id' => $item->id, 'action' => 'activate', 'library' => 'cms_core'], ['class' => 'button']) ?>
+					<?php endif ?>
+					<?= $this->html->link($t('edit'), ['id' => $item->id, 'action' => 'edit', 'library' => 'cms_core'], ['class' => 'button']) ?>
 			<?php endforeach ?>
 		</tbody>
 	</table>

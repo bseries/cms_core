@@ -6,6 +6,12 @@ use cms_core\extensions\cms\Features;
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> use-list">
 	<h1 class="alpha"><?= $this->title($t('Users')) ?></h1>
 
+	<div class="help">
+	<?php if (Features::enabled('user.sendActivationMail')): ?>
+		<?= $t('The user will be notified by e-mail when her account is activated.') ?>
+	<?php endif ?>
+	</div>
+
 	<table>
 		<thead>
 			<tr>
@@ -18,7 +24,7 @@ use cms_core\extensions\cms\Features;
 				<td data-sort="email" class="email list-sort"><?= $t('Email') ?>
 				<td data-sort="role" class="role list-sort"><?= $t('Role') ?>
 				<td class="date created"><?= $t('Created') ?>
-				<td>
+				<td class="actions">
 					<?= $this->form->field('search', [
 						'type' => 'search',
 						'label' => false,
@@ -42,21 +48,14 @@ use cms_core\extensions\cms\Features;
 					<time datetime="<?= $this->date->format($item->created, 'w3c') ?>">
 						<?= $this->date->format($item->created, 'date') ?>
 					</time>
-				<td>
-					<nav class="actions">
-						<?= $this->html->link($t('delete'), ['id' => $item->id, 'action' => 'delete', 'library' => 'cms_core'], ['class' => 'button']) ?>
-						<?php if ($item->is_active): ?>
-							<?= $this->html->link($t('deactivate'), ['id' => $item->id, 'action' => 'deactivate', 'library' => 'cms_core'], ['class' => 'button']) ?>
-						<?php else: ?>
-							<?= $this->html->link($t('activate'), ['id' => $item->id, 'action' => 'activate', 'library' => 'cms_core'], ['class' => 'button']) ?>
-						<?php endif ?>
-						<?php if ($item->role == 'admin'): ?>
-							<?= $this->html->link($t('make user'), ['id' => $item->id, 'action' => 'change_role', 'role' => 'user', 'library' => 'cms_core'], ['class' => 'button']) ?>
-						<?php else: ?>
-							<?= $this->html->link($t('make admin'), ['id' => $item->id, 'action' => 'change_role', 'role' => 'admin', 'library' => 'cms_core'], ['class' => 'button']) ?>
-						<?php endif ?>
-						<?= $this->html->link($t('edit'), ['id' => $item->id, 'action' => 'edit', 'library' => 'cms_core'], ['class' => 'button']) ?>
-					</nav>
+				<td class="actions">
+					<?= $this->html->link($t('delete'), ['id' => $item->id, 'action' => 'delete', 'library' => 'cms_core'], ['class' => 'button']) ?>
+					<?php if ($item->is_active): ?>
+						<?= $this->html->link($t('deactivate'), ['id' => $item->id, 'action' => 'deactivate', 'library' => 'cms_core'], ['class' => 'button']) ?>
+					<?php else: ?>
+						<?= $this->html->link($t('activate'), ['id' => $item->id, 'action' => 'activate', 'library' => 'cms_core'], ['class' => 'button']) ?>
+					<?php endif ?>
+					<?= $this->html->link($t('edit'), ['id' => $item->id, 'action' => 'edit', 'library' => 'cms_core'], ['class' => 'button']) ?>
 			<?php endforeach ?>
 		</tbody>
 	</table>

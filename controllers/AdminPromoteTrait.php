@@ -19,15 +19,19 @@ trait AdminPromoteTrait {
 
 	public function admin_promote() {
 		extract(Message::aliases());
+
 		$model = $this->_model;
+		$model::pdo()->beginTransaction();
 
 		$result = $model::first($this->request->id)->save(
 			['is_promoted' => true],
 			['whitelist' => ['is_promoted'], 'validate' => false]
 		);
 		if ($result) {
+			$model::pdo()->commit();
 			FlashMessage::write($t('Successfully promoted.'), ['level' => 'success']);
 		} else {
+			$model::pdo()->rollback();
 			FlashMessage::write($t('Failed to promote.'), ['level' => 'error']);
 		}
 		return $this->redirect($this->request->referer());
@@ -35,15 +39,19 @@ trait AdminPromoteTrait {
 
 	public function admin_unpromote() {
 		extract(Message::aliases());
+
 		$model = $this->_model;
+		$model::pdo()->beginTransaction();
 
 		$result = $model::first($this->request->id)->save(
 			['is_promoted' => false],
 			['whitelist' => ['is_promoted'], 'validate' => false]
 		);
 		if ($result) {
+			$model::pdo()->commit();
 			FlashMessage::write($t('Successfully unpromoted.'), ['level' => 'success']);
 		} else {
+			$model::pdo()->rollback();
 			FlashMessage::write($t('Failed to unpromote.'), ['level' => 'error']);
 		}
 		return $this->redirect($this->request->referer());

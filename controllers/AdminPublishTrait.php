@@ -19,15 +19,19 @@ trait AdminPublishTrait {
 
 	public function admin_publish() {
 		extract(Message::aliases());
+
 		$model = $this->_model;
+		$model::pdo()->beginTransaction();
 
 		$result = $model::first($this->request->id)->save(
 			['is_published' => true],
 			['whitelist' => ['is_published'], 'validate' => false]
 		);
 		if ($result) {
+			$model::pdo()->commit();
 			FlashMessage::write($t('Successfully published.'), ['level' => 'success']);
 		} else {
+			$model::pdo()->rollback();
 			FlashMessage::write($t('Failed to publish.'), ['level' => 'error']);
 		}
 		return $this->redirect($this->request->referer());
@@ -35,15 +39,19 @@ trait AdminPublishTrait {
 
 	public function admin_unpublish() {
 		extract(Message::aliases());
+
 		$model = $this->_model;
+		$model::pdo()->beginTransaction();
 
 		$result = $model::first($this->request->id)->save(
 			['is_published' => false],
 			['whitelist' => ['is_published'], 'validate' => false]
 		);
 		if ($result) {
+			$model::pdo()->commit();
 			FlashMessage::write($t('Successfully unpublished.'), ['level' => 'success']);
 		} else {
+			$model::pdo()->rollback();
 			FlashMessage::write($t('Failed to unpublish.'), ['level' => 'error']);
 		}
 		return $this->redirect($this->request->referer());

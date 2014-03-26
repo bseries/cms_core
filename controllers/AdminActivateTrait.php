@@ -21,14 +21,17 @@ trait AdminActivateTrait {
 		extract(Message::aliases());
 
 		$model = $this->_model;
+		$model::pdo()->beginTransaction();
 
 		$result = $model::first($this->request->id)->save(
 			['is_active' => true],
 			['whitelist' => ['is_active'], 'validate' => false]
 		);
 		if ($result) {
+			$model::pdo()->commit();
 			FlashMessage::write($t('Activated.'), ['level' => 'success']);
 		} else {
+			$model::pdo()->rollback();
 			FlashMessage::write($t('Failed to activate.'), ['level' => 'error']);
 		}
 		return $this->redirect($this->request->referer());
@@ -36,15 +39,19 @@ trait AdminActivateTrait {
 
 	public function admin_deactivate() {
 		extract(Message::aliases());
+
 		$model = $this->_model;
+		$model::pdo()->beginTransaction();
 
 		$result = $model::first($this->request->id)->save(
 			['is_active' => false],
 			['whitelist' => ['is_active'], 'validate' => false]
 		);
 		if ($result) {
+			$model::pdo()->commit();
 			FlashMessage::write($t('Deactivated.'), ['level' => 'success']);
 		} else {
+			$model::pdo()->rollback();
 			FlashMessage::write($t('Failed to deactivate.'), ['level' => 'error']);
 		}
 		return $this->redirect($this->request->referer());

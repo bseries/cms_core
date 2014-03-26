@@ -19,7 +19,9 @@ trait AdminLockTrait {
 
 	public function admin_lock() {
 		extract(Message::aliases());
+
 		$model = $this->_model;
+		$model::pdo()->beginTransaction();
 
 		$result = $model::first($this->request->id)->save(
 			['is_locked' => true],
@@ -30,8 +32,10 @@ trait AdminLockTrait {
 			]
 		);
 		if ($result) {
+			$model::pdo()->commit();
 			FlashMessage::write($t('Successfully locked.'), ['level' => 'success']);
 		} else {
+			$model::pdo()->rollback();
 			FlashMessage::write($t('Failed to lock.'), ['level' => 'error']);
 		}
 		return $this->redirect($this->request->referer());
@@ -39,7 +43,9 @@ trait AdminLockTrait {
 
 	public function admin_unlock() {
 		extract(Message::aliases());
+
 		$model = $this->_model;
+		$model::pdo()->beginTransaction();
 
 		$result = $model::first($this->request->id)->save(
 			['is_locked' => false],
@@ -50,8 +56,10 @@ trait AdminLockTrait {
 			]
 		);
 		if ($result) {
+			$model::pdo()->commit();
 			FlashMessage::write($t('Successfully unlocked.'), ['level' => 'success']);
 		} else {
+			$model::pdo()->rollback();
 			FlashMessage::write($t('Failed to unlock.'), ['level' => 'error']);
 		}
 		return $this->redirect($this->request->referer());

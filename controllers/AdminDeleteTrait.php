@@ -19,13 +19,17 @@ trait AdminDeleteTrait {
 
 	public function admin_delete() {
 		extract(Message::aliases());
+
 		$model = $this->_model;
+		$model::pdo()->beginTransaction();
 
 		$item = $model::find($this->request->id);
 
 		if ($item->delete()) {
+			$model::pdo()->commit();
 			FlashMessage::write($t('Successfully deleted.'), ['level' => 'success']);
 		} else {
+			$model::pdo()->rollback();
 			FlashMessage::write($t('Failed to delete.'), ['level' => 'error']);
 		}
 		return $this->redirect($this->request->referer());

@@ -21,6 +21,8 @@ trait AdminAddTrait {
 		extract(Message::aliases());
 
 		$model = $this->_model;
+		$model::pdo()->beginTransaction();
+
 		$redirectUrl = $this->_redirectUrl + [
 			'action' => 'index', 'library' => $this->_library
 		];
@@ -29,10 +31,11 @@ trait AdminAddTrait {
 
 		if ($this->request->data) {
 			if ($item->save($this->request->data)) {
+				$model::pdo()->commit();
 				FlashMessage::write($t('Successfully saved.'), ['level' => 'success']);
-
 				return $this->redirect($redirectUrl);
 			} else {
+				$model::pdo()->rollback();
 				FlashMessage::write($t('Failed to save.'), ['level' => 'error']);
 			}
 		}

@@ -19,12 +19,18 @@ trait AdminOrderTrait {
 
 	public function admin_order() {
 		extract(Message::aliases());
+
 		$model = $this->_model;
+		$model::pdo()->beginTransaction();
 
 		$ids = $this->request->data['ids'];
-		$model::weightSequence($ids);
-		FlashMessage::write($t('Successfully updated order.'), ['level' => 'success']);
-
+		if ($model::weightSequence($ids)) {
+			$model::pdo()->commit();
+			FlashMessage::write($t('Successfully updated order.'), ['level' => 'success']);
+		} else {
+			$model::pdo()->rollback();
+			FlashMessage::write($t('Failed to update order.'), ['level' => 'error']);
+		}
 		return $this->render(['head' => true]);
 	}
 }

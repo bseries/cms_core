@@ -23,7 +23,11 @@ trait AdminLockTrait {
 
 		$result = $model::first($this->request->id)->save(
 			['is_locked' => true],
-			['whitelist' => ['is_locked'], 'validate' => false]
+			[
+				'whitelist' => ['is_locked'],
+				'validate' => false,
+				'lockWriteThrough' => true
+			]
 		);
 		if ($result) {
 			FlashMessage::write($t('Successfully locked.'), ['level' => 'success']);
@@ -39,7 +43,11 @@ trait AdminLockTrait {
 
 		$result = $model::first($this->request->id)->save(
 			['is_locked' => false],
-			['whitelist' => ['is_locked'], 'validate' => false]
+			[
+				'whitelist' => ['is_locked'],
+				'validate' => false,
+				'lockWriteThrough' => true
+			]
 		);
 		if ($result) {
 			FlashMessage::write($t('Successfully unlocked.'), ['level' => 'success']);

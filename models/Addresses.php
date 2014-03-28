@@ -16,12 +16,84 @@ use lithium\core\Environment;
 use cms_core\models\Users;
 use cms_core\models\VirtualUsers;
 use cms_core\models\Countries;
+use lithium\util\Validator;
+use lithium\g11n\Message;
 
 class Addresses extends \cms_core\models\Base {
 
 	protected static $_actsAs = [
 		'cms_core\extensions\data\behavior\Timestamp'
 	];
+
+	public static function init() {
+		extract(Message::aliases());
+		$model = static::_object();
+
+		$model->validates['name'] = [
+			[
+				'notEmpty',
+				'on' => ['create', 'update'],
+				'message' => $t('This field cannot be empty.')
+			],
+		];
+		$model->validates['street'] = [
+			[
+				'notEmpty',
+				'on' => ['create', 'update'],
+				'last' => true,
+				'message' => $t('This field cannot be empty.')
+			],
+			[
+				'streetNo',
+				'on' => ['create', 'update'],
+				'message' => $t('Missing street number.')
+			],
+		];
+		Validator::add('streetNo', function($value, $format, $options) {
+			return preg_match('/\s[0-9]/', $value);
+		});
+
+		$locale = Environment::get('locale');
+		if (strpos($locale, '_') === false) {
+			$locale = $locale . '_' . strtoupper($locale);
+		}
+		$model->validates['zip'] = [
+			[
+				'notEmpty',
+				'on' => ['create', 'update'],
+				'last' => true,
+				'message' => $t('This field cannot be empty.')
+			],
+			[
+				'postalCode',
+				'on' => ['create', 'update'],
+				'format' => $locale,
+				'message' => $t('The field is not correctly formatted.')
+			],
+		];
+		$model->validates['city'] = [
+			[
+				'notEmpty',
+				'on' => ['create', 'update'],
+				'message' => $t('This field cannot be empty.')
+			],
+		];
+		$model->validates['country'] = [
+			[
+				'notEmpty',
+				'on' => ['create', 'update'],
+				'message' => $t('A country must be selected.')
+			],
+		];
+		$model->validates['phone'] = [
+			[
+				'phone',
+				'on' => ['create', 'update'],
+				'skipEmpty' => true,
+				'message' => $t('The field is not correctly formatted.')
+			],
+		];
+	}
 
 	public function title($entity) {
 		return $entity->format('oneline');
@@ -100,5 +172,7 @@ class Addresses extends \cms_core\models\Base {
 		}
 	}
 }
+
+Addresses::init();
 
 ?>

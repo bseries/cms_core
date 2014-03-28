@@ -41,13 +41,6 @@ class Users extends \cms_core\models\Base {
 		]
 	];
 
-	public function title($entity) {
-		if (Features::enabled('useBilling')) {
-			return $entity->name . '/' . $entity->number;
-		}
-		return $entity->name;
-	}
-
 	public static function init() {
 		extract(Message::aliases());
 		$model = static::_object();
@@ -114,6 +107,13 @@ class Users extends \cms_core\models\Base {
 			}
 			return !Users::find('count', compact('conditions'));
 		});
+	}
+
+	public function title($entity) {
+		if (Features::enabled('useBilling')) {
+			return $entity->name . '/' . $entity->number;
+		}
+		return $entity->name;
 	}
 
 	public function isVirtual() {

@@ -83,6 +83,7 @@ class Users extends \cms_core\models\Base {
 			[
 				'notEmpty',
 				'on' => ['create'],
+				'last' => true,
 				'message' => $t('This field cannot be empty.')
 			]
 		];

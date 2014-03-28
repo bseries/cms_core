@@ -184,19 +184,50 @@ Inflector::rules('transliteration', Catalog::read(true, 'inflection.transliterat
 /**
  * Validation
  *
- * Adds locale specific rules through the `Catalog` class. You can load more
- * locale dependent rules into the by specifying them manually or retrieving
- * them with the `Catalog` class.
+ * Overwrites certain validation rules in order to make them locale aware. Locale
+ * specific versions are added as formats to those rules. In order to validate a
+ * german postal code you may use the following configuration in a model.
+ *
+ * {{{
+ * // ...
+ *	public $validates = array(
+ *		'zip' => array(
+ *			array('postalCode', 'format' => 'de_DE')
+ *		)
+ *		// ...
+ * }}}
+ *
+ * When no format or the special `any` format is provided the rule will use the
+ * built-in regular expression. This ensures that default behavior isn't affected.
+ *
+ * The regular expression for a locale aware rule is retrieved using the `Catalog`
+ * class. To add support for more locales and rules have a look at the `li3_lldr`
+ * and `li3_cldr` projects.
+ *
  *
  * Enables support for multibyte strings through the `Multibyte` class by
  * overwriting rules (currently just `lengthBetween`).
  *
+ * @link https://github.com/UnionOfRAD/li3_lldr
+ * @link https://github.com/UnionOfRAD/li3_cldr
  * @see lithiumm\g11n\Catalog
  * @see lithiumm\g11n\Multibyte
  * @see lithium\util\Validator
  */
 foreach (['phone', 'postalCode', 'ssn'] as $name) {
-	Validator::add($name, Catalog::read('lithium', "validation.{$name}", 'en_US'));
+	$regex = Validator::rules($name);
+
+	Validator::add($name, function($value, $format, $options) use ($name, $regex) {
+		if ($format !== 'any') {
+			$regex = Catalog::read(true, "validation.{$name}", $format);
+		}
+		if (!$regex) {
+			$message  = "Cannot find regular expression for validation rule `{$name}` ";
+			$message .= "using format/locale `{$format}`.";
+			throw new RuntimeException($message);
+		}
+		return preg_match($regex, $value);
+	});
 }
 Validator::add('lengthBetween', function($value, $format, $options) {
 	$length = Multibyte::strlen($value);

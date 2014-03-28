@@ -29,7 +29,7 @@ trait AdminUpdateStatusTrait {
 		);
 		if ($result) {
 			$model::pdo()->commit();
-			FlashMessage::write($t('Successfully update status.'), ['level' => 'success']);
+			FlashMessage::write($t('Successfully updated status.'), ['level' => 'success']);
 		} else {
 			$model::pdo()->rollback();
 			FlashMessage::write($t('Failed to update status.'), ['level' => 'error']);

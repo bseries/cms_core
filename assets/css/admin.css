@@ -357,6 +357,11 @@ form input,
 form textarea {
   margin-bottom: 1em;
 }
+table select,
+table input,
+table textarea {
+  margin: 0;
+}
 input,
 textarea {
   width: 100%;

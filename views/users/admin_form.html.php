@@ -105,11 +105,18 @@ require(['jquery', 'modal', 'domready!'], function($, modal) {
 					'label' => $t('Billing Address'),
 					'list' => $addresses
 				]) ?>
+				<div class="help">
+					<?= $this->html->link($t('Create new address.'), ['controller' => 'Addresses', 'action' => 'add', 'library' => 'cms_core']) ?>
+				</div>
+
 				<?= $this->form->field('shipping_address_id', [
 					'type' => 'select',
 					'label' => $t('Shipping Address'),
 					'list' => $addresses
 				]) ?>
+				<div class="help">
+					<?= $this->html->link($t('Create new address.'), ['controller' => 'Addresses', 'action' => 'add', 'library' => 'cms_core']) ?>
+				</div>
 			</section>
 		<?php endif ?>
 		<section>

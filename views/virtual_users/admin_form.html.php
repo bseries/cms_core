@@ -55,12 +55,18 @@ $this->title("{$title['title']} - {$title['object'][1]}");
 					'label' => $t('Billing Currency'),
 					'list' => $currencies
 				]) ?>
+				<div class="help">
+					<?= $this->html->link($t('Create new address.'), ['controller' => 'Addresses', 'action' => 'add', 'library' => 'cms_core']) ?>
+				</div>
 				<?= $this->form->field('billing_vat_reg_no', [
 					'type' => 'text',
 					'autocomplete' => 'off',
 					'label' => $t('Billing VAT Reg. No.')
 				]) ?>
-			</section>
+				<div class="help">
+					<?= $this->html->link($t('Create new address.'), ['controller' => 'Addresses', 'action' => 'add', 'library' => 'cms_core']) ?>
+				</div>
+		</section>
 		<?php endif ?>
 		<?php if (Features::enabled('useBilling')): ?>
 			<section>

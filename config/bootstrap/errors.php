@@ -124,7 +124,7 @@ Logger::config([
 	'default' => [
 		'adapter' => 'File',
 		'path' => $path . '/log',
-		'priority' => ['debug', 'error']
+		'priority' => ['debug', 'error', 'security', 'notice']
 	],
 ]);
 Logger::applyFilter('write', function ($self, $params, $chain) {

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e7543f38f59c772e506fafd835608ef9",
+    "hash": "673a1b81f3d0955d0b27151287db6d91",
     "packages": [
         {
             "name": "fzaninotto/faker",
@@ -52,6 +52,58 @@
             "time": "2013-12-16 21:56:48"
         },
         {
+            "name": "mobiledetect/mobiledetectlib",
+            "version": "2.7.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/serbanghita/Mobile-Detect.git",
+                "reference": "610846237295e3e50a1923e7cc1639a956ead22a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/610846237295e3e50a1923e7cc1639a956ead22a",
+                "reference": "610846237295e3e50a1923e7cc1639a956ead22a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Mobile_Detect.php"
+                ],
+                "psr-0": {
+                    "Detection": "namespaced/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Serban Ghita",
+                    "email": "serbanghita@gmail.com",
+                    "homepage": "http://mobiledetect.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Mobile_Detect is a lightweight PHP class for detecting mobile devices. It uses the User-Agent string combined with specific HTTP headers to detect the mobile environment.",
+            "homepage": "https://github.com/serbanghita/Mobile-Detect",
+            "keywords": [
+                "detect mobile devices",
+                "mobile",
+                "mobile detect",
+                "mobile detector",
+                "php mobile detect"
+            ],
+            "time": "2014-03-07 13:33:54"
+        },
+        {
             "name": "naneau/semver",
             "version": "dev-master",
             "source": {
@@ -97,56 +149,6 @@
                 "versioning"
             ],
             "time": "2014-03-14 17:25:54"
-        },
-        {
-            "name": "suncat/php-mobile-detect",
-            "version": "v2.0.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/suncat2000/php-mobile-detect.git",
-                "reference": "a1b702a470ea24ce42edf71433e27190ea2d90ef"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/suncat2000/php-mobile-detect/zipball/a1b702a470ea24ce42edf71433e27190ea2d90ef",
-                "reference": "a1b702a470ea24ce42edf71433e27190ea2d90ef",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Mobile_Detect": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Victor Stanciu",
-                    "email": "vic.stanciu@gmail.com",
-                    "homepage": "https://plus.google.com/112830021345771739573"
-                },
-                {
-                    "name": "Serban Ghita",
-                    "email": "serbanghita@gmail.com",
-                    "homepage": "http://ghita.org",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Lightweight PHP class for detecting mobile devices",
-            "homepage": "https://github.com/suncat2000/php-mobile-detect",
-            "keywords": [
-                "mobile",
-                "mobile detect",
-                "mobile detector",
-                "mobile device"
-            ],
-            "time": "2012-07-23 20:25:18"
         },
         {
             "name": "symfony/event-dispatcher",

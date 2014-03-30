@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "8fae9c8f126bb8c2819ba1855eac53a5",
+    "hash": "e7543f38f59c772e506fafd835608ef9",
     "packages": [
         {
             "name": "fzaninotto/faker",
@@ -97,6 +97,56 @@
                 "versioning"
             ],
             "time": "2014-03-14 17:25:54"
+        },
+        {
+            "name": "suncat/php-mobile-detect",
+            "version": "v2.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/suncat2000/php-mobile-detect.git",
+                "reference": "a1b702a470ea24ce42edf71433e27190ea2d90ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/suncat2000/php-mobile-detect/zipball/a1b702a470ea24ce42edf71433e27190ea2d90ef",
+                "reference": "a1b702a470ea24ce42edf71433e27190ea2d90ef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Mobile_Detect": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Victor Stanciu",
+                    "email": "vic.stanciu@gmail.com",
+                    "homepage": "https://plus.google.com/112830021345771739573"
+                },
+                {
+                    "name": "Serban Ghita",
+                    "email": "serbanghita@gmail.com",
+                    "homepage": "http://ghita.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Lightweight PHP class for detecting mobile devices",
+            "homepage": "https://github.com/suncat2000/php-mobile-detect",
+            "keywords": [
+                "mobile",
+                "mobile detect",
+                "mobile detector",
+                "mobile device"
+            ],
+            "time": "2012-07-23 20:25:18"
         },
         {
             "name": "symfony/event-dispatcher",

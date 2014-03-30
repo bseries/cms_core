@@ -5,6 +5,7 @@
     "require": {
         "naneau/semver": "dev-master",
         "fzaninotto/faker": "1.*",
-        "yohang/finite": "1.*"
+        "yohang/finite": "1.*",
+        "suncat/php-mobile-detect": "2.0.*"
     }
 }

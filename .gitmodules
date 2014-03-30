@@ -22,9 +22,6 @@
 [submodule "libraries/textual"]
 	path = libraries/textual
 	url = git@github.com:davidpersson/textual.git
-[submodule "libraries/mobile_detect"]
-	path = libraries/mobile_detect
-	url = git@github.com:serbanghita/Mobile-Detect.git
 [submodule "libraries/li3_cldr"]
 	path = libraries/li3_cldr
 	url = https://github.com/UnionOfRAD/li3_cldr.git

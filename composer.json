@@ -3,6 +3,8 @@
         "vendor-dir": "libraries"
     },
     "require": {
-        "naneau/semver": "dev-master"
+        "naneau/semver": "dev-master",
+        "fzaninotto/faker": "1.*",
+        "yohang/finite": "1.*"
     }
 }

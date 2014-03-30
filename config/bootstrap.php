@@ -38,13 +38,6 @@ Libraries::add('li3_mailer', [
 	'path' => dirname(__DIR__) . '/libraries/li3_mailer'
 ]);
 
-Libraries::add('Finite', array(
-	'path' => dirname(__DIR__) . '/libraries/finite/src/Finite',
-	'prefix' => 'Finite\\'
-));
-Libraries::add('Faker', [
-	'path' => dirname(__DIR__) . '/libraries/faker/src/Faker'
-]);
 Libraries::add('temporary', [
 	'path' => dirname(__DIR__) . '/libraries/temporary/src'
 ]);

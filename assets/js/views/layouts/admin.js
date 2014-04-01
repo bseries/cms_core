@@ -106,10 +106,10 @@ require(['jquery', 'list', 'domready!'], function($, List) {
   if (attachDirect.length || attachJoined.length) {
     require(['jquery', 'media-attachment'], function($, MediaAttachment) {
         attachDirect.each(function(k, el) {
-          MediaAttachment.direct(el, {endpoints: App.env.media.endpoints});
+          MediaAttachment.direct(el, {endpoints: App.media.endpoints});
         });
         attachJoined.each(function(k, el) {
-          MediaAttachment.joined(el, {endpoints: App.env.media.endpoints});
+          MediaAttachment.joined(el, {endpoints: App.media.endpoints});
         });
     });
   }
@@ -124,7 +124,7 @@ require(['jquery', 'list', 'domready!'], function($, List) {
       function($, Editor, EditorMedia, EditorPageBreak) {
 
         var externalPlugins = {
-          media: (new EditorMedia()).init({endpoints: App.env.media.endpoints}),
+          media: (new EditorMedia()).init({endpoints: App.media.endpoints}),
           'page-break': new EditorPageBreak()
         };
 

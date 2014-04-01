@@ -16,7 +16,7 @@ requirejs.config({
       useXhr: function() { return true; }
     }
   },
-  baseUrl: 'http://assets.' + window.location.hostname + '/v:__PROJECT_VERSION_BUILD__',
+  baseUrl: App.assets.base + '/v:__PROJECT_VERSION_BUILD__',
   waitSeconds: 15,
   paths: {
     // Basics

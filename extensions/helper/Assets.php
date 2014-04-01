@@ -60,13 +60,12 @@ class Assets extends \lithium\template\Helper {
 			return $path;
 		}
 		$version = Settings::read('project.version');
-		$base = AssetsModel::base($this->_context->request()->is('ssl') ? 'https' : 'http');
-		return $base . '/v:' . $version . $path . $suffix;
+		return $this->base() . '/v:' . $version . $path . $suffix;
 	}
 
 	public function urls($pattern) {
-		$fileBase = parse_url(AssetsModel::base('file'), PHP_URL_PATH);
-		$httpBase = AssetsModel::base('http');
+		$fileBase = parse_url($this->base('file'), PHP_URL_PATH);
+		$httpBase = $this->base();
 
 		$results = glob($fileBase . $pattern);
 
@@ -74,6 +73,11 @@ class Assets extends \lithium\template\Helper {
 			$result = str_replace($fileBase, $httpBase, $result);
 		}
 		return $results;
+	}
+
+	public function base($scheme = null) {
+		$scheme = $scheme ?: $this->_context->request()->is('ssl') ? 'https' : 'http';
+		return AssetsModel::base($scheme);
 	}
 
 	public function availableScripts($type, array $options = []) {

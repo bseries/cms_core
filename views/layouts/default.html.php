@@ -40,6 +40,7 @@ FlashMessage::clear();
 			'/site/css/base'
 		]) ?>
 		<?php echo $this->styles() ?>
+		<?=$this->view()->render(['element' => 'head_app_defines'], [], ['library' => 'cms_core']) ?>
 		<?php
 			$scripts = array_merge(
 				['/core/js/require'],

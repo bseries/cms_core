@@ -28,14 +28,18 @@ FlashMessage::clear();
 			'/core/css/admin',
 			'/site/css/admin'
 		]) ?>
-		<?php echo $this->assets->script([
-			'/core/js/underscore',
-			'/core/js/jquery',
-			'/core/js/require',
-			'/core/js/base',
-			'/media/js/base'
-		]) ?>
 		<?php echo $this->styles() ?>
+		<?=$this->view()->render(['element' => 'head_app_defines'], [], ['library' => 'cms_core']) ?>
+		<?php
+			$scripts = array_merge(
+				['/core/js/jquery'],
+				['/core/js/require'],
+				$this->assets->availableScripts('base', ['admin' => true]),
+				$this->assets->availableScripts('view', ['admin' => true]),
+				$this->assets->availableScripts('layout', ['admin' => true])
+			);
+		?>
+		<?php echo $this->assets->script($scripts) ?>
 		<?php echo $this->scripts() ?>
 		<?php if (Settings::read('googleAnalytics.default')): ?>
 			<?=$this->view()->render(['element' => 'ga'], [], [

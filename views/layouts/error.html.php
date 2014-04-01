@@ -15,8 +15,15 @@ $locale = Environment::get('locale');
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?><?= $site['title'] ?></title>
 		<link rel="icon" href="<?= $this->assets->url('/site/ico/site.png') ?>">
 
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<!--[if lt IE 9]>>
 			<script src="<?= $this->assets->url('/core/js/compat/html5shiv.js') ?>"></script>
+		<![endif]-->
+		<noscript>
+			<link rel="stylesheet" type="text/css" href="<?= $this->assets->url('/site/css/compat/noscript.css') ?>">
+		</noscript>
+		<!--[if lt IE 10]>
+			<link rel="stylesheet" type="text/css" href="<?= $this->assets->url('/site/css/compat/ie9.css') ?>">
 		<![endif]-->
 
 		<?php echo $this->assets->style([
@@ -25,6 +32,7 @@ $locale = Environment::get('locale');
 		]) ?>
 		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>
+		<?=$this->view()->render(['element' => 'head_app_defines'], [], ['library' => 'cms_core']) ?>
 		<?php if (Settings::read('googleAnalytics.default')): ?>
 			<?=$this->view()->render(['element' => 'ga'], [], [
 				'library' => 'cms_core'

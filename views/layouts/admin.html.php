@@ -31,6 +31,7 @@ FlashMessage::clear();
 			'/site/css/admin'
 		]) ?>
 		<?php echo $this->styles() ?>
+		<?=$this->view()->render(['element' => 'head_app_defines'], [], ['library' => 'cms_core']) ?>
 		<?php
 			$scripts = array_merge(
 				['/core/js/jquery'],
@@ -42,19 +43,6 @@ FlashMessage::clear();
 		?>
 		<?php echo $this->assets->script($scripts) ?>
 		<?php echo $this->scripts() ?>
-		<script>
-			<?php $url = ['controller' => 'files', 'library' => 'cms_media', 'admin' => true] ?>
-
-			App.env = $.extend(App.env, {
-				media: {
-					endpoints: {
-						index: '<?= $this->url($url + ['action' => 'api_index']) ?>',
-						view: '<?= $this->url($url + ['action' => 'api_view', 'id' => '__ID__']) ?>',
-						transfer: '<?= $this->url($url + ['action' => 'api_transfer']) ?>'
-					}
-				}
-			});
-		</script>
 	</head>
 	<body class="layout-admin">
 		<div

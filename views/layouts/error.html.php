@@ -13,22 +13,22 @@ $locale = Environment::get('locale');
 	<head>
 		<?php echo $this->html->charset() ?>
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?><?= $site['title'] ?></title>
-		<link rel="icon" href="<?= $this->assets->url('/site/ico/site.png') ?>">
+		<link rel="icon" href="<?= $this->assets->url('/app/ico/app.png') ?>">
 
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<!--[if lt IE 9]>>
-			<script src="<?= $this->assets->url('/core/js/compat/html5shiv.js') ?>"></script>
+			<script src="<?= $this->assets->url('/cms-core/js/compat/html5shiv.js') ?>"></script>
 		<![endif]-->
 		<noscript>
-			<link rel="stylesheet" type="text/css" href="<?= $this->assets->url('/site/css/compat/noscript.css') ?>">
+			<link rel="stylesheet" type="text/css" href="<?= $this->assets->url('/app/css/compat/noscript.css') ?>">
 		</noscript>
 		<!--[if lt IE 10]>
-			<link rel="stylesheet" type="text/css" href="<?= $this->assets->url('/site/css/compat/ie9.css') ?>">
+			<link rel="stylesheet" type="text/css" href="<?= $this->assets->url('/app/css/compat/ie9.css') ?>">
 		<![endif]-->
 
 		<?php echo $this->assets->style([
-			'/core/css/reset',
-			'/site/css/base'
+			'/cms-core/css/reset',
+			'/app/css/base'
 		]) ?>
 		<?php echo $this->styles() ?>
 		<?php echo $this->scripts() ?>

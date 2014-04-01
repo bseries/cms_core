@@ -19,21 +19,21 @@ FlashMessage::clear();
 	<head>
 		<?php echo $this->html->charset() ?>
 		<title><?php echo ($title = $this->title()) ? "{$title} - " : null ?>Admin – <?= $site['title'] ?></title>
-		<link rel="icon" href="<?= $this->assets->url('/core/ico/admin.png') ?>">
+		<link rel="icon" href="<?= $this->assets->url('/cms-core/ico/admin.png') ?>">
 
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
 		<?php echo $this->assets->style([
-			'/core/css/reset',
-			'/core/css/admin',
-			'/site/css/admin'
+			'/cms-core/css/reset',
+			'/cms-core/css/admin',
+			'/app/css/admin'
 		]) ?>
 		<?php echo $this->styles() ?>
 		<?=$this->view()->render(['element' => 'head_app_defines'], [], ['library' => 'cms_core']) ?>
 		<?php
 			$scripts = array_merge(
-				['/core/js/jquery'],
-				['/core/js/require'],
+				['/cms-core/js/jquery'],
+				['/cms-core/js/require'],
 				$this->assets->availableScripts('base', ['admin' => true]),
 				$this->assets->availableScripts('view', ['admin' => true]),
 				$this->assets->availableScripts('layout', ['admin' => true])

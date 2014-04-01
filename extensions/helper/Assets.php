@@ -141,8 +141,7 @@ class Assets extends \lithium\template\Helper {
 	}
 
 	protected function _script($library, $file) {
-		$library = str_replace(['cms_', 'ecommerce_'], '', $library);
-		$library = $library == 'app' ? 'site' : $library;
+		$library = str_replace('_', '-', $library);
 		$base = parse_url(AssetsModel::base('file'), PHP_URL_PATH) . '/' . $library;
 
 		if (file_exists($a = "{$base}/js/{$file}.js")) {

@@ -117,7 +117,7 @@ p a:hover {
 #container > header {
   box-shadow: inset 0 -5px 5px 2px rgba(0, 0, 0, 0.5);
   height: 280px;
-  background: url("../img/stones.jpg");
+  background: url("../img/stones.jpg?v=__PROJECT_VERSION_BUILD__");
   padding: 1em 1.5em;
 }
 #container > header h1 {
@@ -309,7 +309,7 @@ footer.main {
   background: black;
   box-shadow: inset 0 5px 5px 2px rgba(0, 0, 0, 0.5);
   height: 280px;
-  background: url("../img/stones.jpg");
+  background: url("../img/stones.jpg?v=__PROJECT_VERSION_BUILD__");
   padding: 2em 1.5em;
   text-align: center;
 }
@@ -435,7 +435,7 @@ select {
   padding: .4em 40px .2em .5em !important;
 }
 select:not([multiple]) {
-  background: white url("../ico/field_arrow_down.png") no-repeat right 8px center;
+  background: white url("../ico/field_arrow_down.png?v=__PROJECT_VERSION_BUILD__") no-repeat right 8px center;
 }
 
 input[type="radio"],
@@ -449,17 +449,17 @@ input[type="checkbox"] + label {
   height: 33px;
   line-height: 2.4;
   cursor: pointer;
-  background: url("../ico/checkbox.png?v=__REV__") no-repeat 1px -1px;
+  background: url("../ico/checkbox.png?v=__PROJECT_VERSION_BUILD__") no-repeat 1px -1px;
   padding: 0 0 0 45px;
   margin-bottom: .75em;
 }
 input[type="radio"] + label:hover,
 input[type="checkbox"] + label:hover {
-  background-image: url("../ico/checkbox_hover.png?v=__REV__")
+  background-image: url("../ico/checkbox_hover.png?v=__PROJECT_VERSION_BUILD__")
 }
 input[type="radio"]:checked + label,
 input[type="checkbox"]:checked + label {
-  background-image: url("../ico/checkbox_checked.png?v=__REV__")
+  background-image: url("../ico/checkbox_checked.png?v=__PROJECT_VERSION_BUILD__")
 }
 
 select[disabled],
@@ -675,7 +675,7 @@ button.small,
   opacity: 1;
 }
 .media-attachment .selected.populated:empty {
-  background: url("../img/none_bg.png") no-repeat -350px 0;
+  background: url("../img/none_bg.png?v=__PROJECT_VERSION_BUILD__") no-repeat -350px 0;
 }
 .media-attachment img {
   max-height: 100%;

@@ -9,15 +9,6 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
 
-// Export global App (configuration) object.
-var App = {
-  env: {
-    project: {
-      version: '__REV__'
-    }
-  }
-};
-
 requirejs.config({
   config: {
     text: {
@@ -25,7 +16,7 @@ requirejs.config({
       useXhr: function() { return true; }
     }
   },
-  baseUrl: 'http://assets.' + window.location.hostname + '/v:' + App.env.project.version,
+  baseUrl: 'http://assets.' + window.location.hostname + '/v:__PROJECT_VERSION_BUILD__',
   waitSeconds: 15,
   paths: {
     // Basics

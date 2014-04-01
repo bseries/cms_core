@@ -11,6 +11,8 @@
  */
 
 use lithium\security\Auth;
+use cms_core\models\Users;
+use lithium\storage\Session;
 
 Auth::config([
 	'default' => [
@@ -23,5 +25,50 @@ Auth::config([
 		]
 	]
 ]);
+
+// Sync session_key for user in database when a session is created.
+// Note only real users get authenticated.
+Auth::applyFilter('set', function($self, $params, $chain) {
+	$result = $chain->next($self, $params, $chain);
+	$key = Session::key($params['name']);
+
+	$user = Users::find('first', [
+		'conditions' => [
+			'id' => $params['data']['id']
+		],
+		'fields' => [
+			'id', 'session_key'
+		]
+	]);
+	$user->save(['session_key' => $key], [
+		'whitelist' => ['session_key'],
+		'validate' => false
+	]);
+	return $result;
+});
+Auth::applyFilter('clear', function($self, $params, $chain) {
+	$key = Session::key($params['name']);
+
+	$result = $chain->next($self, $params, $chain);
+
+	$user = Users::find('first', [
+		'conditions' => [
+			'session_key' => $key
+		],
+		'fields' => [
+			'id'
+		]
+	]);
+	// This feature may no been enabled on previous
+	// installs gracefully degrade.
+	if (!$user) {
+		return $result;
+	}
+	$user->save(['session_key' => null], [
+		'whitelist' => ['session_key'],
+		'validate' => false
+	]);
+	return $result;
+});
 
 ?>

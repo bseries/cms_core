@@ -65,7 +65,7 @@ $retrieveUaInfo = function($request) {
 	$cacheKey = 'ua_' . md5($cacheKey);
 
 	if ($ua = Cache::read('default', $cacheKey)) {
-	//	return $ua;
+		return $ua;
 	}
 	$ua = [
 		'isMobile' => $detect->isMobile(),

@@ -60,8 +60,7 @@ class Assets extends \lithium\template\Helper {
 			return $path;
 		}
 		$version = Settings::read('project.version');
-
-		$base = AssetsModel::base('http');
+		$base = AssetsModel::base($this->_context->request()->is('ssl') ? 'https' : 'http');
 		return $base . '/v:' . $version . $path . $suffix;
 	}
 

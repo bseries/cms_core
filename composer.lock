@@ -3,8 +3,146 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0bae7cba6a9a5882e23cfb1f8c854644",
+    "hash": "5da1244055ddf7d5c355667881bf2a6f",
     "packages": [
+        {
+            "name": "composer/installers",
+            "version": "v1.0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/installers.git",
+                "reference": "4127333b03e8b4c08d081958548aae5419d1a2fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/installers/zipball/4127333b03e8b4c08d081958548aae5419d1a2fa",
+                "reference": "4127333b03e8b4c08d081958548aae5419d1a2fa",
+                "shasum": ""
+            },
+            "replace": {
+                "shama/baton": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "composer-installer",
+            "extra": {
+                "class": "Composer\\Installers\\Installer",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Composer\\Installers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "https://github.com/shama",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A multi-framework Composer library installer",
+            "homepage": "http://composer.github.com/installers/",
+            "keywords": [
+                "Craft",
+                "Hurad",
+                "MODX Evo",
+                "OXID",
+                "WolfCMS",
+                "agl",
+                "annotatecms",
+                "cakephp",
+                "codeigniter",
+                "concrete5",
+                "croogo",
+                "drupal",
+                "elgg",
+                "fuelphp",
+                "installer",
+                "joomla",
+                "kohana",
+                "laravel",
+                "lithium",
+                "magento",
+                "mako",
+                "mediawiki",
+                "modulework",
+                "phpbb",
+                "piwik",
+                "ppi",
+                "shopware",
+                "silverstripe",
+                "symfony",
+                "typo3",
+                "wordpress",
+                "zend",
+                "zikula"
+            ],
+            "time": "2014-02-24 04:21:34"
+        },
+        {
+            "name": "davidpersson/li3_behaviors",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davidpersson/li3_behaviors.git",
+                "reference": "373377b11cbb95b510120601e8d798fc5493362b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davidpersson/li3_behaviors/zipball/373377b11cbb95b510120601e8d798fc5493362b",
+                "reference": "373377b11cbb95b510120601e8d798fc5493362b",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.4"
+            },
+            "type": "lithium-library",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "David Persson",
+                    "homepage": "https://github.com/davidpersson"
+                },
+                {
+                    "name": "Simon Jaillet",
+                    "homepage": "https://github.com/jails"
+                },
+                {
+                    "name": "Nate Abele",
+                    "homepage": "https://github.com/nateabele"
+                },
+                {
+                    "name": "Community",
+                    "homepage": "http://github.com/unionofrad/li3_behaviors/graphs/contributors"
+                }
+            ],
+            "description": "Model behaviors for the Lithium PHP framework",
+            "homepage": "https://github.com/davidpersson/li3_behaviors",
+            "keywords": [
+                "behavior",
+                "li3",
+                "lithium",
+                "model",
+                "php"
+            ],
+            "support": {
+                "source": "https://github.com/davidpersson/li3_behaviors/tree/master"
+            },
+            "time": "2014-04-02 17:28:39"
+        },
         {
             "name": "davidpersson/temporary",
             "version": "1.0.0",
@@ -498,7 +636,8 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "naneau/semver": 20
+        "naneau/semver": 20,
+        "davidpersson/li3_behaviors": 20
     },
     "platform": [
 

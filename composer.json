@@ -9,7 +9,8 @@
         "mobiledetect/mobiledetectlib": "2.*",
         "guzzle/guzzle": "3.*",
         "davidpersson/temporary": "1.*",
-        "davidpersson/textual": "1.*"
+        "davidpersson/textual": "1.*",
+        "davidpersson/li3_behaviors": "dev-master"
     },
     "repositories": [
       {
@@ -19,6 +20,10 @@
       {
         "type": "vcs",
         "url": "https://github.com/davidpersson/textual"
+      },
+      {
+        "type": "vcs",
+        "url": "https://github.com/davidpersson/li3_behaviors"
       }
     ]
 }

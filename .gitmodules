@@ -1,6 +1,3 @@
-[submodule "libraries/temporary"]
-	path = libraries/temporary
-	url = https://github.com/davidpersson/temporary.git
 [submodule "libraries/li3_lldr"]
 	path = libraries/li3_lldr
 	url = https://github.com/UnionOfRAD/li3_lldr.git

@@ -38,17 +38,10 @@ Libraries::add('li3_mailer', [
 	'path' => dirname(__DIR__) . '/libraries/li3_mailer'
 ]);
 
-Libraries::add('temporary', [
-	'path' => dirname(__DIR__) . '/libraries/temporary/src'
-]);
-Libraries::add('textual', array(
-	'path' => dirname(__DIR__) . '/libraries/textual/src'
-));
 Libraries::add('jsend', array(
 	'path' => dirname(__DIR__) . '/libraries/jsend/src'
 ));
 
-require dirname(__DIR__) . '/libraries/guzzle/vendor/autoload.php';
 require_once dirname(__DIR__) . '/libraries/autoload.php';
 
 Features::register('cms_core', 'useNewGoogleAnalyticsTrackingCode', true);

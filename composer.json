@@ -15,14 +15,6 @@
     "repositories": [
       {
         "type": "vcs",
-        "url": "https://github.com/davidpersson/temporary"
-      },
-      {
-        "type": "vcs",
-        "url": "https://github.com/davidpersson/textual"
-      },
-      {
-        "type": "vcs",
         "url": "https://github.com/davidpersson/li3_behaviors"
       }
     ]

@@ -1,4 +1,7 @@
 {
+    "name": "atelierdisko/cms_core",
+    "description": "Core functionality for bureau.",
+    "license": "proprietary",
     "config": {
         "vendor-dir": "libraries"
     },

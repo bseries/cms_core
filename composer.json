@@ -3,6 +3,7 @@
         "vendor-dir": "libraries"
     },
     "require": {
+        "php": ">=5.5.0",
         "naneau/semver": "dev-master",
         "fzaninotto/faker": "1.*",
         "yohang/finite": "1.*",

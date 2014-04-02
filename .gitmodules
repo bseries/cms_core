@@ -16,9 +16,6 @@
 [submodule "libraries/li3_taggable"]
 	path = libraries/li3_taggable
 	url = git@github.com:atelierdisko/li3_taggable.git
-[submodule "libraries/textual"]
-	path = libraries/textual
-	url = git@github.com:davidpersson/textual.git
 [submodule "libraries/li3_cldr"]
 	path = libraries/li3_cldr
 	url = https://github.com/UnionOfRAD/li3_cldr.git

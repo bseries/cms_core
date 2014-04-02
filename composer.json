@@ -6,6 +6,7 @@
         "naneau/semver": "dev-master",
         "fzaninotto/faker": "1.*",
         "yohang/finite": "1.*",
-        "mobiledetect/mobiledetectlib": "2.*"
+        "mobiledetect/mobiledetectlib": "2.*",
+        "guzzle/guzzle": "3.*"
     }
 }

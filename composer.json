@@ -3,7 +3,8 @@
     "description": "Core functionality for bureau.",
     "license": "proprietary",
     "config": {
-        "vendor-dir": "libraries"
+        "vendor-dir": "libraries",
+        "preferred-install": "dist"
     },
     "require": {
         "php": ">=5.5.0",

@@ -10,9 +10,6 @@
 [submodule "libraries/li3_mailer"]
 	path = libraries/li3_mailer
 	url = git@github.com:atelierdisko/li3_mailer.git
-[submodule "libraries/li3_behaviors"]
-	path = libraries/li3_behaviors
-	url = https://github.com/davidpersson/li3_behaviors.git
 [submodule "libraries/li3_taggable"]
 	path = libraries/li3_taggable
 	url = git@github.com:atelierdisko/li3_taggable.git

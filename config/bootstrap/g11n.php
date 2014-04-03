@@ -126,7 +126,7 @@ Catalog::config([
 	 ],
 	'lithium' => [
 		'adapter' => 'Php',
-		'path' => LITHIUM_LIBRARY_PATH . '/lithium/g11n/resources/php'
+		'path' => LITHIUM_LIBRARY_PATH . '/unionofrad/lithium/lithium/g11n/resources/php'
 	],
 	'cldr' => [
 		'adapter' => 'Cldr',

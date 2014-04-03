@@ -27,15 +27,4 @@ $project = Settings::read('project');
 		<dt><?= $t('Environment') ?></dt>
 		<dd><?= Environment::get() ?></dd>
 	</dl>
-
-	<!--
-	<h2 class="beta"><?= $t('Services') ?></h2>
-	<?php foreach ($services as $name => $service): ?>
-	<h3 class="gamma"><?= $name ?></h3>
-<pre>
-<?php echo json_encode($service) ?>
-</pre>
-	<?php endforeach ?>
-	-->
-
 </article>

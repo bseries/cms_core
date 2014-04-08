@@ -18,7 +18,8 @@
         "davidpersson/li3_behaviors": "dev-master",
         "tmaiaroto/li3_access": "dev-master",
         "unionofrad/li3_cldr": "dev-master",
-        "unionofrad/li3_lldr": "dev-master"
+        "unionofrad/li3_lldr": "dev-master",
+        "uor/li3_flash_message": "dev-master"
     },
     "repositories": [
       {
@@ -32,6 +33,10 @@
       {
         "type": "vcs",
         "url": "https://github.com/unionofrad/li3_lldr"
+      },
+      {
+        "type": "vcs",
+        "url": "https://github.com/uor/li3_flash_message"
       }
-    ]
+   ]
 }

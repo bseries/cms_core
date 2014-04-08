@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "23d79d226f9ce197786fac26087c8117",
+    "hash": "d2dabf22acb44352e9d63a9762c0c970",
     "packages": [
         {
             "name": "composer/installers",
@@ -665,6 +665,53 @@
             "time": "2014-04-08 16:33:53"
         },
         {
+            "name": "unionofrad/li3_lldr",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/unionofrad/li3_lldr.git",
+                "reference": "4035ef43e13e5400ab253d21f22fbb900fe531f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/unionofrad/li3_lldr/zipball/4035ef43e13e5400ab253d21f22fbb900fe531f7",
+                "reference": "4035ef43e13e5400ab253d21f22fbb900fe531f7",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.3.6"
+            },
+            "type": "lithium-library",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Union of RAD",
+                    "homepage": "http://union-of-rad.org"
+                },
+                {
+                    "name": "The Lithium Community"
+                }
+            ],
+            "description": "A Lithium plugin with additional g11n resources constituting the Lithium Locale Data Repository.",
+            "homepage": "http://li3.me",
+            "keywords": [
+                "g11n",
+                "li3",
+                "lithium",
+                "lldr",
+                "locale",
+                "php"
+            ],
+            "support": {
+                "source": "https://github.com/unionofrad/li3_lldr/tree/master",
+                "issues": "https://github.com/unionofrad/li3_lldr/issues"
+            },
+            "time": "2014-04-08 16:41:34"
+        },
+        {
             "name": "yohang/finite",
             "version": "1.0.1",
             "source": {
@@ -741,7 +788,8 @@
         "naneau/semver": 20,
         "davidpersson/li3_behaviors": 20,
         "tmaiaroto/li3_access": 20,
-        "unionofrad/li3_cldr": 20
+        "unionofrad/li3_cldr": 20,
+        "unionofrad/li3_lldr": 20
     },
     "platform": {
         "php": ">=5.5.0"

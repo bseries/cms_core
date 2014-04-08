@@ -17,7 +17,8 @@
         "davidpersson/textual": "1.*",
         "davidpersson/li3_behaviors": "dev-master",
         "tmaiaroto/li3_access": "dev-master",
-        "unionofrad/li3_cldr": "dev-master"
+        "unionofrad/li3_cldr": "dev-master",
+        "unionofrad/li3_lldr": "dev-master"
     },
     "repositories": [
       {
@@ -27,6 +28,10 @@
       {
         "type": "vcs",
         "url": "https://github.com/unionofrad/li3_cldr"
+      },
+      {
+        "type": "vcs",
+        "url": "https://github.com/unionofrad/li3_lldr"
       }
     ]
 }

@@ -27,7 +27,9 @@ class Date extends \lithium\template\Helper {
 		$locale = $options['locale'] ?: $this->_locale();
 		$timezone = $options['timezone'] ?: $this->_timezone();
 
-		if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]+:[0-9]+:[0-9]+$/', $value)) {
+		if ($value instanceof DateTime) {
+			$date = $value;
+		} elseif (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]+:[0-9]+:[0-9]+$/', $value)) {
 			$date = DateTime::createFromFormat('Y-m-d H:i:s', $value);
 		} elseif (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $value)) {
 			$date = DateTime::createFromFormat('Y-m-d', $value);
@@ -36,6 +38,14 @@ class Date extends \lithium\template\Helper {
 		}
 
 		switch ($type) {
+			case 'full-date':
+				$formatter = new IntlDateFormatter(
+					$locale,
+					IntlDateFormatter::FULL,
+					IntlDateFormatter::NONE,
+					$timezone
+				);
+				return $formatter->format($date);
 			case 'datetime':
 				$formatter = new IntlDateFormatter(
 					$locale,

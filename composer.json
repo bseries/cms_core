@@ -26,27 +26,7 @@
     "repositories": [
       {
         "type": "vcs",
-        "url": "https://github.com/davidpersson/li3_behaviors"
-      },
-      {
-        "type": "vcs",
-        "url": "https://github.com/unionofrad/li3_cldr"
-      },
-      {
-        "type": "vcs",
-        "url": "https://github.com/unionofrad/li3_lldr"
-      },
-      {
-        "type": "vcs",
         "url": "https://github.com/uor/li3_flash_message"
-      },
-      {
-        "type": "vcs",
-        "url": "https://github.com/atelierdisko/li3_mailer"
-      },
-      {
-        "type": "vcs",
-        "url": "https://github.com/atelierdisko/li3_taggable"
       }
    ]
 }

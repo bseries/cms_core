@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d0e5561bc8d217b99f0d984a5132ff7e",
+    "hash": "23d79d226f9ce197786fac26087c8117",
     "packages": [
         {
             "name": "composer/installers",
@@ -613,6 +613,58 @@
             "time": "2013-12-19 16:09:09"
         },
         {
+            "name": "unionofrad/li3_cldr",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/unionofrad/li3_cldr.git",
+                "reference": "0bf881148248bc2894afac50dad155b4cc605cfe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/unionofrad/li3_cldr/zipball/0bf881148248bc2894afac50dad155b4cc605cfe",
+                "reference": "0bf881148248bc2894afac50dad155b4cc605cfe",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.3.6"
+            },
+            "type": "lithium-library",
+            "scripts": {
+                "post-install-cmd": [
+                    "curl http://unicode.org/Public/cldr/1.8.0/core.zip --O /tmp/core.zip && unzip /tmp/core.zip -d /tmp && mv /tmp/common ./resources/g11n"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Union of RAD",
+                    "homepage": "http://union-of-rad.org"
+                },
+                {
+                    "name": "The Lithium Community"
+                }
+            ],
+            "description": "A Lithium plugin adding support for querying Unicode's CLDR.",
+            "homepage": "http://li3.me",
+            "keywords": [
+                "cldr",
+                "g11n",
+                "li3",
+                "lithium",
+                "php",
+                "unicode"
+            ],
+            "support": {
+                "source": "https://github.com/unionofrad/li3_cldr/tree/master",
+                "issues": "https://github.com/unionofrad/li3_cldr/issues"
+            },
+            "time": "2014-04-08 16:33:53"
+        },
+        {
             "name": "yohang/finite",
             "version": "1.0.1",
             "source": {
@@ -688,7 +740,8 @@
     "stability-flags": {
         "naneau/semver": 20,
         "davidpersson/li3_behaviors": 20,
-        "tmaiaroto/li3_access": 20
+        "tmaiaroto/li3_access": 20,
+        "unionofrad/li3_cldr": 20
     },
     "platform": {
         "php": ">=5.5.0"

@@ -1,12 +1,3 @@
-[submodule "libraries/li3_lldr"]
-	path = libraries/li3_lldr
-	url = https://github.com/UnionOfRAD/li3_lldr.git
-[submodule "libraries/li3_mailer"]
-	path = libraries/li3_mailer
-	url = git@github.com:atelierdisko/li3_mailer.git
 [submodule "libraries/li3_taggable"]
 	path = libraries/li3_taggable
 	url = git@github.com:atelierdisko/li3_taggable.git
-[submodule "libraries/li3_cldr"]
-	path = libraries/li3_cldr
-	url = https://github.com/UnionOfRAD/li3_cldr.git

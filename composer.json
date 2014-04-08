@@ -19,7 +19,8 @@
         "tmaiaroto/li3_access": "dev-master",
         "unionofrad/li3_cldr": "dev-master",
         "unionofrad/li3_lldr": "dev-master",
-        "uor/li3_flash_message": "dev-master"
+        "uor/li3_flash_message": "dev-master",
+        "atelierdisko/li3_mailer": "dev-master"
     },
     "repositories": [
       {
@@ -37,6 +38,10 @@
       {
         "type": "vcs",
         "url": "https://github.com/uor/li3_flash_message"
+      },
+      {
+        "type": "vcs",
+        "url": "https://github.com/atelierdisko/li3_mailer"
       }
    ]
 }

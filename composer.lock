@@ -3,8 +3,71 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "6909f1b0036c4ea1593dcac271d386a6",
+    "hash": "d7a9542455dfc153db2a1ee551060822",
     "packages": [
+        {
+            "name": "atelierdisko/li3_mailer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/atelierdisko/li3_mailer.git",
+                "reference": "7890c1f87407aedf240ae0d3fee4c4d0956df40e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/atelierdisko/li3_mailer/zipball/7890c1f87407aedf240ae0d3fee4c4d0956df40e",
+                "reference": "7890c1f87407aedf240ae0d3fee4c4d0956df40e",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=5.3.6"
+            },
+            "type": "lithium-library",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Atelier Disko",
+                    "homepage": "http://atelierdisko.de"
+                },
+                {
+                    "name": "eLod",
+                    "homepage": "https://github.com/eLod"
+                },
+                {
+                    "name": "Nate Abele",
+                    "homepage": "https://github.com/nateabele"
+                },
+                {
+                    "name": "Michael Nitschinger",
+                    "homepage": "https://github.com/daschl"
+                },
+                {
+                    "name": "Martin Samson",
+                    "homepage": "https://github.com/masom"
+                },
+                {
+                    "name": "The Lithium Community"
+                }
+            ],
+            "description": "A plugin for sending email messages from your Lithium application.",
+            "homepage": "http://li3.me",
+            "keywords": [
+                "li3",
+                "lithium",
+                "mail",
+                "mailgun",
+                "php",
+                "smtp",
+                "swiftmailer"
+            ],
+            "support": {
+                "source": "https://github.com/atelierdisko/li3_mailer/tree/master"
+            },
+            "time": "2014-04-08 16:53:43"
+        },
         {
             "name": "composer/installers",
             "version": "v1.0.12",
@@ -832,7 +895,8 @@
         "tmaiaroto/li3_access": 20,
         "unionofrad/li3_cldr": 20,
         "unionofrad/li3_lldr": 20,
-        "uor/li3_flash_message": 20
+        "uor/li3_flash_message": 20,
+        "atelierdisko/li3_mailer": 20
     },
     "platform": {
         "php": ">=5.5.0"

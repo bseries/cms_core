@@ -55,7 +55,10 @@ use cms_core\extensions\cms\Features;
 					<?php else: ?>
 						<?= $this->html->link($t('activate'), ['id' => $item->id, 'action' => 'activate', 'library' => 'cms_core'], ['class' => 'button']) ?>
 					<?php endif ?>
-					<?= $this->html->link($t('edit'), ['id' => $item->id, 'action' => 'edit', 'library' => 'cms_core'], ['class' => 'button']) ?>
+					<?php if ($authedUser['id'] != $item->id): ?>
+						<?= $this->html->link($t('become'), ['id' => $item->id, 'action' => 'become', 'library' => 'cms_core'], ['class' => 'button']) ?>
+					<?php endif ?>
+					<?= $this->html->link($t('open'), ['id' => $item->id, 'action' => 'edit', 'library' => 'cms_core'], ['class' => 'button']) ?>
 			<?php endforeach ?>
 		</tbody>
 	</table>

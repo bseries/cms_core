@@ -18,6 +18,7 @@ use cms_core\models\Currencies;
 use li3_flash_message\extensions\storage\FlashMessage;
 use lithium\g11n\Message;
 use lithium\security\Auth;
+use lithium\storage\Session;
 use cms_core\extensions\cms\Features;
 use li3_mailer\action\Mailer;
 
@@ -195,6 +196,38 @@ class UsersController extends \cms_core\controllers\BaseController {
 		return $this->redirect($this->request->referer());
 	}
 
+	public function admin_become() {
+		extract(Message::aliases());
+
+		$auth = Auth::check('default');
+
+		$new = Users::findById($this->request->id)->data();
+
+		if (isset($auth['original'])) {
+			// If we already became another user keep original.
+			$new['original'] = Users::findById($auth['original']['id'])->data();
+		} else {
+			$new['original'] = Users::findById($auth['id'])->data();
+		}
+		unset($new['password']);
+		unset($new['original']['password']);
+
+		Auth::set('default', $new);
+		FlashMessage::write($t('Became user `{:name}`.', $new), ['level' => 'success']);
+
+		return $this->redirect($this->request->referer());
+	}
+
+	public function admin_debecome() {
+		extract(Message::aliases());
+
+		$auth = Auth::check('default');
+
+		Auth::set('default', $auth['original']);
+		FlashMessage::write($t('Became user `{:name}` again.', $auth['original']), ['level' => 'success']);
+
+		return $this->redirect($this->request->referer());
+	}
 }
 
 ?>

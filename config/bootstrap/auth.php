@@ -32,9 +32,15 @@ Auth::applyFilter('set', function($self, $params, $chain) {
 	$result = $chain->next($self, $params, $chain);
 	$key = Session::key($params['name']);
 
+	if (isset($params['data']['original'])) {
+		$id = $params['data']['original']['id'];
+	} else {
+		$id = $params['data']['id'];
+	}
+
 	$user = Users::find('first', [
 		'conditions' => [
-			'id' => $params['data']['id']
+			'id' => $id
 		],
 		'fields' => [
 			'id', 'session_key'

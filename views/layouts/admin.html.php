@@ -76,17 +76,16 @@ FlashMessage::clear();
 									<?php echo $t('Moin {:name}!', [
 										'name' => '<span class="name">' . strtok($authedUser['name'], ' ') . '</span>'
 									]) ?>
+									<?php if (isset($authedUser['original'])): ?>
+										<span class="name-original">
+											(<?= $t('actually') ?>
+											<?= $authedUser['original']['name'] ?>)
+										</span>
+									<?php endif ?>
 								</div>
-								<?php
-									$today = new DateTime();
-									$formatter = new IntlDateFormatter(
-										'de_DE',
-										IntlDateFormatter::FULL,
-										IntlDateFormatter::NONE
-									);
-								?>
-								<time class="today" datetime="<?= $today->format(DateTime::W3C) ?>">
-									<?= $formatter->format($today) ?>
+								<?php $today = new DateTime(); ?>
+								<time class="today" datetime="<?= $this->date->format($today, 'w3c') ?>">
+									<?= $this->date->format($today, 'full-date') ?>
 								</time>
 							</div>
 						</div>
@@ -94,6 +93,9 @@ FlashMessage::clear();
 							<?= $this->html->link($t('Site'), '/', ['target' => 'new']) ?>
 							<?= $this->html->link($t('Dashboard'), ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
 							<?= $this->html->link($t('Logout'), ['controller' => 'users', 'action' => 'logout', 'library' => 'cms_core', 'admin' => true]) ?>
+							<?php if (isset($authedUser['original'])): ?>
+								<?= $this->html->link($t('Debecome'), ['controller' => 'users', 'action' => 'debecome', 'library' => 'cms_core', 'admin' => true]) ?>
+							<?php endif ?>
 						</div>
 					<?php endif ?>
 				</div>

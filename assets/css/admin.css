@@ -154,9 +154,15 @@ p a:hover {
 #user .name {
   font-weight: bold;
 }
+#user .name-original {
+  display: block;
+  font-weight: normal;
+  font-size: 12px;
+}
 #user .welcome {
   font-size: 21px;
 }
+
 #user .today {
   color: #aaa;
   font-size: 14px;
@@ -192,6 +198,8 @@ p a:hover {
 #user .actions a[href^="/admin"] {
   background: #f27935;
 }
+
+#user .actions a[href$="debecome"],
 #user .actions a[href^="/admin/logout"] {
   background: #1fbba6;
 }

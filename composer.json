@@ -15,7 +15,8 @@
         "guzzle/guzzle": "3.*",
         "davidpersson/temporary": "1.*",
         "davidpersson/textual": "1.*",
-        "davidpersson/li3_behaviors": "dev-master"
+        "davidpersson/li3_behaviors": "dev-master",
+        "tmaiaroto/li3_access": "dev-master"
     },
     "repositories": [
       {

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5da1244055ddf7d5c355667881bf2a6f",
+    "hash": "d0e5561bc8d217b99f0d984a5132ff7e",
     "packages": [
         {
             "name": "composer/installers",
@@ -563,6 +563,56 @@
             "time": "2014-01-07 13:28:54"
         },
         {
+            "name": "tmaiaroto/li3_access",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tmaiaroto/li3_access.git",
+                "reference": "29613e58caaf32898d35b1556641e5ce5859828f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tmaiaroto/li3_access/zipball/29613e58caaf32898d35b1556641e5ce5859828f",
+                "reference": "29613e58caaf32898d35b1556641e5ce5859828f",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*"
+            },
+            "type": "lithium-library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT License"
+            ],
+            "authors": [
+                {
+                    "name": "Nate Abele",
+                    "email": "nate.abele@gmail.com",
+                    "homepage": "http://nateabele.com/"
+                },
+                {
+                    "name": "Tom Maiaroto",
+                    "homepage": "http://www.shift8creative.com"
+                },
+                {
+                    "name": "Weluse",
+                    "homepage": "http://www.weluse.de/"
+                },
+                {
+                    "name": "rich97",
+                    "homepage": "http://www.enrich.it/"
+                }
+            ],
+            "description": "A simple library for user access control.",
+            "homepage": "http://github.com/tmaiaroto/li3_access",
+            "keywords": [
+                "access control",
+                "li3_access",
+                "lithium"
+            ],
+            "time": "2013-12-19 16:09:09"
+        },
+        {
             "name": "yohang/finite",
             "version": "1.0.1",
             "source": {
@@ -637,11 +687,12 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "naneau/semver": 20,
-        "davidpersson/li3_behaviors": 20
+        "davidpersson/li3_behaviors": 20,
+        "tmaiaroto/li3_access": 20
     },
-    "platform": [
-
-    ],
+    "platform": {
+        "php": ">=5.5.0"
+    },
     "platform-dev": [
 
     ]

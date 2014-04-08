@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d7a9542455dfc153db2a1ee551060822",
+    "hash": "292b62f58f6784dedeb2c1549220abb6",
     "packages": [
         {
             "name": "atelierdisko/li3_mailer",
@@ -67,6 +67,53 @@
                 "source": "https://github.com/atelierdisko/li3_mailer/tree/master"
             },
             "time": "2014-04-08 16:53:43"
+        },
+        {
+            "name": "atelierdisko/li3_taggable",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/atelierdisko/li3_taggable.git",
+                "reference": "9e0b072e87aa50ee345a8bd2a5429a80a4ce5a1a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/atelierdisko/li3_taggable/zipball/9e0b072e87aa50ee345a8bd2a5429a80a4ce5a1a",
+                "reference": "9e0b072e87aa50ee345a8bd2a5429a80a4ce5a1a",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "davidpersson/li3_behaviors": "1.*",
+                "php": ">=5.4.0"
+            },
+            "type": "lithium-library",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Atelier Disko",
+                    "homepage": "https://github.com/atelierdisko"
+                },
+                {
+                    "name": "Rob Marscher",
+                    "homepage": "https://github.com/rmarscher"
+                }
+            ],
+            "description": "Lithium library with a behavior that let's you add tag support to models.",
+            "homepage": "http://atelierdisko.de",
+            "keywords": [
+                "behavior",
+                "li3",
+                "lithium",
+                "php",
+                "tag"
+            ],
+            "support": {
+                "source": "https://github.com/atelierdisko/li3_taggable/tree/master"
+            },
+            "time": "2014-04-08 17:05:38"
         },
         {
             "name": "composer/installers",
@@ -154,7 +201,7 @@
         },
         {
             "name": "davidpersson/li3_behaviors",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/davidpersson/li3_behaviors.git",
@@ -891,12 +938,12 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "naneau/semver": 20,
-        "davidpersson/li3_behaviors": 20,
         "tmaiaroto/li3_access": 20,
         "unionofrad/li3_cldr": 20,
         "unionofrad/li3_lldr": 20,
         "uor/li3_flash_message": 20,
-        "atelierdisko/li3_mailer": 20
+        "atelierdisko/li3_mailer": 20,
+        "atelierdisko/li3_taggable": 20
     },
     "platform": {
         "php": ">=5.5.0"

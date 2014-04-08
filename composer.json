@@ -15,12 +15,13 @@
         "guzzle/guzzle": "3.*",
         "davidpersson/temporary": "1.*",
         "davidpersson/textual": "1.*",
-        "davidpersson/li3_behaviors": "dev-master",
+        "davidpersson/li3_behaviors": "*",
         "tmaiaroto/li3_access": "dev-master",
         "unionofrad/li3_cldr": "dev-master",
         "unionofrad/li3_lldr": "dev-master",
         "uor/li3_flash_message": "dev-master",
-        "atelierdisko/li3_mailer": "dev-master"
+        "atelierdisko/li3_mailer": "dev-master",
+        "atelierdisko/li3_taggable": "dev-master"
     },
     "repositories": [
       {
@@ -42,6 +43,10 @@
       {
         "type": "vcs",
         "url": "https://github.com/atelierdisko/li3_mailer"
+      },
+      {
+        "type": "vcs",
+        "url": "https://github.com/atelierdisko/li3_taggable"
       }
    ]
 }

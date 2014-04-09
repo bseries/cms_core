@@ -42,8 +42,6 @@ Libraries::add('jsend', array(
 	'path' => dirname(__DIR__) . '/libraries/jsend/src'
 ));
 
-require_once dirname(__DIR__) . '/libraries/autoload.php';
-
 Features::register('cms_core', 'useNewGoogleAnalyticsTrackingCode', true);
 Features::register('cms_core', 'useBilling', false);
 Features::register('cms_core', 'user.sendActivationMail', false);

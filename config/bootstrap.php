@@ -15,29 +15,6 @@ use cms_core\extensions\cms\Features;
 use cms_core\models\Assets;
 use lithium\net\http\Media as HttpMedia;
 
-Libraries::add('li3_behaviors', [
-	'path' => dirname(__DIR__) . '/libraries/li3_behaviors'
-]);
-Libraries::add('li3_taggable', [
-	'path' => dirname(__DIR__) . '/libraries/li3_taggable'
-]);
-Libraries::add('li3_cldr', [
-	'path' => dirname(__DIR__) . '/libraries/li3_cldr',
-	'bootstrap' => false
-]);
-Libraries::add('li3_lldr', [
-	'path' => dirname(__DIR__) . '/libraries/li3_lldr'
-]);
-Libraries::add('li3_flash_message', [
-	'path' => dirname(__DIR__) . '/libraries/li3_flash_message'
-]);
-Libraries::add('li3_access', [
-	'path' => dirname(__DIR__) . '/libraries/li3_access'
-]);
-Libraries::add('li3_mailer', [
-	'path' => dirname(__DIR__) . '/libraries/li3_mailer'
-]);
-
 Libraries::add('jsend', array(
 	'path' => dirname(__DIR__) . '/libraries/jsend/src'
 ));

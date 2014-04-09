@@ -1,7 +1,13 @@
 {
     "name": "atelierdisko/cms_core",
     "description": "Core functionality for bureau.",
+    "homepage": "http://atelierdisko.de",
+    "type": "lithium-library",
     "license": "proprietary",
+    "authors": {
+      "name": "Atelier Disko",
+      "homepage": "http://atelierdisko.de"
+    },
     "config": {
         "vendor-dir": "libraries",
         "preferred-install": "dist"
@@ -18,7 +24,9 @@
         "unionofrad/li3_lldr": "dev-master",
         "uor/li3_flash_message": "dev-master",
         "atelierdisko/li3_mailer": "dev-master",
-        "atelierdisko/li3_taggable": "dev-master"
+        "atelierdisko/li3_taggable": "dev-master",
+        "unionofrad/lithium": "dev-dev",
+        "composer/installers": "~1.0"
     },
     "repositories": [
       {

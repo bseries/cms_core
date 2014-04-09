@@ -8,12 +8,14 @@
       "name": "Atelier Disko",
       "homepage": "http://atelierdisko.de"
     },
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.5.0",
         "naneau/semver": "dev-master",
         "mobiledetect/mobiledetectlib": "2.*",
         "davidpersson/temporary": "1.*",
         "davidpersson/li3_behaviors": "*",
+        "tmaiaroto/li3_access": "dev-master",
         "unionofrad/li3_cldr": "dev-master",
         "unionofrad/li3_lldr": "dev-master",
         "uor/li3_flash_message": "dev-master",

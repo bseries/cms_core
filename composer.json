@@ -24,6 +24,11 @@
         "unionofrad/lithium": "dev-dev",
         "composer/installers": "~1.0"
     },
+    "autoload": {
+      "psr-4": {
+        "cms_core\\" : ""
+      }
+    },
     "repositories": [
       {
         "type": "vcs",

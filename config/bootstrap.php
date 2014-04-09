@@ -98,7 +98,7 @@ foreach (glob(LITHIUM_LIBRARY_PATH . '/cms_*') as $item) {
 }
 
 // Register any ecommerce_ libraries.
-if (is_dir(LITHIUM_LIBARY_PATH .'/ecommerce_core')) {
+if (is_dir(LITHIUM_LIBRARY_PATH .'/ecommerce_core')) {
 	Libraries::add('ecommerce_core');
 
 	foreach (glob(LITHIUM_LIBRARY_PATH . '/ecommerce_*') as $item) {

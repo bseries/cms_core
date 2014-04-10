@@ -21,6 +21,7 @@ class Widgets extends \lithium\core\StaticObject {
 	const GROUP_DASHBOARD = 'dashboard';
 
 	const TYPE_COUNT_SINGLE_ALPHA = 'count_single_alpha';
+	const TYPE_COUNT_MULTIPLE_ALPHA = 'count_multiple_alpha';
 	const TYPE_COUNT_MULTIPLE_BETA = 'count_multiple_beta';
 	const TYPE_QUICKDIAL = 'quickdial';
 

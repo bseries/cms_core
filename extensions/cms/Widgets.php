@@ -41,10 +41,6 @@ class Widgets extends \lithium\core\StaticObject {
 		static::$_data[$name] = compact('name', 'library') + $options;
 	}
 
-	public static function write($name, $data) {
-		static::$_data[$name] = $data;
-	}
-
 	public static function read($name = null) {
 		if (!$name) {
 			return static::$_data;

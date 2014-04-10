@@ -39,10 +39,5 @@ Panes::register('cms_core', 'styleguide', [
 	'group' => Panes::GROUP_MANAGE,
 	'url' => ['controller' => 'pages', 'action' => 'styleguide', 'admin' => true, 'library' => 'cms_core'],
 ]);
-Panes::register('cms_core', 'support', [
-	'title' => $t('Support'),
-	'group' => Panes::GROUP_MANAGE,
-	'url' => ['controller' => 'pages', 'action' => 'support', 'library' => 'cms_core', 'admin' => true]
-]);
 
 ?>

@@ -117,21 +117,8 @@ Libraries::add('jsend', array(
 	'path' => dirname(__DIR__) . '/libraries/jsend/src'
 ));
 
-Features::register('cms_core', 'useNewGoogleAnalyticsTrackingCode', true);
-Features::register('cms_core', 'useBilling', false);
-Features::register('cms_core', 'user.sendActivationMail', false);
-
-// Register "empty" schemes, base must be set
-// through app. Cannot provide sane defaults here.
-Assets::registerScheme('file');
-Assets::registerScheme('http');
-Assets::registerScheme('https');
-
-HttpMedia::type('binary', 'application/octet-stream', [
-	'cast' => false,
-	'encode' => function($data) {
-		return $data;
-	}
-]);
+require 'settings.php';
+require 'media.php';
+require 'widgets.php';
 
 ?>

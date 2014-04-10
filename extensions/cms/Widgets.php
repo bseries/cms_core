@@ -22,6 +22,7 @@ class Widgets extends \lithium\core\StaticObject {
 
 	const TYPE_COUNT_SINGLE_ALPHA = 'count_single_alpha';
 	const TYPE_COUNT_MULTIPLE_BETA = 'count_multiple_beta';
+	const TYPE_QUICKDIAL = 'quickdial';
 
 	protected static $_data = [];
 
@@ -29,8 +30,6 @@ class Widgets extends \lithium\core\StaticObject {
 
 	public static function register($library, $name, array $options = []) {
 		$options += [
-			'title' => Inflector::humanize($name),
-			'url' => null,
 			'type' => null,
 			'group' => static::GROUP_NONE,
 			'data' => function($renderer) {

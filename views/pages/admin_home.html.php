@@ -8,6 +8,14 @@ $project = Settings::read('project');
 
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
+	<?php foreach ($widgets as $item): ?>
+		<?=$this->view()->render(
+			['element' => 'widget_' . $item['type']],
+			['item' => $item],
+			['library' => 'cms_core']
+		) ?>
+	<?php endforeach ?>
+
 	<h1 class="alpha"><?= $this->title($t('Dashboard')) ?></h1>
 
 	<h2 class="beta"><?= $t('Site') ?></h2>

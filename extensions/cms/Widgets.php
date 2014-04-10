@@ -20,6 +20,9 @@ class Widgets extends \lithium\core\StaticObject {
 	const GROUP_NONE = 'none';
 	const GROUP_DASHBOARD = 'dashboard';
 
+	const TYPE_COUNT_SINGLE_ALPHA = 'count_single_alpha';
+	const TYPE_COUNT_MULTIPLE_BETA = 'count_multiple_beta';
+
 	protected static $_data = [];
 
 	protected static $_sources = [];
@@ -28,8 +31,9 @@ class Widgets extends \lithium\core\StaticObject {
 		$options += [
 			'title' => Inflector::humanize($name),
 			'url' => null,
+			'type' => null,
 			'group' => static::GROUP_NONE,
-			'body' => function($renderer) {
+			'data' => function($renderer) {
 
 			}
 		];

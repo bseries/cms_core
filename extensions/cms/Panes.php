@@ -30,12 +30,13 @@ class Panes extends \lithium\core\StaticObject {
 		$options += [
 			'title' => Inflector::humanize($name),
 			'url' => null,
-			'group' => Panes::GROUP_NONE,
+			'group' => static::GROUP_NONE,
 			'actions' => []
 		];
 		if (is_callable($options['url'])) {
 			$options['url'] = $options['url']();
 		}
+		static::$_sources[$name] = $library;
 		static::$_data[$name] = compact('name', 'library') + $options;
 	}
 
@@ -44,10 +45,10 @@ class Panes extends \lithium\core\StaticObject {
 
 		// Preorder manually groups.
 		$results = [
-			Panes::GROUP_AUTHORING => [],
-			Panes::GROUP_ACCESS => [],
-			Panes::GROUP_MANAGE => [],
-			Panes::GROUP_NONE => []
+			static::GROUP_AUTHORING => [],
+			static::GROUP_ACCESS => [],
+			static::GROUP_MANAGE => [],
+			static::GROUP_NONE => []
 		];
 		foreach ($data as $item) {
 			$results[$item['group']][] = $item;

@@ -12,9 +12,14 @@
 
 namespace cms_core\controllers;
 
+use cms_core\extensions\cms\Widgets;
+
 class PagesController extends \cms_core\controllers\BaseController {
 
-	public function admin_home() {}
+	public function admin_home() {
+		$widgets = Widgets::read();
+		return compact('widgets');
+	}
 
 	public function admin_support() {}
 

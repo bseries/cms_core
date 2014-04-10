@@ -13,16 +13,28 @@
 namespace cms_core\extensions\cms;
 
 use lithium\util\Set;
+use lithium\util\Inflector;
 
 class Widgets extends \lithium\core\StaticObject {
+
+	const GROUP_NONE = 'none';
+	const GROUP_DASHBOARD = 'dashboard';
 
 	protected static $_data = [];
 
 	protected static $_sources = [];
 
-	public static function register($library, $name, $default) {
+	public static function register($library, $name, array $options = []) {
+		$options += [
+			'title' => Inflector::humanize($name),
+			'url' => null,
+			'group' => static::GROUP_NONE,
+			'body' => function($renderer) {
+
+			}
+		];
 		static::$_sources[$name] = $library;
-		static::$_data[$name] = $default;
+		static::$_data[$name] = compact('name', 'library') + $options;
 	}
 
 	public static function write($name, $data) {

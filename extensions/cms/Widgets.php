@@ -31,6 +31,7 @@ class Widgets extends \lithium\core\StaticObject {
 	public static function register($library, $name, array $options = []) {
 		$options += [
 			'type' => null,
+			'url' => null,
 			'group' => static::GROUP_NONE,
 			'data' => function($renderer) {
 

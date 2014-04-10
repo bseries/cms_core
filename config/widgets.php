@@ -18,13 +18,13 @@ extract(Message::aliases());
 Widgets::register('cms_core', 'support', [
 	'type' => Widgets::TYPE_QUICKDIAL,
 	'group' => Widgets::GROUP_DASHBOARD,
+	'url' => [
+		'controller' => 'Pages', 'action' => 'support',
+		'library' => 'cms_core', 'admin' => true
+	],
 	'data' => function() use ($t) {
 		return [
-			'title' => $t('Contact Support'),
-			'url' => [
-				'controller' => 'Pages', 'action' => 'support',
-				'library' => 'cms_core', 'admin' => true
-			]
+			'title' => $t('Contact Support')
 		];
 	}
 ]);

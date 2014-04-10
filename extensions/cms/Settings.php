@@ -12,7 +12,6 @@
 
 namespace cms_core\extensions\cms;
 
-use lithium\core\Environment;
 use lithium\util\Set;
 
 class Settings extends \lithium\core\StaticObject {

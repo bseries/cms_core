@@ -12,8 +12,9 @@
 
 namespace cms_core\extensions\cms;
 
-// Non hirachical storage.
-class Features extends \lithium\core\StaticObject {
+use lithium\util\Set;
+
+class Widgets extends \lithium\core\StaticObject {
 
 	protected static $_data = [];
 
@@ -33,10 +34,6 @@ class Features extends \lithium\core\StaticObject {
 			return static::$_data;
 		}
 		return static::$_data[$name];
-	}
-
-	public static function enabled($name) {
-		return (boolean) static::read($name);
 	}
 }
 

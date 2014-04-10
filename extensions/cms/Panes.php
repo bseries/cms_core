@@ -14,7 +14,6 @@ namespace cms_core\extensions\cms;
 
 use lithium\util\Set;
 use lithium\util\Inflector;
-use lithium\core\Environment;
 
 class Panes extends \lithium\core\StaticObject {
 
@@ -22,6 +21,10 @@ class Panes extends \lithium\core\StaticObject {
 	const GROUP_ACCESS = 'access';
 	const GROUP_AUTHORING = 'authoring';
 	const GROUP_MANAGE = 'manage';
+
+	protected static $_data = [];
+
+	protected static $_sources = [];
 
 	public static function register($library, $name, array $options = []) {
 		$options += [
@@ -33,7 +36,7 @@ class Panes extends \lithium\core\StaticObject {
 		if (is_callable($options['url'])) {
 			$options['url'] = $options['url']();
 		}
-		Environment::set(true, ['panes' => [$name => compact('name', 'library') + $options]]);
+		static::$_data[$name] = compact('name', 'library') + $options;
 	}
 
 	public static function grouped() {
@@ -59,7 +62,10 @@ class Panes extends \lithium\core\StaticObject {
 	}
 
 	public static function read($name = null) {
-		return Environment::get($name ? 'panes.' . $name : 'panes');
+		if (!$name) {
+			return static::$_data;
+		}
+		return static::$_data[$name];
 	}
 }
 

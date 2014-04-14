@@ -6,38 +6,50 @@ use cms_core\extensions\cms\Settings;
 
 extract(Message::aliases());
 
-Panes::register('cms_core', 'users', [
-	'title' => $t('Users'),
-	'group' =>  Panes::GROUP_ACCESS,
-	'url' => $base = ['controller' => 'users', 'action' => 'index', 'library' => 'cms_core', 'admin' => true],
-	'actions' => [
-		$t('List Users') => ['action' => 'index'] + $base,
-		$t('New User') => ['action' => 'add'] + $base,
-		$t('Become User') => ['action' => 'become'] + $base,
-		$t('List Virtual Users') => ['controller' => 'VirtualUsers', 'action' => 'index'] + $base,
-		$t('New Virtual User') => ['controller' => 'VirtualUsers', 'action' => 'add'] + $base,
-		$t('List Addresses') => ['controller' => 'Addresses', 'action' => 'index'] + $base,
-		$t('New Address') => ['controller' => 'Addresses', 'action' => 'add'] + $base,
-		$t('List Tokens') => ['controller' => 'tokens', 'action' => 'index'] + $base,
-		$t('Generate Token') => ['controller' => 'tokens', 'action' => 'generate'] + $base,
-	]
+Panes::registerGroup('cms_core', 'dashboard', [
+	'title' => $t('Dashboard'),
+	'url' => ['controller' => 'Pages', 'action' => 'home', 'admin' => true, 'library' => 'cms_core'],
+	'actions' => false,
+	'order' => 100
 ]);
-Panes::register('cms_core', 'settings', [
-	'title' => $t('Settings & Features'),
-	'group' => Panes::GROUP_MANAGE,
-	'url' => ['controller' => 'settings', 'action' => 'index', 'library' => 'cms_core', 'admin' => true]
+Panes::registerGroup('cms_core', 'access', [
+	'title' => $t('Access'),
+	'order' => 20
 ]);
-Panes::register('cms_core', 'google_analytics', [
-	'title' => $t('Google Analytics'),
-	'group' => Panes::GROUP_MANAGE,
-	'url' => function() {
+Panes::registerGroup('cms_core', 'external', [
+	'title' => $t('External'),
+	'order' => 15
+]);
+Panes::registerGroup('cms_core', 'development', [
+	'title' => $t('Development'),
+	'order' => 0
+]);
+Panes::registerGroup('cms_core', 'authoring', [
+	'title' => $t('Authoring'),
+	'order' => 90
+]);
+
+$base = ['controller' => 'users', 'action' => 'index', 'library' => 'cms_core', 'admin' => true];
+Panes::registerActions('cms_core', 'access', [
+	$t('List Users') => ['action' => 'index'] + $base,
+	$t('New User') => ['action' => 'add'] + $base,
+	$t('Become User') => ['action' => 'become'] + $base,
+	$t('List Virtual Users') => ['controller' => 'VirtualUsers', 'action' => 'index'] + $base,
+	$t('New Virtual User') => ['controller' => 'VirtualUsers', 'action' => 'add'] + $base,
+	$t('List Addresses') => ['controller' => 'Addresses', 'action' => 'index'] + $base,
+	$t('New Address') => ['controller' => 'Addresses', 'action' => 'add'] + $base,
+	$t('List Tokens') => ['controller' => 'tokens', 'action' => 'index'] + $base,
+	$t('Generate Token') => ['controller' => 'tokens', 'action' => 'generate'] + $base,
+]);
+
+Panes::registerActions('cms_core', 'external', [
+	$t('Google Analytics') => function() {
 		return 'https://www.google.com/analytics/web/#report/visitors-overview/' . Settings::read('googleAnalytics.default.propertyId');
 	}
 ]);
-Panes::register('cms_core', 'styleguide', [
-	'title' => $t('Styleguide'),
-	'group' => Panes::GROUP_MANAGE,
-	'url' => ['controller' => 'pages', 'action' => 'styleguide', 'admin' => true, 'library' => 'cms_core'],
+Panes::registerActions('cms_core', 'development', [
+	$t('Styleguide') => ['controller' => 'pages', 'action' => 'styleguide', 'admin' => true, 'library' => 'cms_core'],
+	$t('Settings & Features') => ['controller' => 'settings', 'action' => 'index', 'library' => 'cms_core', 'admin' => true]
 ]);
 
 ?>

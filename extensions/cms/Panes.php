@@ -14,59 +14,127 @@ namespace cms_core\extensions\cms;
 
 use lithium\util\Set;
 use lithium\util\Inflector;
+use Exception;
 
 class Panes extends \lithium\core\StaticObject {
 
-	const GROUP_NONE = 'none';
-	const GROUP_ACCESS = 'access';
-	const GROUP_AUTHORING = 'authoring';
-	const GROUP_MANAGE = 'manage';
-
 	protected static $_data = [];
 
-	protected static $_sources = [];
-
-	public static function register($library, $name, array $options = []) {
+	public static function registerGroup($library, $name, array $options = []) {
 		$options += [
 			'title' => Inflector::humanize($name),
 			'url' => null,
-			'group' => static::GROUP_NONE,
-			'actions' => []
+			'actions' => [],
+			'active' => null,
+			// The higher the weight the higher the possible position.
+			// Should be a number between 0-100 inclusive.
+			'order' => 0
 		];
 		if (is_callable($options['url'])) {
 			$options['url'] = $options['url']();
 		}
-		static::$_sources[$name] = $library;
 		static::$_data[$name] = compact('name', 'library') + $options;
 	}
 
-	public static function grouped() {
-		$data = static::read();
+	public static function registerActions($library, $group, array $actions) {
+		if (!isset(static::$_data[$group])) {
+			throw new Exception("Pane group `{$group}` not defined.");
+		}
+		if (static::$_data[$group]['actions'] === false) {
+			throw new Exception("Pane group `{$group}` doesn't accept actions.");
+		}
+		foreach ($actions as $title => $url) {
+			static::$_data[$group]['actions'][] = [
+				'title' => $title,
+				'url' => is_callable($url) ? $url() : $url,
+				'library' => $library,
+				'active' => null
+			];
+		}
+	}
 
-		// Preorder manually groups.
-		$results = [
-			static::GROUP_AUTHORING => [],
-			static::GROUP_ACCESS => [],
-			static::GROUP_MANAGE => [],
-			static::GROUP_NONE => []
-		];
+	public static function groups($request = null) {
+		$data = static::read();
+		$results = [];
+
 		foreach ($data as $item) {
-			$results[$item['group']][] = $item;
+			if ($item['actions'] === [] && !$item['url']) {
+				// Skip groups which should have actions but don't have one.
+				continue;
+			}
+			if ($item['actions'] !== false && !$item['url']) {
+				// Use first action url as url for group.
+				$item['url'] = $item['actions'][0]['url'];
+			}
+
+			$results[] = $item;
 		}
-		foreach ($results as $group => &$panes) {
-			// Sort mainly by library, then by title.
-			$panes = Set::sort($panes, '/title');
-			$panes = Set::sort($panes, '/library');
+
+		// If we have a request, try to determine current active group.
+		if ($request) {
+			foreach ($results as &$group) {
+				if ($group['actions'] !== false) {
+					// If an action is active the group itself is active.
+
+					foreach ($group['actions'] as &$action) {
+						if (static::_active($action, $request)) {
+							$group['active'] = $action['active'] = true;
+							break(2);
+						}
+					}
+				} elseif (static::_active($group, $request)) {
+					$group['active'] = true;
+					break;
+				}
+			}
 		}
+
+		// Sort groups mainly by order than library and title.
+		// $results = Set::sort($results, '/title');
+		// $results = Set::sort($results, '/library');
+		$results = Set::sort($results, '/order', 'desc');
 
 		return $results;
 	}
 
-	public static function read($name = null) {
-		if (!$name) {
+	public static function actions($group, $request = null) {
+		if (!isset(static::$_data[$group])) {
+			throw new Exception("Pane group `{$group}` not defined.");
+		}
+		if (static::$_data[$group]['actions'] === false) {
+			throw new Exception("Pane group `{$group}` doesn't accept actions.");
+		}
+		$results = static::$_data[$group]['actions'];
+
+		if ($request) {
+			// If we have a request, try to determine current active group.
+			foreach ($results as &$result) {
+				$result['active'] = static::_active($result, $request);
+			}
+		}
+
+		// Sort actions mainly by library than title.
+		// $results = Set::sort($results, '/title');
+		$results = Set::sort($results, '/library');
+
+		return $results;
+	}
+
+	public static function read($group = null) {
+		if (!$group) {
 			return static::$_data;
 		}
-		return static::$_data[$name];
+		if (!isset(static::$_data[$group])) {
+			throw new Exception("Pane group `{$group}` not defined.");
+		}
+		return static::$_data[$group];
+	}
+
+	protected static function _active($item, $request) {
+		if (is_string($item['url'])) {
+			return false;
+		}
+		return !array_diff($item['url'], $request->params);
 	}
 }
 

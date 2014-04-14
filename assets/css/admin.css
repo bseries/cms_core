@@ -57,6 +57,14 @@ body {
   box-sizing: border-box;
 }
 
+pre, code, .fixed {
+  font-family: Consolas, Monaco, Courier, monospace;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Misc
+-------------------------------------------------------------- */
 .hide {
   display: none;
 }
@@ -72,6 +80,17 @@ body {
   hyphens: auto;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
+/* Honeypot. */
+.if-you-can {
+  display: none;
+}
+
+/* Clearfix
+---------------------------------------------------------------- */
 .cleafix:before,
 .clearfix:after {
     content: " ";
@@ -81,23 +100,13 @@ body {
     clear: both;
 }
 
+/* Section Spacing
+---------------------------------------------------------------- */
 .section-spacing section + section {
+  margin-top: 4em;
+}
+.section-spacing form section + section {
   margin-top: 2em;
-}
-
-/* Honeypot. */
-.if-you-can {
-  display: none;
-}
-
-.no-scroll {
-  overflow: hidden;
-}
-
-pre, code, .fixed {
-  font-family: Consolas, Monaco, Courier, monospace;
-  font-size: 14px;
-  line-height: 1.4;
 }
 
 /* Animations
@@ -224,6 +233,12 @@ footer.main {
 }
 #user [target="new"]:before {
   content: "← ";
+}
+
+h1 + .actions {
+  text-align: right;
+  margin-top: -3.9em;
+  margin-bottom: .9em;
 }
 
 /* Content
@@ -525,7 +540,6 @@ button.small,
   min-height: 50em;
 }
 
-
 /* Modal
 -------------------------------------------------------------- */
 #modal {
@@ -566,19 +580,6 @@ button.small,
 #modal .content {
   height: 100%;
   overflow: hidden;
-}
-
-/* Modal Password Generation
--------------------------------------------------------------- */
-#modal.filled .content {
-  padding: 20px 10px;
-  background: white;
-  color: #111;
-  margin-top: 1em;
-}
-#modal.passwords .content {
-  text-align: center;
-  -webkit-column-count: 3;
 }
 
 /* Progress (nprogress)
@@ -781,19 +782,6 @@ tbody .status {
   color: white;
 }
 
-/* Misc
--------------------------------------------------------------- */
-h1 + .actions {
-  text-align: right;
-  margin-top: -3.9em;
-  margin-bottom: .9em;
-}
-.section-spacing section + section {
-  margin-top: 4em;
-}
-.section-spacing form section + section {
-  margin-top: 2em;
-}
 
 /* Media Explorer
 -------------------------------------------------------------- */
@@ -924,3 +912,18 @@ h1 + .actions {
 .sortable-placeholder {
   background: #f8f8f8;
 }
+
+
+/* Modal Password Generation
+-------------------------------------------------------------- */
+#modal.filled .content {
+  padding: 20px 10px;
+  background: white;
+  color: #111;
+  margin-top: 1em;
+}
+#modal.passwords .content {
+  text-align: center;
+  -webkit-column-count: 3;
+}
+

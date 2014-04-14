@@ -2,12 +2,17 @@
 
 use cms_core\extensions\cms\Features;
 
-$title = [
-	'action' => ucfirst($this->_request->action === 'add' ? $t('creating') : $t('editing')),
-	'title' => $item->name ?: $t('unnamed'),
-	'object' => [ucfirst($t('user')), ucfirst($t('users'))]
-];
-$this->title("{$title['title']} - {$title['object'][1]}");
+$this->set([
+	'page' => [
+		'type' => 'single',
+		'title' => $item->name,
+		'empty' => $t('unnamed'),
+		'object' => $t('user')
+	],
+	'meta' => [
+		'status' => $item->is_active ? $t('activated') : $t('deactivated')
+	]
+]);
 
 ?>
 <?php ob_start() ?>
@@ -33,12 +38,6 @@ require(['jquery', 'modal', 'domready!'], function($, modal) {
 <?php $this->scripts(ob_get_clean()) ?>
 
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> section-spacing">
-	<h1 class="alpha">
-		<span class="action"><?= $title['action'] ?></span>
-		<span class="object"><?= $title['object'][0] ?></span>
-		<span class="title" data-untitled="<?= $t('unnamed') ?>"><?= $title['title'] ?></span>
-		<span class="status"><?= $item->is_active ? $t('activated') : $t('deactivated') ?></span>
-	</h1>
 
 	<nav class="actions">
 		<?php if ($item->is_active): ?>

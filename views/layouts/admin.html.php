@@ -15,6 +15,24 @@ $locale = Environment::get('locale');
 $flash = FlashMessage::read();
 FlashMessage::clear();
 
+// Rich page title.
+$map = [
+	'add' => $t('creating'),
+	'edit' => $t('editing'),
+	'index' => $t('listing'),
+];
+$page += [
+	'action' => isset($map[$this->_request->action]) ? $map[$this->_request->action] : null,
+	'empty' => $t('untitled')
+];
+if ($page['type'] == 'multiple') {
+	$this->title("{$page['object']}");
+} elseif ($page['type'] == 'single') {
+	$this->title("{$page['title']} - {$page['object']}");
+} elseif ($page['type'] == 'standalone') {
+	$this->title("{$page['object']}");
+}
+
 ?>
 <!doctype html>
 <html lang="<?= strtolower(str_replace('_', '-', $locale)) ?>">
@@ -65,77 +83,61 @@ FlashMessage::clear();
 				<h1>
 					<?= $this->html->link($site['title'], ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
 				</h1>
-				<div id="user">
+				<h2 class="h-alpha rich-page-title">
+					<?php if ($page['type'] != 'standalone'): ?>
+						<span class="action"><?= $page['action'] ?></span>
+					<?php endif ?>
+					<span class="object"><?= $page['object'] ?></span>
+					<?php if ($page['type'] == 'single'): ?>
+						<span class="title" data-empty="<?= $page['empty'] ?>">
+							<?= $page['title'] ?>
+						</span>
+					<?php endif ?>
+				</h2>
+				<div class="nav-top">
 					<?php if ($authedUser = Auth::check('default')): ?>
-						<div class="inner">
-							<div class="left">
-								<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($authedUser['email'] )?>.jpg?s=200&d=retro"></span>
-							</div>
-							<div class="right">
-								<div class="welcome">
-									<?php echo $t('Moin {:name}!', [
-										'name' => '<span class="name">' . strtok($authedUser['name'], ' ') . '</span>'
-									]) ?>
-									<?php if (isset($authedUser['original'])): ?>
-										<span class="name-original">
-											(<?= $t('actually') ?>
-											<?= $authedUser['original']['name'] ?>)
-										</span>
-									<?php endif ?>
-								</div>
-								<?php $today = new DateTime(); ?>
-								<time class="today" datetime="<?= $this->date->format($today, 'w3c') ?>">
-									<?= $this->date->format($today, 'full-date') ?>
-								</time>
-							</div>
-						</div>
-						<div class="actions">
-							<?= $this->html->link($t('Site'), '/', ['target' => 'new']) ?>
-							<?= $this->html->link($t('Dashboard'), ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
-							<?= $this->html->link($t('Logout'), ['controller' => 'users', 'action' => 'logout', 'library' => 'cms_core', 'admin' => true]) ?>
+						<div class="welcome">
+							<?php echo $t('Moin {:name}!', [
+								'name' => '<span class="name">' . strtok($authedUser['name'], ' ') . '</span>'
+							]) ?>
 							<?php if (isset($authedUser['original'])): ?>
-								<?= $this->html->link($t('Debecome'), ['controller' => 'users', 'action' => 'debecome', 'library' => 'cms_core', 'admin' => true]) ?>
+								<span class="name-original">
+									(<?= $t('actually') ?>
+									<?= $authedUser['original']['name'] ?>)
+								</span>
 							<?php endif ?>
 						</div>
+
+						<div class="date">
+							<?php $today = new DateTime(); ?>
+							<time class="today" datetime="<?= $this->date->format($today, 'w3c') ?>">
+								<?= $this->date->format($today, 'full-date') ?>
+							</time>
+						</div>
+
+						<?= $this->html->link($t('Logout'), ['controller' => 'users', 'action' => 'logout', 'library' => 'cms_core', 'admin' => true]) ?>
+						<?php if (isset($authedUser['original'])): ?>
+							<?= $this->html->link($t('Debecome'), ['controller' => 'users', 'action' => 'debecome', 'library' => 'cms_core', 'admin' => true]) ?>
+						<?php endif ?>
 					<?php endif ?>
 				</div>
 			</header>
-			<div class="content-wrap">
-				<nav class="main">
-					<?php foreach (Panes::grouped() as $group => $panes): ?>
-						<div class="group group-<?= $group ?>">
-							<?php foreach ($panes as $pane): ?>
-								<div class="pane">
-									<?= $this->html->link($pane['title'], $pane['url'] ?: '#') ?>
-									<ul class="actions">
-									<?php foreach ($pane['actions'] as $title => $url): ?>
-										<li><?= $this->html->link($title, $url) ?>
-									<?php endforeach ?>
-									</ul>
-								</div>
-							<?php endforeach ?>
-						</div>
-					<?php endforeach ?>
-				</nav>
-				<div id="content">
-					<?php echo $this->content(); ?>
-				</div>
+			<nav class="nav-left">
+				<?php foreach (Panes::groups($this->_request) as $group): ?>
+					<?= $this->html->link($group['title'], $group['url'], [
+						'class' => $group['active'] ? 'active' : null
+					]) ?>
+				<?php endforeach ?>
+			</nav>
+			<div id="content">
+				<?php echo $this->content(); ?>
 			</div>
 		</div>
 		<footer class="main">
-			<?=$this->view()->render(['element' => 'copyright'], [
-				'holder' => $this->html->link(
-					'Atelier Disko',
-					'http://atelierdisko.de',
-					['target' => 'new']
-				)
-			], ['library' => 'cms_core']) ?>
-
-			<div class="credits">
-				<?php echo $t('Powered by {:name}.', [
-					'name' => $this->html->link('Bureau', 'http://atlierdisko.de', ['target' => 'new'])
-				]) ?>
-			</div>
+			<?php echo $t('A webapplication by {:name}.', [
+				'name' => $this->html->link('Atelier Disko', 'http://atlierdisko.de', ['target' => 'new'])
+			]) ?>
+			© <?= date('Y') ?> Atelier Disko
 		</footer>
 	</body>
 </html>

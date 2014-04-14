@@ -2,9 +2,15 @@
 
 use cms_core\extensions\cms\Features;
 
+$this->set([
+	'page' => [
+		'type' => 'multiple',
+		'object' => $t('users')
+	]
+]);
+
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> use-list">
-	<h1 class="alpha"><?= $this->title($t('Users')) ?></h1>
 
 	<div class="help">
 	<?php if (Features::enabled('user.sendActivationMail')): ?>

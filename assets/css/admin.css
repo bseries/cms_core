@@ -10,6 +10,27 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
 
+:root {
+  /* Colors */
+  var-color-dim-black: #1b1b1b;
+  var-color-ad-blue:   #0e26fc;
+  var-color-ad-yellow: #ffd200;
+
+  /* Typography */
+  var-font-size-alpha: 32px;
+  var-font-size-beta:  20px;
+  var-font-size-gamma: 16px;
+  var-font-size-delta: 14px;
+
+  var-line-height-normal: 1.35;
+  var-line-height-tight: 1.2;
+  var-line-height-tighter: 1.05;
+
+  /* Spacing */
+  var-space-h-normal: 80px;
+  var-space-v-normal: 40px;
+}
+
 /* Basics
 ---------------------------------------------------------------- */
 body {
@@ -18,19 +39,18 @@ body {
   word-spacing: -.02em;
 
   text-rendering: optimizeLegibility;
-  -moz-font-feature-settings: "liga" 1, "frac" 1, "kern" 1, "smcp" 1;
-  font-feature-settings: "liga" 1, "frac" 1, "kern" 1, "smcp" 1;
+  font-feature-settings: "frac" 1, "kern" 1, "liga" 1, "dlig" 1;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
 
-  line-height: 1.35;
+  line-height: var(line-height-normal);
 
-  color: #303030;
+  color: var(color-dim-black);
   background-color: #fff;
 
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  padding: var(space-v-normal) var(space-h-normal);
 }
 
 * {
@@ -41,19 +61,37 @@ body {
   display: none;
 }
 
-small, .small {
-	font-size: 14px;
-	letter-spacing: .04em;
-	line-height: 1.3;
-	color: #222;
-	display: inline-block; /* For line-height to take effect. */
+.hyphenate {
+  hyphens: auto;
 }
-big, .big {
-	font-weight: bold;
-	text-transform: uppercase;
-	font-size: 48px;
-	line-height: 1;
-	display: inline-block;
+.hyphenate-soft {
+  hyphens: manual;
+}
+.hyphenate-hard {
+  word-break: break-all;
+  hyphens: auto;
+}
+
+.cleafix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+
+.section-spacing section + section {
+  margin-top: 2em;
+}
+
+/* Honeypot. */
+.if-you-can {
+  display: none;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 pre, code, .fixed {
@@ -62,136 +100,113 @@ pre, code, .fixed {
   line-height: 1.4;
 }
 
-/* Headlines
+/* Animations
 ---------------------------------------------------------------- */
-h1, h2, h3, h4 {
-  font-size: 16px;
-  margin: 0;
-  line-height: 1;
+
+/* Text Sizes
+---------------------------------------------------------------- */
+.t-alpha {
+  font-size: var(font-size-alpha);
+  line-height: var(line-height-tight);
+  font-weight: bold;
+}
+.t-beta {
+  font-size: var(font-size-beta);
+  line-height: var(line-height-tight);
+  font-weight: bold;
+}
+.t-gamma {
+  font-size: var(font-size-gamma);
 }
 
-.alpha,
-.beta,
-.gamma,
-.delta,
-.epsilon {
+/* Headlines
+---------------------------------------------------------------- */
+.h-alpha,
+.h-beta,
+.h-gamma,
+.h-delta,
+.h-epsilon {
+  font-size: var(font-size-gamma);
+  line-height: var(line-height-tighter);
+  margin: 0;
+
   letter-spacing: .01em; /* Works only for Firfox. */
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bolder;
-  line-height: 1.05;
 }
-
-.alpha {
-  margin: 0.67em 0;
-  font-size: 32px;
+.h-alpha {
+  font-size: var(font-size-alpha);
+  line-height: var(line-height-tighter);
+  margin: 0.67em 0 1.5em 0;
 }
-.beta {
-  font-size: 20px;
-  margin: 0.67em 0;
+.h-beta {
+  font-size: var(font-size-beta);
+  line-height: var(line-height-tighter);
 }
-.gamma {
-  font-size: 20px;
+.h-gamma {
+  margin-bottom: .5em;
+  line-height: var(line-height-tight);
+}
+.h-delta {
   font-weight: normal;
-  margin: 0.3em 0;
+}
+.h-epsilon {
+  font-size: var(font-size-delta);
+  font-weight: normal;
+}
+.h-alpha-boxed {
+  display: inline-block;
+  border: 5px solid var(color-dim-black);
+  padding: 20px 30px 15px 30px;
 }
 
 /* Hyperlinks
 ---------------------------------------------------------------- */
 a {
-  color: #3d3d3d;
-  text-decoration: none;
+  color: var(color-dim-black);
 }
-p a {
-  border-bottom: 1px solid #969696;
-}
-p a:hover {
-  border-color: #3d3d3d;
-}
-
 
 /* Header
 ---------------------------------------------------------------- */
 #container > header h1 a {
   text-decoration: none;
 }
-#container > header {
-  box-shadow: inset 0 -5px 5px 2px rgba(0, 0, 0, 0.5);
-  height: 280px;
-  background: url("../img/stones.jpg?v=__PROJECT_VERSION_BUILD__");
-  padding: 1em 1.5em;
-}
-#container > header h1 {
-  font-size: 24px;
-  font-weight: bold;
-}
-#container > header h1 a {
-  color: white;
-}
 
-/* Header: User
+/* Footer
 ---------------------------------------------------------------- */
-#user .inner {
-  background: #f1f1f1;
-  padding: 1em;
-  height: 7.5em;
+footer.main {
+  margin-left: var(space-h-normal);
+}
+footer.main .copyright,
+footer.main .credits,
+footer.main nav {
+  display: inline;
+}
+footer.main .user {
+  display: block;
+}
+footer.main .separator {
+  margin: 0 5px;
 }
 
-#user {
-  width: 30%;
-  max-width: 450px;
-  min-width: 350px;
+/* Sticky sticky Footer
+---------------------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin: 0 0 100px; /* bottom = footer height */
+}
+footer.main {
   position: absolute;
-  top: 0;
-  right: 1.5em;
-}
-#user .avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 80px;
-  -webkit-filter: grayscale(1);
-  filter: grayscale(1);
-}
-#user .name {
-  font-weight: bold;
-}
-#user .name-original {
-  display: block;
-  font-weight: normal;
-  font-size: 12px;
-}
-#user .welcome {
-  font-size: 21px;
+  left: 0;
+  bottom: 0;
+  height: 100px;
 }
 
-#user .today {
-  color: #aaa;
-  font-size: 14px;
-}
-#user .left {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: .5em;
-}
-#user .right {
-  display: inline-block;
-  vertical-align: middle;
-}
-#user .actions {
-  background: #e3e3e3;
-  text-align: right;
-  float: left;
-  width: 100%;
-}
-#user .actions a {
-  font-size: 14px;
-  float: left;
-  display: block;
-  text-align: center;
-  width: 100px;
-  padding: 1.5em 5px;
-  background: #14b9d6;
-  color: white;
-}
+/* Navigation
+---------------------------------------------------------------- */
 #user .actions a[href^="/"] {
   background: #14b9d6;
 }
@@ -211,67 +226,19 @@ p a:hover {
   content: "← ";
 }
 
-/* Sidebar Nav
----------------------------------------------------------------- */
-nav.main {
-  display: inline-block;
-  width: 220px;
-}
-
-nav.main .pane {
-  position: relative;
-}
-nav.main .pane > a {
-  position: relative;
-  z-index: 10;
-
-}
-nav.main a {
-  padding: 1em;
-  height: 3em;
-  color: #303030;
-  display: block;
-  background: #f1f1f1;
-  text-decoration: none;
-}
-nav.main a:hover {
-  color: #fff;
-  background: #555;
-}
-
-nav.main .pane ul:hover,
-nav.main .pane:hover ul {
-  -webkit-transform: translateX(0);
-  opacity: 1;
-}
-
-nav.main .actions {
-  z-index: 9;
-  -webkit-transform: translateX(-100%);
-  opacity: 0;
-
-  transition: all .2s ease;
-  width: 220px;
-  position: absolute;
-  top: 0;
-  left: 219px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
 /* Content
 ---------------------------------------------------------------- */
 #content {
   vertical-align: top;
-  padding: 0 1.5em 10em 2em;
-  display: inline-block;
   min-height: 50em;
   width: 80%;
 }
 #content > article > h1 {
   margin-top: .45em;
 }
+
+/* Rich Titles
+---------------------------------------------------------------- */
 #content > article > h1 .title {
   font-weight: normal;
   margin-right: 10px;
@@ -296,54 +263,19 @@ nav.main .actions {
   top: -3px;
 }
 
-/* Footer
----------------------------------------------------------------- */
-footer.main a {
-  color: white;
-  border-bottom: 1px solid #e0dde3;
-}
-footer.main a:hover {
-  color: white;
-  border-color: #fff;
-}
-footer.main .copyright,
-footer.main .credits,
-footer.main nav {
-  display: inline;
-}
-footer.main {
-  color: white;
-  width: 100%;
-  background: black;
-  box-shadow: inset 0 5px 5px 2px rgba(0, 0, 0, 0.5);
-  height: 280px;
-  background: url("../img/stones.jpg?v=__PROJECT_VERSION_BUILD__");
-  padding: 2em 1.5em;
-  text-align: center;
-}
-
-/* Sticky sticky Footer
----------------------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  margin: 0 0 100px; /* bottom = footer height */
-}
-footer.main {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 100px;
-}
-
 /* Forms
 ---------------------------------------------------------------- */
 input,
 textarea {
-  color: #000;
-  border: 1px solid #e3e3e3;
+  /* Fix iOS styling. */
+  -webkit-appearance: none;
+  -webkit-border-radius:0;
+  border-radius: 0;
+
+  font-family: Helvetica, Arial, sans-serif;
+  color: var(color-dim-black);
+  background: transparent;
+  border: 1px solid var(color-dim-black);
   padding: .5em;
 }
 select:focus,
@@ -351,30 +283,42 @@ textarea:focus,
 input:focus {
   border: 1px solid #000;
   background: white;
-  color: black;
+  color: #000;
   outline: none; /* Disable auto glow for webkit. */
 }
 form label {
   display: block;
   margin-bottom: .25em;
-  color: #aaa;
-  font-size: 14px;
 }
 form select,
 form input,
 form textarea {
   margin-bottom: 1em;
 }
-table select,
-table input,
-table textarea {
-  margin: 0;
-}
 input,
 textarea {
   width: 100%;
   max-width: 600px;
 }
+form button[type="submit"] {
+  margin-top: 1em;
+}
+
+::-webkit-input-placeholder {
+   color: #030303;
+}
+
+.nolabel label {
+  display: none;
+}
+
+/* No spacing for form elements in tables. */
+table select,
+table input,
+table textarea {
+  margin: 0;
+}
+
 form button[type="submit"] {
   margin-top: 1em;
 }
@@ -387,6 +331,7 @@ form input[type="checkbox"] + label {
   display: inline-block;
 }
 
+/* Fields with editor. */
 form .teaser, form .body {
   margin: 3em 0;
 }
@@ -401,6 +346,7 @@ form .type-selector {
   margin-bottom: 1em;
 }
 
+/* Date range compound field. */
 form .date-range div,
 form .date-range input[type*="date"],
 form .date-range .error,
@@ -431,6 +377,7 @@ form .date-range {
   margin-bottom: 1em;
 }
 
+/* Select styling */
 select {
   border-radius: 0;
   border: 1px solid #e3e3e3;
@@ -446,6 +393,7 @@ select:not([multiple]) {
   background: white url("../ico/field_arrow_down.png?v=__PROJECT_VERSION_BUILD__") no-repeat right 8px center;
 }
 
+/* Checkbox are radios and styled. */
 input[type="radio"],
 input[type="checkbox"] {
   position: absolute;
@@ -481,7 +429,6 @@ textarea[name*="address"] {
   min-height: 6em;
 }
 
-
 input.title {
   font-weight: bold;
 }
@@ -496,21 +443,15 @@ button,
 .button {
   text-align: center;
   display: inline-block;
-  padding: .9em .7em .7em .9em;
-  color: #303030;
-  border: 1px solid #e3e3e3;
-  background: #e3e3e3;
-  font-weight: bold;
-}
-button.large,
-.button.large {
-  font-size: 18px;
-  padding: 1.5em 2em;
+  padding: 7px 5px 4px 5px;
+  color: var(color-dim-black);
+  border: 1px solid var(color-dim-black);
+  background: transparent;
 }
 button:hover,
 .button:hover {
-  background: #555;
-  color: white;
+  background: white;
+  color: var(color-dim-black);
 }
 button.small,
 .button.small {
@@ -584,6 +525,7 @@ button.small,
   min-height: 50em;
 }
 
+
 /* Modal
 -------------------------------------------------------------- */
 #modal {
@@ -596,7 +538,6 @@ button.small,
   left: 10%;
 
   padding: 1em;
-  cursor: pointer;
 }
 #modal-overlay {
   position: fixed;
@@ -604,17 +545,17 @@ button.small,
 
   top: 0;
   left: 0;
-  height:100%;
-  width:100%;
+  height: 100%;
+  width: 100%;
 
-  background-color: black;
+  background-color: var(color-dim-black);
   cursor: pointer;
   opacity: .88;
 }
 #modal .controls .close {
   cursor: pointer;
   opacity: .7;
-  color: white;
+  color: var(color-dim-black);
   font-size: 25px;
   font-weight: bold;
   text-align: right;
@@ -623,8 +564,12 @@ button.small,
   opacity: 1;
 }
 #modal .content {
-  cursor: default;
+  height: 100%;
+  overflow: hidden;
 }
+
+/* Modal Password Generation
+-------------------------------------------------------------- */
 #modal.filled .content {
   padding: 20px 10px;
   background: white;
@@ -644,7 +589,7 @@ button.small,
 }
 
 #nprogress .bar {
-  background: #29d;
+  background: var(color-dim-black);
 
   position: fixed;
   z-index: 100;
@@ -652,20 +597,60 @@ button.small,
   left: 0;
 
   width: 100%;
-  height: 2px;
+  height: 5px;
 }
 
-/* Fancy blur effect */
-#nprogress .peg {
-  display: block;
-  position: absolute;
-  right: 0;
-  width: 100px;
-  height: 100%;
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
-  opacity: 1.0;
-  transform: rotate(3deg) translate(0px, -4px);
+/* General Items
+-------------------------------------------------------------- */
+
+/* Articles
+-------------------------------------------------------------- */
+
+/* Organization/Person
+-------------------------------------------------------------- */
+[itemtype$="Person"] label,
+[itemtype$="Organization"] label {
+  display: inline-block;
+  min-width: 4em;
 }
+
+/* Styleguide
+---------------------------------------------------------------- */
+.styleguide .sandbox {
+  margin-top: 1em;
+  padding: 20px;
+  border: 1px dotted var(color-dim-black);
+}
+
+/* Errors
+---------------------------------------------------------------- */
+.layout-error .try,
+.layout-error .reason {
+  list-style: none;
+  padding: 0;
+}
+.layout-error .try li:before    { content: "➜ "; }
+.layout-error .reason li:before { content: "✖ "; }
+
+/* Help
+-------------------------------------------------------------- */
+.help {
+  color: gray;
+  font-size: 14px;
+  max-width: 600px;
+}
+.actions + .help,
+h1 + .help {
+  margin-bottom: 2em;
+}
+form .help {
+  margin-top: -.5em;
+  margin-bottom: 1.5em;
+}
+
+
+/* Basics OLD
+---------------------------------------------------------------- */
 
 /* Media Attachment
 ---------------------------------------------------------------- */
@@ -701,13 +686,6 @@ button.small,
 .media-attachment .media-item .remove {
   background: white;
   padding: 1px;
-}
-
-/* Media Pane
----------------------------------------------------------------- */
-table .media {
-  height: 100%;
-  padding: .3em 0 0 0;
 }
 
 /* Tables
@@ -914,47 +892,11 @@ h1 + .actions {
   margin-right: 1em;
 }
 
-/* Organization/Person
--------------------------------------------------------------- */
-[itemtype$="Person"] label,
-[itemtype$="Organization"] label {
-  display: inline-block;
-  min-width: 4em;
-}
-
-/* Help
--------------------------------------------------------------- */
-.help {
-  color: gray;
-  font-size: 14px;
-  max-width: 600px;
-}
-.actions + .help,
-h1 + .help {
-  margin-bottom: 2em;
-}
-form .help {
-  margin-top: -.5em;
-  margin-bottom: 1.5em;
-}
-
-/* Settings/Features Pane
--------------------------------------------------------------- */
-.features .title,
-.settings .title {
-  max-width: none;
-}
-
 /* List & Table Filtering/Search
 -------------------------------------------------------------- */
 .list-search {
   width: 140px;
 }
-/*
-.list-sort {
-  color: #111;
-}
-*/
 .list-sort:hover {
   cursor: pointer;
   color: #111;

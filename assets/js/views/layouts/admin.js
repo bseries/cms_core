@@ -10,6 +10,20 @@
  */
 require(['jquery', 'list', 'domready!'], function($, List) {
 
+  $('form .help').each(function() {
+    var $help = $(this);
+    var $input = $help.prev().find('input');
+
+    $input.on('focusin', function() {
+      $help.fadeIn();
+    });
+    $input.on('focusout', function() {
+      $help.fadeOut();
+    });
+    $help.hide();
+
+  });
+
   //
   // Table sorting/filtering
   //

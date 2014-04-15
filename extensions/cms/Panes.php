@@ -98,7 +98,17 @@ class Panes extends \lithium\core\StaticObject {
 	}
 
 	public static function actions($group, $request = null) {
-		if (!isset(static::$_data[$group])) {
+		if ($group === true) {
+			foreach (static::groups($request) as $item) {
+				if ($item['active']) {
+					$group = $item['name'];
+					break;
+				}
+			}
+			if ($group === true) {
+				throw new Exception("Could not auto-detect active group.");
+			}
+		} elseif (!isset(static::$_data[$group])) {
 			throw new Exception("Pane group `{$group}` not defined.");
 		}
 		if (static::$_data[$group]['actions'] === false) {
@@ -134,7 +144,10 @@ class Panes extends \lithium\core\StaticObject {
 		if (is_string($item['url'])) {
 			return false;
 		}
-		return !array_diff($item['url'], $request->params);
+		$a = array_map('strtolower', $item['url']);
+		$b = array_map('strtolower', $request->params);
+
+		return !array_diff($a, $b);
 	}
 }
 

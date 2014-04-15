@@ -1,11 +1,10 @@
-<?php $data = $item['data']() ?>
-<article class="widget widget-alpha widget-multiple">
+<article class="widget widget-alpha widget-multiple <?= $item['class'] ?>">
 	<a href="<?= $this->url($item['url']) ?>">
-		<h1 class="h-gamma title"><?= $data['title'] ?></h1>
-		<?php foreach ($data['data'] as $title => $count): ?>
+		<h1 class="h-beta title"><?= $item['title'] ?></h1>
+		<?php foreach ($item['data'] as $title => $count): ?>
 			<div class="count-group">
-				<div class="h-gamma title"><?= $title ?></div>
-				<div class="count"><?= $count ?></div>
+				<div class="h-beta title"><?= $title ?></div>
+				<div class="t-alpha count"><?= $count ?></div>
 			</div>
 		<?php endforeach ?>
 	</a>

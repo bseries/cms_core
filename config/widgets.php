@@ -15,18 +15,18 @@ use cms_core\extensions\cms\Widgets;
 
 extract(Message::aliases());
 
-Widgets::register('cms_core', 'support', [
+Widgets::register('cms_core', 'support', function() use ($t) {
+	return [
+		'class' => null,
+		'url' => [
+			'controller' => 'Pages', 'action' => 'support',
+			'library' => 'cms_core', 'admin' => true
+		],
+		'title' => $t('Contact Support')
+	];
+}, [
 	'type' => Widgets::TYPE_QUICKDIAL,
 	'group' => Widgets::GROUP_DASHBOARD,
-	'url' => [
-		'controller' => 'Pages', 'action' => 'support',
-		'library' => 'cms_core', 'admin' => true
-	],
-	'data' => function() use ($t) {
-		return [
-			'title' => $t('Contact Support')
-		];
-	}
 ]);
 
 ?>

@@ -29,17 +29,13 @@ class Widgets extends \lithium\core\StaticObject {
 
 	protected static $_sources = [];
 
-	public static function register($library, $name, array $options = []) {
+	public static function register($library, $name, $data, array $options = []) {
 		$options += [
 			'type' => null,
-			'url' => null,
-			'group' => static::GROUP_NONE,
-			'data' => function($renderer) {
-
-			}
+			'group' => static::GROUP_NONE
 		];
 		static::$_sources[$name] = $library;
-		static::$_data[$name] = compact('name', 'library') + $options;
+		static::$_data[$name] = compact('name', 'library', 'data') + $options;
 	}
 
 	public static function read($name = null) {

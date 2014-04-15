@@ -1,12 +1,11 @@
-<?php $data = $item['data']() ?>
-<article class="widget widget-alpha widget-single">
+<article class="widget widget-alpha widget-single <?= $item['class'] ?>">
 	<a href="<?= $this->url($item['url']) ?>">
-		<div class="h-gamma title"><?= $data['title'] ?></div>
-		<div class="count">
-			<?php if (is_object($data['value'])): ?>
-				<?= $this->money->format($data['value'], 'money') ?>
+		<div class="h-beta title"><?= $item['title'] ?></div>
+		<div class="t-alpha count">
+			<?php if (is_object($item['value'])): ?>
+				<?= $this->money->format($item['value'], 'money') ?>
 			<?php else: ?>
-				<?= $data['value'] ?>
+				<?= $item['value'] ?>
 			<?php endif ?>
 		</div>
 	</a>

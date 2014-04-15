@@ -1,6 +1,5 @@
-<?php $data = $item['data']() ?>
-<article class="widget widget-gamma widget-quickdial">
+<article class="widget widget-gamma widget-quickdial <?= $item['class'] ?>">
 	<a href="<?= $this->url($item['url']) ?>">
-		<div class="h-gamma title"><?= $data['title'] ?></div>
+		<div class="h-beta title"><?= $item['title'] ?></div>
 	</a>
 </article>

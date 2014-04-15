@@ -80,10 +80,10 @@ if ($page['type'] == 'multiple') {
 
 		<div id="container">
 			<header class="main">
-				<h1>
+				<h1 class="t-alpha">
 					<?= $this->html->link($site['title'], ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
 				</h1>
-				<h2 class="h-alpha rich-page-title">
+				<h2 class="t-alpha rich-page-title">
 					<?php if ($page['type'] != 'standalone'): ?>
 						<span class="action"><?= $page['action'] ?></span>
 					<?php endif ?>
@@ -122,22 +122,37 @@ if ($page['type'] == 'multiple') {
 					<?php endif ?>
 				</div>
 			</header>
-			<nav class="nav-left">
-				<?php foreach (Panes::groups($this->_request) as $group): ?>
-					<?= $this->html->link($group['title'], $group['url'], [
-						'class' => $group['active'] ? 'active' : null
-					]) ?>
-				<?php endforeach ?>
-			</nav>
-			<div id="content">
-				<?php echo $this->content(); ?>
+			<div class="content-wrapper clearfix">
+				<nav class="nav-panes-actions">
+					<?php foreach (Panes::actions(true, $this->_request) as $action): ?>
+						<?= $this->html->link($action['title'], $action['url'], [
+							'class' => $action['active'] ? 'active' : null
+						]) ?>
+					<?php endforeach ?>
+				</nav>
+				<nav class="nav-panes-groups">
+					<?php foreach (Panes::groups($this->_request) as $group): ?>
+						<?= $this->html->link($group['title'], $group['url'], [
+							'class' => $group['active'] ? 'active' : null
+						]) ?>
+					<?php endforeach ?>
+				</nav>
+				<div id="content">
+					<?php echo $this->content(); ?>
+				</div>
 			</div>
 		</div>
 		<footer class="main">
-			<?php echo $t('A webapplication by {:name}.', [
-				'name' => $this->html->link('Atelier Disko', 'http://atlierdisko.de', ['target' => 'new'])
-			]) ?>
-			© <?= date('Y') ?> Atelier Disko
+			<div class="nav-bottom">
+				<div class="powered-by">
+				<?php echo $t('A webapplication by {:name}.', [
+					'name' => $this->html->link('Atelier Disko', 'http://atlierdisko.de', ['target' => 'new'])
+				]) ?>
+				</div>
+				<div class="copyright">
+					© <?= date('Y') ?> Atelier Disko
+				</div>
+			</div>
 		</footer>
 	</body>
 </html>

@@ -15,6 +15,10 @@
   var-color-dim-black: #1b1b1b;
   var-color-ad-blue:   #0e26fc;
   var-color-ad-yellow: #ffd200;
+  var-color-gray-neutral: #F2F2F2;
+  var-color-gray-dark: #E6E6E6;
+  var-color-gray-darker: #B3B3B3;
+
 
   /* Typography */
   var-font-size-alpha: 32px;
@@ -29,12 +33,16 @@
   /* Spacing */
   var-space-h-normal: 80px;
   var-space-v-normal: 40px;
+  var-space-h-tight: 20px;
+  var-space-v-tight: 10px;
+  var-space-h-tighter: 10px;
+  var-space-v-tighter: 5px;
 }
 
 /* Basics
 ---------------------------------------------------------------- */
 body {
-  font-size: 16px;
+  font-size: var(font-size-delta);
   font-family: Helvetica, Arial, sans-serif;
   word-spacing: -.02em;
 
@@ -48,9 +56,11 @@ body {
   line-height: var(line-height-normal);
 
   color: var(color-dim-black);
-  background-color: #fff;
+  background-color: var(color-ad-blue);
 
-  padding: var(space-v-normal) var(space-h-normal);
+  padding: var(space-v-tight) var(space-h-tight);
+
+  min-width: 1000px;
 }
 
 * {
@@ -130,6 +140,10 @@ pre, code, .fixed {
 
 /* Headlines
 ---------------------------------------------------------------- */
+h1,h2,h3,h4 {
+  margin: 0;
+}
+
 .h-alpha,
 .h-beta,
 .h-gamma,
@@ -173,29 +187,34 @@ pre, code, .fixed {
 ---------------------------------------------------------------- */
 a {
   color: var(color-dim-black);
+  text-decoration: none;
 }
 
 /* Header
 ---------------------------------------------------------------- */
-#container > header h1 a {
+header.main h1 a {
+  color: white;
   text-decoration: none;
+}
+header.main h2 {
+  color: white;
+}
+header.main {
+  margin-bottom: 2em;
 }
 
 /* Footer
 ---------------------------------------------------------------- */
 footer.main {
-  margin-left: var(space-h-normal);
+  text-align: right;
 }
-footer.main .copyright,
-footer.main .credits,
-footer.main nav {
-  display: inline;
+.nav-bottom {
 }
-footer.main .user {
-  display: block;
-}
-footer.main .separator {
-  margin: 0 5px;
+.nav-bottom > * {
+  padding: 15px 15px 10px 15px;
+  display: inline-block;
+  background: white;
+  margin-left: -4px;
 }
 
 /* Sticky sticky Footer
@@ -216,6 +235,67 @@ footer.main {
 
 /* Navigation
 ---------------------------------------------------------------- */
+.nav-top {
+  font-size: var(font-size-gamma);
+  width: 500px;
+  position: absolute;
+  top: 0;
+  right: var(space-h-tight);
+  text-align: right;
+}
+
+.nav-top > * {
+  padding: 15px 15px 10px 15px;
+  display: inline-block;
+  background: white;
+  margin-left: -4px;
+}
+.nav-top > a:hover {
+  background: var(color-dim-black);
+  color: white;
+}
+.nav-top .welcome .name {
+  font-weight: bold;
+}
+
+.nav-panes-groups {
+  font-size: var(font-size-gamma);
+  overflow: hidden;
+
+  /* Hack to spread content over much space as possible. */
+  position: relative;
+  z-index: 2;
+
+  width: 100px;
+  float: left;
+}
+.nav-panes-groups > a {
+  display: block;
+  height: 100px;
+  background-color: var(color-gray-darker);
+}
+.nav-panes-groups > .active {
+  background: white;
+}
+
+.nav-panes-actions {
+  font-size: var(font-size-gamma);
+  margin-left: 100px;
+}
+.nav-panes-actions > a {
+  padding: 15px 15px 10px 15px;
+  display: inline-block;
+  background: var(color-gray-darker);
+  color: white;
+  margin-right: -5px;
+}
+.nav-panes-actions > a:hover,
+.nav-panes-actions .active {
+  background: white;
+  color: var(color-dim-black);
+}
+
+/*
 #user .actions a[href^="/"] {
   background: #14b9d6;
 }
@@ -240,21 +320,37 @@ h1 + .actions {
   margin-top: -3.9em;
   margin-bottom: .9em;
 }
+*/
 
 /* Content
 ---------------------------------------------------------------- */
 #content {
-  vertical-align: top;
+  padding: var(space-v-tight) var(space-h-tight);
+
+  /* Hack to spread content over much space as possible. */
+  position: relative;
+  z-index: 1;
+  padding-left: calc(100px + var(space-h-tight));
+  margin-left: -100px;
+  width: 100%;
+
+  float: left;
   min-height: 50em;
-  width: 80%;
+  background: var(color-gray-neutral);
 }
-#content > article > h1 {
-  margin-top: .45em;
+.content-wrapper {
+  min-width: 1000px;
 }
 
 /* Rich Titles
 ---------------------------------------------------------------- */
-#content > article > h1 .title {
+.rich-page-title .action {
+  text-transform: capitalize;
+}
+.rich-page-title .object {
+  font-weight: normal;
+}
+.rich-page-title .title {
   font-weight: normal;
   margin-right: 10px;
   text-overflow: ellipsis;
@@ -262,11 +358,11 @@ h1 + .actions {
   overflow: hidden;
   white-space: nowrap;
   display: inline-block;
-  margin-bottom: -5px;
 }
-#content > article > h1 .object {
+.richt-page-title .object {
   text-transform: capitalize;
 }
+/*
 #content > article > h1 .status {
   font-weight: normal;
   font-size: 16px;
@@ -277,6 +373,7 @@ h1 + .actions {
   position: relative;
   top: -3px;
 }
+*/
 
 /* Forms
 ---------------------------------------------------------------- */
@@ -640,9 +737,8 @@ button.small,
   font-size: 14px;
   max-width: 600px;
 }
-.actions + .help,
-h1 + .help {
-  margin-bottom: 2em;
+.help + table {
+  margin-top: 2em;
 }
 form .help {
   margin-top: -.5em;
@@ -692,9 +788,9 @@ form .help {
 /* Tables
 -------------------------------------------------------------- */
 table {
-  margin-bottom: 1.4em;
-  width:100%;
-  border-collapse: collapse;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 var(space-v-tight);
 }
 td {
 	vertical-align: middle;
@@ -715,17 +811,16 @@ table td + td {
 }
 
 thead {
-  color: #aaa;
-  font-size: 14px;
-}
-thead td {
-  height: 1em;
-  padding: .5em .5em 1.5em .5em;
+  color: white;
+  background: var(color-ad-blue);
 }
 
+tbody td {
+  padding: 0 .5em;
+  background: white;
+}
 tbody tr:hover td {
-   background: #9475ee;
-   color: #fff;
+   background: var(color-ad-yellow);
 }
 tbody tr:hover td a {
   color: #fff;
@@ -744,10 +839,10 @@ tbody .button {
   background: transparent;
   border-color: transparent;
 }
-.actions + table {
-  margin-top: 2em;
-}
 
+table img {
+  vertical-align: middle;
+}
 table .flag {
   text-align: center;
 }
@@ -926,4 +1021,3 @@ tbody .status {
   text-align: center;
   -webkit-column-count: 3;
 }
-

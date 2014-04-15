@@ -81,10 +81,10 @@ require(['jquery', 'list', 'domready!'], function($, List) {
   // Dynamic Title
   //
   var $headTitle = $('head title');
-  var $headingTitle = $('h1 .title');
+  var $headingTitle = $('.rich-page-title .title');
   var $titleInput = $('form input.use-for-title');
 
-  var originalValue = $headingTitle.data('untitled');
+  var originalValue = $headingTitle.data('empty');
   // var originalValue = $headingTitle.text();
 
   $titleInput.on('keyup', function(ev) {

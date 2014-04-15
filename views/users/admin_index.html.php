@@ -41,7 +41,7 @@ $this->set([
 		<tbody class="list">
 			<?php foreach ($data as $item): ?>
 			<tr>
-				<td class="is-active flag"><?= $item->is_active ? '✓ ' : '╳' ?>
+				<td class="is-active flag"><?= $item->is_active ? '✓ ' : '×' ?>
 				<td>
 					<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($item->email)?>.jpg?s=30&d=retro" />
 				<?php if (Features::enabled('useBilling')): ?>

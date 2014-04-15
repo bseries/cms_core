@@ -15,6 +15,11 @@ $locale = Environment::get('locale');
 $flash = FlashMessage::read();
 FlashMessage::clear();
 
+// Remove when every page uses new rich page title.
+if (!isset($page)) {
+	$page = [];
+}
+
 // Rich page title.
 $map = [
 	'add' => $t('creating'),
@@ -31,6 +36,10 @@ if ($page['type'] == 'multiple') {
 	$this->title("{$page['title']} - {$page['object']}");
 } elseif ($page['type'] == 'standalone') {
 	$this->title("{$page['object']}");
+}
+
+if (!isset($meta)) {
+	$meta = [];
 }
 
 ?>
@@ -90,9 +99,12 @@ if ($page['type'] == 'multiple') {
 					<span class="object"><?= $page['object'] ?></span>
 					<?php if ($page['type'] == 'single'): ?>
 						<span class="title" data-empty="<?= $page['empty'] ?>">
-							<?= $page['title'] ?>
+							<?= $page['title'] ?: $page['empty'] ?>
 						</span>
 					<?php endif ?>
+					<?php foreach ($meta as $name => $value): ?>
+						<span class="meta"><?= $value ?></span>
+					<?php endforeach ?>
 				</h2>
 				<div class="nav-top">
 					<?php if ($authedUser = Auth::check('default')): ?>
@@ -133,7 +145,7 @@ if ($page['type'] == 'multiple') {
 				<nav class="nav-panes-groups">
 					<?php foreach (Panes::groups($this->_request) as $group): ?>
 						<?= $this->html->link($group['title'], $group['url'], [
-							'class' => $group['active'] ? 'active' : null
+							'class' => 'pane-group pane-group-' . str_replace('_', '-', $group['name']) .  ($group['active'] ? ' active' : null)
 						]) ?>
 					<?php endforeach ?>
 				</nav>

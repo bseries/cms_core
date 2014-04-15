@@ -111,18 +111,6 @@ class UsersController extends \cms_core\controllers\BaseController {
 		return compact('roles', 'timezones', 'currencies', 'locales', 'addresses');
 	}
 
-	public function admin_generate_passwords() {
-		$passwords = [];
-
-		for ($i = 0; $i < 42; $i++) {
-			$passwords[] = Users::generatePassword(10, 1);
-		}
-		return [
-			'status' => 'success',
-			'data' => compact('passwords')
-		];
-	}
-
 	// We don't need to check if current user is admin, as
 	// anybody who can access the admin is an admin already.
 	public function admin_change_role() {

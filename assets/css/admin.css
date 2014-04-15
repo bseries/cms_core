@@ -121,8 +121,22 @@ pre, code, .fixed {
   margin-top: 2em;
 }
 
+.grid-row h1 {
+  font-weight: normal;
+  text-align: right;
+  color: var(color-gray-darker);
+  margin-top: -1em;
+  margin-bottom: 1em;
+}
+.grid-row .actions  {
+  margin-top: .5em;
+  margin-bottom: 1em;
+  float: right;
+  clear: both;
+  text-align: right;
+}
 form .grid-row {
-  border-bottom: 2px solid var(color-dim-black);
+  border-bottom: 2px solid var(color-gray-dark);
   float: left;
   width: 100%;
   clear: both;
@@ -519,9 +533,11 @@ form input[type="checkbox"] + label {
 }
 
 /* Fields with editor. */
+/*
 form .teaser, form .body {
   margin: 3em 0;
 }
+*/
 form .editor {
   margin-bottom: 4em;
 }
@@ -625,8 +641,7 @@ input.title {
   text-align: right;
   margin-top: 3em;
   padding: 20px 0;
-  border-top: 2px solid var(color-dim-black);
-  /*background: var(color-gray-dark); */
+  border-top: 3px solid var(color-gray-dark);
 }
 
 /* Buttons
@@ -640,6 +655,11 @@ button.save,
   color: white;
   background-color: var(color-ci-green);
 }
+button.delete,
+.button.delete {
+  color: white;
+  background-color: var(color-ci-red);
+}
 
 button,
 .button {
@@ -647,10 +667,10 @@ button,
   line-height: 1;
   text-align: center;
   display: inline-block;
-  padding: 12px 11px 7px;
+  padding: 12px 14px 9px;
   color: var(color-dim-black);
   border: none;
-  background: var(color-gray-darker);
+  background: var(color-gray-dark);
 }
 button:hover,
 .button:hover {
@@ -836,6 +856,7 @@ button.large,
   color: gray;
   font-size: 14px;
 }
+.help + form,
 .help + table {
   margin-top: 2em;
 }
@@ -852,7 +873,7 @@ form .help {
 /* Media Attachment
 ---------------------------------------------------------------- */
 .media-attachment {
-  margin-top: 1em;
+/*margin-top: 1em;*/
   margin-bottom: 2em;
 }
 .media-attachment .selected {
@@ -910,6 +931,14 @@ table td + td {
   padding-left: 20px;
 }
 
+tbody td:not(.flag):not(.actions), tfoot td {
+  font-family: "Courier New";
+}
+
+tfoot td {
+  font-weight: bold;
+}
+
 thead {
   color: white;
   background: var(color-ad-blue);
@@ -935,8 +964,8 @@ table .actions {
 table .actions a {
   color: transparent;
 }
-tbody .button {
-  background: transparent;
+tbody tr:not(:hover) .button {
+  background: transparent !important;
 }
 tbody .button:hover {
   color: var(color-dim-black);
@@ -947,6 +976,9 @@ table img {
 }
 table .flag {
   text-align: center;
+}
+tbody .flage {
+  font-weight: bold;
 }
 table .date {
   max-width: none;

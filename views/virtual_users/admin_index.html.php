@@ -2,10 +2,15 @@
 
 use cms_core\extensions\cms\Features;
 
-?>
-<article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
-	<h1 class="alpha"><?= $this->title($t('Virtual Users')) ?></h1>
+$this->set([
+	'page' => [
+		'type' => 'multiple',
+		'object' => $t('virtual users')
+	]
+]);
 
+?>
+<article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> use-list">
 	<div class="help">
 		<?= $t("Virtual users are users which you want to track and associated with other items (i.e. an order), These users didn't sign up directly but may have been creating a temporary account.") ?>
 	</div>
@@ -13,31 +18,32 @@ use cms_core\extensions\cms\Features;
 	<table>
 		<thead>
 			<tr>
-				<td class="flag"><?= $t('Active?') ?>
-				<td>
+				<td data-sort="is-active" class="is-active flag list-sort"><?= $t('Active?') ?>
 				<?php if (Features::enabled('useBilling')): ?>
 					<td data-sort="number" class="number list-sort"><?= $t('Number') ?>
 				<?php endif ?>
-				<td class="emphasize"><?= $t('Name') ?>
-				<td><?= $t('Email') ?>
-				<td><?= $t('Role') ?>
+				<td data-sort="name" class="name emphasize list-sort"><?= $t('Name') ?>
+				<td data-sort="email" class="email list-sort"><?= $t('Email') ?>
+				<td data-sort="role" class="role list-sort"><?= $t('Role') ?>
 				<td class="date created"><?= $t('Created') ?>
 				<td class="actions">
+					<?= $this->form->field('search', [
+						'type' => 'search',
+						'label' => false,
+						'placeholder' => $t('Filter'),
+						'class' => 'list-search'
+					]) ?>
 		</thead>
-		<tbody>
+		<tbody class="list">
 			<?php foreach ($data as $item): ?>
 			<tr>
-				<td class="flag"><?= $item->is_active ? '✓ ' : '╳' ?>
-				<td>
-					<?php if ($item->email): ?>
-						<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($item->email)?>.jpg?s=30&d=retro">
-					<?php endif ?>
+				<td class="is-active flag"><?= $item->is_active ? '✓ ' : '×' ?>
 				<?php if (Features::enabled('useBilling')): ?>
 					<td class="number emphasize"><?= $item->number ?>
 				<?php endif ?>
-				<td class="emphasize"><?= $item->name ?>
-				<td><?= $item->email ?>
-				<td><?= $item->role ?>
+				<td class="name emphasize"><?= $item->name ?>
+				<td class="email"><?= $item->email ?>
+				<td class="role"><?= $item->role ?>
 				<td class="date created">
 					<time datetime="<?= $this->date->format($item->created, 'w3c') ?>">
 						<?= $this->date->format($item->created, 'date') ?>
@@ -49,8 +55,12 @@ use cms_core\extensions\cms\Features;
 					<?php else: ?>
 						<?= $this->html->link($t('activate'), ['id' => $item->id, 'action' => 'activate', 'library' => 'cms_core'], ['class' => 'button']) ?>
 					<?php endif ?>
-					<?= $this->html->link($t('edit'), ['id' => $item->id, 'action' => 'edit', 'library' => 'cms_core'], ['class' => 'button']) ?>
+					<?php if ($authedUser['id'] != $item->id): ?>
+						<?= $this->html->link($t('become'), ['id' => $item->id, 'action' => 'become', 'library' => 'cms_core'], ['class' => 'button']) ?>
+					<?php endif ?>
+					<?= $this->html->link($t('open'), ['id' => $item->id, 'action' => 'edit', 'library' => 'cms_core'], ['class' => 'button']) ?>
 			<?php endforeach ?>
 		</tbody>
 	</table>
+
 </article>

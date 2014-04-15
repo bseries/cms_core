@@ -1,6 +1,14 @@
-<article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
-	<h1 class="alpha"><?= $this->title($t('Tokens')) ?></h1>
+<?php
 
+$this->set([
+	'page' => [
+		'type' => 'multiple',
+		'object' => $t('tokens')
+	]
+]);
+
+?>
+<article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
 	<?php if ($data->count()): ?>
 		<table>
 			<thead>

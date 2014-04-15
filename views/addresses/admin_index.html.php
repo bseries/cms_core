@@ -1,5 +1,14 @@
+<?php
+
+$this->set([
+	'page' => [
+		'type' => 'multiple',
+		'object' => $t('addresses')
+	]
+]);
+
+?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> use-list">
-	<h1 class="alpha"><?= $this->title($t('Addresses')) ?></h1>
 
 	<div class="help">
 		<?= $t("Addresses can be owned by a user but addresses without an owner are possible, too.") ?>

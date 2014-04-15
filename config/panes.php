@@ -28,6 +28,12 @@ Panes::registerGroup('cms_core', 'authoring', [
 	'title' => $t('Authoring'),
 	'order' => 90
 ]);
+Panes::registerGroup('cms_core', 'view_site', [
+	'title' => $t('Site'),
+	'order' => 5,
+	'url' => '/',
+	'actions' => false
+]);
 
 $base = ['controller' => 'users', 'action' => 'index', 'library' => 'cms_core', 'admin' => true];
 Panes::registerActions('cms_core', 'access', [

@@ -72,6 +72,12 @@ class Panes extends \lithium\core\StaticObject {
 
 		// If we have a request, try to determine current active group.
 		if ($request) {
+			if (isset($request->params['id'])) {
+				$request = clone $request;
+				unset($request->params['id']);
+				$request->params['action'] = 'index';
+			}
+
 			foreach ($results as &$group) {
 				if ($group['actions'] !== false) {
 					// If an action is active the group itself is active.
@@ -85,6 +91,7 @@ class Panes extends \lithium\core\StaticObject {
 				} elseif (static::_active($group, $request)) {
 					$group['active'] = true;
 					break;
+
 				}
 			}
 		}
@@ -112,7 +119,7 @@ class Panes extends \lithium\core\StaticObject {
 			throw new Exception("Pane group `{$group}` not defined.");
 		}
 		if (static::$_data[$group]['actions'] === false) {
-			throw new Exception("Pane group `{$group}` doesn't accept actions.");
+			return [];
 		}
 		$results = static::$_data[$group]['actions'];
 
@@ -144,8 +151,13 @@ class Panes extends \lithium\core\StaticObject {
 		if (is_string($item['url'])) {
 			return false;
 		}
+		$params = $request->params;
+		unset($params['args']);
+
 		$a = array_map('strtolower', $item['url']);
-		$b = array_map('strtolower', $request->params);
+		$b = array_map(function($v) {
+			return is_string($v) ? strtolower($v) : $v;
+		}, $params);
 
 		return !array_diff($a, $b);
 	}

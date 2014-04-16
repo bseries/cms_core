@@ -870,6 +870,7 @@ button.large,
   color: gray;
   font-size: 14px;
 }
+.help + .none-available,
 .help + form,
 .help + table {
   margin-top: 2em;

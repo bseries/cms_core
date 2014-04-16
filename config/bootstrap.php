@@ -116,6 +116,9 @@ if (is_dir(LITHIUM_LIBRARY_PATH .'/ecommerce_core')) {
 Libraries::add('jsend', array(
 	'path' => dirname(__DIR__) . '/libraries/jsend/src'
 ));
+Libraries::add('avatar', array(
+	'path' => dirname(__DIR__) . '/libraries/avatar/src'
+));
 
 require 'settings.php';
 require 'media.php';

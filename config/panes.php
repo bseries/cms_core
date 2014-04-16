@@ -48,13 +48,17 @@ Panes::registerActions('cms_core', 'access', [
 ]);
 
 Panes::registerActions('cms_core', 'external', [
+	$t('Contact Support') => ['controller' => 'Pages', 'action' => 'support', 'library' => 'cms_core'],
 	$t('Google Analytics') => function() {
 		return 'https://www.google.com/analytics/web/#report/visitors-overview/' . Settings::read('googleAnalytics.default.propertyId');
 	}
 ]);
+
+/*
 Panes::registerActions('cms_core', 'development', [
 	$t('Styleguide') => ['controller' => 'pages', 'action' => 'styleguide', 'admin' => true, 'library' => 'cms_core'],
 	$t('Settings & Features') => ['controller' => 'settings', 'action' => 'index', 'library' => 'cms_core', 'admin' => true]
 ]);
+ */
 
 ?>

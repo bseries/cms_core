@@ -8,7 +8,7 @@ $this->set([
 ]);
 
 ?>
-<article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?>">
+<article class="view-<?= $this->_config['controller'] . '-' . str_replace('_', '-', $this->_config['template']) ?>">
 	<div class="widgets">
 		<?php foreach ($widgets as $item): ?>
 			<?=$this->view()->render(

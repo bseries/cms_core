@@ -82,7 +82,7 @@ if (!isset($meta)) {
 		</div>
 
 		<div id="modal" class="hide">
-			<div class="controls"><div class="close">╳</div></div>
+			<div class="controls"><div class="close">×</div></div>
 			<div class="content"></div>
 		</div>
 		<div id="modal-overlay" class="hide"></div>
@@ -156,11 +156,21 @@ if (!isset($meta)) {
 		</div>
 		<footer class="main">
 			<div class="nav-bottom">
+				<div>
+				<?php if (defined('ECOMMERCE_CORE_VERSION')):?>
+					AD Boutique <?= ECOMMERCE_CORE_VERSION ?>
+				<?php else: ?>
+					AD Bureau <?= CMS_CORE_VERSION ?>
+				<?php endif ?>
+
+				</div>
+<!--
 				<div class="powered-by">
 				<?php echo $t('A webapplication by {:name}.', [
 					'name' => $this->html->link('Atelier Disko', 'http://atlierdisko.de', ['target' => 'new'])
 				]) ?>
 				</div>
+-->
 				<div class="copyright">
 					© <?= date('Y') ?> Atelier Disko
 				</div>

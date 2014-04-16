@@ -13,6 +13,15 @@ $locale = Environment::get('locale');
 $flash = FlashMessage::read();
 FlashMessage::clear();
 
+// Remove when every page uses new rich page title.
+if (!isset($page)) {
+	$page = [];
+}
+$page += [
+	'type' => null,
+	'object' => null
+];
+
 ?>
 <!doctype html>
 <html lang="<?= strtolower(str_replace('_', '-', $locale)) ?>">
@@ -47,7 +56,7 @@ FlashMessage::clear();
 			]) ?>
 		<?php endif ?>
 	</head>
-	<body class="layout-admin">
+	<body class="layout-admin layout-admin-blank">
 		<div
 			id="messages"
 			<?php if ($flash): ?>
@@ -64,28 +73,40 @@ FlashMessage::clear();
 		<div id="modal-overlay" class="hide"></div>
 
 		<div id="container">
-			<header class="main">
-				<h1>
+			<header class="main rich-page-title">
+				<h1 class="t-alpha">
 					<?= $this->html->link($site['title'], ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
 				</h1>
+				<h2 class="t-alpha object">
+					<?= $page['object'] ?>
+				</h2>
 			</header>
+			<div class="content-wrapper clearfix">
 			<div id="content">
 				<?php echo $this->content(); ?>
 			</div>
+			</div>
 		</div>
 		<footer class="main">
-			<?=$this->view()->render(['element' => 'copyright'], [
-				'holder' => $this->html->link(
-					'Atelier Disko',
-					'http://atelierdisko.de',
-					['target' => 'new']
-				)
-			], ['library' => 'cms_core']) ?>
+			<div class="nav-bottom">
+				<div>
+				<?php if (defined('ECOMMERCE_CORE_VERSION')):?>
+					AD Boutique <?= ECOMMERCE_CORE_VERSION ?>
+				<?php else: ?>
+					AD Bureau <?= CMS_CORE_VERSION ?>
+				<?php endif ?>
 
-			<div class="credits">
-				<?php echo $t('Powered by {:name}.', [
-					'name' => $this->html->link('Bureau', 'http://atlierdisko.de', ['target' => 'new'])
+				</div>
+<!--
+				<div class="powered-by">
+				<?php echo $t('A webapplication by {:name}.', [
+					'name' => $this->html->link('Atelier Disko', 'http://atlierdisko.de', ['target' => 'new'])
 				]) ?>
+				</div>
+-->
+				<div class="copyright">
+					© <?= date('Y') ?> Atelier Disko
+				</div>
 			</div>
 		</footer>
 	</body>

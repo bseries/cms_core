@@ -8,7 +8,7 @@
  * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
-define(['jquery', 'wysihtml5', 'media-explorer-modal'],
+define(['jquery', 'wysihtml5', 'mediaExplorerModal'],
 function($, wysihtml5, MediaExplorerModal) {
   return function EditorMedia() {
     var _this = this;

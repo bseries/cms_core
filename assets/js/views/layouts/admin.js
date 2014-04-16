@@ -118,7 +118,7 @@ require(['jquery', 'list', 'domready!'], function($, List) {
   var attachJoined = $('.use-media-attachment-joined');
 
   if (attachDirect.length || attachJoined.length) {
-    require(['jquery', 'media-attachment'], function($, MediaAttachment) {
+    require(['jquery', 'mediaAttachment'], function($, MediaAttachment) {
         attachDirect.each(function(k, el) {
           MediaAttachment.direct(el, {endpoints: App.media.endpoints});
         });

@@ -15,6 +15,7 @@
   var-color-dim-black: #1b1b1b;
   var-color-ad-blue:   #0e26fc;
   var-color-ad-yellow: #ffd200;
+  var-color-ci-yellow: #FCEE21;
   var-color-ci-green:   #7AC943;
   var-color-ci-red:     #FF1D25;
   var-color-gray-neutral: #F2F2F2;
@@ -128,14 +129,14 @@ pre, code, .fixed {
   margin-top: -1em;
   margin-bottom: 1em;
 }
-.grid-row .actions  {
+.grid-row > .actions  {
   margin-top: .5em;
   margin-bottom: 1em;
   float: right;
   clear: both;
   text-align: right;
 }
-form .grid-row {
+.grid-row {
   border-bottom: 2px solid var(color-gray-dark);
   float: left;
   width: 100%;
@@ -143,14 +144,14 @@ form .grid-row {
   padding-bottom: 2em;
   margin-bottom: 2.5em;
 }
-form .grid-row-last {
+.grid-row-last {
   border: none;
 }
-form .grid-column-left {
+.grid-column-left {
   float: left;
   width: 48%;
 }
-form .grid-column-right {
+.grid-column-right {
   clear: none;
   float: right;
   margin-left: 4%;
@@ -432,10 +433,21 @@ footer.main {
   min-height: 70em;
   background: var(color-gray-neutral);
 }
+
+.layout-admin-blank #content {
+  min-height: 0;
+  padding-top: 60px;
+  margin-left: 0;
+  border-left: 0;
+}
+.layout-admin-blank .content-wrapper {
+  margin-right: 0;
+}
 .content-wrapper {
   margin-right: -20px;
   min-width: 1000px;
 }
+
 
 /* Rich Titles
 ---------------------------------------------------------------- */
@@ -462,10 +474,11 @@ footer.main {
   font-weight: normal;
   font-size: 15px;
   color: white;
+  border: 1px solid white;
   padding: 6px 10px 4px 10px;
   display: inline-block;
   position: relative;
-  top: -4px;
+  top: -5px;
 }
 
 /* Forms
@@ -650,8 +663,8 @@ a.button {
   text-decoration: none;
 }
 
-button.save,
-.button.save {
+button.login, .button.login,
+button.save, .button.save {
   color: white;
   background-color: var(color-ci-green);
 }
@@ -769,6 +782,7 @@ button.large,
   left: 10%;
 
   padding: 1em;
+  border: 6px solid var(color-gray-dark);
 }
 #modal-overlay {
   position: fixed;
@@ -779,7 +793,7 @@ button.large,
   height: 100%;
   width: 100%;
 
-  background-color: var(color-dim-black);
+  background: url(../img/pattern1.gif);
   cursor: pointer;
   opacity: .88;
 }
@@ -866,18 +880,17 @@ form .help {
   margin-bottom: 1.5em;
 }
 
-
-/* Basics OLD
----------------------------------------------------------------- */
-
 /* Media Attachment
 ---------------------------------------------------------------- */
 .media-attachment {
 /*margin-top: 1em;*/
   margin-bottom: 2em;
 }
+.media-attachment label {
+  margin-bottom: 1em;
+}
 .media-attachment .selected {
-  min-height: 10em;
+  min-height: 11em;
   margin-bottom: 1em;
   opacity: 0;
   transition: opacity .15s ease;
@@ -903,7 +916,9 @@ form .help {
 
 .media-attachment .media-item .remove {
   background: white;
-  padding: 1px;
+  padding: 1px 5px;
+  margin-top: -1px;
+  display: inline-block;
 }
 
 /* Tables
@@ -990,26 +1005,49 @@ tbody .emphasize {
 }
 form [name*=status],
 tbody .status {
-  color: #067387;
+  font-weight: bold;
+}
+
+table .nested-add-action  {
+  text-align: center;
+}
+
+table .add-nested {
+  width: 50px;
+  height: 50px;
+  color: transparent;
+  background: url(../ico/add_plus.png) no-repeat;
+  background-size: 50px 50px;
+}
+table button.add-nested:hover {
+  color: transparent;
+  background: url(../ico/add_plus_active.png) no-repeat;
+  background-size: 50px 50px;
+}
+
+table .sub-item td:first-child {
+  border-left: 10px solid var(color-gray-dark);
 }
 
 /* Notifications
 -------------------------------------------------------------- */
 #messages .message {
   position: absolute;
-  top: 200px;
-  right: 1.5em;
-  background: white;
+  top: 50px;
+  right: 20px;
+  background: var(color-ad-yellow);
   padding: 1em;
 }
+/*
 #messages .message.error {
-  background: #f24543;
+  background: var(color-ci-red);
   color: white;
 }
 #messages .message.success {
-  background: #1fbba6;
+  background: var(color-ci-green);
   color: white;
 }
+*/
 
 
 /* Media Explorer
@@ -1140,20 +1178,6 @@ tbody .status {
   background: #f8f8f8;
 }
 
-
-/* Modal Password Generation
--------------------------------------------------------------- */
-#modal.filled .content {
-  padding: 20px 10px;
-  background: white;
-  color: #111;
-  margin-top: 1em;
-}
-#modal.passwords .content {
-  text-align: center;
-  -webkit-column-count: 3;
-}
-
 /* Dashboard / Widgets
 ---------------------------------------------------------------- */
 .widget {
@@ -1220,4 +1244,8 @@ tbody .status {
 }
 .widget-alpha .count {
   font-size: 55px;
+}
+
+.view-pages-admin-home .widgets {
+  max-width: 950px;
 }

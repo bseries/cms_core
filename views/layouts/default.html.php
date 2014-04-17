@@ -18,7 +18,13 @@ FlashMessage::clear();
 <html lang="<?= strtolower(str_replace('_', '-', $locale)) ?>">
 	<head>
 		<?php echo $this->html->charset() ?>
-		<title><?php echo ($title = $this->title()) ? "{$title} – " : null ?><?= $site['title'] ?></title>
+		<title>
+			<?php if ($this->_request->action === 'home'): ?>
+				<?php echo $this->title() ?>
+			<?php else: ?>
+				<?php echo ($title = $this->title()) ? "{$title} – " : null ?><?= $site['title'] ?>
+			<?php endif ?>
+		</title>
 		<link rel="icon" href="<?= $this->assets->url('/app/ico/app.png') ?>">
 		<?php if (isset($seo['description'])): ?>
 			<meta name="description" content="<?= $seo['description'] ?>">

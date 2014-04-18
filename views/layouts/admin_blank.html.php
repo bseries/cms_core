@@ -89,23 +89,9 @@ $page += [
 		</div>
 		<footer class="main">
 			<div class="nav-bottom">
-				<div>
-				<?php if (defined('ECOMMERCE_CORE_VERSION')):?>
-					AD Boutique <?= ECOMMERCE_CORE_VERSION ?>
-				<?php else: ?>
-					AD Bureau <?= CMS_CORE_VERSION ?>
-				<?php endif ?>
-
-				</div>
-<!--
-				<div class="powered-by">
-				<?php echo $t('A webapplication by {:name}.', [
-					'name' => $this->html->link('Atelier Disko', 'http://atlierdisko.de', ['target' => 'new'])
-				]) ?>
-				</div>
--->
+				<?php // Do not disclose software version and type ?>
 				<div class="copyright">
-					© <?= date('Y') ?> Atelier Disko
+					© <?= date('Y') ?> <?= $this->html->link('Atelier Disko', 'http://atelierdisko.de', ['target' => 'new']) ?>
 				</div>
 			</div>
 		</footer>

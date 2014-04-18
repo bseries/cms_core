@@ -162,17 +162,9 @@ if (!isset($meta)) {
 				<?php else: ?>
 					AD Bureau <?= CMS_CORE_VERSION ?>
 				<?php endif ?>
-
 				</div>
-<!--
-				<div class="powered-by">
-				<?php echo $t('A webapplication by {:name}.', [
-					'name' => $this->html->link('Atelier Disko', 'http://atlierdisko.de', ['target' => 'new'])
-				]) ?>
-				</div>
--->
 				<div class="copyright">
-					© <?= date('Y') ?> Atelier Disko
+					© <?= date('Y') ?> <?= $this->html->link('Atelier Disko', 'http://atelierdisko.de', ['target' => 'new']) ?>
 				</div>
 			</div>
 		</footer>

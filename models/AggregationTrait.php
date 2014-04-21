@@ -12,6 +12,7 @@
 
 namespace cms_core\models;
 
+use lithium\util\Set;
 use lithium\util\Collection;
 use Exception;
 
@@ -116,15 +117,19 @@ trait AggregationTrait {
 			return new Collection(['data' => &$data]);
 
 		} elseif ($type == 'first') {
-			if (!is_string($options['aggregate'])) {
-				throw new Exception('Aggregation option must be name string.');
+			if (!is_array($options['aggregate'])) {
+				throw new Exception('Aggregation option must be array of names.');
 			}
-			$model = static::$_models[$options['aggregation']];
 
-			if (!$result = $model::find('first', $options)) {
-				return $result;
+			foreach (Set::normalize($options['aggregate']) as $n => $o) {
+				$model = static::$_models[$n];
+
+				if ($result = $model::find('first', (array) $o)) {
+					return static::create(['original' => $result]);
+				}
 			}
-			return static::create(['original' => $result]);
+			return;
+
 		} elseif ($type == 'count') {
 			if (!is_array($options['aggregate'])) {
 				throw new Exception('Aggregation option must be array of names.');

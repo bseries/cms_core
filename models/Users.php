@@ -186,6 +186,7 @@ class Users extends \cms_core\models\Base {
 		);
 	}
 
+	/*
 	public function avatarUrl($entity, $type = 'http') {
 		$hash = md5($entity->id);
 		$file = Assets::base('file') . '/app/img/avatar/' . $hash . '.png';
@@ -200,6 +201,7 @@ class Users extends \cms_core\models\Base {
 	//	}
 		return str_replace(Assets::base('file'), Assets::base('http'), $file);
 	}
+	*/
 }
 
 Users::init();

@@ -190,14 +190,14 @@ class Users extends \cms_core\models\Base {
 		$hash = md5($entity->id);
 		$file = Assets::base('file') . '/app/img/avatar/' . $hash . '.png';
 
-		if (!file_exists($file)) {
+	//	if (!file_exists($file)) {
 			$stream = fopen($file, 'w+');
 
 			$avatar = new Avatar($hash);
 			$avatar->render($stream, 100, 100, 50);
 
 			fclose($stream);
-		}
+	//	}
 		return str_replace(Assets::base('file'), Assets::base('http'), $file);
 	}
 }

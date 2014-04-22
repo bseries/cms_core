@@ -98,6 +98,12 @@ FlashMessage::clear();
 		</div>
 		<div id="modal-overlay" class="hide"></div>
 
+		<?php if (!Environment::is('production')): ?>
+			<?=$this->view()->render(['element' => 'dev_bar'], [], [
+				'library' => 'cms_core'
+			]) ?>
+		<?php endif ?>
+
 		<div id="container">
 			<header class="main">
 				<?=$this->view()->render(['element' => 'header'], [], [

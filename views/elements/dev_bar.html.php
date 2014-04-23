@@ -15,17 +15,19 @@ if ($preRelease == 'alpha') {
 
 ?>
 <div class="dev-bar">
-	<div class="dev-status dev-status-<?= $friendly ?>">
-		<div>
-			<span class="dev-friendly"><?= $friendly ?></span>
-		</div>
-		<div>
-			<span class="dev-label">Version:</span>
-			<span class="dev-project-version"><?= PROJECT_VERSION ?></span>
-		</div>
-		<div>
-			<span class="dev-label">Environment:</span>
-			<span class="dev-env"><?= Environment::get() ?></span>
+	<div class="inner">
+		<div class="dev-status dev-status-<?= $friendly ?>">
+			<div>
+				<span class="dev-friendly"><?= $friendly ?></span>
+			</div>
+			<div>
+				<span class="dev-label">Version:</span>
+				<span class="dev-project-version"><?= PROJECT_VERSION ?></span>
+			</div>
+			<div>
+				<span class="dev-label">Environment:</span>
+				<span class="dev-env"><?= Environment::get() ?></span>
+			</div>
 		</div>
 	</div>
 </div>

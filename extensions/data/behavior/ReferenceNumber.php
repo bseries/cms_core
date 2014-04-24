@@ -61,7 +61,12 @@ class ReferenceNumber extends \li3_behaviors\data\model\Behavior {
 			$field = $behavior->config('field');
 
 			if (!$params['entity']->exists() && empty($params['data'][$field])) {
-				$params['data'][$field] = static::_nextReferenceNumber($model, $behavior, $params['entity']->data());
+				if (isset($params['options']['whitelist'])) {
+					$params['options']['whitelist'][] = $field;
+				}
+				$params['data'][$field] = static::_nextReferenceNumber(
+					$model, $behavior, $params['entity']->data()
+				);
 			}
 			return $chain->next($self, $params, $chain);
 		});

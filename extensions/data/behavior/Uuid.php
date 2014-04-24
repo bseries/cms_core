@@ -22,6 +22,9 @@ class Uuid extends \li3_behaviors\data\model\Behavior {
 
 	protected static function _filters($model, $behavior) {
 		$model::applyFilter('save', function($self, $params, $chain) use ($behavior) {
+			if (isset($params['options']['whitelist'])) {
+				$params['options']['whitelist'][] = $behavior->config('field');
+			}
 			$params['data'] = static::_uuid($behavior, $params['entity'], $params['data']);
 
 			return $chain->next($self, $params, $chain);

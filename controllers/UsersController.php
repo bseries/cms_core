@@ -21,6 +21,7 @@ use lithium\security\Auth;
 use lithium\storage\Session;
 use cms_core\extensions\cms\Features;
 use li3_mailer\action\Mailer;
+use lithium\analysis\Logger;
 
 class UsersController extends \cms_core\controllers\BaseController {
 
@@ -136,10 +137,16 @@ class UsersController extends \cms_core\controllers\BaseController {
 
 		if ($this->request->data) {
 			if (Auth::check('default', $this->request)) {
+				$message = "Authenticated user with email `{$this->request->data['email']}`.";
+				Logger::write('security', $message);
 				FlashMessage::write($t('Authenticated.'), ['level' => 'success']);
+
 				return $this->redirect('/admin');
 			}
+			$message = "Failed authentication for user with email `{$this->request->data['email']}`.";
+			Logger::write('security', $message);
 			FlashMessage::write($t('Failed to authenticate.'), ['level' => 'error']);
+
 			return $this->redirect($this->request->referer());
 		}
 	}
@@ -168,7 +175,7 @@ class UsersController extends \cms_core\controllers\BaseController {
 		if (Features::read('user.sendActivationMail')) {
 			$result = $result && Mailer::deliver('user_activated', [
 				'to' => $item->email,
-				'subject' => 'Ihr Konto wurde aktiviert.',
+				'subject' => $t('Your account has been activated.'),
 				'data' => [
 					'user' => $item
 				]
@@ -176,6 +183,8 @@ class UsersController extends \cms_core\controllers\BaseController {
 		}
 		if ($result) {
 			$model::pdo()->commit();
+
+			Logger::write('security', "Activated user `{$item->email}`.");
 			FlashMessage::write($t('Activated.'), ['level' => 'success']);
 		} else {
 			$model::pdo()->rollback();

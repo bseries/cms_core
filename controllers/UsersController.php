@@ -138,13 +138,13 @@ class UsersController extends \cms_core\controllers\BaseController {
 		if ($this->request->data) {
 			if (Auth::check('default', $this->request)) {
 				$message = "Authenticated user with email `{$this->request->data['email']}`.";
-				Logger::write('security', $message);
+				Logger::write('debug', $message);
 				FlashMessage::write($t('Authenticated.'), ['level' => 'success']);
 
 				return $this->redirect('/admin');
 			}
 			$message = "Failed authentication for user with email `{$this->request->data['email']}`.";
-			Logger::write('security', $message);
+			Logger::write('debug', $message);
 			FlashMessage::write($t('Failed to authenticate.'), ['level' => 'error']);
 
 			return $this->redirect($this->request->referer());
@@ -184,7 +184,7 @@ class UsersController extends \cms_core\controllers\BaseController {
 		if ($result) {
 			$model::pdo()->commit();
 
-			Logger::write('security', "Activated user `{$item->email}`.");
+			Logger::write('debug', "Activated user `{$item->email}`.");
 			FlashMessage::write($t('Activated.'), ['level' => 'success']);
 		} else {
 			$model::pdo()->rollback();

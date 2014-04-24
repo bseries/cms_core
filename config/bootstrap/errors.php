@@ -126,7 +126,7 @@ Logger::config([
 		'path' => $path . '/log',
 		// Log everything into one file.
 		'file' => function($data, $config) { return 'app.log'; },
-		'priority' => ['debug', 'error', 'security', 'notice', 'warning']
+		'priority' => ['debug', 'error', 'notice', 'warning']
 	],
 ]);
 Logger::applyFilter('write', function ($self, $params, $chain) {

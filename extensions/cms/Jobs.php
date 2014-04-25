@@ -31,20 +31,36 @@ class Jobs extends \lithium\core\StaticObject {
 		}
 	}
 
+	public static function runName($name) {
+		foreach (static::$_recurring as $frequency => $data) {
+			if (!isset($data[$name])) {
+				continue;
+			}
+			static::_run($data[$name]);
+		}
+	}
+
+	protected static function _run($item) {
+		Logger::write('debug', "Running job `{$item['name']}`.");
+		$start = microtime(true);
+
+		$item['run']();
+
+		$took = round((microtime(true) - $start), 2);
+		Logger::write('debug', "Finished running job `{$item['name']}`; took {$took}ms.");
+	}
+
 	public static function runFrequency($frequency) {
 		Logger::write('debug', "Running all jobs with frequency `{$frequency}`.");
 
 		foreach (static::$_recurring[$frequency] as $item) {
-			Logger::write('debug', "Running job `{$item['name']}`.");
-			$start = microtime(true);
-
-			$item['run']();
-
-			$took = round((microtime(true) - $start), 2);
-			Logger::write('debug', "Finished running job `{$item['name']}`; took {$took}ms.");
+			static::_run($item);
 		}
-
 		Logger::write('debug', "Finished running all jobs with frequency `{$frequency}`.");
+	}
+
+	public static function read() {
+		return ['recurring' => static::$_recurring];
 	}
 }
 

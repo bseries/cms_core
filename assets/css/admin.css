@@ -520,6 +520,12 @@ form input,
 form textarea {
   margin-bottom: 1em;
 }
+textarea {
+  line-height: var(line-height-normal);
+}
+::input-placeholder {
+   color: #030303;
+}
 
 ::-webkit-input-placeholder {
    color: #030303;
@@ -640,7 +646,7 @@ input[disabled] {
 }
 
 textarea[name*="address"] {
-  min-height: 6em;
+  min-height: 8em;
 }
 
 input.title {

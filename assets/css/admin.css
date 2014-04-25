@@ -1160,6 +1160,9 @@ table .sub-item td:first-child {
   width: 140px;
   background-color: white;
 }
+.list-search:focus {
+  width: 90%;
+}
 .list-sort:hover {
   cursor: pointer;
   background-color: white;

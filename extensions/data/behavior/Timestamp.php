@@ -23,7 +23,7 @@ class Timestamp extends \li3_behaviors\data\model\Behavior {
 	protected static function _filters($model, $behavior) {
 		$model::applyFilter('save', function($self, $params, $chain) use ($behavior) {
 			if (isset($params['options']['whitelist'])) {
-				foreach ($behavior->config('field') as $field) {
+				foreach ($behavior->config('fields') as $field) {
 					$params['options']['whitelist'][] = $field;
 				}
 			}

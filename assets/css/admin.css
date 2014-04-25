@@ -1033,7 +1033,7 @@ table button.add-nested:hover {
 }
 
 table .sub-item td:first-child {
-  border-left: 10px solid var(color-gray-dark);
+  border-left: 30px solid var(color-gray-dark);
 }
 
 /* Notifications

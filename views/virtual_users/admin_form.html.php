@@ -30,6 +30,11 @@ $this->set([
 					<div class="help"><?= $t('Leave empty to autogenerate number.') ?></div>
 				<?php endif ?>
 				<?= $this->form->field('email', ['type' => 'email', 'label' => $t('E–mail')]) ?>
+				<?= $this->form->field('is_notified', [
+					'type' => 'checkbox',
+					'label' => $t('receives notifications'),
+					'checked' => (boolean) $item->is_notified
+				]) ?>
 			</section>
 			<section class="grid-column-right">
 				<?= $this->form->field('role', [

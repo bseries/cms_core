@@ -994,6 +994,7 @@ tbody .button:hover {
 }
 
 table img {
+  max-height: 50px;
   vertical-align: middle;
 }
 table .flag {

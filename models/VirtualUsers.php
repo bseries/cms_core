@@ -48,11 +48,27 @@ class VirtualUsers extends \cms_core\models\Base {
 	}
 
 	public static function init() {
+		extract(Message::aliases());
 		$model = static::_object();
 
 		static::behavior('cms_core\extensions\data\behavior\ReferenceNumber')->config(
 			Settings::read('user.number')
 		);
+
+		$model->validates['email'] = [
+			[
+				'notEmpty',
+				'on' => ['addEmail'],
+				'message' => $t('This field cannot be empty.'),
+				'last' => true
+			],
+			[
+				'email',
+				'on' => ['addEmail'],
+				'message' => $t('Invalid e–mail.')
+			]
+		];
+
 	}
 
 	public function isVirtual() {

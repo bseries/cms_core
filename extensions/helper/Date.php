@@ -62,6 +62,14 @@ class Date extends \lithium\template\Helper {
 					$timezone
 				);
 				return $formatter->format($date);
+			case 'time':
+				$formatter = new IntlDateFormatter(
+					$locale,
+					IntlDateFormatter::NONE,
+					IntlDateFormatter::SHORT,
+					$timezone
+				);
+				return $formatter->format($date);
 			case 'w3c':
 				return $date->format(DateTime::W3C);
 		}

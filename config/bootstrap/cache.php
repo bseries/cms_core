@@ -32,7 +32,7 @@ Cache::config([
 ]);
 
 Dispatcher::applyFilter('run', function($self, $params, $chain) {
-	if (!Environment::is('production')) {
+	if (Environment::is('development')) {
 		return $chain->next($self, $params, $chain);
 	}
 	$cacheKey = 'core.libraries';
@@ -50,7 +50,7 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 });
 
 Dispatcher::applyFilter('run', function($self, $params, $chain) {
-	if (!Environment::is('production')) {
+	if (Environment::is('development')) {
 		return $chain->next($self, $params, $chain);
 	}
 	foreach (Connections::get() as $name) {
@@ -74,6 +74,9 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 });
 
 Dispatcher::applyFilter('run', function($self, $params, $chain) {
+	if (Environment::is('development')) {
+		return $chain->next($self, $params, $chain);
+	}
 	$request  = $params['request'];
 	$response = $chain->next($self, $params, $chain);
 

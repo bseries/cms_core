@@ -92,7 +92,7 @@ requirejs.config({
       deps: ['globalize']
     },
     'notify': {
-      deps: ['jquery']
+      deps: ['jquery', 'modernizr']
     },
     'wysihtml5': {
       exports: 'wysihtml5'

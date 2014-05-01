@@ -1039,12 +1039,20 @@ table .sub-item td:first-child {
 
 /* Notifications
 -------------------------------------------------------------- */
+#messages {
+  overflow: hidden;
+}
 #messages .message {
+  transition: .75s all;
   position: absolute;
   top: 50px;
   right: 20px;
   background: var(color-ad-yellow);
   padding: 1em;
+}
+#messages .message.hide {
+  display: block;
+  right: -400px;
 }
 /*
 #messages .message.error {

@@ -8,8 +8,41 @@
  * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
-require(['jquery', 'list', 'domready!'], function($, List) {
 
+require(['jquery', 'list', 'nprogress', 'notify', 'domready!'], function($, List, Progress) {
+
+  //
+  // Progress setup
+  //
+  Progress.configure({
+    showSpinner: false
+  });
+  $(document).on('modal:isLoading', function() { Progress.start(); });
+  $(document).on('modal:newContent', function() { Progress.done(); });
+  $(document).on('modal:isReady', function() {
+    Progress.done();
+
+    setTimeout(function() {
+      Progress.remove();
+    }, 500);
+  });
+  $(document).on('transfer:start', function() { Progress.start(); });
+//  $(document).on('transfer:progress', function(ev, data) { Progress.set(data); });
+  $(document).on('transfer:done', function(data) { Progress.done(); });
+
+  //
+  // Bridge between PHP flash messaging and JS notify.
+  //
+  var flashMessage = $('#messages').data('flash-message');
+  var flashLevel = $('#messages').data('flash-level') || 'neutral';
+
+  if (flashMessage) {
+    $.notify(flashMessage, {level: flashLevel});
+  }
+
+  //
+  // Form help
+  //
   $('form .help').each(function() {
     var $help = $(this);
     var $input = $help.prev().find('input');
@@ -98,18 +131,6 @@ require(['jquery', 'list', 'domready!'], function($, List) {
       $headTitle.text($headTitle.text().replace(/^[\w\s]+\s\-/, originalValue + ' -'));
     }
   });
-
-  //
-  // Relative dates/times.
-  //
-  /*
-  moment.lang('de');
-
-  $('table .date.modified, table .date.created').each(function(k, v) {
-   $(v).find('time').html(moment($(v).find('time').attr('datetime')).fromNow());
-   $(v).find('time').addClass('relative');
-  });
-  */
 
   //
   // Automatically bind media attachment.

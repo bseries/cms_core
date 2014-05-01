@@ -145,41 +145,5 @@ requirejs.config({
     }
   }
 });
-require(['jquery', 'notify', 'domready!'],
-function($) {
-  // Bridge between PHP flash messaging and JS notify.
-  var flashMessage = $('#messages').data('flash-message');
-  var flashLevel = $('#messages').data('flash-level') || 'neutral';
 
-  if (flashMessage) {
-    $.notify(flashMessage, flashLevel);
-  }
-});
 
-require(['jquery', 'nprogress', 'domready!'],
-function($, Progress) {
-  Progress.configure({
-    showSpinner: false
-  });
-  $(document).on('modal:isLoading', function() { Progress.start(); });
-  $(document).on('modal:newContent', function() { Progress.done(); });
-  $(document).on('modal:isReady', function() {
-    Progress.done();
-
-    setTimeout(function() {
-      Progress.remove();
-    }, 500);
-  });
-  $(document).on('transfer:start', function() { Progress.start(); });
-//  $(document).on('transfer:progress', function(ev, data) { Progress.set(data); });
-  $(document).on('transfer:done', function(data) { Progress.done(); });
-});
-
-require(['jquery', 'domready!'], function($) {
-  var hasTouch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch);
-  if (hasTouch) {
-    $('body').addClass('touch');
-  } else {
-    $('body').addClass('no-touch');
-  }
-});

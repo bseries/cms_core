@@ -88,6 +88,31 @@ require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/auth.php';
 
 require LITHIUM_LIBRARY_PATH . '/cms_core/config/panes.php';
 
+// ------------------------------------------------------------------------------------------------
+
+require 'settings.php';
+require 'media.php';
+require 'widgets.php';
+
+use li3_access\security\Access;
+
+Access::config([
+	'entity' => [
+		'adapter' => 'Rules',
+		'allowAny' => true // When at least one rule matches succeed.
+	]
+]);
+$rules = Access::adapter('entity');
+
+$rules->add('user.role:admin', function($user, $entity, $options) {
+	return $user->role == 'admin';
+});
+$rules->add('any', function($user, $entity, $options) {
+	return true;
+});
+
+// ------------------------------------------------------------------------------------------------
+
 // Must come after cms_core but before any other libraries.
 Libraries::add('cms_media');
 
@@ -111,17 +136,13 @@ if (is_dir(LITHIUM_LIBRARY_PATH .'/ecommerce_core')) {
 	}
 }
 
-// ------------------------------------------------------------------------------------------------
-
+// TODO Refactor these into autoloaaded packages once
+// they have enough contents.
 Libraries::add('jsend', array(
 	'path' => dirname(__DIR__) . '/libraries/jsend/src'
 ));
 Libraries::add('avatar', array(
 	'path' => dirname(__DIR__) . '/libraries/avatar/src'
 ));
-
-require 'settings.php';
-require 'media.php';
-require 'widgets.php';
 
 ?>

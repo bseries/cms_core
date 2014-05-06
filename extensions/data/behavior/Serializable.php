@@ -44,6 +44,29 @@ class Serializable extends \li3_behaviors\data\model\Behavior {
 			}
 			return $chain->next($self, $params, $chain);
 		});
+		$model::applyFilter('find', function($self, $params, $chain) use ($behavior) {
+			$result = $chain->next($self, $params, $chain);
+
+			if (is_a($result, '\lithium\data\Collection')) {
+				foreach ($result as $r) {
+					foreach ($behavior->config('fields') as $field => $type) {
+						if (!isset($r->$field)) {
+							continue;
+						}
+						$r->$field = static::_unserialize($r->$field, $type);
+					}
+				}
+			} elseif (is_a($result, '\lithium\data\Entity')) {
+				foreach ($behavior->config('fields') as $field => $type) {
+					if (!isset($result->$field)) {
+						continue;
+					}
+					$result->$field = static::_unserialize($result->$field, $type);
+				}
+			}
+			return $result;
+		});
+
 
 		$methods = [];
 		foreach ($behavior->config('fields') as $field => $pass) {

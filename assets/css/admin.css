@@ -18,6 +18,7 @@
   var-color-ci-yellow: #FCEE21;
   var-color-ci-green:   #7AC943;
   var-color-ci-red:     #FF1D25;
+  var-color-gray-bright: #f5f5f6;
   var-color-gray-neutral: #F2F2F2;
   var-color-gray-dark: #E6E6E6;
   var-color-gray-darker: #B3B3B3;
@@ -523,12 +524,15 @@ form textarea {
 textarea {
   line-height: var(line-height-normal);
 }
-::input-placeholder {
-   color: #030303;
-}
 
 ::-webkit-input-placeholder {
-   color: #030303;
+   color: var(color-gray-darker);
+}
+::-moz-placeholder {
+   color: var(color-gray-darker);
+}
+::input-placeholder {
+   color: var(color-gray-darker);
 }
 
 .nolabel label {

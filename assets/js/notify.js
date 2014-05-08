@@ -60,7 +60,7 @@
     var $m = $(config.element).html(html);
 
     if (options.level) {
-      $m.addClass(level);
+      $m.addClass(options.level);
     }
     if (options.sticky) {
       $m.addClass('sticky');
@@ -79,7 +79,7 @@
 
     // Multiply the timeout for complex messages, giving comprehension time.
     // Give 1s per 30 chars over the first 25 chars.
-    options.timeout += 1000 * (($($.parseHTML(html)).text().length - 25) / 30);
+   var timeout = options.timeout + 1000 * (($($.parseHTML(html)).text().length - 25) / 30);
 
     // Workaround to enable CSS transitions on dynamically inserted elements.
     // Reading random property to force recalculating styles.
@@ -91,7 +91,7 @@
           $m.remove();
           complete(); // Show next message in queue.
         });
-      }, options.timeout);
+      }, timeout);
     });
   };
 
@@ -100,14 +100,14 @@
   $.notify = function(html, options) {
     // Allow setting global configuration for this plugin.
     if (typeof html === 'object') {
-      config = $.extend(html, config);
+      config = $.extend(config, html);
       return;
     }
-    options = $.extend(options || {}, {
+    options = $.extend({
       level: null,
       sticky: false,
       timeout: config.timeout
-    });
+    }, options || {});
 
     // Prevent flooding; no more than 2 pending messages. We start at
     // zero as this is called before the first item is queued.

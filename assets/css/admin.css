@@ -195,7 +195,6 @@ h1,h2,h3,h4 {
   line-height: var(line-height-tighter);
   margin: 0;
 
-  letter-spacing: .01em; /* Works only for Firfox. */
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bolder;
 }

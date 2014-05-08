@@ -1,5 +1,5 @@
 /* Modernizr 2.8.1 (Custom Build) | MIT & BSD
- * Build: http://modernizr.com/download/#-backgroundsize-multiplebgs-cssanimations-csscolumns-generatedcontent-csstransforms-csstransforms3d-csstransitions-canvas-canvastext-hashchange-history-audio-video-input-inputtypes-geolocation-addtest-prefixed-teststyles-testprop-testallprops-hasevent-prefixes-domprefixes-css_calc-css_filters-css_remunit-css_vhunit-css_vmaxunit-css_vminunit-css_vwunit-file_api-forms_fileinput-forms_formattribute-forms_placeholder-forms_validation-fullscreen_api-unicode
+ * Build: http://modernizr.com/download/#-backgroundsize-multiplebgs-cssanimations-csscolumns-generatedcontent-csstransforms-csstransforms3d-csstransitions-canvas-canvastext-hashchange-history-audio-video-input-inputtypes-geolocation-addtest-prefixed-teststyles-testprop-testallprops-hasevent-prefixes-domprefixes-css_calc-css_filters-css_remunit-css_vhunit-css_vmaxunit-css_vminunit-css_vwunit-file_api-forms_placeholder-fullscreen_api-unicode
  */
 ;
 
@@ -481,7 +481,13 @@ Modernizr.addTest('csscalc', function() {
 
     return !!el.style.length;
 });
-
+// https://github.com/Modernizr/Modernizr/issues/615
+// documentMode is needed for false positives in oldIE, please see issue above
+Modernizr.addTest('cssfilters', function() {
+    var el = document.createElement('div');
+    el.style.cssText = Modernizr._prefixes.join('filter' + ':blur(2px); ');
+    return !!el.style.length && ((document.documentMode === undefined || document.documentMode > 9));
+});
 // test by github.com/nsfmc
 
 // "The 'rem' unit ('root em') is relative to the computed
@@ -500,13 +506,7 @@ Modernizr.addTest('cssremunit', function(){
   return (/rem/).test(div.style.fontSize);
 
 });
-// https://github.com/Modernizr/Modernizr/issues/615
-// documentMode is needed for false positives in oldIE, please see issue above
-Modernizr.addTest('cssfilters', function() {
-    var el = document.createElement('div');
-    el.style.cssText = Modernizr._prefixes.join('filter' + ':blur(2px); ');
-    return !!el.style.length && ((document.documentMode === undefined || document.documentMode > 9));
-});// https://github.com/Modernizr/Modernizr/issues/572
+// https://github.com/Modernizr/Modernizr/issues/572
 // Similar to http://jsfiddle.net/FWeinb/etnYC/
 Modernizr.addTest('cssvhunit', function() {
     var bool;
@@ -572,19 +572,6 @@ Modernizr.addTest('cssvwunit', function(){
 Modernizr.addTest('filereader', function () {
     return !!(window.File && window.FileList && window.FileReader);
 });
-
-
-// Detects whether input type="file" is available on the platform
-// E.g. iOS < 6 and some android version don't support this
-
-//  It's useful if you want to hide the upload feature of your app on devices that
-//  don't support it (iphone, ipad, etc).
-
-Modernizr.addTest('fileinput', function() {
-    var elem = document.createElement('input');
-    elem.type = 'file';
-    return !elem.disabled;
-});
 // testing for placeholder attribute in inputs and textareas
 // re-using Modernizr.input if available
 
@@ -595,96 +582,6 @@ Modernizr.addTest('placeholder', function(){
            );
 
 });
-// Detects whether input form="form_id" is available on the platform
-// E.g. IE 10 (and below), don't support this
-Modernizr.addTest("formattribute", function() {
-	var form = document.createElement("form"),
-		input = document.createElement("input"),
-		div = document.createElement("div"),
-		id = "formtest"+(new Date().getTime()),
-		attr,
-		bool = false;
-
-		form.id = id;
-
-	//IE6/7 confuses the form idl attribute and the form content attribute
-	if(document.createAttribute){
-		attr = document.createAttribute("form");
-		attr.nodeValue = id;
-		input.setAttributeNode(attr);
-		div.appendChild(form);
-		div.appendChild(input);
-
-		document.documentElement.appendChild(div);
-
-		bool = form.elements.length === 1 && input.form == form;
-
-		div.parentNode.removeChild(div);
-	}
-
-	return bool;
-});// This implementation only tests support for interactive form validation.
-// To check validation for a specific type or a specific other constraint,
-// the test can be combined: 
-//    - Modernizr.inputtypes.numer && Modernizr.formvalidation (browser supports rangeOverflow, typeMismatch etc. for type=number)
-//    - Modernizr.input.required && Modernizr.formvalidation (browser supports valueMissing)
-//
-(function(document, Modernizr){
-
-
-  Modernizr.formvalidationapi = false;
-  Modernizr.formvalidationmessage = false;
-
-  Modernizr.addTest('formvalidation', function() {
-    var form = createElement('form');
-    if ( !('checkValidity' in form) || !('addEventListener' in form) ) {
-      return false;
-    }
-    if ('reportValidity' in form) {
-      return true;
-    }
-    var invalidFired = false;
-    var input;
-
-    Modernizr.formvalidationapi =  true;
-
-    // Prevent form from being submitted
-    form.addEventListener('submit', function(e) {
-      //Opera does not validate form, if submit is prevented
-      if ( !window.opera ) {
-        e.preventDefault();
-      }
-      e.stopPropagation();
-    }, false);
-
-    // Calling form.submit() doesn't trigger interactive validation,
-    // use a submit button instead
-    //older opera browsers need a name attribute
-    form.innerHTML = '<input name="modTest" required><button></button>';
-
-    testStyles('#modernizr form{position:absolute;top:-99999em}', function( node ) {
-      node.appendChild(form);
-
-      input = form.getElementsByTagName('input')[0];
-
-      // Record whether "invalid" event is fired
-      input.addEventListener('invalid', function(e) {
-        invalidFired = true;
-        e.preventDefault();
-        e.stopPropagation();
-      }, false);
-
-      //Opera does not fully support the validationMessage property
-      Modernizr.formvalidationmessage = !!input.validationMessage;
-
-      // Submit form by clicking submit button
-      form.getElementsByTagName('button')[0].click();
-    });
-
-    return invalidFired;
-  });
-
-})(document, window.Modernizr);
 Modernizr.addTest('fullscreen',function(){
      for(var i = 0; i < Modernizr._domPrefixes.length; i++) {
         if( document[Modernizr._domPrefixes[i].toLowerCase() + 'CancelFullScreen'])

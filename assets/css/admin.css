@@ -52,6 +52,8 @@ body {
   font-size: var(--font-size-delta);
   font-family: Helvetica, Arial, sans-serif;
 
+  word-spacing: -.02em;
+
   text-rendering: optimizeLegibility;
   font-feature-settings: "frac" 1, "kern" 1, "liga" 1, "dlig" 1;
   -webkit-font-smoothing: antialiased;
@@ -948,7 +950,7 @@ table td + td {
 }
 
 tbody td:not(.flag):not(.actions), tfoot td {
-  font-family: "Courier New";
+  font-family: "Courier New", Monaco, Courier, monospace;
 }
 
 tfoot td {
@@ -1048,7 +1050,6 @@ table .sub-item td:first-child {
   display: block;
   right: -400px;
 }
-/*
 #messages .message.error {
   background: var(--color-ci-red);
   color: white;
@@ -1057,8 +1058,6 @@ table .sub-item td:first-child {
   background: var(--color-ci-green);
   color: white;
 }
-*/
-
 
 /* Media Explorer
 -------------------------------------------------------------- */

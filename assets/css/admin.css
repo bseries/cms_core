@@ -1197,7 +1197,7 @@ table .sub-item td:first-child {
   column-count: 2;
   column-gap: var(--space-h-tight);
   -moz-column-count: 2;
-  -moz-column-gap: var(--space-h-tight);
+  -moz-column-gap: var(--space-h-normal);
   width: 100%;
 }
 

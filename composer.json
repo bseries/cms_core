@@ -12,7 +12,6 @@
     "require": {
         "php": ">=5.5.0",
         "naneau/semver": "dev-master",
-        "mobiledetect/mobiledetectlib": "2.*",
         "davidpersson/temporary": "1.*",
         "davidpersson/li3_behaviors": "*",
         "tmaiaroto/li3_access": "dev-master",

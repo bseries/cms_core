@@ -15,6 +15,7 @@ namespace cms_core\extensions\helper;
 use cms_core\extensions\cms\Settings;
 use cms_core\models\Assets as AssetsModel;
 use lithium\core\Libraries;
+use lithium\util\Inflector;
 
 class Assets extends \lithium\template\Helper {
 
@@ -129,7 +130,7 @@ class Assets extends \lithium\template\Helper {
 			// Load corresponding view scripts automatically.
 			$library = $this->_context->_config['library'];
 			$controller = $this->_context->_config['controller'];
-			$template = $this->_context->_config['template'];
+			$template = Inflector::camelize($this->_context->_config['template'], false);
 
 			if ($script = $this->_script($library, "views/{$controller}/{$template}")) {
 				$scripts[] = $script;

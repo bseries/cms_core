@@ -1192,16 +1192,23 @@ table .sub-item td:first-child {
 
 /* Dashboard / Widgets
 ---------------------------------------------------------------- */
+.view-pages-admin-home .widgets {
+  max-width: 950px;
+  column-count: 2;
+  column-gap: var(--space-h-tight);
+  -moz-column-count: 2;
+  -moz-column-gap: var(--space-h-tight);
+  width: 100%;
+}
+
 .widget {
   position: relative;
-
   color: white;
   background-color: var(--color-gray-darkest);
-  width: 440px;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
   margin-bottom: var(--space-v-normal);
-  margin-right: var(--space-h-tight);
   padding: var(--space-v-tight) var(--space-h-tighter);
 }
 .widget.positive {
@@ -1210,10 +1217,8 @@ table .sub-item td:first-child {
 .widget.negative {
   background-color: var(--color-ci-red);
 }
-
 .widget a {
   color: white;
-
 }
 .widget-alpha {
   height: 250px;
@@ -1221,10 +1226,6 @@ table .sub-item td:first-child {
 .widget-beta {
   height: 110px;
 }
-.widget-gamma {
-  height: 5em;
-}
-
 .widget:hover {
   background-color: var(--color-gray-darker);
 }
@@ -1232,11 +1233,11 @@ table .sub-item td:first-child {
 .widget .count {
   color: white;
 }
-
 .widget-multiple .count-group {
   position: relative;
   display: inline-block;
-  width: 200px;
+  vertical-align: top;
+  width: 49%;
   height: 100%;
 }
 .widget .count {
@@ -1246,7 +1247,7 @@ table .sub-item td:first-child {
 }
 
 .widget-multiple.widget-alpha .count-group .title {
-  margin-top: 5em;
+  margin-top: 4em;
   border-top: 6px solid white;
   padding-top: 10px;
   display: inline-block;
@@ -1256,8 +1257,4 @@ table .sub-item td:first-child {
 }
 .widget-alpha .count {
   font-size: 55px;
-}
-
-.view-pages-admin-home .widgets {
-  max-width: 950px;
 }

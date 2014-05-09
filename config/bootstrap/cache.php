@@ -25,7 +25,7 @@ if (!Memcache::enabled()) {
 
 Cache::config([
 	'default' => [
-		'scope' => PROJECT_NAME,
+		'scope' => PROJECT_NAME . ':' . PROJECT_VERSION,
 		'adapter' => 'Memcache',
 		'host' => '127.0.0.1:11211'
 	]
@@ -91,8 +91,7 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 
 	$hash = 'W/' . md5(serialize([
 		$response->body,
-		$response->headers,
-		PROJECT_VERSION
+		$response->headers
 	]));
 	$condition = trim($request->get('http:if_none_match'), '"');
 

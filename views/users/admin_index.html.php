@@ -16,6 +16,7 @@ $this->set([
 	<?php if (Features::enabled('user.sendActivationMail')): ?>
 		<?= $t('The user will be notified by e-mail when her account is activated.') ?>
 	<?php endif ?>
+		<?= $t('You can temporarily use the identity of a user by clicking on the `become` button in the row of that user.') ?>
 	</div>
 
 	<table>

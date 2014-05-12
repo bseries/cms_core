@@ -49,23 +49,18 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 	}
 	return $chain->next($self, $params, $chain);
 });
-
 // Inject environment variables into templates; remember variables are only
 // injected into the original template, for elements variables must be passed
 // manually.
-Dispatcher::applyFilter('run', function($self, $params, $chain) {
-	Media::applyFilter('_handle', function($self, $params, $chain) {
-		if ($params['handler']['type'] == 'html') {
-			$params['data']['authedUser'] = Auth::check('default');
+Media::applyFilter('_handle', function($self, $params, $chain) {
+	if ($params['handler']['type'] == 'html') {
+		$params['data']['authedUser'] = Auth::check('default');
 
-			$params['data']['locale'] = Environment::get('locale');
+		$params['data']['locale'] = Environment::get('locale');
 
-			// $params['data']['site'] = Environment::get('site');
-			// $params['data']['service'] = Environment::get('service');
-		}
-		return $chain->next($self, $params, $chain);
-	});
-
+		// $params['data']['site'] = Environment::get('site');
+		// $params['data']['service'] = Environment::get('service');
+	}
 	return $chain->next($self, $params, $chain);
 });
 

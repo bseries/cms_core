@@ -91,7 +91,8 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) {
 
 	$hash = 'W/' . md5(serialize([
 		$response->body,
-		$response->headers
+		$response->headers,
+		PROJECT_VERSION
 	]));
 	$condition = trim($request->get('http:if_none_match'), '"');
 

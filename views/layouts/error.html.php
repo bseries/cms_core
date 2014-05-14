@@ -31,6 +31,16 @@ $locale = Environment::get('locale');
 			'/app/css/base'
 		]) ?>
 		<?php echo $this->styles() ?>
+		<?=$this->view()->render(['element' => 'head_app_defines'], [], ['library' => 'cms_core']) ?>
+		<?php
+			$scripts = array_merge(
+				['/cms-core/js/require'],
+				$this->assets->availableScripts('base'),
+				$this->assets->availableScripts('view'),
+				$this->assets->availableScripts('layout')
+			);
+		?>
+		<?php echo $this->assets->script($scripts) ?>
 		<?php echo $this->scripts() ?>
 		<?=$this->view()->render(['element' => 'head_app_defines'], [], ['library' => 'cms_core']) ?>
 		<?php if (Settings::read('googleAnalytics.default')): ?>

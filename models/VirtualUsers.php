@@ -75,6 +75,8 @@ class VirtualUsers extends \cms_core\models\Base {
 		return true;
 	}
 
+	// Will always return a address object, even if none is
+	// associated with this user.
 	public function address($entity, $type = 'billing') {
 		$field = "{$type}_address";
 		if ($entity->$field) {
@@ -86,7 +88,7 @@ class VirtualUsers extends \cms_core\models\Base {
 			'conditions' => [
 				'id' => $entity->$field
 			]
-		]);
+		]) ?: Addresses::create();
 	}
 
 	public function taxZone($entity) {

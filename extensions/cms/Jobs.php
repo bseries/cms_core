@@ -20,7 +20,11 @@ class Jobs extends \lithium\core\StaticObject {
 	const FREQUENCY_MEDIUM = 'medium';
 	const FREQUENCY_LOW = 'low';
 
-	protected static $_recurring = [];
+	protected static $_recurring = [
+		'high' => [],
+		'medium' => [],
+		'low' => []
+	];
 
 	public static function recur($library, $name, $run, array $options = []) {
 		$options += [

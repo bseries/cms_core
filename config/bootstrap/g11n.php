@@ -73,7 +73,7 @@ $setLocale = function($self, $params, $chain) {
 	if ($user = Auth::check('default')) {
 		$timezone = $user['timezone'];
 	} else {
-		$timezone = 'UTC';
+		$timezone = Environment::get('timezone') ?: 'UTC';
 	}
 	Environment::set(true, compact('timezone'));
 

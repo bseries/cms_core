@@ -109,7 +109,7 @@ class ReferenceNumber extends \li3_behaviors\data\model\Behavior {
 		} else {
 			uasort($numbers, static::_sorter($model, $behavior));
 		}
-		return $generator($entity, $extractor(array_pop($numbers)) + 1);
+		return $generator($entity, $extractor($entity, array_pop($numbers)) + 1);
 	}
 
 	protected static function _sorter($model, $behavior) {
@@ -142,7 +142,10 @@ class ReferenceNumber extends \li3_behaviors\data\model\Behavior {
 	protected static function _extractor($model, $behavior) {
 		$config = $behavior->config('extract');
 
-		return function($value) use ($config) {
+		if (is_callable($config)) {
+			return $config;
+		}
+		return function($data, $value) use ($config) {
 			if (!preg_match($config, $value, $matches)) {
 				$message = "Cannot extract number from value `{$value}`.`";
 				trigger_error($message, E_USER_NOTICE);
@@ -156,12 +159,12 @@ class ReferenceNumber extends \li3_behaviors\data\model\Behavior {
 	protected static function _generator($model, $behavior) {
 		$config = $behavior->config('generate');
 
-		if (is_string($config)) {
-			return function($data, $value) use ($config) {
-				return sprintf(strftime($config), $value);
-			};
+		if (is_callable($config)) {
+			return $config;
 		}
-		return $config;
+		return function($data, $value) use ($config) {
+			return sprintf(strftime($config), $value);
+		};
 	}
 }
 

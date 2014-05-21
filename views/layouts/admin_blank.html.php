@@ -38,7 +38,7 @@ $page += [
 			'/app/css/admin'
 		]) ?>
 		<?php echo $this->styles() ?>
-		<?=$this->view()->render(['element' => 'head_app_defines'], [], ['library' => 'cms_core']) ?>
+		<?=$this->view()->render(['element' => 'head_app_defines'], ['admin' => true], ['library' => 'cms_core']) ?>
 		<?php
 			$scripts = array_merge(
 				['/cms-core/js/jquery'],

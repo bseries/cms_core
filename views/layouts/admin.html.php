@@ -77,7 +77,14 @@ if (!isset($meta)) {
 		<?php echo $this->assets->script($scripts) ?>
 		<?php echo $this->scripts() ?>
 	</head>
-	<body class="layout-admin">
+	<?php
+		$classes = ['layout-admin'];
+
+		if (isset($extraBodyClasses)) {
+			$classes = array_merge($classes, $extraBodyClasses);
+		}
+	?>
+	<body class="<?= implode(' ', $classes) ?>">
 		<div
 			id="messages"
 			<?php if ($flash): ?>

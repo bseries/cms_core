@@ -56,7 +56,14 @@ $page += [
 			]) ?>
 		<?php endif ?>
 	</head>
-	<body class="layout-admin layout-admin-blank">
+	<?php
+		$classes = ['layout-admin', 'layout-admin-blank'];
+
+		if (isset($extraBodyClasses)) {
+			$classes = array_merge($classes, $extraBodyClasses);
+		}
+	?>
+	<body class="<?= implode(' ', $classes) ?>">
 		<div
 			id="messages"
 			<?php if ($flash): ?>

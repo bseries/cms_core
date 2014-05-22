@@ -333,70 +333,38 @@ footer.main {
 .pane-group {
   color: transparent;
   background-repeat: no-repeat;
-  background-size: 100px 100px;
+  background-size: auto 100px;
 }
 .pane-group {
   background-image: url(../ico/default.png);
 }
 .pane-group.active,
 .pane-group:hover {
-  background-image: url(../ico/default_active.png);
+  background-position: -100px 0;
 }
 .pane-group-dashboard {
-  background-image: url(../ico/dashboard.png);
-}
-.pane-group-dashboard.active,
-.pane-group-dashboard:hover {
-  background-image: url(../ico/dashboard_active.png);
+  background-image: url(../ico/dashboard_sprite.png);
 }
 .pane-group-authoring {
-  background-image: url(../ico/authoring.png);
-}
-.pane-group-authoring.active,
-.pane-group-authoring:hover{
-  background-image: url(../ico/authoring_active.png);
+  background-image: url(../ico/authoring_sprite.png);
 }
 .pane-group-billing {
-  background-image: url(../ico/billing.png);
-}
-.pane-group-billing.active,
-.pane-group-billing:hover{
-  background-image: url(../ico/billing_active.png);
+  background-image: url(../ico/billing_sprite.png);
 }
 .pane-group-ecommerce {
-  background-image: url(../ico/ecommerce.png);
-}
-.pane-group-ecommerce.active,
-.pane-group-ecommerce:hover{
-  background-image: url(../ico/ecommerce_active.png);
+  background-image: url(../ico/ecommerce_sprite.png);
 }
 .pane-group-access {
-  background-image: url(../ico/access.png);
-}
-.pane-group-access.active,
-.pane-group-access:hover{
-  background-image: url(../ico/access_active.png);
+  background-image: url(../ico/access_sprite.png);
 }
 .pane-group-external {
-  background-image: url(../ico/external.png);
-}
-.pane-group-external.active,
-.pane-group-external:hover{
-  background-image: url(../ico/external_active.png);
+  background-image: url(../ico/external_sprite.png);
 }
 .pane-group-media {
-  background-image: url(../ico/media.png);
-}
-.pane-group-media.active,
-.pane-group-media:hover{
-  background-image: url(../ico/media_active.png);
+  background-image: url(../ico/media_sprite.png);
 }
 .pane-group-view-site {
-  background-image: url(../ico/view_site.png);
-}
-.pane-group-view-site.active,
-.pane-group-view-site:hover{
-  background-image: url(../ico/view_site_active.png);
+  background-image: url(../ico/view_site_sprite.png);
 }
 
 .nav-panes-actions {

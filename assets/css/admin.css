@@ -908,7 +908,10 @@ form .help {
   max-height: 100%;
   vertical-align: top;
 }
+.media-attachment .sortable-placeholder,
 .media-attachment .media-item {
+  position: relative;
+  vertical-align: top;
   height: 150px;
   width: 150px;
   background-position: center;
@@ -920,8 +923,9 @@ form .help {
 .media-attachment .media-item .remove {
   background: white;
   padding: 1px 5px;
-  margin-top: -1px;
-  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 /* Tables

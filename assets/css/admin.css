@@ -466,7 +466,7 @@ textarea {
   font-family: Helvetica, Arial, sans-serif;
   color: var(--color-dim-black);
   border: 2px solid var(--color-gray-dark);
-  padding: .5em;
+  padding: 12px 10px 8px 10px;
 }
 
 input,

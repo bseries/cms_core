@@ -4,7 +4,8 @@ $this->set([
 	'page' => [
 		'type' => 'standalone',
 		'object' => $t('Login')
-	]
+	],
+	'extraBodyClasses' => ['layout-admin-session']
 ]);
 
 ?>

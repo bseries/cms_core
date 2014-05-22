@@ -1262,3 +1262,16 @@ table .sub-item td:first-child {
 .widget-alpha .count {
   font-size: 55px;
 }
+
+/* Session
+---------------------------------------------------------------- */
+.layout-admin-session {
+  background-image: url(../img/session_bg.jpg);
+  background-size: cover;
+}
+
+.layout-admin-session #content {
+  float: none;
+  width: 500px;
+  margin: 10% auto;
+}

@@ -30,14 +30,20 @@ $page += [
 	'action' => isset($map[$this->_request->action]) ? $map[$this->_request->action] : null,
 	'empty' => $t('untitled')
 ];
+
 if ($page['type'] == 'multiple') {
-	$this->title("{$page['object']}");
+	$this->title(ucfirst($page['object']));
 } elseif ($page['type'] == 'single') {
-	$this->title("{$page['title']} - {$page['object']}");
+	if ($page['title']) {
+		$this->title(ucfirst($page['action']) . " {$page['title']} - " . ucfirst($page['object']));
+	} else {
+		$this->title(ucfirst($page['action']) . " {$page['empty']} - " . ucfirst($page['object']));
+	}
 } elseif ($page['type'] == 'standalone') {
 	$this->title("{$page['object']}");
 }
 
+// Ensure meta is set, some pages may not yet use it.
 if (!isset($meta)) {
 	$meta = [];
 }

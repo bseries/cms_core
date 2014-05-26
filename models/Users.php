@@ -105,8 +105,8 @@ class Users extends \cms_core\models\Base {
 			$conditions = [
 				$options['field'] => $value
 			];
-			if (isset($options['values']['id'])) {
-				$conditions['id'] = '!=' . $options['values']['id'];
+			if (!empty($options['values']['id'])) {
+				$conditions['id'] = ['!=' => $options['values']['id']];
 			}
 			return !Users::find('count', compact('conditions'));
 		});

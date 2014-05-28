@@ -45,7 +45,7 @@ require(['jquery', 'list', 'nprogress', 'notify', 'domready!'], function($, List
   //
   $('form .help').each(function() {
     var $help = $(this);
-    var $input = $help.prev().find('input');
+    var $input = $help.prev().find('input,textarea');
 
     $input.on('focusin', function() {
       $help.fadeIn();

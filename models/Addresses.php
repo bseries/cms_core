@@ -161,7 +161,12 @@ class Addresses extends \cms_core\models\Base {
 			$result = [];
 
 			$result[] = $entity->company;
-			$result[] = $entity->name;
+
+			if ($entity->company) {
+				$result[] = "– {$entity->name} –";
+			} else {
+				$result[] = $entity->name;
+			}
 			$result[] = $entity->street;
 			$result[] = $entity->zip . ' ' . $entity->city;
 			$result[] = Countries::find('first', [

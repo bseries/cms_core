@@ -150,15 +150,17 @@ class Addresses extends \cms_core\models\Base {
 		if ($type == 'oneline') {
 			$result = [];
 
+			$result[] = $entity->company;
 			$result[] = $entity->name;
 			$result[] = $entity->street;
 			$result[] = $entity->city;
 
-			return implode(', ', $result);
+			return implode(', ', array_filter($result));
 		}
 		if ($type == 'postal') {
 			$result = [];
 
+			$result[] = $entity->company;
 			$result[] = $entity->name;
 			$result[] = $entity->street;
 			$result[] = $entity->zip . ' ' . $entity->city;
@@ -168,7 +170,7 @@ class Addresses extends \cms_core\models\Base {
 				],
 				'locale' => $locale
 			])->name;
-			return implode("\n", $result);
+			return implode("\n", array_filter($result));
 		}
 	}
 }

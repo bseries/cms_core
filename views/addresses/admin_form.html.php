@@ -51,6 +51,10 @@ $this->set([
 					'type' => 'text',
 					'label' => $t('Name')
 				]) ?>
+				<?= $this->form->field('company', [
+					'type' => 'text',
+					'label' => $t('Company')
+				]) ?>
 				<?= $this->form->field('street', [
 					'type' => 'text',
 					'label' => $t('Street')

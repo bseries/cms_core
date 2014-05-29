@@ -32,8 +32,8 @@ class AddressesController extends \cms_core\controllers\BaseController {
 	}
 
 	protected function _selects($item) {
-		$virtualUsers = [null => '-'] + VirtualUsers::find('list');
-		$users = [null => '-'] + Users::find('list');
+		$virtualUsers = [null => '-'] + VirtualUsers::find('list', ['order' => 'name']);
+		$users = [null => '-'] + Users::find('list', ['order' => 'name']);
 		$countries = Countries::find('list');
 
 		return compact('users', 'virtualUsers', 'countries');

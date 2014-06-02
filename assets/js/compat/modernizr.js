@@ -1,5 +1,5 @@
-/* Modernizr 2.8.1 (Custom Build) | MIT & BSD
- * Build: http://modernizr.com/download/#-backgroundsize-multiplebgs-cssanimations-csscolumns-generatedcontent-csstransforms-csstransforms3d-csstransitions-canvas-canvastext-hashchange-history-audio-video-input-inputtypes-geolocation-addtest-prefixed-teststyles-testprop-testallprops-hasevent-prefixes-domprefixes-css_calc-css_filters-css_remunit-css_vhunit-css_vmaxunit-css_vminunit-css_vwunit-file_api-forms_placeholder-fullscreen_api-unicode
+/* Modernizr 2.8.2 (Custom Build) | MIT & BSD
+ * Build: http://modernizr.com/download/#-backgroundsize-multiplebgs-cssanimations-csscolumns-generatedcontent-csstransforms-csstransforms3d-csstransitions-canvas-canvastext-hashchange-history-audio-video-input-inputtypes-geolocation-touch-addtest-prefixed-teststyles-testprop-testallprops-hasevent-prefixes-domprefixes-css_calc-css_filters-css_remunit-file_api-forms_placeholder-fullscreen_api-unicode
  */
 ;
 
@@ -7,7 +7,7 @@
 
 window.Modernizr = (function( window, document, undefined ) {
 
-    var version = '2.8.0',
+    var version = '2.8.2',
 
     Modernizr = {},
 
@@ -246,6 +246,19 @@ window.Modernizr = (function( window, document, undefined ) {
 
     tests['canvastext'] = function() {
         return !!(Modernizr['canvas'] && is(document.createElement('canvas').getContext('2d').fillText, 'function'));
+    };
+    tests['touch'] = function() {
+        var bool;
+
+        if(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+          bool = true;
+        } else {
+          injectElementWithStyles(['@media (',prefixes.join('touch-enabled),('),mod,')','{#modernizr{top:9px;position:absolute}}'].join(''), function( node ) {
+            bool = node.offsetTop === 9;
+          });
+        }
+
+        return bool;
     };
 
 
@@ -505,60 +518,6 @@ Modernizr.addTest('cssremunit', function(){
   } catch(er){}
   return (/rem/).test(div.style.fontSize);
 
-});
-// https://github.com/Modernizr/Modernizr/issues/572
-// Similar to http://jsfiddle.net/FWeinb/etnYC/
-Modernizr.addTest('cssvhunit', function() {
-    var bool;
-    Modernizr.testStyles("#modernizr { height: 50vh; }", function(elem, rule) {   
-        var height = parseInt(window.innerHeight/2,10),
-            compStyle = parseInt((window.getComputedStyle ?
-                      getComputedStyle(elem, null) :
-                      elem.currentStyle)["height"],10);
-        
-        bool= (compStyle == height);
-    });
-    return bool;
-});// https://github.com/Modernizr/Modernizr/issues/572
-// http://jsfiddle.net/glsee/JDsWQ/4/
-Modernizr.addTest('cssvmaxunit', function(){
-    var bool;
-    Modernizr.testStyles("#modernizr { width: 50vmax; }", function(elem, rule) {
-        var one_vw = window.innerWidth/100,
-            one_vh = window.innerHeight/100,
-            compWidth = parseInt((window.getComputedStyle ?
-                                  getComputedStyle(elem, null) :
-                                  elem.currentStyle)['width'],10);
-        bool = ( parseInt(Math.max(one_vw, one_vh)*50,10) == compWidth );
-    });
-    return bool;
-});// https://github.com/Modernizr/Modernizr/issues/572
-// http://jsfiddle.net/glsee/JRmdq/8/
-Modernizr.addTest('cssvminunit', function(){
-    var bool;
-    Modernizr.testStyles("#modernizr { width: 50vmin; }", function(elem, rule) {
-        var one_vw = window.innerWidth/100,
-            one_vh = window.innerHeight/100,
-            compWidth = parseInt((window.getComputedStyle ?
-                                  getComputedStyle(elem, null) :
-                                  elem.currentStyle)['width'],10);
-        bool = ( parseInt(Math.min(one_vw, one_vh)*50,10) == compWidth );
-    });
-    return bool;
-});
-// https://github.com/Modernizr/Modernizr/issues/572
-// http://jsfiddle.net/FWeinb/etnYC/
-Modernizr.addTest('cssvwunit', function(){
-    var bool;
-    Modernizr.testStyles("#modernizr { width: 50vw; }", function(elem, rule) {
-        var width = parseInt(window.innerWidth/2,10),
-            compStyle = parseInt((window.getComputedStyle ?
-                      getComputedStyle(elem, null) :
-                      elem.currentStyle)["width"],10);
-        
-        bool= (compStyle == width);
-    });
-    return bool;
 });
 /**
  * file tests for the File API specification

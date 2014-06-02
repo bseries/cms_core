@@ -373,7 +373,7 @@ footer.main {
   min-height: 2.9em; /* Prevent jumping if there are no actions. */
 }
 .nav-panes-actions > a {
-  /* border-radius: 20px 20px 0 0; */
+  border-radius: 20px 20px 0 0;
   padding: 15px 15px 10px 15px;
   display: inline-block;
   background: var(--color-gray-darker);
@@ -462,10 +462,10 @@ textarea {
   -webkit-border-radius:0;
   border-radius: 0;
 
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Anonymous Pro", Helvetica, Arial, sans-serif;
   color: var(--color-dim-black);
   border: 2px solid var(--color-gray-dark);
-  padding: 12px 10px 8px 10px;
+  padding: 10px 10px 8px 10px;
 }
 
 input,

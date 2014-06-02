@@ -50,8 +50,8 @@ class Jobs extends \lithium\core\StaticObject {
 
 		$item['run']();
 
-		$took = round((microtime(true) - $start), 2);
-		Logger::write('debug', "Finished running job `{$item['name']}`; took {$took}ms.");
+		$took = round((microtime(true) - $start) / 1000, 2);
+		Logger::write('debug', "Finished running job `{$item['name']}`; took {$took}s.");
 	}
 
 	public static function runFrequency($frequency) {

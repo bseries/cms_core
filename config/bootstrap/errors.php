@@ -124,15 +124,12 @@ Logger::config([
 	'default' => [
 		'adapter' => 'File',
 		'path' => $path . '/log',
+		'timestamp' => '[Y-m-d H:i:s]',
 		// Log everything into one file.
 		'file' => function($data, $config) { return 'app.log'; },
 		'priority' => ['debug', 'error', 'notice', 'warning']
 	],
 ]);
-Logger::applyFilter('write', function ($self, $params, $chain) {
-	$params['message'] = date('[Y-m-d H:i:s]') . ' '. $params['message'];
-	return $chain->next($self, $params, $chain);
-});
 
 // Handle errors rising from exceptions.
 $errorResponse = function($request, $code) {

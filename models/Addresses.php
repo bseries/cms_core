@@ -31,11 +31,14 @@ class Addresses extends \cms_core\models\Base {
 
 		$model->validates['name'] = [
 			[
-				'notEmpty',
+				'nameOrCompany',
 				'on' => ['create', 'update'],
-				'message' => $t('This field cannot be empty.')
-			],
+				'message' => 'Bitte geben Sie einen Namen und/oder eine Firma an.'
+			]
 		];
+		Validator::add('nameOrCompany', function($value, $format, $options) {
+			return !empty($value) || !empty($options['values']['company']);
+		});
 		$model->validates['street'] = [
 			[
 				'notEmpty',

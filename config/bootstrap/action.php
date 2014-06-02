@@ -78,4 +78,20 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) use ($errorRespo
 	return $chain->next($self, $params, $chain);
 });
 
+// Mainteance page handling.
+Dispatcher::applyFilter('run', function($self, $params, $chain) use ($errorResponse){
+	if (!Environment::get('maintenance')) {
+		return $chain->next($self, $params, $chain);
+	}
+	$message  = 'Showing maintenance page.';
+	Logger::debug($message);
+
+	$controller = Libraries::instance('controllers', 'cms_core.Errors', ['request' => $params['request']]);
+
+	return $controller(
+		$params['request'],
+		['action' => 'maintenance']
+	);
+});
+
 ?>

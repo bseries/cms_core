@@ -12,8 +12,8 @@ $this->set([
 	<div class="widgets">
 		<?php foreach ($widgets as $item): ?>
 			<?=$this->view()->render(
-				['element' => 'widget_' . $item['type']],
-				['item' => $item['data']()],
+				['element' => 'widgets/' . $item['type']],
+				['item' => $item['inner']()],
 				['library' => 'cms_core']
 			) ?>
 		<?php endforeach ?>

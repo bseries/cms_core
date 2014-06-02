@@ -12,37 +12,78 @@
 
 namespace cms_core\extensions\cms;
 
-use lithium\util\Set;
-use lithium\util\Inflector;
+use lithium\util\Collection;
 
 class Widgets extends \lithium\core\StaticObject {
 
 	const GROUP_NONE = 'none';
 	const GROUP_DASHBOARD = 'dashboard';
 
-	const TYPE_COUNT_SINGLE_ALPHA = 'count_single_alpha';
-	const TYPE_COUNT_MULTIPLE_ALPHA = 'count_multiple_alpha';
-	const TYPE_COUNT_MULTIPLE_BETA = 'count_multiple_beta';
+	const TYPE_COUNTER = 'counter';
+	const TYPE_TABLE = 'table';
 	const TYPE_QUICKDIAL = 'quickdial';
 
 	protected static $_data = [];
 
 	protected static $_sources = [];
 
-	public static function register($library, $name, $data, array $options = []) {
+	public static function register($library, $name, $inner, array $options = []) {
 		$options += [
 			'type' => null,
 			'group' => static::GROUP_NONE
 		];
-		static::$_sources[$name] = $library;
-		static::$_data[$name] = compact('name', 'library', 'data') + $options;
+		$id = hash('md5', $name . $options['type'] . $options['group']);
+
+		if (isset(static::$_sources[$id])) {
+			static::$_sources[$id] = array_merge(static::$_sources[$id], [$library]);
+		} else {
+			static::$_sources[$id] = [$library];
+		}
+		static::$_data[$id][] = compact('name', 'inner') +  $options;
 	}
 
-	public static function read($name = null) {
-		if (!$name) {
-			return static::$_data;
+	// Returns all items wrapped in a collection object which can be
+	// filtered and sorted. When an item has been registered multiple
+	// times its inner data is wrapped in a single closure.
+	public static function read() {
+		$data = [];
+
+		foreach (static::$_data as $id => $items) {
+			$item = current($items);
+
+			$data[$id] = [
+				// group and type will be the same for all items as we grouped earlier.
+				// We need both to be available "outside" as we need to filter on those
+				// properities or need them to determine the widget element to load.
+				'name' => $item['name'],
+				'group' => $item['group'],
+				'type' => $item['type'],
+				// Aggregates multiple registered widgets into one.
+				'inner' => function() use ($items) {
+					$result = [
+						'class' => null,
+						'url' => null,
+						'title' => false,
+						'data' => []
+					];
+					foreach ($items as $i) {
+						$inner = $i['inner']();
+
+						if (isset($inner['data'])) {
+							if (is_array($inner['data'])) {
+								$result['data'] += $inner['data'];
+							} else {
+								$result['data'] = $inner['data'];
+							}
+							unset($inner['data']);
+						}
+						$result = $inner + $result;
+					}
+					return $result;
+				}
+			];
 		}
-		return static::$_data[$name];
+		return new Collection(compact('data'));
 	}
 }
 

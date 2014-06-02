@@ -17,7 +17,9 @@ use cms_core\extensions\cms\Widgets;
 class PagesController extends \cms_core\controllers\BaseController {
 
 	public function admin_home() {
-		$widgets = Widgets::read();
+		$widgets = Widgets::read()->find(function($item) {
+			return $item['group'] === 'dashboard';
+		});
 		return compact('widgets');
 	}
 

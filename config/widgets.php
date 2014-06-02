@@ -19,16 +19,15 @@ extract(Message::aliases());
 
 Widgets::register('cms_core', 'support', function() use ($t) {
 	return [
-		'class' => null,
+		'title' => $t('Contact Support'),
 		'url' => [
 			'controller' => 'Pages', 'action' => 'support',
 			'library' => 'cms_core', 'admin' => true
-		],
-		'title' => $t('Contact Support')
+		]
 	];
 }, [
 	'type' => Widgets::TYPE_QUICKDIAL,
-	'group' => Widgets::GROUP_DASHBOARD,
+	'group' => Widgets::GROUP_DASHBOARD
 ]);
 
 Widgets::register('cms_core', 'users', function() use ($t) {
@@ -40,7 +39,6 @@ Widgets::register('cms_core', 'users', function() use ($t) {
 	]);
 
 	return [
-		'class' => null,
 		'title' => $t('Users'),
 		'url' => [
 			'controller' => 'Users', 'library' => 'cms_core', 'admin' => true, 'action' => 'index'
@@ -51,7 +49,7 @@ Widgets::register('cms_core', 'users', function() use ($t) {
 		]
 	];
 }, [
-	'type' => Widgets::TYPE_COUNT_MULTIPLE_ALPHA,
+	'type' => Widgets::TYPE_COUNTER,
 	'group' => Widgets::GROUP_DASHBOARD,
 ]);
 

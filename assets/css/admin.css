@@ -1213,7 +1213,6 @@ table .sub-item td:first-child {
 }
 .widget-counter .count-group {
   float: left;
-  vertical-align: top;
   width: 50%;
   height: calc(100% - 10px);
 }
@@ -1225,11 +1224,12 @@ table .sub-item td:first-child {
 }
 .widget-counter .count-group .title {
   position: absolute;
-  top: 0;
   border-top: 6px solid white;
   padding-top: 10px;
-  display: inline-block;
   font-size: var(--font-size-beta);
+}
+.widget-counter-single .count-group .title {
+  display: none;
 }
 
 .widget-table {

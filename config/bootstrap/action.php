@@ -17,6 +17,7 @@ use lithium\net\http\Router;
 use lithium\net\http\Media;
 use lithium\security\Auth;
 use lithium\storage\Cache;
+use lithium\analysis\Logger;
 
 Dispatcher::applyFilter('run', function($self, $params, $chain) {
 	$libraries = Libraries::get();
@@ -61,6 +62,19 @@ Media::applyFilter('_handle', function($self, $params, $chain) {
 		// $params['data']['site'] = Environment::get('site');
 		// $params['data']['service'] = Environment::get('service');
 	}
+	return $chain->next($self, $params, $chain);
+});
+
+// Request logging.
+Dispatcher::applyFilter('run', function($self, $params, $chain) use ($errorResponse){
+	$request = $params['request'];
+
+	$message = sprintf('%s %s', $request->method, $request->url);
+	if ($request->method == 'POST') {
+		$message .= " with:\n" . var_export($request->data, true);
+	}
+	Logger::debug($message);
+
 	return $chain->next($self, $params, $chain);
 });
 

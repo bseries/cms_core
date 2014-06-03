@@ -92,6 +92,7 @@ class Users extends \cms_core\models\Base {
 			],
 			[
 				'email',
+				'deep' => true,
 				'on' => ['create'],
 				'message' => $t('Invalid e–mail.')
 			],

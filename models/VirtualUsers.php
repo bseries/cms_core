@@ -65,6 +65,7 @@ class VirtualUsers extends \cms_core\models\Base {
 			[
 				'email',
 				'on' => ['addEmail'],
+				'deep' => true,
 				'message' => $t('Invalid e–mail.')
 			]
 		];

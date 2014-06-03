@@ -13,26 +13,26 @@
 use cms_core\extensions\cms\Settings;
 use cms_core\extensions\cms\Features;
 
-Settings::register('contact.default.name', 'Acme Inc.');
-Settings::register('contact.default.type', 'organization');
-Settings::register('contact.default.email', 'mail@example.com');
-Settings::register('contact.default.phone', '+49 (0) 12 345 678');
+Settings::register('cms_core', 'contact.default.name', 'Acme Inc.');
+Settings::register('cms_core', 'contact.default.type', 'organization');
+Settings::register('cms_core', 'contact.default.email', 'mail@example.com');
+Settings::register('cms_core', 'contact.default.phone', '+49 (0) 12 345 678');
 
-Settings::register('contact.exec.name', 'Atelier Disko');
-Settings::register('contact.exec.type', 'organization');
-Settings::register('contact.exec.email', 'info@atelierdisko.de');
-Settings::register('contact.exec.phone', '+49 (0) 40 355 618 96');
-Settings::register('contact.exec.website', 'http://atelierdisko.de');
-Settings::register('contact.exec.postal_code', 'D-20359');
-Settings::register('contact.exec.street_address', 'Budapester Straße 49');
-Settings::register('contact.exec.city', 'Hamburg');
-Settings::register('contact.exec.country', 'Germany');
-Settings::register('contact.exec.district', 'St. Pauli');
+Settings::register('cms_core', 'contact.exec.name', 'Atelier Disko');
+Settings::register('cms_core', 'contact.exec.type', 'organization');
+Settings::register('cms_core', 'contact.exec.email', 'info@atelierdisko.de');
+Settings::register('cms_core', 'contact.exec.phone', '+49 (0) 40 355 618 96');
+Settings::register('cms_core', 'contact.exec.website', 'http://atelierdisko.de');
+Settings::register('cms_core', 'contact.exec.postal_code', 'D-20359');
+Settings::register('cms_core', 'contact.exec.street_address', 'Budapester Straße 49');
+Settings::register('cms_core', 'contact.exec.city', 'Hamburg');
+Settings::register('cms_core', 'contact.exec.country', 'Germany');
+Settings::register('cms_core', 'contact.exec.district', 'St. Pauli');
 
-Settings::register('availableCurrencies', [
+Settings::register('cms_core', 'availableCurrencies', [
 	'EUR'
 ]);
-Settings::register('availableCountries', [
+Settings::register('cms_core', 'availableCountries', [
 	'DE'
 ]);
 

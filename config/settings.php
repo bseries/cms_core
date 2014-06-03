@@ -26,6 +26,7 @@ Settings::register('cms_core', 'contact.default.name', 'Acme Inc.');
 Settings::register('cms_core', 'contact.default.type', 'organization'); // organization or person
 Settings::register('cms_core', 'contact.default.email', 'mail@example.com');
 Settings::register('cms_core', 'contact.default.phone', '+49 (0) 12 345 678');
+Settings::register('cms_core', 'contact.default.city', 'Las Vegas');
 
 Settings::register('cms_core', 'contact.exec.name', 'Atelier Disko');
 Settings::register('cms_core', 'contact.exec.type', 'organization');

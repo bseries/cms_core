@@ -78,7 +78,7 @@ require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/session.php';
 require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/g11n.php';
 require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/media.php';
 
-require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/settings.php';
+require 'settings.php';
 
 if (PHP_SAPI === 'cli') {
 	require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/console.php';
@@ -90,7 +90,6 @@ require LITHIUM_LIBRARY_PATH . '/cms_core/config/panes.php';
 
 // ------------------------------------------------------------------------------------------------
 
-require 'settings.php';
 require 'media.php';
 require 'widgets.php';
 

@@ -27,7 +27,7 @@ class ReferenceNumber extends \li3_behaviors\data\model\Behavior {
 		'sort' => '/^(.*)$/',
 
 		// When string passed through strftime and sprintf.
-		'generate' => '%%04.d',
+		'generate' => '%%04.%d',
 
 		// Set to true when your sort pattern spreads
 		// over the whole string. Then optimizations can

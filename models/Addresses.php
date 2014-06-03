@@ -104,9 +104,9 @@ class Addresses extends \cms_core\models\Base {
 
 	public function user($entity) {
 		if ($entity->user_id) {
-			return Users::findById($entity->user_id);
+			return Users::find('first', ['conditions' => ['id' => $entity->user_id]]);
 		}
-		return VirtualUsers::findById($entity->virtual_user_id);
+		return VirtualUsers::find('first', ['conditions' => ['id' => $entity->virtual_user_id]]);
 	}
 
 	public static function findExact($data) {

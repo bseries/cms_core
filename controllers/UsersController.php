@@ -117,7 +117,7 @@ class UsersController extends \cms_core\controllers\BaseController {
 	public function admin_change_role() {
 		extract(Message::aliases());
 
-		$item = Users::findById($this->request->id);
+		$item = Users::find('first', ['conditions' => ['id' => $this->request->id]]);
 		$item->role = $this->request->role;
 
 		if ($item->save(null, ['validate' => false, 'whitelist' => ['role']])) {
@@ -198,13 +198,13 @@ class UsersController extends \cms_core\controllers\BaseController {
 
 		$auth = Auth::check('default');
 
-		$new = Users::findById($this->request->id)->data();
+		$new = Users::find('first', ['conditions' => ['id' => $this->request->id]])->data();
 
 		if (isset($auth['original'])) {
 			// If we already became another user keep original.
-			$new['original'] = Users::findById($auth['original']['id'])->data();
+			$new['original'] = Users::find('first', ['conditions' => ['id' => $auth['original']['id']]])->data();
 		} else {
-			$new['original'] = Users::findById($auth['id'])->data();
+			$new['original'] = Users::find('first', ['conditions' => ['id' => $auth['id']]])->data();
 		}
 		unset($new['password']);
 		unset($new['original']['password']);

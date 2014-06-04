@@ -28,7 +28,8 @@
   --color-gray-darkest: #808080;
 
   /* Typography */
-  --font-size-alpha: 32px;
+  --font-size-super-alpha: 32px;
+  --font-size-alpha: 25px;
   --font-size-beta:  20px;
   --font-size-gamma: 16px;
   --font-size-delta: 14px;
@@ -168,6 +169,11 @@ pre, code, .fixed {
 
 /* Text Sizes
 ---------------------------------------------------------------- */
+.t-super-alpha {
+  font-size: var(--font-size-super-alpha);
+  line-height: var(--line-height-tight);
+  font-weight: bold;
+}
 .t-alpha {
   font-size: var(--font-size-alpha);
   line-height: var(--line-height-tight);
@@ -188,6 +194,7 @@ h1,h2,h3,h4 {
   margin: 0;
 }
 
+.h-super-alpha,
 .h-alpha,
 .h-beta,
 .h-gamma,
@@ -199,6 +206,11 @@ h1,h2,h3,h4 {
 
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bolder;
+}
+.h-super-alpha {
+  font-size: var(--font-size-super-alpha);
+  line-height: var(--line-height-tighter);
+  margin: 0.67em 0 1.5em 0;
 }
 .h-alpha {
   font-size: var(--font-size-alpha);
@@ -1195,6 +1207,12 @@ table .sub-item td:first-child {
 }
 .widget.negative {
   background-color: var(--color-ci-red);
+}
+
+.widget-quickdial {
+  font-weight: bold;
+  font-size: var(--font-size-alpha);
+  background-color: var(--color-gray-dark);
 }
 
 .widget-counter {

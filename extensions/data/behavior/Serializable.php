@@ -117,6 +117,9 @@ class Serializable extends \li3_behaviors\data\model\Behavior {
 	}
 
 	protected static function _unserialize($value, $type) {
+		if ($value === null || $value === '') {
+			return [];
+		}
 		switch ($type) {
 			case 'php':
 				return unserialize($value);

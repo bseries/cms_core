@@ -1174,6 +1174,8 @@ table .sub-item td:first-child {
 }
 
 .widget {
+  break-inside: avoid;
+
   float: left;
   position: relative;
   background-color: var(--color-gray-darkest);

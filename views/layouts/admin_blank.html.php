@@ -82,10 +82,10 @@ $page += [
 
 		<div id="container">
 			<header class="main rich-page-title">
-				<h1 class="t-alpha">
+				<h1 class="t-super-alpha">
 					<?= $this->html->link($site['title'], ['controller' => 'pages', 'action' => 'home', 'library' => 'cms_core']) ?>
 				</h1>
-				<h2 class="t-alpha object">
+				<h2 class="t-super-alpha object">
 					<?= $page['object'] ?>
 				</h2>
 			</header>

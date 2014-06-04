@@ -54,7 +54,7 @@ $this->set([
 				]) ?>
 			</section>
 		</div>
-		<div class="grid-row">
+		<div class="grid-row<?= Features::enabled('useBilling') ? '' : ' grid-row-last'?>">
 			<div class="grid-column-left">
 				<?=$this->form->field('password', ['type' => 'password', 'label' => 'Neues Passwort', 'autocomplete' => 'off']) ?>
 				<?=$this->form->field('password_repeat', ['type' => 'password', 'label' => 'Neues Passwort (wiederholen)', 'autocomplete' => 'off']) ?>

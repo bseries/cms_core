@@ -19,7 +19,7 @@ $this->set([
 	<?=$this->form->create($item) ?>
 		<?= $this->form->field('id', ['type' => 'hidden']) ?>
 
-		<div class="grid-row">
+		<div class="grid-row<?= Features::enabled('useBilling') ? '' : ' grid-row-last'?>">
 			<section class="grid-column-left">
 				<?= $this->form->field('name', ['type' => 'text', 'label' => $t('Name'), 'class' => 'use-for-title']) ?>
 				<?php if (Features::enabled('useBilling')): ?>

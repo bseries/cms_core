@@ -70,8 +70,13 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) use ($errorRespo
 	$request = $params['request'];
 
 	$message = sprintf('%s %s', $request->method, $request->url);
-	if ($request->method == 'POST') {
-		$message .= " with:\n" . var_export($request->data, true);
+	if (in_array($request->method, ['POST', 'PUT'])) {
+		$clean = $request->data;
+
+		if (isset($clean['password'])) {
+			$clean['password'] = '[protected]';
+		}
+		$message .= " with:\n" . var_export($clean, true);
 	}
 	Logger::debug($message);
 

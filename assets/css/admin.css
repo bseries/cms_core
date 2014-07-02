@@ -1017,6 +1017,10 @@ table .sub-item td:first-child {
   border-left: 30px solid var(--color-gray-dark);
 }
 
+td .minor {
+  color: var(--color-gray-darker);
+}
+
 /* Notifications
 -------------------------------------------------------------- */
 #messages {

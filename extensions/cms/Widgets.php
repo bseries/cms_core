@@ -13,6 +13,7 @@
 namespace cms_core\extensions\cms;
 
 use lithium\util\Collection;
+use lithium\analysis\Logger;
 
 class Widgets extends \lithium\core\StaticObject {
 
@@ -59,7 +60,9 @@ class Widgets extends \lithium\core\StaticObject {
 				'group' => $item['group'],
 				'type' => $item['type'],
 				// Aggregates multiple registered widgets into one.
-				'inner' => function() use ($items) {
+				'inner' => function() use ($item, $items) {
+					$start = microtime(true);
+
 					$result = [
 						'class' => null,
 						'url' => null,
@@ -78,6 +81,14 @@ class Widgets extends \lithium\core\StaticObject {
 							unset($inner['data']);
 						}
 						$result = $inner + $result;
+					}
+
+					if (($took = microtime(true) - $start) > 1) {
+						$message = sprintf(
+							"Widget`{$item['name']}` took very long (%4.fs) to render",
+							$took
+						);
+						Logger::write('notice', $message);
 					}
 					return $result;
 				}

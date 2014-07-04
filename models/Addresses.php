@@ -132,6 +132,7 @@ class Addresses extends \cms_core\models\Base {
 		$item = [];
 
 		foreach ($data as $field => $value) {
+			// Also includes unprefixed virtual_user_id and user_id.
 			if (strpos($field, 'user_') !== false) {
 				$item[$field] = $value;
 				continue;

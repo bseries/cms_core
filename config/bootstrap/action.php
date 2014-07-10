@@ -73,6 +73,14 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) use ($errorRespo
 	if (in_array($request->method, ['POST', 'PUT'])) {
 		$clean = $request->data;
 
+		if (is_array($clean)) {
+			foreach ($clean as $k => &$v) {
+				if (is_string($v) && strlen($v) > 500) {
+					$v = '[too large - '. strlen($v) . ' bytes suppressed]';
+				}
+			}
+		}
+
 		if (isset($clean['password'])) {
 			$clean['password'] = '[protected]';
 		}

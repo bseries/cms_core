@@ -239,6 +239,13 @@ h1,h2,h3,h4 {
   padding: 20px 30px 15px 30px;
 }
 
+h1 .count:before {
+  content: "(";
+}
+h1 .count:after {
+  content: ")";
+}
+
 /* Hyperlinks
 ---------------------------------------------------------------- */
 a {

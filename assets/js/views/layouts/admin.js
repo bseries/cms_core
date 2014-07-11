@@ -9,7 +9,22 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
 
-require(['jquery', 'list', 'nprogress', 'notify', 'domready!'], function($, List, Progress) {
+require(['jquery', 'list', 'nprogress', 'drop', 'notify', 'domready!'], function($, List, Progress, Drop) {
+
+  $('tbody tr').each(function() {
+    var drop = new Drop({
+      target: this,
+      content: $(this).find('.more-content').html(),
+      position: 'bottom center',
+      openOn: 'hover',
+      tetherOptions: {
+        targetOffset: '10px 0',
+        optimizations: {
+          gpu: false
+        }
+      }
+    });
+  });
 
   //
   // Progress setup

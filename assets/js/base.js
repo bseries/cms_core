@@ -47,8 +47,6 @@ requirejs.config({
     'caolan/async': 'cms-core/js/async',
     'list': 'cms-core/js/list',
     'listPagination': 'cms-core/js/listPagination',
-    'tether': 'cms-core/js/tether',
-    'drop': 'cms-core/js/drop',
 
     // Compat
     'versioncompare': 'cms-core/js/compat/versioncompare',
@@ -115,13 +113,6 @@ requirejs.config({
     'listPagination': {
       exports: 'window.ListPagination',
       deps: ['list']
-    },
-    'tether': {
-      exports: 'window.Tether',
-    },
-    'drop': {
-      exports: 'window.Drop',
-      deps: ['tether']
     },
 
     // Compat

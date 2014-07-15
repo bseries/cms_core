@@ -597,29 +597,43 @@ select:not([multiple]) {
   background: white url("../ico/field_arrow_down.png?v=__PROJECT_VERSION_BUILD__") no-repeat right 8px center;
 }
 
-/* Checkbox are radios and styled. */
-input[type="radio"],
-input[type="checkbox"] {
-  position: absolute;
-  clip: rect(0,0,0,0);
+/* Checkbox are styled. */
+input[type="checkbox"]:empty {
+  margin-left: -999px;
 }
-input[type="radio"] + label,
-input[type="checkbox"] + label {
-  transition: all .15s;
-  height: 33px;
-  line-height: 2.4;
+input[type="checkbox"]:empty ~ label {
+  position: relative;
+  float: left;
+  line-height: 35px;
+  text-indent: 80px;
   cursor: pointer;
-  background: url("../ico/checkbox.png?v=__PROJECT_VERSION_BUILD__") no-repeat 1px -1px;
-  padding: 0 0 0 45px;
-  margin-bottom: .75em;
+  user-select: none;
 }
-input[type="radio"] + label:hover,
-input[type="checkbox"] + label:hover {
-  background-image: url("../ico/checkbox_hover.png?v=__PROJECT_VERSION_BUILD__")
+input[type="checkbox"]:empty ~ label:before,
+input[type="checkbox"]:empty ~ label:after {
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  content: ' ';
+  width: 70px;
+  background-color: var(--color-ci-red);
+  border-radius: 20px;
+  transition: all 100ms ease-in;
 }
-input[type="radio"]:checked + label,
-input[type="checkbox"]:checked + label {
-  background-image: url("../ico/checkbox_checked.png?v=__PROJECT_VERSION_BUILD__")
+input[type="checkbox"]:empty ~ label:after {
+  width: 30px;
+  top: 2px;
+  bottom: 2px;
+  margin-left: 2px;
+  background-color: #fff;
+  border-radius: 20px;
+}
+input[type="checkbox"]:checked ~ label:before {
+  background-color: var(--color-ci-green);
+}
+input[type="checkbox"]:checked ~ label:after {
+  margin-left: 38px;
 }
 
 select[disabled],

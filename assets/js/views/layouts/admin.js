@@ -11,6 +11,14 @@
 
 require(['jquery', 'list', 'nprogress', 'notify', 'domready!'], function($, List, Progress) {
 
+  $('.compound-users').each(function() {
+    var $el = $(this);
+
+    $el.find('[type=checkbox]').on('change', function() {
+      $el.find('[name$=user_id]').toggleClass('hide');
+    });
+  });
+
   //
   // Progress setup
   //

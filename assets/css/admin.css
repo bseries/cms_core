@@ -552,6 +552,12 @@ form .type-selector {
   margin-bottom: 1em;
 }
 
+/* real/virtual users compound field. */
+.compound-users input[type="checkbox"] label {
+
+
+}
+
 /* Date range compound field. */
 form .date-range div,
 form .date-range input[type*="date"],

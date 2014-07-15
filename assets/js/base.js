@@ -58,8 +58,6 @@ requirejs.config({
     'inputDate': 'cms-core/js/compat/inputDate',
     'sendAsBinary': 'cms-core/js/compat/sendAsBinary',
     'animationFrame': 'cms-core/js/compat/animationFrame',
-    'styleFix': 'cms-core/js/compat/styleFix',
-    'vunits': 'cms-core/js/compat/vunits',
     'browserSwitch': 'cms-core/js/browserSwitch'
   },
   shim: {
@@ -137,12 +135,6 @@ requirejs.config({
       deps: ['jquery'],
       exports: 'jQuery.fn.balanceText'
     },
-    'styleFix': {
-      exports: 'styleFix'
-    },
-    'vunits': {
-      deps: ['styleFix']
-    }
   }
 });
 

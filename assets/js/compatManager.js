@@ -131,9 +131,5 @@ function($, Modernizr) {
     require(['animationFrame'], dfr.resolve);
   });
 
-  CompatManager.register('vunits', !Modernizr.cssvhunit, function(dfr) {
-    require(['vunits'], dfr.resolve);
-  });
-
   return CompatManager;
 });

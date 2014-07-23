@@ -23,6 +23,7 @@ $this->set([
 		<thead>
 			<tr>
 				<td data-sort="is-active" class="is-active flag list-sort"><?= $t('Active?') ?>
+				<td data-sort="is-notified" class="is-notified flag list-sort"><?= $t('Notified?') ?>
 				<td>
 				<?php if (Features::enabled('useBilling')): ?>
 					<td data-sort="number" class="number list-sort"><?= $t('Number') ?>
@@ -43,6 +44,7 @@ $this->set([
 			<?php foreach ($data as $item): ?>
 			<tr>
 				<td class="is-active flag"><?= $item->is_active ? '✓ ' : '×' ?>
+				<td class="is-notified flag"><?= $item->is_notified ? '✓ ' : '×' ?>
 				<td>
 					<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($item->email)?>.jpg?s=30&d=retro" />
 				<?php if (Features::enabled('useBilling')): ?>

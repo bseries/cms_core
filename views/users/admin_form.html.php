@@ -33,7 +33,8 @@ $this->set([
 				<?= $this->form->field('is_notified', [
 					'type' => 'checkbox',
 					'label' => $t('receives notifications'),
-					'checked' => (boolean) $item->is_notified
+					'checked' => (boolean) $item->is_notified,
+					'value' => 1
 				]) ?>
 			</section>
 			<section class="grid-column-right">

@@ -58,6 +58,9 @@ $this->set([
 		<div class="grid-row<?= Features::enabled('useBilling') ? '' : ' grid-row-last'?>">
 			<div class="grid-column-left">
 				<?=$this->form->field('password', ['type' => 'password', 'label' => 'Neues Passwort', 'autocomplete' => 'off']) ?>
+				<div class="help">
+					<?= $t('Keep empty to leave password unchanged.') ?>
+				</div>
 				<?=$this->form->field('password_repeat', ['type' => 'password', 'label' => 'Neues Passwort (wiederholen)', 'autocomplete' => 'off']) ?>
 			</div>
 		</div>

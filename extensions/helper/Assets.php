@@ -116,7 +116,7 @@ class Assets extends \lithium\template\Helper {
 			// do not rely on any module JS, load only app base.
 			if (!$options['admin']) {
 				// Load only app's base.js not anything else, when in app context.
-				if ($script = $this->_script($name, 'base')) {
+				if ($script = $this->_script('app', 'base')) {
 					$scripts[] = $script;
 				}
 			} else {

@@ -8,13 +8,14 @@
  * in writing, software distributed on an "AS IS" BASIS, WITHOUT-
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
-define(['jquery', 'wysihtml5', 'globalize', 'mediaExplorerModal'],
-function($, wysihtml5, Globalize, MediaExplorerModal) {
+define(['jquery', 'wysihtml5', 'mediaExplorerModal'],
+function($, wysihtml5, MediaExplorerModal) {
   return function Editor() {
     var _this = this;
 
+    // FIXME May at a later point allow for globalization.
     var _ = function(key) {
-      return Globalize.localize(key) || key;
+      return key;
     };
 
     this.rules = {

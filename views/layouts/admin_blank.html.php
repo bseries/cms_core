@@ -34,8 +34,7 @@ $page += [
 
 		<?php echo $this->assets->style([
 			'/cms-core/css/reset',
-			'/cms-core/css/admin',
-			'/app/css/admin'
+			'/cms-core/css/admin'
 		]) ?>
 		<link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
 		<?php echo $this->styles() ?>

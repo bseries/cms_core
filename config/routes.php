@@ -92,11 +92,6 @@ Router::connect('/admin/support', [
 	'controller' => 'pages', 'action' => 'support', 'library' => 'cms_core', 'admin' => true
 ], $persist);
 
-// Do not persist admin as we render this in the apps default layout context.
-Router::connect('/admin/styleguide', [
-	'controller' => 'pages', 'action' => 'styleguide', 'library' => 'cms_core', 'admin' => true
-], ['controller']);
-
 // Administration JavaScript Environment
 Router::connect('/admin/api/discover', [
 	'controller' => 'app', 'action' => 'api_discover', 'library' => 'cms_core', 'admin' => true

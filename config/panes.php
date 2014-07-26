@@ -54,11 +54,4 @@ Panes::registerActions('cms_core', 'external', [
 	}
 ]);
 
-/*
-Panes::registerActions('cms_core', 'development', [
-	$t('Styleguide') => ['controller' => 'pages', 'action' => 'styleguide', 'admin' => true, 'library' => 'cms_core'],
-	$t('Settings & Features') => ['controller' => 'settings', 'action' => 'index', 'library' => 'cms_core', 'admin' => true]
-]);
- */
-
 ?>

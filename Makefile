@@ -49,10 +49,6 @@ requirejs:
 jquery2:
 	curl http://code.jquery.com/jquery-2.1.1.js > $(JSDIR)/jquery.js
 
-# not functional
-# jqueryui:
-	# http://jqueryui.com/download/#!version=1.11.0&components=1110110010000000000000000000000000000
-
 compat-minimal:
 	git clone https://github.com/atelierdisko/compat.git /tmp/compat
 	cp -vr /tmp/compat/src/js/compat/modnerizr.js $(JSDIR)/compat/

@@ -163,6 +163,9 @@ pre, code, .fixed {
   margin-left: 4%;
   width: 48%;
 }
+.grid-row img {
+  max-width: 100%;
+}
 
 /* Animations
 ---------------------------------------------------------------- */

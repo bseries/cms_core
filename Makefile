@@ -10,6 +10,9 @@
 #
 JSDIR = $(CURDIR)/assets/js 
 
+#
+# Updates all JavaScript used by the admin interface.
+#
 .PHONY: js
 js: notify editor jquery2 listjs handlebars nprogress requirejs compat-minimal modal
 

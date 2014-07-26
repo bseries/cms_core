@@ -331,7 +331,7 @@ footer.main {
   color: white;
   background-color: var(--color-ci-red);
 }
-.nav-panes-groups {
+.tabs-v {
   font-size: var(--font-size-gamma);
   overflow: hidden;
 
@@ -344,57 +344,57 @@ footer.main {
 
   background-color: var(--color-ad-blue);
 }
-.nav-panes-groups > a {
+.tab-v {
   display: block;
   height: 100px;
   background-color: var(--color-gray-darker);
 }
-.nav-panes-groups > .active {
+.tab-v.active {
   background-color: var(--color-gray-neutral);
 }
-.pane-group {
+.tab-v {
   color: transparent;
   background-repeat: no-repeat;
   background-size: auto 100px;
-}
-.pane-group {
   background-image: url(../ico/default.png);
 }
-.pane-group.active,
-.pane-group:hover {
+.tab-v.active,
+.tab-v:hover {
   background-position: -100px 0;
 }
-.pane-group-dashboard {
+.tab-dashboard {
   background-image: url(../ico/dashboard_sprite.png);
 }
-.pane-group-authoring {
+.tab-authoring {
   background-image: url(../ico/authoring_sprite.png);
 }
-.pane-group-billing {
+.tab-billing {
   background-image: url(../ico/billing_sprite.png);
 }
-.pane-group-ecommerce {
+.tab-ecommerce {
   background-image: url(../ico/ecommerce_sprite.png);
 }
-.pane-group-access {
+.tab-access {
   background-image: url(../ico/access_sprite.png);
 }
-.pane-group-external {
+.tab-external {
   background-image: url(../ico/external_sprite.png);
 }
-.pane-group-media {
+.tab-media {
   background-image: url(../ico/media_sprite.png);
 }
-.pane-group-view-site {
+.tab-view-site {
   background-image: url(../ico/view_site_sprite.png);
 }
 
-.nav-panes-actions {
+.tabs-h {
   font-size: var(--font-size-gamma);
-  margin-left: 100px;
   min-height: 2.9em; /* Prevent jumping if there are no actions. */
 }
-.nav-panes-actions > a {
+.nav-panes-actions.tabs-h {
+  margin-left: 100px;
+}
+.tab-h {
   border-radius: 20px 20px 0 0;
   padding: 15px 15px 10px 15px;
   display: inline-block;
@@ -402,11 +402,11 @@ footer.main {
   color: white;
   margin-right: -5px;
 }
-.nav-panes-actions a:not(.active):hover {
+.tab-h:not(.active):hover {
   color: var(--color-ad-blue);
   background-color: white;
 }
-.nav-panes-actions .active {
+.tab-h.active {
   background-color: var(--color-gray-neutral);
   color: var(--color-dim-black);
 }
@@ -846,14 +846,6 @@ button.large,
   min-width: 4em;
 }
 
-/* Styleguide
----------------------------------------------------------------- */
-.styleguide .sandbox {
-  margin-top: 1em;
-  padding: 20px;
-  border: 1px dotted var(--color-dim-black);
-}
-
 /* Errors
 ---------------------------------------------------------------- */
 .layout-error .try,
@@ -1089,44 +1081,80 @@ td .minor {
   overflow: hidden;
 }
 
+.media-explorer .tabs-h {
+  float: left;
+}
+.media-explorer .search {
+  float: right;
+  width: 300px;
+}
+
+.media-explorer .pane {
+  display: none;
+}
+.media-explorer .pane.active {
+  display: block;
+}
+
+.media-explorer nav {
+  float: left;
+  width: 100%;
+  border-bottom: 2px solid gray;
+  margin-bottom: 20px;
+}
+
 .media-explorer .available {
-  height: 90%;
+  height: 85%;
   overflow: scroll;
+  float: left;
+  clear: both;
+}
+
+.media-explorer .item {
+  position: relative;
+  width: 420px;
+  height: 300px;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 .media-explorer .available .item {
   cursor: pointer;
-  position: relative;
-  width: 150px;
-  height: 150px;
-  overflow: hidden;
-  display: inline-block;
-  margin-right: -4px;
-  margin-bottom: -6px;
 }
-.media-explorer .available .item .image {
+.media-explorer .available .item.hide {
+  display: none;
+}
+.media-explorer .item .image {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 250px;
   background-position: center;
   background-size: cover;
+  background-image: url(../img/none_bg.png);
   z-index: 10;
 }
-.media-explorer .available .item .title {
+.media-explorer .item .meta {
   font-weight: normal;
   text-overflow: ellipsis;
   overflow: hidden;
   width: 100%;
-  display: none;
-  position: absolute;
-  bottom: 0;
+  height: 50px;
   white-space: nowrap;
   background: white;
   font-size: 11px;
   padding: 10px 5px;
-  z-index: 31;
 }
-.media-explorer .available .item:hover .title {
-  display: block;
+
+.media-explorer .item .meta .title,
+.media-explorer .item .meta .size,
+.media-explorer .item .meta .status,
+.media-explorer .item .meta .progress {
+  margin-left: 5px;
+}
+.media-explorer .item .meta .title,
+.media-explorer .item .meta .status {
+  font-weight: bold;
 }
 
 .media-explorer .available .item.selected .overlay {
@@ -1140,36 +1168,45 @@ td .minor {
   z-index: 20
 }
 
-.media-explorer footer {
-  padding-top: 1.2em;
-  height: 10%;
-  text-align: right;
-}
-.media-explorer footer label {
-  display: none;
-}
 
 .media-explorer .transfer {
+  float: left;
+  clear: both;
   height: auto;
-  background: white;
-  display: none;
-  position: absolute;
-  top: 0;
-  margin: 0 -1em; /* compensate padding on #modal */
-  padding: 0 1em 2em 1em;
   width: 100%;
-  z-index: 30;
-  box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.5);
 }
-.media-explorer .transfer div + div {
-  margin-top: 1em;
+
+.media-explorer .transfer .methods {
+  text-align: center;
 }
-.media-explorer .transfer label {
-  display: block;
-}
-.media-explorer .transfer .upload .title:not(:empty) {
+.media-explorer .transfer .methods .button,
+.media-explorer .transfer .methods input {
   display: inline-block;
-  margin-right: 1em;
+  margin: 0;
+}
+.media-explorer .transfer .methods input[name="url"] {
+  width: 50%;
+}
+.media-explorer .transfer .methods input[name="vimeo_id"] {
+  width: 30%;
+}
+.media-explorer .transfer .methods .or {
+  margin: 1em 0;
+}
+
+
+.media-explorer .actions {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+#modal.media-explorer.dragged-over {
+  border-color: blue;
+
+}
+#modal.media-explorer.dragged-over .content {
+  opacity: .5;
 }
 
 /* List & Table Filtering/Search

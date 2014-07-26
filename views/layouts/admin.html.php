@@ -149,17 +149,17 @@ if (!isset($meta)) {
 				</div>
 			</header>
 			<div class="content-wrapper clearfix">
-				<nav class="nav-panes-actions">
+				<nav class="nav-panes-actions tabs-h">
 					<?php foreach (Panes::actions(true, $this->_request) as $action): ?>
 						<?= $this->html->link($action['title'], $action['url'], [
-							'class' => $action['active'] ? 'active' : null
+							'class' => $action['active'] ? 'active tab-h' : 'tab-h'
 						]) ?>
 					<?php endforeach ?>
 				</nav>
-				<nav class="nav-panes-groups">
+				<nav class="nav-panes-groups tabs-v">
 					<?php foreach (Panes::groups($this->_request) as $group): ?>
 						<?= $this->html->link($group['title'], $group['url'], [
-							'class' => 'pane-group pane-group-' . str_replace('_', '-', $group['name']) .  ($group['active'] ? ' active' : null)
+							'class' => 'tab-v tab-' . str_replace('_', '-', $group['name']) .  ($group['active'] ? ' active' : null)
 						]) ?>
 					<?php endforeach ?>
 				</nav>

@@ -38,6 +38,7 @@ Non-Goals
 - Content coupled to technology
 - Lock-in(?)
 - No in-app query logging; let the database do that for you
+- Provide common JS, Apps should not depend on any js provided in the modules.
 
 [1] as per http://de.slideshare.net/spacemonkeylabs/content-management-systems-and-mongodb-4354336
 

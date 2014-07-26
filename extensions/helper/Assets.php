@@ -110,16 +110,29 @@ class Assets extends \lithium\template\Helper {
 				}
 				return strcmp($a['name'], $b['name']);
 			});
-			foreach ($libraries as $name => $library) {
-				if ($name == 'app' && $options['admin']) {
-					continue;
-				}
+
+			// Load base files. When in admin context also
+			// load all module base files, if in app context
+			// do not rely on any module JS, load only app base.
+			if (!$options['admin']) {
+				// Load only app's base.js not anything else, when in app context.
 				if ($script = $this->_script($name, 'base')) {
 					$scripts[] = $script;
 				}
+			} else {
+				foreach ($libraries as $name => $library) {
+					if ($name == 'app' && $options['admin']) {
+						// Do not load app base.js when in admin context.
+						continue;
+					}
+					if ($script = $this->_script($name, 'base')) {
+						$scripts[] = $script;
+					}
+				}
 			}
 		} elseif ($type == 'layout') {
-			// Load corresponding layout script.
+			// Load corresponding layout script; when admin load it from _core
+			// when in app load it from app.
 			$library = $options['admin'] ? 'cms_core' : 'app';
 			$layout = $this->_context->_config['layout'];
 

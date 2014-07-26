@@ -1,18 +1,13 @@
 <script>
-	App = {};
-
-	App.assets = {
-		base: '<?= $this->assets->base() ?>'
-	};
-	App.media = {
-		base: '<?= $this->media->base() ?>',
-		endpoints: {
-			<?php if (isset($admin) && $admin): ?>
-				<?php $url = ['controller' => 'media', 'library' => 'cms_media', 'admin' => true] ?>
-				index: '<?= $this->url($url + ['action' => 'api_index']) ?>',
-				view: '<?= $this->url($url + ['action' => 'api_view', 'id' => '__ID__']) ?>',
-				transfer: '<?= $this->url($url + ['action' => 'api_transfer']) ?>'
-			<?php endif ?>
-		}
-	};
+App = {
+	assets: {
+		base: "<?= $this->assets->base() ?>"
+	},
+	media: {
+		base: "<?= $this->media->base() ?>"
+	},
+	api: {
+		discover: "<?= $this->url(['library' => 'cms_core', 'action' => 'api_discover', 'admin' => true, 'controller' => 'App']) ?>"
+	}
+}
 </script>

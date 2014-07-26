@@ -32,7 +32,7 @@ FlashMessage::clear();
 
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<!--[if lt IE 9]>>
-			<script src="<?= $this->assets->url('/cms-core/js/compat/html5shiv.js') ?>"></script>
+			<script src="<?= $this->assets->url('/app/js/compat/html5shiv.js') ?>"></script>
 		<![endif]-->
 		<noscript>
 			<link rel="stylesheet" type="text/css" href="<?= $this->assets->url('/app/css/compat/noscript.css') ?>">
@@ -42,14 +42,14 @@ FlashMessage::clear();
 		<![endif]-->
 
 		<?php echo $this->assets->style([
-			'/cms-core/css/reset',
+			'/app/css/reset',
 			'/app/css/base'
 		]) ?>
 		<?php echo $this->styles() ?>
 		<?=$this->view()->render(['element' => 'head_app_defines'], ['admin' => false], ['library' => 'cms_core']) ?>
 		<?php
 			$scripts = array_merge(
-				['/cms-core/js/require'],
+				['/app/js/require'],
 				$this->assets->availableScripts('base'),
 				$this->assets->availableScripts('view'),
 				$this->assets->availableScripts('layout')

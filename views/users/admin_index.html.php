@@ -28,10 +28,10 @@ $this->set([
 				<?php if (Features::enabled('useBilling')): ?>
 					<td data-sort="number" class="number list-sort"><?= $t('Number') ?>
 				<?php endif ?>
-				<td data-sort="name" class="name emphasize list-sort"><?= $t('Name') ?>
+				<td data-sort="name" class="name emphasize list-sort asc"><?= $t('Name') ?>
 				<td data-sort="email" class="email list-sort"><?= $t('Email') ?>
 				<td data-sort="role" class="role list-sort"><?= $t('Role') ?>
-				<td class="date created"><?= $t('Created') ?>
+				<td data-sort="created" class="date created list-sort"><?= $t('Created') ?>
 				<td class="actions">
 					<?= $this->form->field('search', [
 						'type' => 'search',

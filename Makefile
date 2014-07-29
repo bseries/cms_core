@@ -22,7 +22,7 @@ router:
 modal:
 	cp -r ~/Code/ad/modal/src/* $(JSDIR)/
 
-editor: wysihtml5
+editor: 
 	cp -r ~/Code/ad/editor/src/* $(JSDIR)/
 
 notify:
@@ -57,11 +57,3 @@ compat-minimal:
 	cp -vr /tmp/compat/src/js/compat/modnerizr.js $(JSDIR)/compat/
 	rm -r /tmp/compat
 	
-wysithml5:
-	git clone https://github.com/xing/wysihtml5.git /tmp/wysithml5
-	cd /tmp/wysihtml5
-	rm dist/*.js
-	make bundle
-	cp -v dist/*.js $(JSDIR)/wysithml5.js 
-	rm -r /tmp/wysithml5
-

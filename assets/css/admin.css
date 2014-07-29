@@ -1108,7 +1108,9 @@ td .minor {
   margin-bottom: 20px;
 }
 
+.media-explorer .transfer,
 .media-explorer .available {
+  width: 100%;
   height: 85%;
   overflow: scroll;
   float: left;
@@ -1130,7 +1132,7 @@ td .minor {
 .media-explorer .available .item.hide {
   display: none;
 }
-.media-explorer .item .image {
+.media-explorer .item .preview {
   position: relative;
   width: 100%;
   height: 250px;
@@ -1173,13 +1175,6 @@ td .minor {
   z-index: 20
 }
 
-
-.media-explorer .transfer {
-  float: left;
-  clear: both;
-  height: auto;
-  width: 100%;
-}
 
 .media-explorer .transfer .methods {
   text-align: center;

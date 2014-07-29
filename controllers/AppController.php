@@ -12,36 +12,20 @@
 
 namespace cms_core\controllers;
 
-// use lithium\core\Environment;
-use cms_media\models\MediaVersions;
-use cms_core\models\Assets;
 use lithium\net\http\Router;
 
 class AppController extends \cms_core\controllers\BaseController {
 
 	public function admin_api_discover() {
-		$data = [];
-
-/*
-		$scheme = $scheme ?: $this->request->is('ssl') ? 'https' : 'http';
-		$data['app'] = [
-			'base' => '/admin'
-		];
-		$data['media'] = [
-			'base' => MediaVersions::base($scheme)
-		];
-		$data['assets'] = [
-			'base' => Assets::base($scheme)
-		];
-		 */
 		$base = ['controller' => 'media', 'library' => 'cms_media', 'admin' => true];
-		$data['routes'] = [
+
+		$data = [
 			'media:index' => Router::match($base + ['action' => 'api_index'], $this->request),
 			'media:view' => Router::match($base + ['action' => 'api_view', 'id' => '__ID__'], $this->request),
+			'media:transfer-preflight' => Router::match($base + ['action' => 'api_transfer_preflight'], $this->request),
+			'media:transfer-meta' => Router::match($base + ['action' => 'api_transfer_meta'], $this->request),
 			'media:transfer' => Router::match($base + ['action' => 'api_transfer'], $this->request) . '?title=__TITLE__'
 		];
-
-		$data = $data['routes'];
 
 		$this->render(array('type' => $this->request->accepts(), 'data' => $data));
 	}

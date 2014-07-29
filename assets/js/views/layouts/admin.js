@@ -34,9 +34,6 @@ require(['jquery', 'list', 'nprogress', 'notify', 'domready!'], function($, List
       Progress.remove();
     }, 500);
   });
-  $(document).on('transfer:start', function() { Progress.start(); });
-//  $(document).on('transfer:progress', function(ev, data) { Progress.set(data); });
-  $(document).on('transfer:done', function(data) { Progress.done(); });
 
   //
   // Bridge between PHP flash messaging and JS notify.

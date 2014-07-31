@@ -53,7 +53,6 @@ Libraries::add('lithium');
 Libraries::add('app', ['default' => true]);
 
 require LITHIUM_APP_PATH . '/config/environment.php';
-
 require LITHIUM_APP_PATH . '/libraries/autoload.php';
 
 // Register any lithium libraries.
@@ -67,26 +66,22 @@ Libraries::add('cms_core', [
 ]);
 
 require LITHIUM_APP_PATH . '/config/connections.php';
-
-require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/errors.php';
-require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/action.php';
+require 'bootstrap/errors.php';
+require 'bootstrap/action.php';
 
 if (PHP_SAPI !== 'cli') {
-	require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/cache.php';
+	require 'bootstrap/cache.php';
 }
-require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/session.php';
-require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/g11n.php';
-require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/media.php';
-
+require 'bootstrap/session.php';
+require 'bootstrap/g11n.php';
+require 'bootstrap/media.php';
 require 'settings.php';
 
 if (PHP_SAPI === 'cli') {
-	require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/console.php';
+	require 'bootstrap/console.php';
 }
-
-require LITHIUM_LIBRARY_PATH . '/cms_core/config/bootstrap/auth.php';
-
-require LITHIUM_LIBRARY_PATH . '/cms_core/config/panes.php';
+require 'bootstrap/auth.php';
+require 'panes.php';
 
 // ------------------------------------------------------------------------------------------------
 

@@ -14,8 +14,10 @@ namespace cms_core\extensions\cms;
 
 use lithium\util\Set;
 use lithium\util\Inflector;
+use lithium\net\http\Router;
 use Exception;
 
+// This class is used to generate the overall admin navigation bars.
 class Panes extends \lithium\core\StaticObject {
 
 	protected static $_data = [];
@@ -154,12 +156,10 @@ class Panes extends \lithium\core\StaticObject {
 		$params = $request->params;
 		unset($params['args']);
 
-		$a = array_map('strtolower', $item['url']);
-		$b = array_map(function($v) {
-			return is_string($v) ? strtolower($v) : $v;
-		}, $params);
+		$a = Router::match($item['url'], $request);
+		$b = $request->url;
 
-		return !array_diff($a, $b);
+		return $a == $b;
 	}
 }
 

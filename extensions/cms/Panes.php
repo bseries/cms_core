@@ -55,6 +55,8 @@ class Panes extends \lithium\core\StaticObject {
 		}
 	}
 
+	// Returns registered groups with the active one set active.
+	// If an action is active inside a group the whole group itself becomes active.
 	public static function groups($request = null) {
 		$data = static::read();
 		$results = [];
@@ -74,26 +76,23 @@ class Panes extends \lithium\core\StaticObject {
 
 		// If we have a request, try to determine current active group.
 		if ($request) {
-			if (isset($request->params['id'])) {
-				$request = clone $request;
-				unset($request->params['id']);
-				$request->params['action'] = 'index';
-			}
+			$found = false;
 
 			foreach ($results as &$group) {
-				if ($group['actions'] !== false) {
-					// If an action is active the group itself is active.
-
-					foreach ($group['actions'] as &$action) {
-						if (static::_active($action, $request)) {
-							$group['active'] = $action['active'] = true;
-							break(2);
-						}
-					}
-				} elseif (static::_active($group, $request)) {
-					$group['active'] = true;
+				if (!$group['actions']) {
+					continue;
+				}
+				if (($key = static::_active($group['actions'], $request)) !== false) {
+					// We can simplify things here as we don't need to also set the actions active.
+					$found = $group['active'] = true;
 					break;
-
+				}
+			}
+			// As a fallback - and as there *must* be one active pane group match on
+			// the pane group urls directly (not their actions) i.e. dashboard.
+			if (!$found) {
+				if (($key = static::_active($results, $request)) !== false) {
+					$results[$key]['active'] = true;
 				}
 			}
 		}
@@ -106,6 +105,7 @@ class Panes extends \lithium\core\StaticObject {
 		return $results;
 	}
 
+	// If $group is `true` return actions for the currently active group.
 	public static function actions($group, $request = null) {
 		if ($group === true) {
 			foreach (static::groups($request) as $item) {
@@ -114,7 +114,7 @@ class Panes extends \lithium\core\StaticObject {
 					break;
 				}
 			}
-			if ($group === true) {
+			if ($group === true && $request) { // Variable seems unused.
 				throw new Exception("Could not auto-detect active group.");
 			}
 		} elseif (!isset(static::$_data[$group])) {
@@ -127,8 +127,8 @@ class Panes extends \lithium\core\StaticObject {
 
 		if ($request) {
 			// If we have a request, try to determine current active group.
-			foreach ($results as &$result) {
-				$result['active'] = static::_active($result, $request);
+			if (($key = static::_active($results, $request)) !== false) {
+				$results[$key]['active'] = true;
 			}
 		}
 
@@ -149,17 +149,28 @@ class Panes extends \lithium\core\StaticObject {
 		return static::$_data[$group];
 	}
 
-	protected static function _active($item, $request) {
-		if (is_string($item['url'])) {
-			return false;
+	// Best (longest) match.
+	// Each item in $data must have a url under the `url` key.
+	protected static function _active($data, $request) {
+		$map = [];
+		foreach ($data as $key => $item) {
+			if (is_string($item['url']) && strpos($item['url'], 'http') !== false) {
+				// Already skip external urls here to make search set smaller.
+				continue;
+			}
+			$map[$key] = Router::match($item['url'], $request);
 		}
-		$params = $request->params;
-		unset($params['args']);
-
-		$a = Router::match($item['url'], $request);
-		$b = $request->url;
-
-		return $a == $b;
+		uasort($map, function($a, $b) {
+			// Sort by length, longest comes first.
+			return strlen($b) - strlen($a);
+		});
+		foreach ($map as $key => $value) {
+			// Request URL is the more detailed URL. Item URLs may be a subset of it.
+			if (strpos($request->url, $value) !== false) {
+				return $key;
+			}
+		}
+		return false;
 	}
 }
 

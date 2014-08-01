@@ -76,6 +76,17 @@ Router::connect('/admin/tokens/{:action}/{:args}', [
 	'controller' => 'tokens', 'library' => 'cms_core', 'admin' => true
 ], $persist);
 
+// Nodes
+Router::connect('/admin/nodes/{:action}:{:nodeType}', [
+	'controller' => 'nodes', 'library' => 'cms_core', 'admin' => true
+], $persist);
+Router::connect('/admin/nodes/{:action}/{:id:[0-9]+}', [
+	'controller' => 'nodes', 'library' => 'cms_core', 'admin' => true
+], $persist);
+Router::connect('/admin/nodes/{:action}/{:args}', [
+	'controller' => 'nodes', 'library' => 'cms_core', 'admin' => true
+], $persist);
+
 // Addresses
 Router::connect('/admin/addresses/{:action}/{:id:[0-9]+}', [
 	'controller' => 'addresses', 'library' => 'cms_core', 'admin' => true

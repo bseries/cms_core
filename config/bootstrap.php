@@ -87,6 +87,7 @@ require 'panes.php';
 
 require 'media.php';
 require 'widgets.php';
+require 'nodes.php';
 
 use li3_access\security\Access;
 

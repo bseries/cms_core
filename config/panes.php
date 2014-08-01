@@ -54,4 +54,9 @@ Panes::registerActions('cms_core', 'external', [
 	}
 ]);
 
+$base = ['controller' => 'nodes', 'library' => 'cms_core', 'admin' => true];
+Panes::registerActions('cms_core', 'authoring', [
+	$t('Nodes') => ['action' => 'index'] + $base
+]);
+
 ?>

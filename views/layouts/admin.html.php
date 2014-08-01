@@ -3,6 +3,7 @@
 use lithium\core\Environment;
 use li3_flash_message\extensions\storage\FlashMessage;
 use lithium\security\Auth;
+use lithium\util\Inflector;
 use \DateTime;
 use \IntlDateFormatter;
 use cms_core\extensions\cms\Panes;
@@ -147,18 +148,28 @@ if (!isset($meta)) {
 					<?php endif ?>
 				</div>
 			</header>
+			<?php
+				$panes = Panes::read($this->_request);
+				$pane = null;
+				foreach ($panes as $item) {
+					if ($item['active']) {
+						$pane = $item;
+						break;
+					}
+				}
+			?>
 			<div class="content-wrapper clearfix">
 				<nav class="nav-panes-actions tabs-h">
-					<?php foreach (Panes::actions(true, $this->_request) as $action): ?>
-						<?= $this->html->link($action['title'], $action['url'], [
-							'class' => $action['active'] ? 'active tab-h' : 'tab-h'
+				<?php foreach ($pane['panes'] as $item): ?>
+						<?= $this->html->link($item['title'], $item['url'], [
+							'class' => $item['active'] ? 'active tab-h' : 'tab-h'
 						]) ?>
 					<?php endforeach ?>
 				</nav>
 				<nav class="nav-panes-groups tabs-v">
-					<?php foreach (Panes::groups($this->_request) as $group): ?>
-						<?= $this->html->link($group['title'], $group['url'], [
-							'class' => 'tab-v tab-' . str_replace('_', '-', $group['name']) .  ($group['active'] ? ' active' : null)
+					<?php foreach ($panes as $name => $item): ?>
+						<?= $this->html->link($item['title'], $item['url'], [
+							'class' => 'tab-v tab-' . strtolower(Inflector::slug($item['name'])) .  ($item['active'] ? ' active' : null)
 						]) ?>
 					<?php endforeach ?>
 				</nav>

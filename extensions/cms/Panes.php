@@ -13,140 +13,83 @@
 namespace cms_core\extensions\cms;
 
 use lithium\util\Set;
-use lithium\util\Inflector;
 use lithium\net\http\Router;
 use Exception;
 
 // This class is used to generate the overall admin navigation bars.
+// Panes may have subpanes but just one level deep. Actions of panes
+// are not handled intentionally.
 class Panes extends \lithium\core\StaticObject {
 
 	protected static $_data = [];
 
-	public static function registerGroup($library, $name, array $options = []) {
+	public static function register($name, array $options = []) {
+		list($primary, $secondary) = explode('.', $name, 2) + [null, null];
+
 		$options += [
-			'title' => Inflector::humanize($name),
+			'title' => $name,
 			'url' => null,
-			'actions' => [],
 			'active' => null,
 			// The higher the weight the higher the possible position.
 			// Should be a number between 0-100 inclusive.
-			'order' => 0
+			'order' => 1,
+			'panes' => $secondary ? false : []
 		];
 		if (is_callable($options['url'])) {
 			$options['url'] = $options['url']();
 		}
-		static::$_data[$name] = compact('name', 'library') + $options;
-	}
-
-	public static function registerActions($library, $group, array $actions) {
-		if (!isset(static::$_data[$group])) {
-			throw new Exception("Pane group `{$group}` not defined.");
-		}
-		if (static::$_data[$group]['actions'] === false) {
-			throw new Exception("Pane group `{$group}` doesn't accept actions.");
-		}
-		foreach ($actions as $title => $url) {
-			static::$_data[$group]['actions'][] = [
-				'title' => $title,
-				'url' => is_callable($url) ? $url() : $url,
-				'library' => $library,
-				'active' => null
-			];
+		if ($secondary) {
+			static::$_data[$primary]['panes'][$secondary] = compact('name') + $options;
+		} else {
+			if (isset(static::$_data[$primary])) {
+				static::$_data[$primary] += compact('name') + $options;
+			} else {
+				static::$_data[$primary] = compact('name') + $options;
+			}
 		}
 	}
 
-	// Returns registered groups with the active one set active.
-	// If an action is active inside a group the whole group itself becomes active.
-	public static function groups($request = null) {
-		$data = static::read();
-		$results = [];
+	// Only if $request is provided we can determine current active.
+	public static function read($request) {
+		foreach (static::$_data as $item) {
+			if (!$item['url']) {
+				if ($item['panes']) {
+					// Some primary panes are just predefined and may or may not have sub-panes
+					// depending if modules register sub-panes for it.
+					// continue;
 
-		foreach ($data as $item) {
-			if ($item['actions'] === [] && !$item['url']) {
-				// Skip groups which should have actions but don't have one.
-				continue;
+					// Use first action url as url for group.
+					// FIXME Move into register.
+					$current = reset($item['panes']);
+					$item['url'] = $current['url'];
+				}
 			}
-			if ($item['actions'] !== false && !$item['url']) {
-				// Use first action url as url for group.
-				$item['url'] = $item['actions'][0]['url'];
-			}
-
 			$results[] = $item;
 		}
-
-		// If we have a request, try to determine current active group.
-		if ($request) {
-			$found = false;
-
-			foreach ($results as &$group) {
-				if (!$group['actions']) {
-					continue;
-				}
-				if (($key = static::_active($group['actions'], $request)) !== false) {
-					// We can simplify things here as we don't need to also set the actions active.
-					$found = $group['active'] = true;
-					break;
-				}
-			}
-			// As a fallback - and as there *must* be one active pane group match on
-			// the pane group urls directly (not their actions) i.e. dashboard.
-			if (!$found) {
-				if (($key = static::_active($results, $request)) !== false) {
-					$results[$key]['active'] = true;
-				}
-			}
-		}
-
-		// Sort groups mainly by order than library and title.
-		// $results = Set::sort($results, '/title');
-		// $results = Set::sort($results, '/library');
 		$results = Set::sort($results, '/order', 'desc');
 
-		return $results;
-	}
-
-	// If $group is `true` return actions for the currently active group.
-	public static function actions($group, $request = null) {
-		if ($group === true) {
-			foreach (static::groups($request) as $item) {
-				if ($item['active']) {
-					$group = $item['name'];
-					break;
-				}
+		$found = false;
+		foreach ($results as &$pane) {
+			if (!$pane['panes']) {
+				continue;
 			}
-			if ($group === true && $request) { // Variable seems unused.
-				throw new Exception("Could not auto-detect active group.");
-			}
-		} elseif (!isset(static::$_data[$group])) {
-			throw new Exception("Pane group `{$group}` not defined.");
-		}
-		if (static::$_data[$group]['actions'] === false) {
-			return [];
-		}
-		$results = static::$_data[$group]['actions'];
+			// While we're here sort subpanes.
+			// FIXME Does not work, why?
+			// $pane['panes'] = Set::sort($pane['panes'], '/order', 'desc');
 
-		if ($request) {
-			// If we have a request, try to determine current active group.
+			if (($key = static::_active($pane['panes'], $request)) !== false) {
+				// We can simplify things here as we don't need to also set the sub-panes active.
+				$found = $pane['panes'][$key]['active'] = $pane['active'] = true;
+				break;
+			}
+		}
+		// For secondary panes and primary panes s a fallback i.e. dashboard.
+		if (!$found) {
 			if (($key = static::_active($results, $request)) !== false) {
 				$results[$key]['active'] = true;
 			}
 		}
-
-		// Sort actions mainly by library than title.
-		// $results = Set::sort($results, '/title');
-		$results = Set::sort($results, '/library');
-
 		return $results;
-	}
-
-	public static function read($group = null) {
-		if (!$group) {
-			return static::$_data;
-		}
-		if (!isset(static::$_data[$group])) {
-			throw new Exception("Pane group `{$group}` not defined.");
-		}
-		return static::$_data[$group];
 	}
 
 	// Best (longest) match.
@@ -154,7 +97,7 @@ class Panes extends \lithium\core\StaticObject {
 	protected static function _active($data, $request) {
 		$map = [];
 		foreach ($data as $key => $item) {
-			if (is_string($item['url']) && strpos($item['url'], 'http') !== false) {
+			if (!$item['url'] || (is_string($item['url']) && strpos($item['url'], 'http') !== false)) {
 				// Already skip external urls here to make search set smaller.
 				continue;
 			}

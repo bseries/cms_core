@@ -10,10 +10,13 @@ $this->set([
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> use-list">
 
+	<div class="top-actions">
+		<?= $this->html->link($t('new address'), ['action' => 'add', 'library' => 'cms_core'], ['class' => 'button add']) ?>
+	</div>
+
 	<div class="help">
 		<?= $t("Addresses can be owned by a user but addresses without an owner are possible, too.") ?>
 	</div>
-
 
 	<?php if ($data->count()): ?>
 	<table>

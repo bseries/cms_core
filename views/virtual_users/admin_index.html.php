@@ -11,6 +11,11 @@ $this->set([
 
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> use-list">
+
+	<div class="top-actions">
+		<?= $this->html->link($t('new virtual user'), ['action' => 'add', 'library' => 'cms_core'], ['class' => 'button add']) ?>
+	</div>
+
 	<div class="help">
 		<?= $t("Virtual users are users which you want to track and associated with other items (i.e. an order), These users didn't sign up directly but may have been creating a temporary account.") ?>
 	</div>

@@ -11,7 +11,7 @@ $this->set([
 
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> use-list">
-	<div class="actions">
+	<div class="top-actions">
 		<?php foreach (Nodes::types() as $name => $type): ?>
 			<?= $this->html->link(
 				$t('New {:type}', ['type' => $type['title']]),

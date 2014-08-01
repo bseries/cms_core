@@ -411,6 +411,12 @@ footer.main {
   color: var(--color-dim-black);
 }
 
+.top-actions {
+  text-align: right;
+  margin-top: -60px;
+  margin-bottom: 60px;
+}
+
 /* Content
 ---------------------------------------------------------------- */
 #content {

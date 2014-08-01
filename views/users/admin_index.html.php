@@ -12,6 +12,10 @@ $this->set([
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> use-list">
 
+	<div class="top-actions">
+		<?= $this->html->link($t('new user'), ['action' => 'add', 'library' => 'cms_core'], ['class' => 'button add']) ?>
+	</div>
+
 	<div class="help">
 	<?php if (Features::enabled('user.sendActivationMail')): ?>
 		<?= $t('The user will be notified by e-mail when her account is activated.') ?>

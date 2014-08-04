@@ -64,9 +64,4 @@ Panes::register('external.ga', [
 	}
 ]);
 
-Panes::register('authoring.nodes', [
-	'title' => $t('Nodes'),
-	'url' => ['controller' => 'nodes', 'action' => 'index', 'library' => 'cms_core', 'admin' => true]
-]);
-
 ?>

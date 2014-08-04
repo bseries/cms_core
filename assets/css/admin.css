@@ -493,12 +493,8 @@ textarea {
   font-family: "Anonymous Pro", Helvetica, Arial, sans-serif;
   color: var(--color-dim-black);
   border: 2px solid var(--color-gray-dark);
-  padding: 10px 10px 8px 10px;
-}
 
-input,
-select,
-textarea {
+  padding: 10px 10px 8px 10px;
   width: 100%;
   max-width: 600px;
   background-color: white;
@@ -682,7 +678,6 @@ a.button {
   text-decoration: none;
 }
 
-button.login, .button.login,
 button.save, .button.save {
   color: white;
   background-color: var(--color-ci-green);
@@ -691,6 +686,11 @@ button.delete,
 .button.delete {
   color: white;
   background-color: var(--color-ci-red);
+}
+button.login, .button.login {
+  width: 100%;
+  color: white;
+  background-color: var(--color-dim-black);
 }
 
 button,

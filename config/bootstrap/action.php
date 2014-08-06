@@ -70,6 +70,7 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) use ($errorRespo
 	$request = $params['request'];
 
 	$message = sprintf('%s %s', $request->method, $request->url);
+
 	if (in_array($request->method, ['POST', 'PUT'])) {
 		$clean = $request->data;
 
@@ -79,6 +80,8 @@ Dispatcher::applyFilter('run', function($self, $params, $chain) use ($errorRespo
 					$v = '[too large - '. strlen($v) . ' bytes suppressed]';
 				}
 			}
+		} elseif (is_string($clean) && strlen($clean) > 500) {
+			$clean = '[too large - '. strlen($clean) . ' bytes suppressed]';
 		}
 
 		if (isset($clean['password'])) {

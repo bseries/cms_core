@@ -736,10 +736,12 @@ button,
   height: 35px;
   text-align: center;
   display: inline-block;
-  padding: 10px 15px;
+  padding: 10px 12px;
+  line-height: 20px;
   color: var(--color-dim-black);
   border: none;
   background: var(--color-gray-dark);
+  vertical-algin: top;
 }
 button:hover,
 .button:hover {
@@ -757,7 +759,8 @@ button.large,
   height: 55px;
   font-weight: bold;
   font-size: var(--font-size-gamma);
-  padding: 17px 25px 16px;
+  padding: 16px 25px;
+  line-height: 25px;
 }
 
 /* Editor

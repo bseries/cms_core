@@ -737,7 +737,7 @@ button,
   text-align: center;
   display: inline-block;
   padding: 10px 12px;
-  line-height: 20px;
+  line-height: 18px;
   color: var(--color-dim-black);
   border: none;
   background: var(--color-gray-dark);
@@ -760,7 +760,7 @@ button.large,
   font-weight: bold;
   font-size: var(--font-size-gamma);
   padding: 16px 25px;
-  line-height: 25px;
+  line-height: 28px;
 }
 
 /* Editor
@@ -1146,6 +1146,7 @@ td .minor {
 }
 .media-explorer .blocktabs-h {
   float: left;
+  width: 60%;
 }
 .media-explorer .search {
   float: right;
@@ -1380,7 +1381,7 @@ td .minor {
   font-size: var(--font-size-alpha);
   max-width: 300px;
   margin: 0 auto;
-  padding-top: 26%;
+  padding-top: 20%;
   position: absolute;
   left: calc(50% - 150px);
   text-align: center;

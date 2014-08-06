@@ -732,6 +732,7 @@ button.login, .button.login {
 
 button,
 .button {
+  outline: 0;
   text-transform: capitalize;
   height: 35px;
   text-align: center;
@@ -1381,7 +1382,7 @@ td .minor {
   font-size: var(--font-size-alpha);
   max-width: 300px;
   margin: 0 auto;
-  padding-top: 20%;
+  padding-top: 23%;
   position: absolute;
   left: calc(50% - 150px);
   text-align: center;

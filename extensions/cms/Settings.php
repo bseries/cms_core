@@ -18,10 +18,7 @@ class Settings extends \lithium\core\StaticObject {
 
 	protected static $_data = [];
 
-	protected static $_sources = [];
-
-	public static function register($source, $name, $default = null) {
-		static::$_sources[$name] = $source;
+	public static function register($name, $default = null) {
 		static::$_data = Set::merge(static::$_data, Set::expand([$name => $default]));
 	}
 

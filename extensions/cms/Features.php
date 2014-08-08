@@ -17,10 +17,7 @@ class Features extends \lithium\core\StaticObject {
 
 	protected static $_data = [];
 
-	protected static $_sources = [];
-
-	public static function register($library, $name, $default) {
-		static::$_sources[$name] = $library;
+	public static function register($name, $default) {
 		static::$_data[$name] = $default;
 	}
 

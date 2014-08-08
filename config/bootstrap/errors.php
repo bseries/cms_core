@@ -21,7 +21,6 @@ use lithium\action\Request;
 use lithium\action\Response;
 use lithium\net\http\Media;
 
-// require LITHIUM_LIBRARY_PATH . '/lithium/analysis/logger/adapter/File.php';
 $path = dirname(Libraries::get(true, 'path'));
 ini_set('error_reporting', E_ALL);
 
@@ -120,16 +119,18 @@ $exceptionHandler = function($exception, $return = false) use ($handler) {
 // set_error_handler($errorHandler);
 // set_exception_handler($exceptionHandler);
 
-Logger::config([
-	'default' => [
-		'adapter' => 'File',
-		'path' => $path . '/log',
-		'timestamp' => '[Y-m-d H:i:s]',
-		// Log everything into one file.
-		'file' => function($data, $config) { return 'app.log'; },
-		'priority' => ['debug', 'error', 'notice', 'warning']
-	],
-]);
+if (USE_LOGGING) {
+	Logger::config([
+		'default' => [
+			'adapter' => 'File',
+			'path' => $path . '/log',
+			'timestamp' => '[Y-m-d H:i:s]',
+			// Log everything into one file.
+			'file' => function($data, $config) { return 'app.log'; },
+			'priority' => ['debug', 'error', 'notice', 'warning']
+		],
+	]);
+}
 
 // Handle errors rising from exceptions.
 $errorResponse = function($request, $code) {

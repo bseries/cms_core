@@ -19,17 +19,28 @@ use lithium\storage\Session;
 use lithium\data\Connections;
 use lithium\data\source\Database;
 
-if (!Memcache::enabled()) {
-	throw new Exception('Memcache not enabled.');
+if (USE_MEMCACHED) {
+	if (!Memcache::enabled()) {
+		throw new Exception("Memcached not available.");
+	}
+	Cache::config([
+		'default' => [
+			'scope' => PROJECT_NAME . ':' . PROJECT_VERSION,
+			'adapter' => 'Memcache',
+			'host' => '127.0.0.1:11211'
+		]
+	]);
+} else {
+	if (!is_writable($path = Libraries::get(true, 'resources') . '/tmp/cache')) {
+		throw new Exception("Cache path `{$path}` is not writable.");
+	}
+	Cache::config([
+		'default' => [
+			'adapter' => 'File',
+			'strategies' => ['Serializer']
+		]
+	]);
 }
-
-Cache::config([
-	'default' => [
-		'scope' => PROJECT_NAME . ':' . PROJECT_VERSION,
-		'adapter' => 'Memcache',
-		'host' => '127.0.0.1:11211'
-	]
-]);
 
 Dispatcher::applyFilter('run', function($self, $params, $chain) {
 	if (Environment::is('development')) {

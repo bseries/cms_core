@@ -30,10 +30,6 @@ Panes::register('external', [
 	'title' => $t('External'),
 	'order' => 15
 ]);
-Panes::register('development', [
-	'title' => $t('Development'),
-	'order' => 0
-]);
 Panes::register('authoring', [
 	'title' => $t('Authoring'),
 	'order' => 90

@@ -22,8 +22,8 @@ class Users extends \lithium\console\Command {
 		$data['password'] = $cleartextPassword = $password ?: $this->in('Password');
 		$data['role'] = $role ?: $this->in('Role');
 
-
 		$data['password'] = UsersModel::hashPassword($data['password']);
+		$data['is_active'] = true;
 
 		$user = UsersModel::create($data);
 		$result = $user->save(null, ['validate' => false]);

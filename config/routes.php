@@ -84,10 +84,7 @@ Router::connect('/admin/addresses/{:action}/{:args}', [
 	'controller' => 'addresses', 'library' => 'cms_core', 'admin' => true
 ], $persist);
 
-// Settings, Misc
-Router::connect('/admin/settings', [
-	'controller' => 'settings', 'action' => 'index', 'library' => 'cms_core', 'admin' => true
-], $persist);
+// Misc
 Router::connect('/admin/support', [
 	'controller' => 'pages', 'action' => 'support', 'library' => 'cms_core', 'admin' => true
 ], $persist);

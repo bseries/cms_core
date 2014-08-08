@@ -24,10 +24,6 @@ class PagesController extends \cms_core\controllers\BaseController {
 	}
 
 	public function admin_support() {}
-
-	public function admin_styleguide() {
-		$this->_render['layout'] = 'default';
-	}
 }
 
 ?>

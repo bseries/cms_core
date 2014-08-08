@@ -1380,11 +1380,11 @@ td .minor {
 .media-explorer .dragging-message {
   color: var(--color-gray-darker);
   font-size: var(--font-size-alpha);
-  max-width: 300px;
+  width: 440px;
   margin: 0 auto;
-  padding-top: 23%;
+  padding-top: 21%;
   position: absolute;
-  left: calc(50% - 150px);
+  left: calc(50% - 220px);
   text-align: center;
 }
 .media-explorer .drag-message {

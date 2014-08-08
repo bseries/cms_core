@@ -23,6 +23,9 @@
         "unionofrad/lithium": "dev-dev",
         "composer/installers": "~1.0"
     },
+    "suggests": {
+      "ext-memcached": "Enables highly-performant object caching."
+    },
     "repositories": [
       {
         "type": "vcs",

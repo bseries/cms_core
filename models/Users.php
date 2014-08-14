@@ -82,7 +82,6 @@ class Users extends \cms_core\models\Base {
 				'message' => $t('This field cannot be empty.')
 			]
 		];
-
 		$model->validates['email'] = [
 			[
 				'notEmpty',

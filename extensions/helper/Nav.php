@@ -65,7 +65,8 @@ class Nav extends \lithium\template\Helper {
 			'active' => null,
 			'title' => null,
 			'rel' => null,
-			'target' => null
+			'target' => null,
+			'nested' => null
 		];
 		$options = array_merge($default, $options);
 		$this->_items[$section][] = [
@@ -79,7 +80,8 @@ class Nav extends \lithium\template\Helper {
 			'class' => $options['class'],
 			'escape' => $options['escape'],
 			'active' => $options['active'],
-			'_title' => $options['title'] // This obviously is a hack :)
+			'_title' => $options['title'], // This obviously is a hack :)
+			'nested' => $options['nested']
 		];
 	}
 
@@ -165,7 +167,7 @@ class Nav extends \lithium\template\Helper {
 			]) + array_filter($item['link']);
 
 			if ($options['itemTag']) {
-				$ItemAttributes = array_filter([
+				$attributes = array_filter([
 					'class' => $item['class'],
 					'id' => $item['id']
 				]);
@@ -180,6 +182,10 @@ class Nav extends \lithium\template\Helper {
 				$attributes = $this->_attributes($attributes);
 				$out .= "<{$options['itemTag']}{$attributes}>";
 				$out .= $this->_context->html->link($item['title'], $item['url'], $linkOptions);
+
+				if ($item['nested']) {
+					$out .= $this->generate($item['nested'], ['class' => $options['class'] . '-nested'] + $options);
+				}
 				$out .= "</{$options['itemTag']}>";
 			} else {
 				$attributes = array_filter([
@@ -194,6 +200,10 @@ class Nav extends \lithium\template\Helper {
 					}
 				}
 				$out .= $this->_context->html->link($item['title'], $item['url'], $attributes);
+
+				if ($item['nested']) {
+					$out .= $this->generate($item['nested'], $options);
+				}
 			}
 		}
 

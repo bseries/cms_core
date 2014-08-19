@@ -65,6 +65,27 @@ require(['jquery', 'list', 'nprogress', 'notify', 'domready!'], function($, List
   //
   // Table sorting/filtering
   //
+
+  var ListPagination = {
+    init: function(list) {
+      if (list.items.length > list.page) {
+        var $container = $(list.listContainer);
+        var $more = $('<a href="#more" class="button more">more</a>');
+        $container.append($more);
+
+        $more.on('click', function(ev) {
+          ev.preventDefault();
+          list.show(1, list.page + 50);
+
+          if (list.items.length < list.page) {
+            $more.remove();
+          }
+        });
+      }
+    },
+    name: "pagination"
+  };
+
   var $list = $('.use-list');
   if ($list.length) {
     var listValueNames = [];
@@ -72,11 +93,14 @@ require(['jquery', 'list', 'nprogress', 'notify', 'domready!'], function($, List
     $list.find('thead .list-sort').each(function() {
       listValueNames.push($(this).data('sort'));
     });
-
     var list = new List($list.get(0), {
+      page: 50,
+      // Does not work.
+      // indexAsync: true,
       searchClass: 'list-search',
       sortClass: 'list-sort',
-      valueNames: listValueNames
+      valueNames: listValueNames,
+      plugins: [ListPagination]
     });
   }
 

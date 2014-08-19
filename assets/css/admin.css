@@ -1442,6 +1442,11 @@ td .minor {
 .list-sort.desc:after {
   content: "⌃";
 }
+.use-list .more {
+  text-align: center;
+  display: block;
+  margin-top: 2em;
+}
 
 /* Sortable
 -------------------------------------------------------------- */

@@ -222,17 +222,16 @@ require(['jquery', 'list', 'nprogress', 'notify', 'domready!'], function($, List
   //
   // Automatically bind sortables.
   //
-  var $sortableElement = $('.use-manual-sorting');
-  if ($sortableElement.length) {
-    require(['sortable'],
-      function(Sortable) {
-        new Sortable($sortableElement.get(0), {
-          store: null,
-          ghostClass: 'sortable-placeholder',
-          draggable: 'tr',
-          onUpdate: function(ev) {
+  var sortableElement = $('.use-manual-sorting');
+  if (sortableElement.length) {
+    require(['jquery', 'jqueryUi'],
+      function($) {
+        sortableElement.sortable({
+          placeholder: 'sortable-placeholder',
+          items: '> tr',
+          update: function(ev, ui) {
             var ids = [];
-            $sortableElement.find('tr').each(function(k, v) {
+            sortableElement.find('tr').each(function(k, v) {
               ids.push($(v).data('id'));
             });
             $.ajax({
@@ -247,11 +246,7 @@ require(['jquery', 'list', 'nprogress', 'notify', 'domready!'], function($, List
               $.notify('Stellen Sie sicher, dass AdBlock für diese Domain deaktiviert ist.');
             });
           }
-         });
-         $sortableElement.find('tr').on('dragstart', function(ev) {
-          // Disable drag image.
-          ev.originalEvent.dataTransfer.setDragImage($('<div/>').get(0), 0, 0);
-         });
+        });
     });
   }
 

@@ -955,6 +955,7 @@ form .help {
   max-height: 100%;
   vertical-align: top;
 }
+.media-attachment .sortable-placeholder,
 .media-attachment .media-item {
   position: relative;
   vertical-align: top;
@@ -1450,15 +1451,14 @@ td .minor {
 
 /* Sortable
 -------------------------------------------------------------- */
-[draggable=true] {
+.ui-sortable-helper {
  cursor: -moz-grabbing;
  cursor: -webkit-grabbing;
+ -webkit-transform: rotate(3deg);
+ -webkit-backface-visibility: hidden;
+ transform: rotate(3deg);
 }
 .sortable-placeholder {
-  transform: rotate(3deg);
-  -webkit-backface-visibility: hidden;
-}
-.sortable-placeholder td {
   background: #f8f8f8;
 }
 

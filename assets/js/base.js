@@ -38,7 +38,6 @@ requirejs.config({
     'modal': 'cms-core/js/modal',
     'nprogress': 'cms-core/js/nprogress',
     'handlebars': 'cms-core/js/handlebars',
-    'sortable': 'cms-core/js/sortable',
     'list': 'cms-core/js/list',
     'listPagination': 'cms-core/js/listPagination',
 
@@ -47,6 +46,10 @@ requirejs.config({
   },
   shim: {
     'jquery': {
+      exports: '$'
+    },
+    'jqueryUi': {
+      deps: ['jquery'],
       exports: '$'
     },
 

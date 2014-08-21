@@ -60,7 +60,7 @@ class Assets extends \lithium\template\Helper {
 		if (strpos($path, '://') !== false) {
 			return $path;
 		}
-		$version = Settings::read('project.version');
+		$version = PROJECT_VERSION;
 		return $this->base() . '/v:' . $version . $path . $suffix;
 	}
 
@@ -158,7 +158,7 @@ class Assets extends \lithium\template\Helper {
 		$library = str_replace('_', '-', $library);
 		$base = parse_url(AssetsModel::base('file'), PHP_URL_PATH) . '/' . $library;
 
-		if (file_exists($a = "{$base}/js/{$file}.js")) {
+		if (file_exists("{$base}/js/{$file}.js")) {
 			return "/{$library}/js/{$file}";
 		}
 	}

@@ -13,8 +13,6 @@
 use cms_core\extensions\cms\Settings;
 use cms_core\extensions\cms\Features;
 
-Settings::register('project.name', PROJECT_NAME);
-Settings::register('project.version', PROJECT_VERSION);
 Settings::register('site.title');
 
 // FIXME Use a pseudo number generator seeded with project

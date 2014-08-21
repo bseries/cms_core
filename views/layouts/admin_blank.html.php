@@ -3,8 +3,6 @@
 use lithium\core\Environment;
 use li3_flash_message\extensions\storage\FlashMessage;
 use lithium\security\Auth;
-use \DateTime;
-use \IntlDateFormatter;
 use cms_core\extensions\cms\Settings;
 
 $site = Settings::read('site');

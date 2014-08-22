@@ -20,6 +20,7 @@
         "uor/li3_flash_message": "dev-master",
         "atelierdisko/li3_mailer": "dev-master",
         "atelierdisko/li3_taggable": "dev-master",
+        "atelierdisko/jsend": "0.5.*",
         "unionofrad/lithium": "dev-dev",
         "composer/installers": "~1.0"
     },

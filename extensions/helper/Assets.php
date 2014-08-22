@@ -91,7 +91,7 @@ class Assets extends \lithium\template\Helper {
 			// Filter out any non-cms libraries, then sort.
 			$libraries = Libraries::get();
 			$libraries = array_filter($libraries, function($a) {
-				return preg_match('/^(cms|ecommerce)_/', $a['name']) || $a['name'] === 'app';
+				return preg_match('/^(cms|ecommerce|billing)_/', $a['name']) || $a['name'] === 'app';
 			});
 			uasort($libraries, function($a, $b) {
 				// Keep app last...

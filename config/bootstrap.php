@@ -110,32 +110,32 @@ $rules->add('any', function($user, $entity, $options) {
 // Must come after cms_core but before any other libraries.
 Libraries::add('cms_media');
 
-// Register any cms_ libraries left.
-foreach (glob(LITHIUM_LIBRARY_PATH . '/cms_*') as $item) {
-	if (basename($item) === 'cms_core' || basename($item) === 'cms_media') {
+// Continue loading and bootstrapping modules. Certain modules may already been loaded. These
+// must be skipped. Also we load the module types in order. Always load core modules first.
+
+$modules = glob(
+	LITHIUM_LIBRARY_PATH . '/{cms,ecommerce,billing}_*',
+	GLOB_BRACE | GLOB_NOSORT | GLOB_ONLYDIR
+);
+// Alphabetically sort entriesbut always put _core modules top.
+uasort($modules, function($a, $b) {
+	if (strpos($a, '_core') !== false) {
+		return -1;
+	}
+	if (strpos($b, '_core') !== false) {
+		return 1;
+	}
+	return strcmp($a, $b);
+});
+$modules = array_map('basename', $modules);
+
+foreach ($modules as $name) {
+	if (Libraries::get($name)) {
+		// Certain modules may already been loaded (i.e. cms_core) during the bootstrap
+		// process above. Prevent loading them and their config files a second time.
 		continue;
 	}
-	Libraries::add(basename($item));
+	Libraries::add($name);
 }
-
-// Register any ecommerce_  and billing_ libraries.
-foreach (['ecommerce', 'billing'] as $name) {
-	if (is_dir(LITHIUM_LIBRARY_PATH .'/' . $name . '_core')) {
-		Libraries::add('ecommerce_core');
-
-		foreach (glob(LITHIUM_LIBRARY_PATH . '/' . $name . '_*') as $item) {
-			if (basename($item) === $name . '_core') {
-				continue;
-			}
-			Libraries::add(basename($item));
-		}
-	}
-}
-
-// TODO Refactor these into autoloaaded packages once
-// they have enough contents.
-Libraries::add('jsend', array(
-	'path' => dirname(__DIR__) . '/libraries/jsend/src'
-));
 
 ?>

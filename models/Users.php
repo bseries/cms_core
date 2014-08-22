@@ -16,7 +16,7 @@ use lithium\util\Validator;
 use lithium\security\Password;
 use lithium\g11n\Message;
 use cms_core\models\Addresses;
-use cms_billing\models\TaxZones;
+use billing_core\models\TaxZones;
 use cms_core\extensions\cms\Settings;
 use cms_core\extensions\cms\Features;
 use avatar\Pattern as Avatar;

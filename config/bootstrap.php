@@ -118,15 +118,17 @@ foreach (glob(LITHIUM_LIBRARY_PATH . '/cms_*') as $item) {
 	Libraries::add(basename($item));
 }
 
-// Register any ecommerce_ libraries.
-if (is_dir(LITHIUM_LIBRARY_PATH .'/ecommerce_core')) {
-	Libraries::add('ecommerce_core');
+// Register any ecommerce_  and billing_ libraries.
+foreach (['ecommerce', 'billing'] as $name) {
+	if (is_dir(LITHIUM_LIBRARY_PATH .'/' . $name . '_core')) {
+		Libraries::add('ecommerce_core');
 
-	foreach (glob(LITHIUM_LIBRARY_PATH . '/ecommerce_*') as $item) {
-		if (basename($item) === 'ecommerce_core') {
-			continue;
+		foreach (glob(LITHIUM_LIBRARY_PATH . '/' . $name . '_*') as $item) {
+			if (basename($item) === $name . '_core') {
+				continue;
+			}
+			Libraries::add(basename($item));
 		}
-		Libraries::add(basename($item));
 	}
 }
 

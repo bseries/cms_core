@@ -19,7 +19,6 @@ use cms_core\models\Addresses;
 use billing_core\models\TaxZones;
 use cms_core\extensions\cms\Settings;
 use cms_core\extensions\cms\Features;
-use avatar\Pattern as Avatar;
 use cms_core\models\Assets;
 
 class Users extends \cms_core\models\Base {

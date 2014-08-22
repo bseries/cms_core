@@ -137,8 +137,5 @@ foreach (['ecommerce', 'billing'] as $name) {
 Libraries::add('jsend', array(
 	'path' => dirname(__DIR__) . '/libraries/jsend/src'
 ));
-Libraries::add('avatar', array(
-	'path' => dirname(__DIR__) . '/libraries/avatar/src'
-));
 
 ?>

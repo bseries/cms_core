@@ -26,20 +26,17 @@ class Widgets extends \lithium\core\StaticObject {
 
 	protected static $_data = [];
 
-	protected static $_sources = [];
-
-	public static function register($library, $name, $inner, array $options = []) {
+	public static function register($name, $inner, array $options = []) {
+		if (func_num_args() > 3) {
+			trigger_error("Library parameter is deprecated (widget $name).", E_USER_DEPRECATED);
+			return;
+		}
 		$options += [
 			'type' => null,
 			'group' => static::GROUP_NONE
 		];
 		$id = hash('md5', $name . $options['type'] . $options['group']);
 
-		if (isset(static::$_sources[$id])) {
-			static::$_sources[$id] = array_merge(static::$_sources[$id], [$library]);
-		} else {
-			static::$_sources[$id] = [$library];
-		}
 		static::$_data[$id][] = compact('name', 'inner') +  $options;
 	}
 

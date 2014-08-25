@@ -17,7 +17,7 @@ use cms_core\models\VirtualUsers;
 
 extract(Message::aliases());
 
-Widgets::register('cms_core', 'support', function() use ($t) {
+Widgets::register('support', function() use ($t) {
 	return [
 		'title' => $t('Contact Support'),
 		'url' => [
@@ -30,7 +30,7 @@ Widgets::register('cms_core', 'support', function() use ($t) {
 	'group' => Widgets::GROUP_DASHBOARD
 ]);
 
-Widgets::register('cms_core', 'users', function() use ($t) {
+Widgets::register('users', function() use ($t) {
 	$total = Users::find('count') + VirtualUsers::find('count');
 	$deactivated = Users::find('count', [
 		'conditions' => [

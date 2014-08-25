@@ -118,6 +118,13 @@ $exceptionHandler = function($exception, $return = false) use ($handler) {
 
 // set_error_handler($errorHandler);
 // set_exception_handler($exceptionHandler);
+use Whoops\Run;
+
+if (Environment::is('development')) {
+	$whoops = new Run();
+	$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+	$whoops->register();
+}
 
 if (USE_LOGGING) {
 	Logger::config([

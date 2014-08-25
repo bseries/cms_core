@@ -1569,3 +1569,10 @@ td .minor {
   width: 500px;
   margin: 10% auto;
 }
+
+/* Avatar
+-------------------------------------------------------------- */
+.avatar {
+  width: 30px;
+  height: 30px;
+}

@@ -9,6 +9,16 @@ $this->set([
 	]
 ]);
 
+$nickRgb = function($nick) {
+	$hash = abs(crc32($nick));
+
+	$rgb = array($hash % 255, $hash % 255, $hash % 255);
+	$rgb[$hash % 2] = 0;
+
+	return $rgb;
+};
+
+
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . $this->_config['template'] ?> use-list">
 
@@ -50,7 +60,11 @@ $this->set([
 				<td class="is-active flag"><?= $item->is_active ? '✓ ' : '×' ?>
 				<td class="is-notified flag"><?= $item->is_notified ? '✓ ' : '×' ?>
 				<td>
-					<img class="avatar" src="https://www.gravatar.com/avatar/<?= md5($item->email)?>.jpg?s=30&d=retro" />
+					<div
+						class="avatar"
+						style="background: rgb(<?=implode(',' , $nickRgb($item->email))?>);"
+					>
+					</div>
 				<?php if (Features::enabled('useBilling')): ?>
 					<td class="number emphasize"><?= $item->number ?>
 				<?php endif ?>

@@ -533,6 +533,8 @@ textarea {
   width: 100%;
   max-width: 600px;
   background-color: white;
+
+  transition: border-color .5s;
 }
 select:focus,
 textarea:focus,
@@ -743,6 +745,7 @@ button,
   border: none;
   background: var(--color-gray-dark);
   vertical-algin: top;
+  transition: all .25s;
 }
 button:hover,
 .button:hover {

@@ -400,6 +400,7 @@ footer.main {
   background: var(--color-gray-darker);
   color: white;
   margin-right: -5px;
+  transition: background .25s;
 }
 .tab-h:not(.active):hover {
   color: var(--color-ad-blue);

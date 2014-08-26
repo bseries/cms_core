@@ -17,7 +17,7 @@ require(['jquery', 'widgets', 'domready!'], function($, Widgets) {
     var widget = new Widgets[$(this).data('widget-type')](this, $(this).data('widget-name'));
     dfrs.push(widget.render());
   });
-  $when.apply($, dfrs).done(function() {
+  $.when.apply($, dfrs).done(function() {
     $('.widgets').removeClass('loading');
   });
 

@@ -1510,6 +1510,15 @@ td .minor {
   background-color: var(--color-gray-darker);
 }
 
+.widget h1 {
+  font-size: var(--font-size-alpha);
+  color: var(--color-dim-black);
+}
+.widget.positive h1,
+.widget.negative h1 {
+  color: white;
+}
+
 .widget-quickdial {
   font-weight: bold;
   font-size: var(--font-size-alpha);
@@ -1518,10 +1527,6 @@ td .minor {
 
 .widget-counter {
   min-height: 250px;
-}
-.widget h1 {
-  font-size: var(--font-size-beta);
-  font-weight: normal;
 }
 .widget .count {
   color: white;

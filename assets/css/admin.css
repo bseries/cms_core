@@ -1486,11 +1486,10 @@ td .minor {
   break-inside: avoid;
 
   float: left;
-  position: relative;
   background-color: var(--color-gray-darkest);
   width: 100%;
   margin-bottom: var(--space-v-normal);
-  padding: var(--space-v-tight) var(--space-h-tighter);
+  padding: var(--space-v-tight) var(--space-h-tighter) 5px;
 }
 .widget,
 .widget a {
@@ -1541,6 +1540,7 @@ td .minor {
 .widget-counter .count {
   font-size: 55px;
   font-weight: bold;
+  line-height: 1;
 }
 .widget-counter .count-group .title {
   font-weight: bold;
@@ -1548,6 +1548,7 @@ td .minor {
   border-top: 6px solid white;
   padding-top: 10px;
   margin-top: 10px;
+  margin-bottom: 10px;
   font-size: var(--font-size-alpha);
 }
 .widget-counter-single .count-group .title {

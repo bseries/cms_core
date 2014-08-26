@@ -44,23 +44,6 @@ CREATE TABLE `addresses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
-# Export von Tabelle tokens
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `tokens`;
-
-CREATE TABLE `tokens` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `token` varchar(32) NOT NULL,
-  `expires` datetime NOT NULL,
-  `created` datetime NOT NULL,
-  `modified` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
 # Export von Tabelle users
 # ------------------------------------------------------------
 

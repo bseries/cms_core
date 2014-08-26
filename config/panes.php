@@ -54,10 +54,6 @@ Panes::register('access.addresses', [
 	'title' => $t('Addresses'),
 	'url' => ['controller' => 'Addresses'] + $base
 ]);
-Panes::register('access.tokens', [
-	'title' => $t('Tokens'),
-	'url' => ['controller' => 'Tokens'] + $base
-]);
 
 Panes::register('external.support', [
 	'title' => $t('Contact Support'),

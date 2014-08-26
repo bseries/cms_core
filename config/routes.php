@@ -69,12 +69,6 @@ Router::connect('/admin/virtual-users/{:action}/{:id:[0-9]+}', [
 Router::connect('/admin/virtual-users/{:action}/{:args}', [
 	'controller' => 'VirtualUsers', 'library' => 'cms_core', 'admin' => true
 ], $persist);
-Router::connect('/admin/tokens/{:action}/{:token:[0-9a-f]{8,16}}', [
-	'controller' => 'tokens', 'library' => 'cms_core', 'admin' => true
-], $persist);
-Router::connect('/admin/tokens/{:action}/{:args}', [
-	'controller' => 'tokens', 'library' => 'cms_core', 'admin' => true
-], $persist);
 
 // Addresses
 Router::connect('/admin/addresses/{:action}/{:id:[0-9]+}', [

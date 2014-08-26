@@ -1498,10 +1498,10 @@ td .minor {
 .widget:hover {
   background-color: var(--color-gray-darker);
 }
-.widget.positive {
+.widget.positive:not(:hover) {
   background-color: var(--color-ci-green);
 }
-.widget.negative {
+.widget.negative:not(:hover) {
   background-color: var(--color-ci-red);
 }
 .widget.loading {

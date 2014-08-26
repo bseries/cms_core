@@ -39,7 +39,7 @@ requirejs.config({
     'nprogress': 'cms-core/js/nprogress',
     'handlebars': 'cms-core/js/handlebars',
     'list': 'cms-core/js/list',
-    'listPagination': 'cms-core/js/listPagination',
+    'widgets': 'cms-core/js/widgets',
 
     // Compat
     'modernizr': 'cms-core/js/compat/modernizr',

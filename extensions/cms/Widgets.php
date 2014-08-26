@@ -13,7 +13,6 @@
 namespace cms_core\extensions\cms;
 
 use lithium\util\Collection;
-use lithium\analysis\Logger;
 
 class Widgets extends \lithium\core\StaticObject {
 
@@ -43,13 +42,19 @@ class Widgets extends \lithium\core\StaticObject {
 	// Returns all items wrapped in a collection object which can be
 	// filtered and sorted. When an item has been registered multiple
 	// times its inner data is wrapped in a single closure.
-	public static function read() {
+	//
+	// Alternatively returns a single widget by name.
+	public static function read($name = null) {
 		$data = [];
 
 		foreach (static::$_data as $id => $items) {
 			$item = current($items);
 
-			$data[$id] = [
+			if ($name && $item['name'] !== $name) {
+				continue;
+			}
+
+			$widget = [
 				// group and type will be the same for all items as we grouped earlier.
 				// We need both to be available "outside" as we need to filter on those
 				// properities or need them to determine the widget element to load.
@@ -58,8 +63,6 @@ class Widgets extends \lithium\core\StaticObject {
 				'type' => $item['type'],
 				// Aggregates multiple registered widgets into one.
 				'inner' => function() use ($item, $items) {
-					$start = microtime(true);
-
 					$result = [
 						'class' => null,
 						'url' => null,
@@ -79,17 +82,17 @@ class Widgets extends \lithium\core\StaticObject {
 						}
 						$result = $inner + $result;
 					}
-
-					if (($took = microtime(true) - $start) > 1) {
-						$message = sprintf(
-							"Widget`{$item['name']}` took very long (%4.fs) to render",
-							$took
-						);
-						Logger::write('notice', $message);
-					}
 					return $result;
 				}
 			];
+
+			if ($name && $item['name'] === $name) {
+				return $widget;
+			}
+			$data[$id] = $widget;
+		}
+		if ($name) {
+			throw new Exception("No widget with name `{$name}` found.");
 		}
 		return new Collection(compact('data'));
 	}

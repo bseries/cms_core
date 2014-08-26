@@ -24,7 +24,11 @@ class AppController extends \cms_core\controllers\BaseController {
 			'media:view' => Router::match($base + ['action' => 'api_view', 'id' => '__ID__'], $this->request),
 			'media:transfer-preflight' => Router::match($base + ['action' => 'api_transfer_preflight'], $this->request),
 			'media:transfer-meta' => Router::match($base + ['action' => 'api_transfer_meta'], $this->request),
-			'media:transfer' => Router::match($base + ['action' => 'api_transfer'], $this->request) . '?title=__TITLE__'
+			'media:transfer' => Router::match($base + ['action' => 'api_transfer'], $this->request) . '?title=__TITLE__',
+			'widgets:view' => Router::match([
+				'controller' => 'widgets', 'library' => 'cms_core',
+				'action' => 'api_view', 'name' => '__NAME__', 'admin' => true
+			], $this->request),
 		];
 
 		$this->render(array('type' => $this->request->accepts(), 'data' => $data));

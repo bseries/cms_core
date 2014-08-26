@@ -94,5 +94,8 @@ Router::connect('/admin/api/discover', [
 	'controller' => 'app', 'action' => 'api_discover', 'library' => 'cms_core', 'admin' => true
 ], $persist);
 
+Router::connect('/admin/api/widgets/{:name}', [
+	'controller' => 'widgets', 'action' => 'api_view', 'library' => 'cms_core', 'admin' => true
+], $persist);
 
 ?>

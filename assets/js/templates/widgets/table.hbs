@@ -1,0 +1,13 @@
+{{#if url}}
+	<a href="{{url}}">
+{{/if}}
+	{{#each data}}
+	<div>
+		<span class="title">{{@key}}</span>
+		<span class="count">{{this}}</span>
+	</div>
+	{{/each}}
+{{#if url}}
+	</a>
+{{/if}}
+

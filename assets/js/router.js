@@ -42,6 +42,7 @@ define('router', [], function() {
     this.match = function(name, params) {
       return _this.initialized.then(function() {
         var template = _this.data[name];
+
         $.each(params || {}, function(k, v) {
           template = template.replace('__' + k.toUpperCase() + '__', v);
         });

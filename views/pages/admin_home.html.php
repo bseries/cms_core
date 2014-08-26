@@ -10,12 +10,12 @@ $this->set([
 ?>
 <article class="view-<?= $this->_config['controller'] . '-' . str_replace('_', '-', $this->_config['template']) ?>">
 	<div class="widgets">
-		<?php foreach ($widgets as $name => $item): ?>
-			<?=$this->view()->render(
-				['element' => 'widgets/' . $item['type']],
-				['item' => $item['inner']()],
-				['library' => 'cms_core']
-			) ?>
+		<?php foreach ($widgets as $item): ?>
+			<div
+				class="widget loading"
+				data-widget-name="<?= $item['name'] ?>"
+				data-widget-type="<?= $item['type']?>"
+			></div>
 		<?php endforeach ?>
 	</div>
 </article>

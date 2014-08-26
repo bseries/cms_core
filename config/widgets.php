@@ -44,8 +44,7 @@ Widgets::register('users', function() use ($t) {
 			'controller' => 'Users', 'library' => 'cms_core', 'admin' => true, 'action' => 'index'
 		],
 		'data' => [
-			$t('Total') => $total,
-			$t('Not active') => $deactivated
+			$t('Total') => $total
 		]
 	];
 }, [

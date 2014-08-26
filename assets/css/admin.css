@@ -746,7 +746,7 @@ button,
   border: none;
   background: var(--color-gray-dark);
   vertical-algin: top;
-  transition: all .25s;
+  transition: background .25s;
 }
 button:hover,
 .button:hover {
@@ -1027,6 +1027,7 @@ thead {
 tbody td {
   padding: 0 .5em;
   background: white;
+  transition: background .1s;
 }
 tbody tr:hover td {
    background: var(--color-ad-yellow);

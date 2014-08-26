@@ -23,16 +23,12 @@ class WidgetsController extends \cms_core\controllers\BaseController {
 		$start = microtime(true);
 		$item = Widgets::read($this->request->name);
 
-
-//		var_dump($item);die;
 		$response = new JSendResponse();
-
 
 		$data = $item['inner']();
 		if (!empty($data['url'])) {
 			$data['url'] = Router::match($data['url'], $this->request);
 		}
-
 		$response->success($data);
 
 		if (($took = microtime(true) - $start) > 1) {

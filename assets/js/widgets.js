@@ -61,9 +61,8 @@ define([
     this.render = function() {
       var template = Handlebars.compile(CounterTemplate);
 
-      _this.data()
+      return _this.data()
         .done(function(data) {
-        console.debug(data);
           _this.$element.html(template(data));
           if (data.class) {
             _this.$element.addClass(data.class);
@@ -83,7 +82,7 @@ define([
     this.render = function() {
       var template = Handlebars.compile(TableTemplate);
 
-      _this.data()
+      return _this.data()
         .done(function(data) {
           _this.$element.html(template(data));
           _this.$element.addClass('widget-table');
@@ -100,7 +99,7 @@ define([
     this.render = function() {
       var template = Handlebars.compile(QuickdialTemplate);
 
-      _this.data()
+      return _this.data()
         .done(function(data) {
           _this.$element.html(template(data));
           _this.$element.addClass('widget-quickdial widget-gamma');

@@ -11,9 +11,14 @@
 
 require(['jquery', 'widgets', 'domready!'], function($, Widgets) {
 
+  var dfrs = [];
+
   $('.widget').each(function() {
     var widget = new Widgets[$(this).data('widget-type')](this, $(this).data('widget-name'));
-    widget.render();
+    dfrs.push(widget.render());
+  });
+  $when.apply($, dfrs).done(function() {
+    $('.widgets').removeClass('loading');
   });
 
 });

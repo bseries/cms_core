@@ -1478,6 +1478,9 @@ td .minor {
   -moz-column-gap: var(--space-h-normal);
   width: 100%;
 }
+.widgets.loading .widget {
+  transition: background 2s;
+}
 
 .widget {
   break-inside: avoid;
@@ -1503,14 +1506,14 @@ td .minor {
   background-color: var(--color-ci-red);
 }
 .widget.loading {
-  opacity: .25;
-  height: 200px;
+  min-height: 250px;
+  background-color: var(--color-gray-darker);
 }
 
 .widget-quickdial {
   font-weight: bold;
   font-size: var(--font-size-alpha);
-  background-color: var(--color-gray-dark);
+  background-color: var(--color-gray-normal);
 }
 
 .widget-counter {

@@ -1510,7 +1510,7 @@ td .minor {
   background-color: var(--color-ci-red);
 }
 .widget.loading {
-  min-height: 250px;
+  min-height: 244px;
   background-color: var(--color-gray-darker);
 }
 

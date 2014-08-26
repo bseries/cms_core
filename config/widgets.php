@@ -27,7 +27,8 @@ Widgets::register('support', function() use ($t) {
 	];
 }, [
 	'type' => Widgets::TYPE_QUICKDIAL,
-	'group' => Widgets::GROUP_DASHBOARD
+	'group' => Widgets::GROUP_DASHBOARD,
+	'weight' => Widgets::WEIGHT_HIGH
 ]);
 
 Widgets::register('users', function() use ($t) {

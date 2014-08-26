@@ -12,12 +12,12 @@
 require(['jquery', 'widgets', 'domready!'], function($, Widgets) {
 
   var dfrs = [];
-
   $('.widget').each(function() {
-    var widget = new Widgets[$(this).data('widget-type')](this, $(this).data('widget-name'));
+    var widget = Widgets.factory(this);
+
     dfrs.push(widget.render());
   });
-  $.when.apply($, dfrs).done(function() {
+  $.when.apply($, dfrs).always(function() {
     $('.widgets').removeClass('loading');
   });
 

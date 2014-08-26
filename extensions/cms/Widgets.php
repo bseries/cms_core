@@ -20,8 +20,13 @@ class Widgets extends \lithium\core\StaticObject {
 	const GROUP_DASHBOARD = 'dashboard';
 
 	const TYPE_COUNTER = 'counter';
+	const TYPE_BIGCOUNTER = 'big-counter';
 	const TYPE_TABLE = 'table';
 	const TYPE_QUICKDIAL = 'quickdial';
+
+	const WEIGHT_HIGH = 100;
+	const WEIGHT_NORMAL = 50;
+	const WEIGHT_LOW = 0;
 
 	protected static $_data = [];
 
@@ -31,6 +36,7 @@ class Widgets extends \lithium\core\StaticObject {
 			return;
 		}
 		$options += [
+			'weight' => static::WEIGHT_NORMAL,
 			'type' => null,
 			'group' => static::GROUP_NONE
 		];
@@ -61,6 +67,7 @@ class Widgets extends \lithium\core\StaticObject {
 				'name' => $item['name'],
 				'group' => $item['group'],
 				'type' => $item['type'],
+				'weight' => $item['weight'],
 				// Aggregates multiple registered widgets into one.
 				'inner' => function() use ($item, $items) {
 					$result = [
@@ -94,7 +101,14 @@ class Widgets extends \lithium\core\StaticObject {
 		if ($name) {
 			throw new Exception("No widget with name `{$name}` found.");
 		}
-		return new Collection(compact('data'));
+		$data = new Collection(compact('data'));
+		$data->sort(function($a, $b) {
+			if ($a['weight'] === $b['weight']) {
+				return 0;
+			}
+			return $a['weight'] < $b['weight'] ? -1 : 1;
+		});
+		return $data;
 	}
 }
 

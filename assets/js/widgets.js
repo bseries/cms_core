@@ -74,6 +74,8 @@ define([
   }
   CounterWidget.prototype = Object.create(Widget.prototype);
 
+  // The table widget has two columns one for the title
+  // and one for arbitrary counts.
   // FIXME Sort lines by title.
   function TableWidget(element, name) {
     Widget.call(this, element, name);
@@ -92,6 +94,7 @@ define([
   }
   TableWidget.prototype = Object.create(Widget.prototype);
 
+  // The quickidal widget is just one single big link.
   function QuickdialWidget(element, name) {
     Widget.call(this, element, name);
     var _this = this;
@@ -109,10 +112,26 @@ define([
   }
   QuickdialWidget.prototype = Object.create(Widget.prototype);
 
-
-  return {
-    counter: CounterWidget,
-    table: TableWidget,
-    quickdial: QuickdialWidget
+  //
+  // Export / Public Interface
+  //
+  var map = {
+    Counter: CounterWidget,
+    Table: TableWidget,
+    Quickdial: QuickdialWidget,
   };
+  return $.extend(map, {
+    factory: function(element) {
+      var camelize = function(value) {
+        return value.replace (/(?:^|[-_])(\w)/g, function (_, c) {
+          return c ? c.toUpperCase () : '';
+        });
+      };
+
+      var type = camelize($(element).data('widget-type'));
+      var name = $(element).data('widget-name');
+
+      return new map[type](element, name);
+    }
+  });
 });

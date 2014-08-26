@@ -1511,9 +1511,8 @@ td .minor {
 }
 
 .widget h1 {
-  font-size: var(--font-size-beta);
-  font-weight: normal;
-  color: #b0afb1;
+  font-size: var(--font-size-alpha);
+  color: var(--color-dim-black);
 }
 .widget.positive h1,
 .widget.negative h1 {
@@ -1523,7 +1522,7 @@ td .minor {
 .widget-quickdial {
   font-weight: bold;
   font-size: var(--font-size-alpha);
-  background-color: var(--color-gray-normal);
+  background-color: var(--color-gray-dark);
 }
 
 .widget .count {
@@ -1536,6 +1535,7 @@ td .minor {
 .widget-counter .count-group {
   float: left;
   min-width: 40%;
+  margin-top: 20px;
   margin-right: 40px;
 }
 .widget-counter .count {
@@ -1543,18 +1543,20 @@ td .minor {
   font-weight: bold;
 }
 .widget-counter .count-group .title {
+  font-weight: bold;
   display: inline-block;
   border-top: 6px solid white;
   padding-top: 10px;
   margin-top: 10px;
-  font-size: var(--font-size-beta);
+  font-size: var(--font-size-alpha);
 }
 .widget-counter-single .count-group .title {
   display: none;
 }
 
 .widget-table {
-  font-size: var(--font-size-beta);
+  font-size: var(--font-size-alpha);
+  font-weight: bold;
 }
 .widget-table .title {
   clear: both;

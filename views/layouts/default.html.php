@@ -34,9 +34,6 @@ FlashMessage::clear();
 		<!--[if lt IE 9]>>
 			<script src="<?= $this->assets->url('/app/js/compat/html5shiv.js') ?>"></script>
 		<![endif]-->
-		<noscript>
-			<link rel="stylesheet" type="text/css" href="<?= $this->assets->url('/app/css/compat/noscript.css') ?>">
-		</noscript>
 		<!--[if lt IE 10]>
 			<link rel="stylesheet" type="text/css" href="<?= $this->assets->url('/app/css/compat/ie9.css') ?>">
 		<![endif]-->

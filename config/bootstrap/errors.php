@@ -123,6 +123,7 @@ use Whoops\Run;
 if (Environment::is('development')) {
 	$whoops = new Run();
 	$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+	$whoops->pushHandler(new \Whoops\Handler\JsonResponseHandler);
 	$whoops->register();
 }
 

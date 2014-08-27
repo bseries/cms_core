@@ -630,6 +630,14 @@ form .date-range {
   margin-bottom: 1em;
 }
 
+/* Users compound field. */
+form .compound-users {
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-bottom: 1em;
+}
+
 /* Select styling */
 select {
   border-radius: 0;

@@ -395,7 +395,7 @@ footer.main {
 }
 .tab-h {
   position: relative;
-  bottom: -3px;
+  bottom: -4px;
   border-radius: 20px 20px 0 0;
   padding: 15px 15px 10px 15px;
   display: inline-block;
@@ -689,8 +689,7 @@ button[disabled],
 select[disabled],
 textarea[disabled],
 input[disabled] {
-  background: transparent;
-  border-color: transparent;
+  background: var(--color-gray-dark);
 }
 
 input:invalid {
@@ -714,6 +713,13 @@ input.title {
   margin-top: 3em;
   padding: 20px 0;
   border-top: 3px solid var(--color-gray-dark);
+}
+
+form .error {
+  color: var(--color-ci-red);
+  margin-left: 4px;
+  margin-top: -.5em;
+  margin-bottom: 1em;
 }
 
 /* Buttons

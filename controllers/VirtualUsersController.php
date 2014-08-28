@@ -33,7 +33,7 @@ class VirtualUsersController extends \cms_core\controllers\BaseController {
 		return compact('data');
 	}
 
-	protected function _selects($item) {
+	protected function _selects($item = null) {
 		extract(Message::aliases());
 
 		$roles = VirtualUsers::enum('role');

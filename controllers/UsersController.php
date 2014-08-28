@@ -85,7 +85,7 @@ class UsersController extends \cms_core\controllers\BaseController {
 		return compact('item') + $this->_selects($item);
 	}
 
-	protected function _selects($item) {
+	protected function _selects($item = null) {
 		extract(Message::aliases());
 
 		$roles = Users::enum('role');

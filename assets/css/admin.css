@@ -1408,7 +1408,7 @@ td .minor {
   font-size: var(--font-size-alpha);
   width: 440px;
   margin: 0 auto;
-  padding-top: 21%;
+  padding-top: 27%;
   position: absolute;
   left: calc(50% - 220px);
   text-align: center;

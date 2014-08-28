@@ -9,7 +9,7 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
 
-define('router', [], function() {
+define('router', ['jquery'], function($) {
 
   if (window.router !== undefined) {
     return window.router; // static
@@ -42,7 +42,6 @@ define('router', [], function() {
     this.match = function(name, params) {
       return _this.initialized.then(function() {
         var template = _this.data[name];
-
         $.each(params || {}, function(k, v) {
           template = template.replace('__' + k.toUpperCase() + '__', v);
         });

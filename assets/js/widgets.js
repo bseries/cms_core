@@ -64,8 +64,8 @@ define([
       return _this.data()
         .done(function(data) {
           _this.$element.html(template(data));
-          if (data.class) {
-            _this.$element.addClass(data.class);
+          if (data["class"]) {
+            _this.$element.addClass(data["class"]);
           }
           _this.$element.addClass('widget-counter');
           _this.$element.removeClass('loading');

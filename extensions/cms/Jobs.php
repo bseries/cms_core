@@ -26,12 +26,12 @@ class Jobs extends \lithium\core\StaticObject {
 		'low' => []
 	];
 
-	public static function recur($library, $name, $run, array $options = []) {
+	public static function recur($name, $run, array $options = []) {
 		$options += [
 			'frequency' => null
 		];
 		if (isset($options['frequency'])) {
-			static::$_recurring[$options['frequency']][$name] = compact('library', 'name', 'run');
+			static::$_recurring[$options['frequency']][$name] = compact('name', 'run');
 		}
 	}
 

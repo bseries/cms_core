@@ -132,11 +132,18 @@ pre, code, .fixed {
 
 .grid-row h1 {
   font-weight: normal;
-  text-align: right;
-  color: var(--color-gray-darker);
-  margin-top: -1em;
-  margin-bottom: 1em;
+  font-size: var(--font-size-delta);
+  color: var(--color-gray-darkest);
+  margin-bottom: .5em;
 }
+.grid-row > h1 {
+  margin-bottom: 1em;
+  margin-top: -1em;
+  color: var(--color-gray-darker);
+  font-size: var(--font-size-gamma);
+  text-align: right;
+}
+
 .grid-row > .actions  {
   margin-top: .5em;
   margin-bottom: 1em;

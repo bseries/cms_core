@@ -118,7 +118,7 @@ require(['jquery', 'list', 'nprogress', 'notify', 'domready!'], function($, List
 
       var key = parseInt(Math.random() * 10000, 10);
 
-      $newNested.find('input').each(function() {
+      $newNested.find('input,select').each(function() {
         $(this).attr('name', $(this).attr('name').replace(/\[new\]/, '[' + key + ']'));
       });
       $nested.find('tbody').append($newNested);

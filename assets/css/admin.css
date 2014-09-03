@@ -938,6 +938,7 @@ button.large,
 
 /* Help
 -------------------------------------------------------------- */
+article > .none-available,
 article > .help {
   color: var(--color-dim-black);
   background: white;
@@ -957,6 +958,10 @@ form .help {
   display: none;
   margin-top: -.5em;
   margin-bottom: 1.5em;
+}
+
+.none-available {
+  display: inline-block;
 }
 
 /* Media Attachment
@@ -1455,7 +1460,7 @@ td .minor {
   display: none;
 }
 
-  /* List & Table Filtering/Search
+/* List & Table Filtering/Search
 -------------------------------------------------------------- */
 .list-search {
   width: 140px;

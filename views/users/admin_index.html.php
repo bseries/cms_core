@@ -13,7 +13,7 @@ $nickRgb = function($nick) {
 	$hash = abs(crc32($nick));
 
 	$rgb = array($hash % 255, $hash % 255, $hash % 255);
-	$rgb[$hash % 2] = 0;
+	$rgb[$hash % 2] = 100;
 
 	return $rgb;
 };

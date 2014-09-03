@@ -34,7 +34,7 @@ $page += [
 			'/cms-core/css/reset',
 			'/cms-core/css/admin'
 		]) ?>
-		<link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Anonymous+Pro:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
 		<?php echo $this->styles() ?>
 		<?=$this->view()->render(['element' => 'head_app_defines'], ['admin' => true], ['library' => 'cms_core']) ?>
 		<?php

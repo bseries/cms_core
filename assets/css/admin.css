@@ -564,6 +564,9 @@ form input,
 form textarea {
   margin-bottom: 1em;
 }
+form select {
+  height: 37px;
+}
 textarea {
   line-height: var(--line-height-normal);
 }

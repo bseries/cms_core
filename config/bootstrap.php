@@ -114,7 +114,7 @@ Libraries::add('cms_media');
 // must be skipped. Also we load the module types in order. Always load core modules first.
 
 $modules = glob(
-	LITHIUM_LIBRARY_PATH . '/{cms,ecommerce,billing}_*',
+	LITHIUM_LIBRARY_PATH . '/{base,cms,ecommerce,billing}_*',
 	GLOB_BRACE | GLOB_NOSORT | GLOB_ONLYDIR
 );
 // Alphabetically sort entriesbut always put _core modules top.

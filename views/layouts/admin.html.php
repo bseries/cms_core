@@ -179,11 +179,11 @@ if (!isset($meta)) {
 		<footer class="main">
 			<div class="nav-bottom">
 				<div>
-				<?php if (defined('ECOMMERCE_CORE_VERSION')):?>
-					AD Boutique <?= ECOMMERCE_CORE_VERSION ?>
-				<?php else: ?>
-					AD Bureau <?= CMS_CORE_VERSION ?>
-				<?php endif ?>
+				<?php foreach (['ecommerce' => 'AD Boutique', 'billing' => 'AD Billing', 'cms' => 'AD Bureau', 'base' => 'AD Bento'] as $prefix => $title): ?>
+					<?php if (defined($constant = strtoupper($prefix) . '_CORE_VERSION')): ?>
+						<?= $title ?> <?= constant($constant) ?>
+					<?php endif ?>
+				<?php endforeach ?>
 				</div>
 				<div class="copyright">
 					© <?= date('Y') ?> <?= $this->html->link('Atelier Disko', 'http://atelierdisko.de', ['target' => 'new']) ?>

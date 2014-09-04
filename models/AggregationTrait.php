@@ -146,32 +146,6 @@ trait AggregationTrait {
 		}
 	}
 
-	/*
-	public static function neighbors($item) {
-		$results = array_values(static::_lookup());
-		$next = $prev = null;
-
-		for ($k = 0, $c = count($results); $k <= $c; $k++) {
-			list($model, $id) = $results[$k];
-
-			if ($item->id !== $id || $model !== $item->original->model()) {
-				continue;
-			}
-			if (isset($results[$k + 1])) {
-				list($model, $id) = $results[$k + 1];
-				$next = static::_convert($model::find($id));
-			}
-			if (isset($results[$k - 1])) {
-				list($model, $id) = $results[$k - 1];
-				$prev = static::_convert($model::find($id));
-			}
-			break;
-		}
-		return compact('prev', 'next');
-	}
-	*/
-
-
 	// Forward method calls to original.
 	public function __call($method, $args) {
 		$entity = array_shift($args);
@@ -187,6 +161,5 @@ trait AggregationTrait {
 		return false;
 	}
 }
-
 
 ?>

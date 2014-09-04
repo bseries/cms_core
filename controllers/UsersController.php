@@ -128,6 +128,9 @@ class UsersController extends \cms_core\controllers\BaseController {
 	}
 
 	public function admin_session() {
+		if (Auth::check('default')) {
+			return $this->redirect('/admin');
+		}
 		$this->_render['layout'] = 'admin_blank';
 	}
 

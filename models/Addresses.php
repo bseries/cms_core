@@ -13,13 +13,13 @@
 namespace cms_core\models;
 
 use lithium\core\Environment;
-use cms_core\models\Users;
-use cms_core\models\VirtualUsers;
 use cms_core\models\Countries;
 use lithium\util\Validator;
 use lithium\g11n\Message;
 
 class Addresses extends \cms_core\models\Base {
+
+	use \cms_core\models\UserTrait;
 
 	protected static $_actsAs = [
 		'cms_core\extensions\data\behavior\Timestamp'
@@ -100,13 +100,6 @@ class Addresses extends \cms_core\models\Base {
 
 	public function title($entity) {
 		return $entity->format('oneline');
-	}
-
-	public function user($entity) {
-		if ($entity->user_id) {
-			return Users::find('first', ['conditions' => ['id' => $entity->user_id]]);
-		}
-		return VirtualUsers::find('first', ['conditions' => ['id' => $entity->virtual_user_id]]);
 	}
 
 	public static function findExact($data) {

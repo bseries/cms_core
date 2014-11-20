@@ -10,8 +10,6 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  */
 
-// use lithium\net\http\Router;
-
-// $persist = ['persist' => ['admin', 'controller']];
+define('CMS_CORE_VERSION', '1.2.0');
 
 ?>

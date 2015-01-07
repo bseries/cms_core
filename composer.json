@@ -8,10 +8,9 @@
       "name": "Atelier Disko",
       "homepage": "http://atelierdisko.de"
     },
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.5.0",
-        "atelierdisko/base_core": "1.3.*",
+        "atelierdisko/base_core": "1.3.*@dev",
         "unionofrad/lithium": "dev-dev as 1.0.0-dev",
         "composer/installers": "~1.0"
     },

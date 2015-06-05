@@ -26,14 +26,12 @@ class Editor extends \lithium\template\Helper {
 	// feature sets by providing a feature set name as `features`.
 	public function field($name, array $options = []) {
 		$options += [
-			'class' => null,
 			'features' => null,
 			'size' => 'beta'
 		];
-		$classes = explode(' ', $option['class']);
+		$classes = [];
 
 		$classes[] = 'use-editor';
-
 		$classes[] = 'editor-size--' . $options['size'];
 
 		if (is_string($options['features'])) {
@@ -44,7 +42,7 @@ class Editor extends \lithium\template\Helper {
 		}
 
 		$options['type'] = 'textarea';
-		$options['class'] = implode(' ', $classes);
+		$options['wrap'] = ['class' => implode(' ', $classes)];
 		unset($options['features']);
 		unset($options['size']);
 		return $this->_context->form->field($name, $options);

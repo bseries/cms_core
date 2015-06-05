@@ -15,8 +15,15 @@ namespace cms_core\extensions\helper;
 use base_media\models\Media;
 use base_core\extensions\cms\Settings;
 
+/**
+ * Editor helper works in tandem with the WYSIWYG editor and
+ * some editor.js.
+ */
 class Editor extends \lithium\template\Helper {
 
+	// Generates form field HTML with appropriate classes so that
+	// editor.js and the CSS can hook into. It is possible to use
+	// feature sets by providing a feature set name as `features`.
 	public function field($name, array $options = []) {
 		$options += [
 			'class' => null,
@@ -43,7 +50,8 @@ class Editor extends \lithium\template\Helper {
 		return $this->_context->form->field($name, $options);
 	}
 
-	// Parses HTML generated with
+	// Parses HTML saved via the editor. Media placeholders can
+	// be dynamically replaced.
 	public function parse($html, array $options = []) {
 		$options += [
 			'mediaVersion' => 'fix0'

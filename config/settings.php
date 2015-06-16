@@ -20,7 +20,7 @@ Settings::register('editor.features', [
 		// 'line',
 		'link',
 		'list',
-		'media',
+		// 'media',
 		// 'history',
 		// 'quote',
 		// 'aside',

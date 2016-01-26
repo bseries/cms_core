@@ -17,6 +17,7 @@
 
 namespace cms_core\extensions\helper;
 
+use Exception;
 use base_media\models\Media;
 use base_core\extensions\cms\Settings;
 
@@ -54,13 +55,24 @@ class Editor extends \lithium\template\Helper {
 	}
 
 	// Parses HTML saved via the editor. Media placeholders can
-	// be dynamically replaced.
+	// be dynamically replaced. Provide a version string as `'mediaVersion'`,
+	// that will be used to replace and generate images only. Provide
+	// a callable to dynamcially decide what to do. The callable must return
+	// the replacement HTML.
+	// ```
+	// function($medium) {
+	//	return $this->_context->media->image($medium->version('fix10'));
+	// }
+	// ```
 	public function parse($html, array $options = []) {
 		$options += [
-			'mediaVersion' => 'fix0'
+			'mediaVersion' => null
 		];
-		$regex = '#(<img\s+data-media-id="([0-9]+)".*?>)#i';
+		$regex = '#(<img.*data-media-id="([0-9]+)".*?>)#iU';
 
+		if (!$options['mediaVersions']) {
+			throw new Exception('No media version provided.');
+		}
 		if (!preg_match_all($regex, $html, $matches, PREG_SET_ORDER)) {
 			return $html;
 		}
@@ -74,9 +86,13 @@ class Editor extends \lithium\template\Helper {
 			if (!$medium) {
 				continue;
 			}
-			$replace = $this->_context->media->image(
-				$medium->version($options['mediaVersion'])
-			);
+			if (is_callable($options['mediaVersion'])) {
+				$replace = $options['mediaVersion']($medium);
+			} else {
+				$replace = $this->_context->media->image(
+					$medium->version($options['mediaVersion'])
+				);
+			}
 			$html = str_replace($match[0], $replace, $html);
 		}
 		return $html;

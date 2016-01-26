@@ -70,7 +70,7 @@ class Editor extends \lithium\template\Helper {
 		];
 		$regex = '#(<img.*data-media-id="([0-9]+)".*?>)#iU';
 
-		if (!$options['mediaVersions']) {
+		if (!$options['mediaVersion']) {
 			throw new Exception('No media version provided.');
 		}
 		if (!preg_match_all($regex, $html, $matches, PREG_SET_ORDER)) {

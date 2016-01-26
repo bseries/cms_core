@@ -68,7 +68,7 @@ class Editor extends \lithium\template\Helper {
 		$options += [
 			'mediaVersion' => null
 		];
-		$regex = '#(<img.*data-media-id="([0-9]+)".*?>)#iU';
+		$regex = '#(<img.*data-media-id="([0-9]+)".*>)#iU';
 
 		if (!$options['mediaVersion']) {
 			throw new Exception('No media version provided.');

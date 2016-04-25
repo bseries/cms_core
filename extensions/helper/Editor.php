@@ -51,7 +51,24 @@ class Editor extends \lithium\template\Helper {
 		$options['wrap'] = ['class' => implode(' ', $classes)];
 		unset($options['features']);
 		unset($options['size']);
-		return $this->_context->form->field($name, $options);
+
+		// We must preprocess the value, as inline media might change its
+		// URLs. This happens when versions are regenerated.
+		//
+		// Invalid media URLs are not really a problem as the media ID
+		// is dictating what is been display in the app part.
+		//
+		// @see lithium\template\helper\Form::_defaults()
+		if (!empty($options['value'])) {
+			$value = $options['value'];
+		} else {
+			$value = $this->_context->form->binding($name)->data;
+		}
+		$value = $this->parse($value, [
+			'mediaVersion' => 'fix2admin'
+		]);
+
+		return $this->_context->form->field($name, compact('value') + $options);
 	}
 
 	// Parses HTML saved via the editor. Media placeholders can

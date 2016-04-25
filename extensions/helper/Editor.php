@@ -107,7 +107,8 @@ class Editor extends \lithium\template\Helper {
 				$replace = $options['mediaVersion']($medium);
 			} else {
 				$replace = $this->_context->media->image(
-					$medium->version($options['mediaVersion'])
+					$medium->version($options['mediaVersion']),
+					['date-media-id' => $medium->id]
 				);
 			}
 			$html = str_replace($match[0], $replace, $html);

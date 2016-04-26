@@ -106,10 +106,16 @@ class Editor extends \lithium\template\Helper {
 			if (is_callable($options['mediaVersion'])) {
 				$replace = $options['mediaVersion']($medium);
 			} else {
-				$replace = $this->_context->media->image(
-					$medium->version($options['mediaVersion']),
-					['date-media-id' => $medium->id]
-				);
+				// Just replace src attribute leave alt and tag style intact.
+				// Lithium currently products XHTML img tag with <img />. This might
+				// not work fine with the WYSIHTML5 editor as it has strict rules.
+				$replace = preg_replace_callback('/src="(.*)"/iU', function($matches) use ($medium, $options) {
+					return str_replace(
+						$matches[1],
+						$this->_context->media->url($medium->version($options['mediaVersion'])),
+						$matches[0]
+					);
+				}, $match[0]);
 			}
 			$html = str_replace($match[0], $replace, $html);
 		}

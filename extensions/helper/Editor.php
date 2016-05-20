@@ -85,7 +85,9 @@ class Editor extends \lithium\template\Helper {
 		$options += [
 			'mediaVersion' => null
 		];
-		$regex = '#(<img.*data-media-id="([0-9]+)".*>)#iU';
+
+		// Tags might be broken up onto multiple lines.
+		$regex = '#(<img.*data-media-id="([0-9]+)".*>)#iUs';
 
 		if (!$options['mediaVersion']) {
 			throw new Exception('No media version provided.');
@@ -109,7 +111,7 @@ class Editor extends \lithium\template\Helper {
 				// Just replace src attribute leave alt and tag style intact.
 				// Lithium currently products XHTML img tag with <img />. This might
 				// not work fine with the WYSIHTML5 editor as it has strict rules.
-				$replace = preg_replace_callback('/src="(.*)"/iU', function($matches) use ($medium, $options) {
+				$replace = preg_replace_callback('/src="(.*)"/iUs', function($matches) use ($medium, $options) {
 					return str_replace(
 						$matches[1],
 						$this->_context->media->url($medium->version($options['mediaVersion'])),

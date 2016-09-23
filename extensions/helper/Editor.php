@@ -27,9 +27,9 @@ use base_core\extensions\cms\Settings;
  */
 class Editor extends \lithium\template\Helper {
 
-	// Generates form field HTML with appropriate classes so that
-	// editor.js and the CSS can hook into. It is possible to use
-	// feature sets by providing a feature set name as `features`.
+	// Generates form field HTML with appropriate classes so that editor.js and the CSS
+	// can hook into. It is possible to use feature sets by providing a feature set name
+	// as `features`.
 	public function field($name, array $options = []) {
 		$options += [
 			'features' => null,
@@ -71,11 +71,11 @@ class Editor extends \lithium\template\Helper {
 		return $this->_context->form->field($name, compact('value') + $options);
 	}
 
-	// Parses HTML saved via the editor. Media placeholders can
-	// be dynamically replaced. Provide a version string as `'mediaVersion'`,
-	// that will be used to replace and generate images only. Provide
-	// a callable to dynamcially decide what to do. The callable must return
-	// the replacement HTML.
+	// Parses HTML saved via the editor. Media placeholders can be dynamically replaced.
+	// Provide a version string as `'mediaVersion'`, that will be used to replace and
+	// generate images only. Provide a callable to dynamcially decide what to do. The
+	// callable must return the replacement HTML.
+	//
 	// ```
 	// function($medium) {
 	//	return $this->_context->media->image($medium->version('fix10'));

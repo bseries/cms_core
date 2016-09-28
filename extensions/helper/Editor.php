@@ -18,8 +18,9 @@
 namespace cms_core\extensions\helper;
 
 use Exception;
-use base_media\models\Media;
 use base_core\extensions\cms\Settings;
+use base_media\models\Media;
+use lithium\g11n\Message;
 
 /**
  * Editor helper works in tandem with the WYSIWYG editor and
@@ -33,7 +34,8 @@ class Editor extends \lithium\template\Helper {
 	public function field($name, array $options = []) {
 		$options += [
 			'features' => null,
-			'size' => 'beta'
+			'size' => 'beta',
+			'help' => true
 		];
 		$classes = [];
 
@@ -68,7 +70,15 @@ class Editor extends \lithium\template\Helper {
 			'mediaVersion' => 'fix2admin'
 		]);
 
-		return $this->_context->form->field($name, compact('value') + $options);
+		$html  = $this->_context->form->field($name, compact('value') + $options);
+
+		if ($options['help']) {
+			extract(Message::aliases());
+			// Insert *into* fields array by replacing last closing div.
+			$help = '<div class="help">' . $t('ENTER for paragraphs, SHIFT+ENTER for hard line breaks'). '</div>';
+			$html = str_replace('</div>', $help . '</div>', $html);
+		}
+		return $html;
 	}
 
 	// Parses HTML saved via the editor. Media placeholders can be dynamically replaced.

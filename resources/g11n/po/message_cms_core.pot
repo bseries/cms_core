@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cms_core 1.0\n"
 "Report-Msgid-Bugs-To: info@atelierdisko.de\n"
-"POT-Creation-Date: 2016-04-13 10:08+0200\n"
+"POT-Creation-Date: 2016-09-28 15:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,4 +19,8 @@ msgstr ""
 
 #: config/panes.php:26
 msgid "Bureau"
+msgstr ""
+
+#: extensions/helper/Editor.php:78
+msgid "ENTER for paragraphs, SHIFT+ENTER for hard line breaks"
 msgstr ""

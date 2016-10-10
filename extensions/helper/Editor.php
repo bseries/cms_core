@@ -75,7 +75,7 @@ class Editor extends \lithium\template\Helper {
 		if ($options['help']) {
 			extract(Message::aliases());
 			// Insert *into* fields array by replacing last closing div.
-			$help = '<div class="help">' . $t('ENTER for paragraphs, SHIFT+ENTER for hard line breaks'). '</div>';
+			$help = '<div class="help">' . $t('ENTER for paragraphs, SHIFT+ENTER for hard line breaks', ['scope' => 'cms_core']). '</div>';
 			$html = str_replace('</div>', $help . '</div>', $html);
 		}
 		return $html;

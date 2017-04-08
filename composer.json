@@ -13,7 +13,7 @@
     "require": {
         "atelierdisko/base_core": "1.5.*@dev",
         "composer/installers": "1.*@stable",
-        "php": ">=5.5.0",
+        "php": "^5.5 || ^7.0",
         "unionofrad/lithium": "^1.1"
     },
     "repositories": [

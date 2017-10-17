@@ -3,11 +3,6 @@
     "description": "Core functionality for Bureau.",
     "type": "lithium-library",
     "license": ["BSD-3-Clause"],
-    "authors": [
-        {"name": "David Persson"},
-        {"name": "Atelier Disko"},
-        {"name": "The Community"}
-    ],
     "require": {
         "bseries/base_core": "1.5.*@dev",
         "composer/installers": "1.*@stable",

@@ -11,12 +11,9 @@
       }
     ],
     "require": {
-        "atelierdisko/base_core": "1.4.*",
+        "bseries/base_core": "1.4.*",
         "composer/installers": "1.*@stable",
         "php": ">=5.5.0",
         "unionofrad/lithium": "1.0.*@dev"
-    },
-    "repositories": [
-      { "type": "vcs", "url": "git@code.atelierdisko.de:base_core.git" }
-   ]
+    }
 }

@@ -1,5 +1,5 @@
 {
-    "name": "atelierdisko/cms_core",
+    "name": "bseries/cms_core",
     "description": "Core functionality for Bureau.",
     "homepage": "http://atelierdisko.de",
     "type": "lithium-library",
@@ -10,11 +10,8 @@
     },
     "require": {
         "php": ">=5.5.0",
-        "atelierdisko/base_core": "1.3.*",
+        "bseries/base_core": "1.3.*",
         "unionofrad/lithium": "1.0.*@dev",
         "composer/installers": "1.*@stable"
-    },
-    "repositories": [
-      { "type": "vcs", "url": "git@code.atelierdisko.de:base_core.git" }
-   ]
+    }
 }

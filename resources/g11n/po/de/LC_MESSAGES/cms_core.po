@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cms_core 1.0\n"
 "Report-Msgid-Bugs-To: info@atelierdisko.de\n"
-"POT-Creation-Date: 2016-09-28 15:04+0200\n"
+"POT-Creation-Date: 2018-07-12 12:51+0200\n"
 "PO-Revision-Date: 2016-04-13 10:08+0100\n"
 "Last-Translator: David Persson <davidpersson@gmx.de>\n"
 "Language-Team: none\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.7\n"
 
-#: config/panes.php:26
+#: config/panes.php:18
 msgid "Bureau"
 msgstr "Bureau"
 
-#: extensions/helper/Editor.php:78
+#: extensions/helper/Editor.php:70
 msgid "ENTER for paragraphs, SHIFT+ENTER for hard line breaks"
 msgstr "ENTER für Absätze, SHIFT+ENTER für harte Zeilenumbrüche"
